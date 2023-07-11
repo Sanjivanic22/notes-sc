@@ -1,0 +1,99 @@
+Springboot
+	• Springboot is project i.e built on the top of spring framework
+	• It provides esier and faster ways to set up ,configure and run both simple and web based application.
+	• It provides rapid application development.
+	
+	•  Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
+
+Advantages
+	• Springboot reduce the lots of development time and increase the productivity
+	• It avaoides boilerplate code ,annotation and xml configurations
+	• It provides lots of plugins to develop and test springboot app very easily build tool like maven and gradle
+	• It test the web application easily with the help of different embedded http srvers like tomcat and jetti
+	• Here don’t need to deployee the war files.
+	•  increased productivity, reduced configuration, simplified dependency management, and easier deployment.
+	
+	Disadvatages
+	It is very tough and time consuming process to convert existing legacy spring framework project into spring boot app.
+	It is application only for brand new/greenfield spring project
+	• 
+	• Application
+	• Using springboot we can develop the stanalone apps,web app,distributed app and entrprise app.
+	
+	• Profiling
+	• Profile is also called as environment
+	• The setup required to execute the app or project for development is called profile or env
+	• This include .class file.properties/yml file,libraries servers ,db s/w like oracle etc.
+	• From development to release/maintainance the project code/app code has executed in diff env/profiles like dev,test/prod profile.
+	• To make spring work only for certain profile activation we can use @profile annotation along with stearotype annotation for @Bean annotation.
+	
+Diff b/w spring and springboot
+	• Spring framework widely used Java EE framework for building application
+	• Springboot framework is widely used to develop Rest Apis.
+	• Spring simplifies the JAVA EE develpement that makes programmer productive
+	• Springboot shorten the code length and provide easier way to develop webapp
+	• Primary feature of spring is dependancy injection
+	• Primary features of springboot is  autoconfiguration.
+	• Spring helps us to develop loosly coupled app
+	• Spring boot help us to create the standalone app with cofiguration
+	• Developers need to write lots of boiler plate code
+	• In spring boot  it reduces the boiler plates code 
+	• In spring define dependancues for the spring project in pom.xml.
+	• In spring boot there is strater in pom.xml file that internally take care of downloading the dependancies.
+
+ Q: What is the auto-configuration feature in Spring Boot? 
+A: The auto-configuration feature in Spring Boot automatically configures the application based on the dependencies that are added to the classpath.
+
+Q: What is the Spring Boot starter project? 
+A: The Spring Boot starter project is a template that includes the necessary dependencies and configuration files to quickly create a Spring Boot application.
+
+Spring boot starter
+Spring boot starter is ready made spring project available in internate repository like maven/gradle repository in the form of advanced jar files having capability to perform common tas of the project or App development through AutoConfiguration features.
+
+
+Q: What is the difference between a Spring application and a Spring Boot application? 
+A: A Spring application requires more configuration and setup than a Spring Boot application, which can be created with minimal configuration and dependencies.
+
+Q: How do you configure the application properties in Spring Boot?
+ A: You can configure the application properties in Spring Boot by using the application.properties or application.yml file.
+
+Q: What is the Spring Boot Actuator? 
+A: The Spring Boot Actuator is a module of Spring Boot that provides endpoints to monitor and manage the application.
+Q: How do you enable the Spring Boot Actuator in an application? 
+A: You can enable the Spring Boot Actuator in an application by adding the necessary dependencies and configuration properties to the project.
+
+Q: What is Spring Boot Data JPA?
+ A: Spring Boot Data JPA is a module of Spring Boot that provides support for the Java Persistence API (JPA) for data access.
+
+Q: How do you handle exceptions in Spring Boot? 
+
+A: You can handle exceptions in Spring Boot by using the @ControllerAdvice annotation or by implementing the ErrorController interface.
+
+Q: What is Spring Boot Security? 
+A: Spring Boot Security is a module of Spring Boot that provides support for securing web applications.
+
+Q: How do you configure database connection in Spring Boot? 
+A: You can configure database connection in Spring Boot by specifying the necessary properties in the application.properties or application.yml file.
+
+Q: How do you create a RESTful web service in Spring Boot? 
+A: You can create a RESTful web service in Spring Boot by using the @RestController and @RequestMapping annotations, and by returning data in JSON format.
+
+Q: What is Spring Boot Test?
+ A: Spring Boot Test is a module of Spring Boot that provides support for testing Spring-based applications.
+
+
+Transaction management
+In an enterprise application, a transaction is a sequence of actions performed by the application that together pipelined to perform a single operation. 
+For example, booking a flight ticket is also a transaction where the end user has to enter his information and then make a payment to book the ticket.
+
+ if a user has entered his information the user’s information gets stored in the user_info table
+
+ Now, to book a ticket he does an online payment and due to some reason(system failure) the payment has been canceled so, the ticket is not booked for him. But, the problem is that his information gets stored on the user_info table. On a large scale, more than thousands of these things happen within a single day. So, it is not good practice to store a single action of the transaction(Here, only user info is stored not the payment info).
+
+To overcome these problems, spring provides transaction management
+
+ which uses annotation to handle these issues
+. In such a scenario, spring stores the user information in temporary memory and then checks for payment information if the payment is successful then it will complete the transaction otherwise it will roll back the transaction and the user information does not gets stored in the database.
+
+Rajepatilakashgmail.com
+Sanju143
