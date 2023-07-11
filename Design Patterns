@@ -60,4 +60,3 @@ Factory method design pattern defines set of rules and guidelines for creating o
 Factory Design pattern
 Provides abstraction on creating one of several related classes object based on the data h
 That is supplied.
-
