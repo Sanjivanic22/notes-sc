@@ -376,24 +376,4 @@ CACHE 10;
 INSERT INTO Person(Personid,FirstName,LastName)
 VALUES (seq_person.nextval,'Lars','Monsen');
 
- select * from orders where orderdate='1986';
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
+ select * from orders where orderdate='198;
