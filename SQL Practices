@@ -1,0 +1,399 @@
+Selecting data from from table
+ select empno,ename from emp;
+
+The SELECT DISTINCT statement is used to return only distinct (different) value
+Select distinct ename from emp;
+
+The WHERE clause is used to filter records.
+select ename from emp where ename='SCOTT';
+ select empno from emp where empno=7900;
+
+The WHERE clause can be combined with AND, OR, and NOT operators.
+The AND and OR operators are used to filter records based on more than one condition:
+	• The AND operator displays a record if all the conditions separated by AND are TRUE.
+	• The OR operator displays a record if any of the conditions separated by OR is TRUE.
+The NOT operator displays a record if the condition(s) is NOT TRUE.
+
+select * from emp where empno=7900 OR empno=7902;
+
+select * from emp where NOT sal=950;
+
+select * from emp where ename='MILLER'AND job='CLERK';
+
+The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
+select * from emp order by job;
+select * from emp order by sal desc;
+
+The CREATE TABLE statement is used to create a new table in a database.
+ create table People (PersonID int,LastName varchar(255),FIrstname varchar(255),Address varchar(255),City varchar(255));
+
+A copy of an existing table can also be created using CREATE TABLE.
+
+ create table TestTable AS Select Personid,firstname from people;
+
+The INSERT INTO statement is used to insert new records in a table.
+ insert into employee values(1,'sannju');
+
+INSERT INTO Customers (CustomerName, City, Country)
+VALUES ('Cardinal', 'Stavanger', 'Norway');
+The IS NULL operator is used to test for empty values (NULL values).
+select name from employee where name is not null;
+select name from employee where name is  null;
+
+The UPDATE statement is used to modify the existing records in a table.
+update employee set name='kunal' where id=1;
+
+The DELETE statement is used to delete existing records in a table.
+delete from employee where name='kunal';
+The SELECT TOP clause is used to specify the number of records to return.
+
+The SELECT TOP clause is useful on large tables with thousands of records. Returning a large number of records can impact performance.
+
+The MIN() function returns the smallest value of the selected column.
+The MAX() function returns the largest value of the selected column.
+
+select min(price) AS smallestprice from product;
+ select max(price) AS largestprice from product;
+
+The SQL COUNT(), AVG() and SUM() Functions
+
+The COUNT() function returns the number of rows that matches a specified criterion.
+select count(pid) from product;
+select avg(price) from product;
+select sum(qty) from product;
+
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+There are two wildcards often used in conjunction with the LIKE operator:
+
+ The percent sign (%) represents zero, one, or multiple characters
+ The underscore sign (_) represents one, single character
+
+select * from emp where ename like 'C%'; starting with c
+
+ select * from emp where ename like '%k'; ending with k
+
+statement selects all customers with a CustomerName that have "or" in any position:
+
+ select * from emp where ename like '%AR%';
+
+ SQL statement selects all customers with a CustomerName that have "r" in the second position:
+
+ SQL statement selects all customers with a CustomerName that have "r" in the second position:
+
+SQL statement selects all customers with a CustomerName that starts with "a" and are at least 3 characters in length:
+
+ select * from emp where ename like 'M__';
+ SQL statement selects all customers with a ContactName that starts with "a" and ends with "o":
+
+select * from emp where ename like 'C%K';
+
+SQL statement selects all customers with a CustomerName that does NOT start with "a":
+
+select * from emp where ename not like 'A%';
+
+A wildcard character is used to substitute one or more characters in a string.
+
+Wildcard characters are used with the LIKE operator. The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+Using the % Wildcard
+ select * from emp where ename like 'MIL%';
+QL statement selects all customers with a City containing the pattern "es": 
+
+select * from emp where ename like '%ER%';
+
+Using the _ Wildcard
+select * from emp where ename like '__LLER';
+
+	• The IN operator allows you to specify multiple values in a WHERE clause.
+
+	The IN operator is a shorthand for multiple OR conditions.
+	
+select * from emp where JOB IN('ANALYST','CLERK');
+
+select * from emp where JOB NOT IN('ANALYST','CLERK');
+
+The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+
+The BETWEEN operator is inclusive: begin and end values are included. 
+ select * from product where price between 500 AND 7000;
+select * from product where price not  between 500 AND 4000;
+
+BETWEEN with IN Example
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20
+AND CategoryID NOT IN (1,2,3);
+
+SELECT * FROM Products
+WHERE ProductName BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+ORDER BY ProductName;
+
+ select * from product where pname  between 'chair' AND 'table' order by pname;
+
+NOT BETWEEN Text Values Example
+SELECT * FROM Products
+WHERE ProductName NOT BETWEEN 'Carnarvon Tigers' AND 'Mozzarella di Giovanni'
+ORDER BY ProductName;
+
+BETWEEN Dates Example
+
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN '1996-07-01' AND '1996-07-31';
+
+SQL Aliases
+SQL aliases are used to give a table, or a column in a table, a temporary name.
+
+Aliases are often used to make column names more readable.
+
+An alias only exists for the duration of that query.
+
+An alias is created with the AS keyword.
+
+SQL JOIN
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+SQL INNER JOIN Keyword
+The INNER JOIN keyword selects records that have matching values in both tables.
+
+SELECT table1.column1,table1.column2,table2.column1,....
+FROM table1 
+INNER JOIN table2
+ON table1.matching_column = table2.matching_column;
+
+Left join
+
+SELECT table1.column1,table1.column2,table2.column1,....
+FROM table1 
+LEFT JOIN table2
+ON table1.matching_column = table2.matching_column;
+
+
+SELECT table1.column1,table1.column2,table2.column1,....
+FROM table1 
+RIGHT JOIN table2
+ON table1.matching_column = table2.matching_column;
+
+SELECT table1.column1,table1.column2,table2.column1,....
+FROM table1 
+FULL JOIN table2
+ON table1.matching_column = table2.matching_column;
+
+The UNION operator is used to combine the result-set of two or more SELECT statements.
+	• Every SELECT statement within UNION must have the same number of columns
+	• The columns must also have similar data types
+	• The columns in every SELECT statement must also be in the same order
+
+
+ select country from customer
+  2  union All
+  3  select country from suppliers
+  4  order by country;
+
+SQL UNION With WHERE
+select contactname,country from customer where country='india'
+  2  union
+  3  select contactname,country from suppliers
+  4  where country='USA'
+  5  order by contactname;
+The SQL GROUP BY Statement
+The GROUP BY statement groups rows that have the same values into summary rows, like "find the number of customers in each country".
+
+The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+ORDER BY column_name(s);
+
+select count(empno),job from emp
+  2  group by job
+  3  order by count(empno) asc;
+
+The SQL HAVING Clause
+The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions.
+
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+HAVING condition
+ORDER BY column_name(s);
+select count(customerid),country from customer
+  2  group by country
+  3  having count(customerid)>5;
+
+The ALTER TABLE statement is used to add, delete, or modify columns in an existing table.
+The ALTER TABLE statement is also used to add and drop various constraints on an existing table.
+
+ALTER TABLE table_name
+ADD column_name datatype;
+
+ alter table product add supplier_id int;
+ALTER TABLE table_name
+DROP COLUMN column_name;
+ALTER TABLE Customers
+DROP COLUMN Email;
+
+ALTER TABLE table_name
+RENAME COLUMN old_name to new_name;
+
+
+The EXISTS operator is used to test for the existence of any record in a subquery.
+The EXISTS operator returns TRUE if the subquery returns one or more records.
+
+The SELECT INTO statement copies data from one table into a new table.
+
+You can create new column names using the AS clause.
+
+A stored procedure is a prepared SQL code that you can save, so the code can be reused over and over again.
+So if you have an SQL query that you write over and over again, save it as a stored procedure, and then just call it to execute it.
+You can also pass parameters to a stored procedure, so that the stored procedure can act based on the parameter value(s) that is passed.
+
+CREATE PROCEDURE procedure_name
+AS
+sql_statement
+GO;
+EXEC procedure_name;
+
+SQL Comments
+Single line comments start with --.
+
+Multi-line comments start with /* and end with */.
+
+The DROP TABLE statement is used to drop an existing table in a database.
+
+DROP TABLE table_name;
+
+The TRUNCATE TABLE statement is used to delete the data inside a table, but not the table itself.
+
+TRUNCATE TABLE table_name;
+
+SQL constraints are used to specify rules for data in a table.
+
+SQL constraints are used to specify rules for the data in a table.
+Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+
+
+• NOT NULL - Ensures that a column cannot have a NULL value
+• 
+
+create table person(
+  2  ID int not null,
+  3  firstname char(20) not null,
+  4  lastname char(20) not null,
+  5  age int);
+
+• UNIQUE - Ensures that all values in a column are different
+The UNIQUE constraint ensures that all values in a column are different.
+Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+
+A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+ create table person(
+  2  ID int not null unique,
+  3  lastname char(20) not null,
+  4  firstname char(20),
+  5  age int);
+
+alter table persons
+  2  add unique(ID);
+
+
+• PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely
+•  identifies each row in a table
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+CREATE TABLE Persons (
+    ID int NOT NULL PRIMARY KEY,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int
+);
+create table persons(
+  2  ID int not null,
+  3  lastname varchar(255) not null,
+  4  firstname varchar(255),
+  5  age int,
+  6  constraint PK_persons primary key(ID,lastname));
+
+
+• FOREIGN KEY - Prevents actions that would destroy links between tables
+SQL FOREIGN KEY Constraint
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
+
+A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+
+The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+CREATE TABLE Orders (
+    OrderID int NOT NULL PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+);
+
+
+• CHECK - Ensures that the values in a column satisfies a specific condition
+SQL CHECK Constraint
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+create table person(
+  2  ID int not null,
+  3  firstname varchar(255),
+  4  lastname varchar(255) not null,
+  5  age int check (age>=18)
+  6  );
+
+• DEFAULT - Sets a default value for a column if no value is specified
+The DEFAULT constraint is used to set a default value for a column.
+
+The default value will be added to all new records, if no other value is specified.
+
+• CREATE INDEX - Used to create and retrieve data from the database very quickly
+
+AUTO INCREMENT Field
+Auto-increment allows a unique number to be generated automatically when a new record is inserted into a table.
+
+Often this is the primary key field that we would like to be created automatically every time a new record is inserted.
+
+You will have to create an auto-increment field with the sequence object (this object generates a number sequence).
+
+Use the following CREATE SEQUENCE syntax:
+CREATE SEQUENCE seq_person
+MINVALUE 1
+START WITH 1
+INCREMENT BY 1
+CACHE 10;
+INSERT INTO Person(Personid,FirstName,LastName)
+VALUES (seq_person.nextval,'Lars','Monsen');
+
+ select * from orders where orderdate='1986';
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
