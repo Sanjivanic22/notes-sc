@@ -1,0 +1,789 @@
+collection
+--------------
+what is collection
+collection is group of individual object as a signle entity
+it has multiple interfaces and classes like
+list ,set, map
+what is difference b/w arraylist and linkedlist
+what is internal working of hashmap
+what is diff b/w hashmap and hashset
+what is load factor of hashmap when it should be 75%
+
+what is concurrent hashmap
+-----------------------------
+what is concurrentmodificationException
+alraedy there hashset why shold go for concurrenthashmap
+
+coding 
+how map is iterate using stream and normally
+
+Multithreading
+---------------------
+what is synchronization keyword
+what is synchronized block
+what is yeild method
+what is diff b/w wait and sleep
+how can stop thread execution
+whhat is thread life cyle
+
+string handling
+-----------------
+why string is immutable
+what is diff b/w string stringbuffer and stringbuilder
+
+Exception handling 
+----------------------
+what are the type of exceptions are there
+what is checked and unchecked exception and examples
+what is customized exception
+can we the handle the exception without try and catch block
+we cant handle the exception without try and catch block
+what is polymorsim and there type
+what is overloading and overriding
+
+what is inheristance and their types
+ which one is good setter or constructor
+  what is interface and abstract classes 
+  what is marker interface
+  what is seriazation and deserialization
+  
+ spring
+ ---------
+ what is dependancy injection and how can we manage
+ what are the scopes in spring
+ what is autowiring and their modes
+ @Autowired
+ @required
+ @Qualifies
+ 
+ springboot
+ ---------------
+ what is diff b/w spring and springboot
+ what is profiling an dhow can we activatte
+ what is springboot jpa
+ how to handle the exception in springboot
+ 
+ 
+
+ Spring Boot Annotations:
+ ------------------------
+Annotations are used to provide supplemental information about a program.
+
+1)@Required:
+ It applies to the bean setter method. It indicates that the annotated bean must be populated at configuration time 
+ with the required property, else it throws an exception BeanInitilizationException.
+ 
+2)@Autowired:
+ Spring provides annotation-based auto-wiring by providing @Autowired annotation. 
+ It is used to autowire spring bean on setter methods, instance variable, and constructor. 
+ When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type. 
+ 
+3)@ComponentScan:
+ It is used when we want to scan a package for beans. It is used with the annotation @Configuration. 
+ We can also specify the base packages to scan for Spring Components. 
+ 
+4)@Bean:
+ It is a method-level annotation. It is an alternative of XML <bean> tag. 
+ It tells the method to produce a bean to be managed by Spring Container. 
+ 
+5)@Component:
+ It is a class-level annotation. It is used to mark a Java class as a bean.
+ A Java class annotated with @Component is found during the classpath. 
+ The Spring Framework pick it up and configure it in the application context as a Spring Bean. 
+ 
+6)@Controller:
+ The @Controller is a class-level annotation. It is a specialization of @Component. 
+ It marks a class as a web request handler. It is often used to serve web pages. By default, 
+ it returns a string that indicates which route to redirect. It is mostly used with @RequestMapping annotation. 
+ 
+7)@Service: It is also used at class level. It tells the Spring that class contains the business logic.
+
+8)@Repository:
+ It is a class-level annotation. The repository is a DAOs (Data Access Object) that access the database directly. 
+ The repository does all the operations related to the database. 
+ 
+9)@EnableAutoConfiguration:
+ It auto-configures the bean that is present in the classpath and configures it to run the methods. 
+ The use of this annotation is reduced in Spring Boot 1.2.0 release because developers provided an alternative of the annotation, 
+ i.e. @SpringBootApplication.
+ 
+10)@SpringBootApplication:
+ It is a combination of three annotations @EnableAutoConfiguration, @ComponentScan, and @Configuration.
+ 
+11)@RequestMapping:
+ It is used to map the web requests. It has many optional elements like consumes, header, method, name, params, 
+ path, produces, and value. We use it with the class as well as the method. 
+
+12)@GetMapping:
+ It maps the HTTP GET requests on the specific handler method. It is used to create a web service endpoint that fetches 
+ It is used instead of using: @RequestMapping(method = RequestMethod.GET)
+ 
+13)@PostMapping:
+ It maps the HTTP POST requests on the specific handler method. It is used to create a web service endpoint that creates 
+ It is used instead of using: @RequestMapping(method = RequestMethod.POST)
+ 
+14)@PutMapping:
+ It maps the HTTP PUT requests on the specific handler method. It is used to create a web service endpoint that creates or updates 
+ It is used instead of using: @RequestMapping(method = RequestMethod.PUT)
+ 
+15)@DeleteMapping:
+ It maps the HTTP DELETE requests on the specific handler method. It is used to create a web service endpoint that deletes a resource. 
+ It is used instead of using: @RequestMapping(method = RequestMethod.DELETE)
+ 
+16)@PatchMapping:
+ It maps the HTTP PATCH requests on the specific handler method. It is used instead of using: @RequestMapping(method = RequestMethod.PATCH)
+ 
+17)@RequestBody:
+ It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to convert the body of the request.
+ When we annotate a method parameter with @RequestBody, the Spring framework binds the incoming HTTP request body to that parameter.
+ 
+18)@ResponseBody:
+ It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object into JSON and XML format.
+ 
+19)@PathVariable:
+ It is used to extract the values from the URI. It is most suitable for the RESTful web service, where the URL contains a path variable.
+ We can define multiple @PathVariable in a method.
+ 
+20)@RequestParam:
+ It is used to extract the query parameters form the URL. It is also known as a query parameter. It is most suitable for web applications. 
+ It can specify default values if the query parameter is not present in the URL.
+ 
+21)@RequestHeader:
+ It is used to get the details about the HTTP request headers. We use this annotation as a method parameter. The optional elements of the 
+ annotation are name, required, value, defaultValue. For each detail in the header, we should specify separate annotations.
+ We can use it multiple time in a method
+ 
+22)@RestController:
+ It can be considered as a combination of @Controller and @ResponseBody annotations. The @RestController annotation is itself annotated 
+ with the @ResponseBody annotation. It eliminates the need for annotating each method with @ResponseBody.
+ 
+23)@RequestAttribute:
+ It binds a method parameter to request attribute. It provides convenient access to the request attributes from a controller method.
+ With the help of @RequestAttribute annotation, we can access objects that are populated on the server-side. 
+ 
+24)@Transient:
+ @Transient annotation is used to mark a field to be transient for the mapping framework, which means the field marked with 
+ @Transient is ignored by mapping framework and the field not mapped to any database column 
+ 
+ Transaction management
+ 
+
+webservices
+what is diff b/w Soap and rest
+is there any disdvantages with webservices
+what is diff b/w put and patch
+what get,post and put
+
+
+SQL
+
+what is sql joins and their types 
+what is index
+
+java 8
+on which you mostly worked 
+streams
+Find element whhich start with first letter A
+import java.util.stream.Stream;
+
+public class Main {
+    public static void main(String[] args) {
+        Stream<String> stream = Stream.of("ABC", "AFD", "BCD", "AVD");
+        char letter = 'A';
+        System.out.println("Starting with: " + letter + "A");
+        stream.filter(s -> s.charAt(0) == letter)
+              .forEach(System.out::println);
+    }
+}
+
+what is map and flatmap
+what is optional class
+
+Gnerics
+--------
+ it is came in  java 5 to deal with type object to make code statble by detecting the bugs at compile time.
+
+actually before generices we can take any type of values in the collection but generices force to take only signle type .
+ with the generics there is some advantages that is 
+type safety
+it wil check at complete so bug wont come at runtime
+ no need of type casting.
+
+refelctio api
+---------------------
+is use to examin or modify the behaviour of method,classess and intefraces at rutime.
+the required classess for refelction api are provided under java.lang.reflect pkg whcih is essential in order to understatnd 
+reflection.
+
+what isdiff b/w hashmap and hashtavble
+-----------------------------------------
+hashmap is non synchronized so it is not thread stfe 
+
+it is can came in jdk 1.2
+it is faster
+
+hashtable is synchronized so it is thread thread safe
+it is legasy classes
+ is slow 
+
+what is failfast and failsafe in java
+---------------------------------------
+fail fast abort operation as fast as posible exposing failure immediately and stopping the whole operation
+
+failsafe dont abort an operation in case of failure .such system try to avaoid raising failure as  much as possible
+
+
+
+LinkedHashMap 
+--------------------
+is a class in Java that extends HashMap and maintains a linked list of the entries in the map, preserving the order of insertion. 
+It combines the features of a hash table and a linked list, providing predictable iteration order based on the order in which entries were added.
+
+ It allows key-value pairs, permits null values and a single null key, and provides constant-time performance for basic operations like get,
+ put, remove, and containsKey .
+ 
+
+Design patten
+----------------
+
+Design patterns are reusable solutions to common software design problems. They provide well-established approaches 
+to solving certain design challenges and promote maintainability, scalability, and flexibility in software development. 
+In Java, several design patterns are commonly used. Here are some popular design patterns in Java:
+
+ Singleton Pattern:
+ -------------------
+Ensures that a class has only one instance and provides global access to it.
+Useful when there should be a single instance of a class throughout the application, such as a database connection or a logger.
+
+
+Factory Pattern:
+------------------
+Provides an interface for creating objects without specifying their concrete classes.
+Allows the client code to create objects by calling a factory method rather than directly invoking a constructor.
+Useful when there are multiple subclasses of a class, and the decision of which subclass to instantiate is made at runtime.
+
+Builder Pattern:
+-------------------
+
+Separates the construction of a complex object from its representation.
+Provides a step-by-step approach to construct objects, allowing flexibility in the construction process.
+Useful when creating objects with many optional parameters or complex construction requirements.
+
+
+diff b/w jpa and hibernate
+-------------------------------
+JPA:
+
+JPA is a Java specification that defines a set of interfaces and annotations for object-relational mapping (ORM) in Java applications.
+It provides a standard way of persisting Java objects to relational databases.
+JPA is part of the Java EE (Enterprise Edition) and Java SE (Standard Edition) platforms.
+JPA defines a set of common APIs and features that can be implemented by various ORM frameworks, including Hibernate.
+JPA simplifies the development process by offering a consistent API for interacting with databases, regardless of the underlying ORM implementation.
+JPA supports entity mapping, query languages (JPQL and Criteria API), caching, transactions, and other persistence-related features.
+
+Hibernate:
+
+Hibernate is an ORM framework that implements the JPA specification and provides additional features beyond the standard JPA API.
+It is one of the most popular ORM frameworks in the Java ecosystem and has been around for a long time.
+Hibernate is known for its powerful and flexible features, such as lazy loading, caching strategies, and advanced query capabilities.
+It offers a rich set of configuration options and allows fine-grained control over the persistence layer.
+Hibernate supports various database systems, including relational databases, NoSQL databases, and in-memory databases.
+While Hibernate is an implementation of JPA, it also provides additional features that go beyond the scope of the JPA specification.
+ These Hibernate-specific features can be leveraged when using Hibernate as the ORM provider.
+ 
+ diff hb vs jdbc
+ --------------------
+ JDBC:
+
+JDBC is a standard Java API for connecting and interacting with databases.
+It provides a low-level, database-centric approach to accessing and manipulating data.
+With JDBC, developers need to write SQL queries, handle database connections, and manage result sets manually.
+JDBC requires explicit coding for tasks such as opening and closing connections, creating statements, binding parameters, executing queries, and processing results.
+It offers direct control over SQL statements, allowing for fine-grained optimization and customization.
+It is suitable for situations where low-level control and fine-grained SQL operations are required.
+
+Hibernate:
+---------
+
+Hibernate is an Object-Relational Mapping (ORM) framework that simplifies database access by mapping Java objects to database tables.
+It provides a higher-level, object-centric approach to working with databases.
+With Hibernate, developers can work with Java objects and have the framework handle the underlying SQL operations.
+Hibernate abstracts away the low-level database interactions, including managing connections, executing queries, and handling result sets.
+It eliminates the need to write raw SQL queries, as developers can use an object-oriented query language (HQL or JPQL) or the Criteria API.
+Hibernate automatically generates the necessary SQL statements based on the object mappings and manages the object-to-relational mapping transparently.
+It simplifies the development process, reduces boilerplate code, and improves productivity by focusing on object-oriented programming rather than SQL manipulation.
+
+Iterable Interface:
+------------------------
+The Iterable interface represents a collection of elements that can be iterated over.
+It provides a single method called iterator() that returns an Iterator object.
+By implementing the Iterable interface, a class indicates that it can be the target of the enhanced for-loop (also known as the foreach loop) and other loop constructs in Java.
+The Iterable interface allows classes to define their custom iteration behavior.
+
+Iterator Interface:
+-------------------
+The Iterator interface provides methods to traverse a collection of elements one by one.
+It defines three main methods:
+hasNext(): Returns true if the iterator has more elements to iterate over.
+next(): Returns the next element in the collection.
+remove(): Removes the last element returned by next() from the collection (optional operation).
+By calling iterator() on an instance of a class that implements the Iterable interface, you get an Iterator object that allows you to iterate over the elements of the collection.
+
+Runnable in functional interface
+--------------------------------
+In Java, the Runnable interface is not classified as a functional interface because it predates the introduction of functional interfaces in Java 8. 
+However, it can still be used in a functional programming style with the help of lambda expressions or method references.
+
+Although Runnable has only one abstract method called run(), it also includes the hashCode(), equals(), and toString() methods inherited from the Object class. 
+This disqualifies it from being a functional interface according to the formal definition.
+
+terminal method in java
+---------------------------
+
+In Java streams, a terminal method is a stream operation that produces a result or a side effect and marks the end of the stream pipeline. 
+Terminal methods are typically called after a series of intermediate operations have been applied to a stream. Once a terminal method is invoked, 
+it triggers the processing of the stream elements and terminates the stream.
+
+Here are some commonly used terminal methods in Java:
+
+forEach(): Applies an action to each element of the stream. It is a terminal operation that does not return a result.
+
+toArray(): Collects the elements of the stream into an array.
+
+collect(): Accumulates the elements of the stream into a collection or other mutable data structure.
+
+reduce(): Performs a reduction on the elements of the stream, producing an optional result.
+
+min(), max(): Finds the minimum or maximum element in the stream based on a provided comparator.
+
+count(): Returns the count of elements in the stream as a long value.
+
+anyMatch(), allMatch(), noneMatch(): Check if any, all, or no elements in the stream match a given predicate.
+
+findFirst(), findAny(): Returns the first or any element of the stream, respectively.
+
+iterator(): Returns an iterator over the elements of the stream.
+
+forEachOrdered(): Applies an action to each element of the stream, ensuring that the order of elements is preserved.
+
+min(), max(): Finds the minimum or maximum element in the stream based on the natural order or a provided comparator.
+
+File synchronization 
+---------------------------
+refers to the process of ensuring that multiple copies of the same file or set of files are consistent across different devices or locations. 
+It involves comparing files, identifying differences, and updating or copying files to ensure they are the same in all locations.
+
+
+diff b/w map and hashmap
+------------------------------
+In Java, Map is an interface that represents a collection of key-value pairs, while HashMap is a specific implementation of that Map interface. Here are the key differences between Map and HashMap:
+
+Map:
+-------
+
+Map is the interface that defines the basic functionality for key-value pair storage and retrieval.
+It allows you to associate a value with a unique key.
+Common methods defined by the Map interface include put(), get(), containsKey(), containsValue(), remove(), and size().
+Map does not specify the order in which elements are stored or iterated over. The specific order is dependent on the implementation being used.
+HashMap:
+----------
+
+HashMap is a concrete class that implements the Map interface using a hash table data structure.
+It provides a fast and efficient way to store and retrieve key-value pairs.
+HashMap allows null values and a single null key.
+It does not guarantee any specific order for iteration, and the ordering may change when elements are added or removed.
+HashMap offers constant-time performance for basic operations like get(), put(), containsKey(), and remove() on average, assuming a good hash function and an even distribution of elements.
+In case of hash collisions (when multiple keys map to the same hash value), HashMap uses a linked list to store multiple entries with the same hash.
+
+constructor in interface
+------------------------
+In Java, an interface cannot have constructors in the traditional sense.
+However, starting from Java 8, interfaces can have static methods, default methods, and private methods, which can provide some level of initialization or utility behavior. 
+These methods can be considered as a form of constructor-like behavior within an interface.
+
+what is rest api  and when 204 status come
+ REST (Representational State Transfer) API is an architectural style for designing networked applications, 
+ particularly web services. It is a set of guidelines and constraints that enable systems to communicate over the internet using standard HTTP protocols. RESTful APIs allow clients (e.g., web browsers or mobile applications) to 
+ interact with server-side resources by sending and receiving data in a standardized manner.
+ 
+ 
+ When a client receives a 204 response, it implies that the operation was successful, and there is 
+ no need to take further action based on the response body.The client can continue with its current 
+ state or proceed with the next relevant action.
+ 
+ life cycle of thread
+ --------------------------
+ The life cycle of a thread in Java refers to the different states a thread can be in during its execution. The Java Thread class provides methods and mechanisms to manage and control the life cycle of threads.
+ Here are the different states in the life cycle of a thread:
+
+New: The thread is in the new state when it is created but has not yet started. The Thread object has been instantiated, but the start() method has not been called.
+
+Runnable: The thread enters the runnable state when the start() method is invoked. It is ready to run, but the scheduler has not yet selected it to be the running thread.
+
+Running: The thread enters the running state when the scheduler selects it to execute. The thread's run() method is being executed.
+
+Blocked/Waiting: A thread can enter a blocked or waiting state under various circumstances. For example:
+
+When it is waiting for a lock to be released to enter a synchronized block.
+When it is waiting for a condition to be satisfied in a call to wait(), join(), or sleep() methods.
+When it is waiting for an I/O operation to complete.
+Timed Waiting: A thread can enter a timed waiting state when it is waiting for a specific amount of time. This can occur when calling methods like sleep(), join(), or wait() with a timeout parameter.
+
+Terminated: The thread enters the terminated state when its run() method completes execution or when an uncaught exception occurs within the thread. Once a thread is terminated, it cannot be restarted.
+ 
+ static and final keyword
+ static modifies the behavior of variables and methods, while final defines constants, prevents method overriding, or prohibits class extension.
+static is associated with the class itself, whereas final is associated with immutability or prohibiting modifications.
+static variables or methods are shared among all instances of a class, while final variables represent constant values that cannot be changed.
+  
+  diff b/w encapsulation and abstraction
+  ----------------------------------------
+  
+  spring beans
+  ------------
+   A Spring bean is defined as a Java object that is instantiated, assembled, and managed by the Spring container.
+  
+  spring vs spring mvc
+  ---------------------------
+  Spring:
+
+Spring is a comprehensive framework for developing enterprise-level Java applications.
+It provides a wide range of features and modules to address various concerns of application development, such as dependency injection, aspect-oriented programming, transaction management, security, data access, and more.
+Spring promotes loose coupling, modularity, and testability in application design.
+It consists of various modules like Spring Core, Spring MVC, Spring Data, Spring Security, Spring AOP, etc., which can be used individually or combined based on the application's requirements.
+Spring can be used for developing different types of applications, including web applications, RESTful services, batch processing, integration with other systems, etc.
+Spring MVC:
+
+Spring MVC (Model-View-Controller) is a module within the Spring Framework that provides support for building web applications using the MVC design pattern.
+It is designed specifically for developing web applications and follows the MVC architectural pattern to separate the application's concerns into models, views, and controllers.
+Spring MVC provides features like request handling, routing, data binding, validation, rendering views, handling form submissions, and more.
+It allows for flexible configuration and supports various view technologies such as JSP, Thymeleaf, FreeMarker, etc.
+Spring MVC leverages the power of the Spring Framework and integrates well with other Spring modules, such as Spring Core, Spring Data, and Spring Security.
+  abstract have a constructor
+  
+ application and webserver
+ -----------------------
+ 
+
+Web Server:
+
+A web server is a software program that handles HTTP requests from clients (typically web browsers) and responds with HTML pages or other web resources.
+It primarily focuses on serving static content, such as HTML, CSS, JavaScript files, and images.
+Web servers are responsible for processing incoming requests, forwarding them to the appropriate resources, and returning the response back to the client.
+Examples of web servers include Apache HTTP Server (most widely used), Nginx, Microsoft IIS, and Lighttpd.
+Application Server:
+
+An application server is a more advanced software platform that provides a runtime environment for executing applications and hosting business logic.
+It offers a range of services and features to support the development and deployment of complex, server-side applications.
+Application servers provide services such as transaction management, security, scalability, database connectivity, messaging, and distributed computing.
+They are designed to execute business logic and process dynamic content, typically in the form of web applications.
+Examples of application servers include Apache Tomcat, JBoss/WildFly, IBM WebSphere, Oracle WebLogic, and GlassFish.
+ 
+ static and nonstatic instance
+ ---------------------------------
+ 
+In Java, "static" and "non-static" refer to the characteristics and behavior of members (variables and methods) within a class. Let's explain the differences between static and non-static members:
+
+Static Members:
+Static variables (also known as class variables) are shared among all instances of a class. There is only one copy of a static variable regardless of the number of objects created from the class.
+Static methods belong to the class itself rather than a specific instance. They can be invoked using the class name, without creating an object of the class.
+Static members are associated with the class itself, not with any specific instance.
+Static members are loaded and initialized when the class is loaded by the Java Virtual Machine (JVM).
+Static members can be accessed directly from the class or through an object instance.
+Non-Static (Instance) Members:
+Non-static variables (also known as instance variables) are specific to each instance/object of a class. Each instance of the class has its own copy of instance variables.
+Non-static methods belong to individual objects/instances of a class. They can access instance variables and other instance members directly.
+Non-static members are associated with an instance/object of the class.
+Non-static members are created when an object is instantiated from the class.
+ 
+ transient variable in java
+ --------------------------------
+ In Java, the transient keyword is used to indicate that a variable should not be serialized when an object is being converted into a byte stream. When an object is serialized, 
+ all of its non-transient instance variables are written to the output stream, allowing the object to be reconstructed later.
+ 
+ string intern method
+ ------------------------
+ In Java, the intern() method is a method available on the String class. 
+ It is used to optimize memory usage and improve performance by returning a canonical representation of a string.
+ 
+ string contant pool in java
+ ---------------------------------
+ 
+ In Java, the "String constant pool" (also known as the "String pool") is a special memory area that stores a collection of unique string literals. 
+ It is an optimization technique used by the Java Virtual Machine (JVM) to reduce memory usage and improve performance.
+ 
+ String Pool:
+ ----------------
+
+The String pool is a part of the JVM's heap memory where unique string literals are stored.
+When a string literal is encountered, the JVM checks if the literal already exists in the pool.
+If the string literal is already present, a reference to the existing string is returned.
+If the string literal is not present, a new string object is created and added to the pool, and a reference to that object is returned.
+ 
+ covarient return type
+ --------------------------
+ Covariant return type refers to a feature in Java that allows a subclass method to have a return type that is a subtype (or a subclass) of the return type of the overridden method in the superclass. In other words, it allows a more specific return type in the subclass method.
+
+The concept of covariant return type was introduced in Java 5 to improve the flexibility and usability of the language.
+ Prior to Java 5, the return types of overridden methods had to be exactly the same as the return type in the superclass.
+ 
+ arraylist and list differance
+ ----------------------------------
+ 
+In Java, ArrayList is a specific implementation of the List interface. The List interface is a part of the Java Collections Framework and defines a contract for classes that represent ordered collections of elements. Here are the key differences between ArrayList and List:
+
+Implementation:
+
+ArrayList is a class that implements the List interface. It provides a resizable array-based implementation of the List interface.
+List is an interface that defines the methods and contracts for working with lists. It does not provide a specific implementation but serves as a blueprint for classes like ArrayList, LinkedList, etc.
+Resizable Array vs. Interface:
+
+ArrayList internally uses a dynamic, resizable array to store its elements. It automatically grows and shrinks as elements are added or removed.
+List is an interface that defines the common operations and behaviors of lists. It does not specify the underlying implementation.
+Performance:
+
+ArrayList provides efficient random access and traversal of elements due to its array-based implementation. Retrieving elements by index is fast (O(1) time complexity).
+Other List implementations may have different performance characteristics. For example, LinkedList provides fast insertion and deletion at both ends but slower random access.
+Flexibility and Polymorphism:
+
+List is an interface, which means it can be used as a variable type to hold any implementation of a list, including ArrayList, LinkedList, etc. This allows for flexibility and polymorphism in the code.
+ArrayList is a concrete class, so you need to declare variables specifically as ArrayList if you want to use its features.
+Constructors and Methods:
+
+Both ArrayList and List have constructors and methods for adding, removing, accessing, and manipulating elements in the list.
+ArrayList provides additional methods specific to its implementation, such as resizing operations.
+ 
+ @validated
+ -------------------
+ @Validated is used to indicate that the annotated element (a method, parameter, or return value) should be validated using the configured validation rules.
+It enables the validation of method arguments and return values based on specified constraints.
+Usage:
+
+@Validated is typically applied at the class level of a Spring MVC controller or service.
+It can also be used at the method level to apply validation specifically to that method.
+When applied at the class level, it acts as a global configuration for method-level validations within that class.
+
+
+ @component
+ ------------
+ @Component is an annotation from the Spring Framework used to mark a Java class as a Spring-managed component. 
+ It is a general-purpose annotation that serves as a stereotype for any Spring-managed bean.
+ Purpose:
+
+@Component is used to indicate that a class is a Spring component or bean that should be managed by the Spring container.
+It is a more generic annotation and can be used as a base annotation for more specific stereotype annotations like @Service,
+ @Repository, or @Controller.
+ 
+ sorig mvc execution flow
+ -------------------------------
+ Client Sends a Request:
+
+The client (typically a web browser) sends an HTTP request to the server for a specific URL or endpoint.
+DispatcherServlet Receives the Request:
+
+The request is intercepted by the front controller of Spring MVC, known as the DispatcherServlet. It acts as the central entry point for all requests.
+Handler Mapping:
+
+The DispatcherServlet consults the configured HandlerMapping to determine which controller (handler) should process the request based on the request URL or other criteria.
+The HandlerMapping maps the request to the appropriate controller method based on the configured URL patterns or mappings.
+Controller Method Execution:
+
+Once the appropriate controller method is determined, the DispatcherServlet invokes that method to process the request.
+The controller method performs the required business logic, data processing, or interacts with other components or services as needed.
+The method may also prepare a model object that holds the data to be rendered by the view.
+Model and View Resolution:
+
+After the controller method has processed the request, it returns a logical view name and model data.
+The DispatcherServlet consults the configured ViewResolver to determine the appropriate View implementation for the returned view name.
+The ViewResolver resolves the logical view name to an actual view, which can be a JSP, Thymeleaf template, JSON, XML, etc.
+Rendering the View:
+
+The resolved view is responsible for rendering the model data into the final response format.
+The view may use the model data to populate dynamic content in the response, apply a template, or generate a specific format like HTML, JSON, XML, etc.
+Sending the Response:
+
+The DispatcherServlet sends the final response back to the client, which contains the rendered view or response data.
+ 
+ treeset in java 
+ ---------------------
+ In Java, TreeSet is a class that implements the SortedSet interface, providing an ordered collection of elements that are sorted based on their natural ordering or
+ a custom comparator. It is part of the Java Collections Framework.
+ 
+ types of iterate
+ ------------------------
+ 
+In Java, there are several ways to iterate over a collection or array. Here are some commonly used methods for iteration:
+
+Enhanced for Loop (for-each loop):
+
+The enhanced for loop provides a simple and concise way to iterate over elements in an iterable object or an array.
+It is particularly useful when you want to iterate through all elements in a collection or array in a sequential manner.
+Iterator:
+
+The Iterator interface provides a way to iterate over elements in a collection, allowing for traversal and manipulation of the collection's elements.
+It provides methods like hasNext() to check if there are more elements, and next() to retrieve the next element.
+
+ListIterator:
+---------------------
+
+ListIterator is a sub-interface of Iterator specifically designed for iterating over elements in a List.
+It extends the functionality of Iterator by allowing bidirectional traversal (forward and backward) and modification of elements in the list.
+
+For Loop (Index-based iteration):
+
+This method is suitable for iterating over elements in an array or a list when you need to access elements using their index.
+It involves specifying the index range and incrementing the index to access each element.
+
+
+how to create custom exceptions in java
+-----------------------------------------
+
+To create a customized exception in Java, you can follow these steps:
+
+Create a Custom Exception Class:
+
+Define a new class that extends one of the existing exception classes in Java, such as Exception or RuntimeException.
+It is recommended to extend Exception if you want to create a checked exception or RuntimeException for an unchecked exception.
+Example:
+java
+Copy code
+public class CustomException extends Exception {
+    // Constructor(s) and additional methods can be added
+}
+Define Constructors:
+
+Define constructors for your custom exception class to provide flexibility in creating and initializing the exception object.
+You can include constructors that accept different types and numbers of parameters based on your specific requirements.
+Example:
+java
+Copy code
+public class CustomException extends Exception {
+    public CustomException() {
+        super();
+    }
+
+    public CustomException(String message) {
+        super(message);
+    }
+
+    public CustomException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+Add Additional Methods (Optional):
+
+You can add additional methods to your custom exception class to provide additional functionality or information related to the exception.
+These methods can be specific to your use case and can assist in handling or providing context for the exception.
+Example:
+java
+Copy code
+public class CustomException extends Exception {
+    public CustomException() {
+        super();
+    }
+
+    public CustomException(String message) {
+        super(message);
+    }
+
+    public CustomException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public void logException() {
+        // Custom method to log exception details
+    }
+}
+Throwing the Custom Exception:
+
+You can throw your custom exception using the throw keyword wherever you want to indicate an exceptional situation in your code.
+Example:
+java
+Copy code
+public void someMethod() throws CustomException {
+    // Code that can potentially throw the CustomException
+    if (someCondition) {
+        throw new CustomException("An error occurred.");
+    }
+}
+
+ options in rest api
+ ------------------------
+  the OPTIONS method is used to retrieve the communication options available for a given resource or endpoint. 
+  It allows the client to determine the allowed HTTP methods, headers, and other capabilities of the server.
+  
+ payloads
+ ------------
+ In the context of web services and APIs, a payload refers to the data that is carried in the body of an HTTP request or response. It represents the actual content being transmitted between the client and the server. The payload can be
+ in various formats such as JSON, XML, plain text, or binary data, depending on the specific requirements of the API.
+ 
+ rest is stateless or statefull
+ --------------------------------
+ REST is stateless, meaning that each request from a client to a server must contain all the information necessary to understand and process that request.
+ The server does not maintain any client-specific state between requests.
+ 
+ where to configure rest api in springboot
+ ---------------------------------------------
+ 
+In a Spring Boot application, you can configure and define REST APIs in various ways depending on your specific requirements. Here are some common approaches for configuring REST APIs in Spring Boot:
+
+Using Spring MVC Annotations:
+
+Spring Boot utilizes the Spring MVC framework to handle RESTful requests and responses.
+You can define REST controllers by creating classes annotated with @RestController or @Controller annotations.
+Within these classes, you define methods annotated with HTTP method annotations such as @GetMapping, @PostMapping,
+ @PutMapping, @DeleteMapping, etc., to handle specific HTTP requests.
+ 
+Using Spring Data REST:
+
+If you are working with JPA or other data repositories, you can use Spring Data REST to automatically generate REST APIs based on your data repositories.
+ functionality of rest api
+ Custom Configuration:
+
+You can create custom configurations and register your own controllers or handlers to handle specific REST API endpoints.
+You can define your own classes and annotate them with @RestController, @RequestMapping, and other relevant annotations to define custom endpoints and request handling logic.
+ 
+ 
+ diff b/w get and loading
+ -----------------------------
+ 
+ jit compiler
+ prepared statements
+ 
+ jdbc steps
+ 
+ diff b/w equal and compareto
+ Purpose:
+
+equals() method: It is used to check the equality of two objects based on their content or attributes. It is used for determining if two objects have the same values or state.
+compareTo() method: It is used to define the natural ordering of objects. It is primarily used for sorting objects or determining their relative ordering in a collection.
+ 
+ how to sort array 
+ listdiff b/w loop and iterator
+Loops:
+
+Loops, such as the for loop and while loop, provide a way to iterate over a collection or perform a set of instructions repeatedly until a certain condition is met.
+They allow you to control the iteration process explicitly and specify the looping condition and increment/decrement logic.
+You have more control over the iteration flow and can easily customize it based on specific requirements.
+Loops are suitable when you need to iterate over a collection sequentially and access elements using an index or counter variable.
+
+
+Iterators:
+
+Iterators provide a more structured and specialized way to iterate over elements in a collection.
+They are objects that implement the Iterator interface and provide methods like hasNext() to check if there are more elements, and next() to retrieve the next element.
+They abstract the iteration process and hide the underlying implementation details of the collection, making it easier to iterate over elements in a generic manner.
+Iterators are suitable when you need to traverse a collection without knowing its internal structure or when you want to remove elements during iteration.
+ 
+ 
+ diff b/w http and https
+ HTTP: It is a non-secure protocol where data is transmitted in plain text. This means that any data sent over HTTP can potentially be intercepted and read by unauthorized individuals.
+HTTPS: It is a secure version of HTTP that uses encryption to protect data during transmission. It adds a layer of security using SSL (Secure Sockets Layer) or TLS (Transport Layer Security) protocols, encrypting the data to prevent eavesdropping and unauthorized access.
+ 
+ dtatbase pool
+ spring boot actuater
+ Spring Boot Actuator is a feature of the Spring Boot framework that provides additional production-ready management and monitoring capabilities to your Spring Boot applications. It enables you to monitor, gather metrics, and interact with your application through various endpoints.
+
+diff parallele and sequential stream
+componentscan
+ 
