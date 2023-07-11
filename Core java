@@ -1,0 +1,530 @@
+
+Java Architecture
+Java Architecture is a collection of components, i.e., JVM, JRE, and JDK. It integrates the process of interpretation and compilation. It defines all the processes involved in creating a Java program
+Java Architecture can be explained by using the following steps:
+	• There is a process of compilation and interpretation in Java.
+	• Java compiler converts the Java code into byte code.
+	• After that, the JVM converts the byte code into machine code.
+	• The machine code is then executed by the machine.
+
+The Java architecture includes the three main components:
+	• Java Virtual Machine (JVM)
+	,JVM
+	Jvm is abstract machine,it is called java virtual machine because it doesn’t physically exist
+	It is speciification  that provides runtime env in which java bytecode can be exceuted
+	It will load
+	Verifies code
+	Exceute the code also provides runtime env
+
+	• Java Runtime Environment (JRE)
+	,jRE
+	It is java runtime env used for developing application it is used to provide the runtime env.it is implementation of jvm.
+	It contains set of libraries and other file that are uses at runtime.
+	
+	• Java Development Kit (JDK)
+	Jdk 
+	Jd is java development kit I
+	It is software development env which is used to develop the java app and applets
+	It contains the JRE+development tools
+	
+
+
+
+
+Encapsulation 
+Encasulating data and corresponding method into ingle module is called encapsulation
+Datahiding+abstraction
+
+Overloading
+Two methods are said to be overloaded if method names are same but argument as different is called oveloading
+Overriding
+If methdo names and arhuments must be matched  i.e method signature must be matched is called
+
+Interface 
+Any service requireent specification or any contrct b/w client and service provider or 100% pure abstract class is nothing but an interface.
+We can declare bu using interface keyword ,for imlement we use implement keyword.
+
+
+Diff b/w inerface & abstract
+Interface
+If we don’t know any thing about implementaion just we have the requirement specification .then go for interface
+Every method present inside interface is by default public and abstract
+For the interface variable compulsory we should perform initialization at the time of declaration only
+Inside interface cant take instance ,static and constructor
+
+Abstract
+If we are talking about  implementaion but not completely then go for abstract
+Every method present inside abstract need not to be public or abstract.we can take concrete method also
+Tehere is no restriction like interface
+We can take
+
+Abstarct class 
+fOr any java class if we don’t want instanciation then we have to declare that class as abstract i.e for abstract classess instanciation is not possible.
+
+
+ABSTRACT METHOD
+Eventhough we don’t know about the implemetation still we can declare a method with abstract modifier that means abstract method can have only declaration but not implemetion hence every abstarct method declaration should end with ;
+
+FACTORY METHOD
+Marker interface
+If an interface wont contains any method & by implementing that interface if our object will get ability such type of interface are called marker interface.
+EX.Seriazable.clonable,signle thread method and random access method.
+By implementing seriazable interface we can send object across the n/w and we can save state of object to a file this extra ability is provided through seriazable interface
+
+By implemeting clonable interface our object will be in position to provide exactly duplicate object
+As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
+We can create our own marker interfface but customization of jvm required
+
+Oops
+Is_A relation(Inheritance)
+Inheritance in Java is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of OOPs (Object Oriented programming system).
+ When you inherit from an existing class, you can reuse methods and fields of the parent class. Moreover, you can add new methods and fields in your current class also.
+
+Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
+• By using extends key  we can implements is-a relationship
+• For r Method Overriding (so runtime polymorphism can be achieved).
+• For Code Reusability.
+• We use the inheritance.
+ there can be three types of inheritance in java: single, multilevel and hierarchical.
+multiple and hybrid inheritance is supported through interface only.
+
+To reduce the complexity and simplify the language, multiple inheritance is not supported in java.
+
+
+Has_A relation
+If a class have an entity reference, it is known as Aggregation. Aggregation represents HAS-A relationship.
+For code reusability we use the Aggregation
+Has -a relationship is also known as composition or aggregation 
+There is not specific keyword for has- arelationship the mostly use keyword is new keyword.
+
+The main disadvantage of has a relationship is it increases dependancy b/w classes and creates maitainance problem.
+
+Composition vs aggregation
+Composition
+In case of composition whenever container object is destroyed contained object will be destroyed automatically .i.e without exixting container object there is not chance of existing contained object 
+i.e container and contained object having strong association 
+Ex. Usniversity is composed or several departments 
+Wenever we are closing university all departments will closed.the relation b/w usniversity object & department object is strong association is nothing but compsition.
+
+Aggregation
+In case of aggregation whenever container object is destroyed there is gurranty of destruction of contained object .i.e without exixting container object  there may be chnace of existing  contained object 
+i.e container object just maintains referances of contained object
+This relationship is called  weakassociation which is nothibng but aggregation.
+
+Ex.several profecers will work in th department
+Wherver we are closing the department still there may be a chance of existing professors.this relationship b/w department is nothing but aggegation..
+
+
+Composition is stronger tha aggregation,in short ,a relationship b/w two object is refered as associtaion ,nd an association is known as composition when object owns another
+ while association is known as agrregation wen object uses another object.
+
+
+Collection
+If we want to represent Group of individual object as single entity then we should go for collection.
+Java collection can achieve all the operation that you perform on a data such as searching ,sorting ,insertion and deletion and manipulation.
+
+List 
+If we want to represent group of individual object where insertion order is preserved and duplicates are allowed then we should go for list interface.
+Lis interface found in java.util package and inherits the Collection interface.
+The implementation classes of List interface are ArrayList, LinkedList, Stack and Vector. The ArrayList and LinkedList are widely used in Java programming. 
+
+
+ArrayList
+Java ArrayList class uses a dynamic array for storing the elements. It is like an array, but there is no size limit. We can add or remove elements anytime.
+
+• Java ArrayList class can contain duplicate elements.
+• Java ArrayList class maintains insertion order.
+• Java ArrayList class is non synchronized Java ArrayList imlements  random access interface,so that we can access element with same speed. Heance if our frequesnt operation  is retrivval operation then best datastructure is arraylist.
+• But if our frequesnt operation operation is inserstion or deletion in the middle then arraylist is worst choice because it required several shift operators.
+
+• linkedList
+Java LinkedList class uses a doubly linked list to store the elements. It provides a linked-list data structure.
+
+• Java LinkedList class can contain duplicate elements.
+• Java LinkedList class maintains insertion order.
+• Java LinkedList class is non synchronized.
+• In Java LinkedList class, manipulation is fast because no shifting needs to occur.
+•  if our frequesnt operation operation is inserstion or deletion in the middle then the best datastructure is linkedlist .
+• if our frequesnt operation  is retrivval operation then linkedlist is not good choice.
+
+
+Vector
+Vector is like the dynamic array which can grow or shrink its size
+
+It is recommended to use the Vector class in the thread-safe implementation only.
+
+• Vector is synchronized.
+
+
+Stack
+The stack is a linear data structure that is used to store the collection of objects. It is based on Last-In-First-Out (LIFO).
+ It also implements interfaces List, Collection, Iterable, Cloneable, Serializable.
+
+the Stack class, we must import the java.util package.
+
+
+Set
+If we want to represent group of ndividual object where duplicates are not allowed.
+Thhe implentation classes of the set is hashset and linkedhashset.
+
+Hashset
+Java HashSet class is used to create a collection that uses a hash table for storage. It inherits the AbstractSet class and implements Set interface.
+
+• HashSet stores the elements by using a mechanism called hashing.
+• HashSet contains unique elements only.
+• HashSet allows null value.
+• HashSet class is non synchronized.
+• HashSet doesn't maintain the insertion order. Here, elements are inserted on the basis of their hashcode.
+• HashSet is the best approach for search operations.
+• The initial default capacity of HashSet is 16, and the load factor is 0.75.
+
+
+
+Linkedhashset
+
+Java LinkedHashSet class is a Hashtable and Linked list implementation of the Set interface. It inherits the HashSet class and implements the Set interface.
+Java LinkedHashSet class contains unique elements only like HashSet.
+• Java LinkedHashSet class provides all optional set operations and permits null elements.
+• Java LinkedHashSet class is non-synchronized.
+• Java LinkedHashSet class maintains insertion order.
+
+Tree set
+Java TreeSet class implements the Set interface that uses a tree for storage. It inherits AbstractSet class and implements the NavigableSet interface. The objects of the TreeSet class are stored in ascending order.
+
+• Java TreeSet class contains unique elements only like HashSet.
+• Java TreeSet class access and retrieval times are quiet fast.
+• Java TreeSet class doesn't allow null element.
+• Java TreeSet class is non synchronized.
+• Java TreeSet class maintains ascending order.
+
+
+Map
+A map contains values on the basis of key, i.e. key and value pair. Each key and value pair is known as an entry. A Map contains unique keys.
+
+A Map is useful if you have to search, update or delete elements on the basis of a key.
+There are two interfaces for implementing Map in java: Map and SortedMap, and three classes: HashMap, LinkedHashMap, and TreeMap
+
+A Map doesn't allow duplicate keys, but you can have duplicate values. HashMap and LinkedHashMap allow null keys and values, but TreeMap doesn't allow any null key or value.
+
+A Map can't be traversed, so you need to convert it into Set using keySet() or entrySet() method.
+
+Hashmap
+Java HashMap class implements the Map interface which allows us to store key and value pair, where keys should be unique. If you try to insert the duplicate key, it will replace the element of the corresponding key. It is easy to perform operations using the key index like updation, deletion, etc. HashMap class is found in the java.util package.
+
+• Java HashMap contains values based on the key.
+• Java HashMap contains only unique keys.
+• Java HashMap may have one null key and multiple null values.
+• Java HashMap is non synchronized.
+• Java HashMap maintains no order.
+• The initial default capacity of Java HashMap class is 16 with a load factor of 0.75
+
+Internal working
+
+linkedHashMap
+Java LinkedHashMap class is Hashtable and Linked list implementation of the Map interface, with predictable iteration order. It inherits HashMap class and implements the Map interface.
+
+• Java LinkedHashMap contains values based on the key.
+• Java LinkedHashMap contains unique elements.
+• Java LinkedHashMap may have one null key and multiple null values.
+• Java LinkedHashMap is non synchronized.
+• Java LinkedHashMap maintains insertion order.
+• The initial default capacity of Java HashMap class is 16 with a load factor of 0.75.
+
+TreeMap
+
+Java TreeMap class is a red-black tree based implementation. It provides an efficient means of storing key-value pairs in sorted order.
+• Java TreeMap contains values based on the key. It implements the NavigableMap interface and extends AbstractMap class.
+• Java TreeMap contains only unique elements.
+• Java TreeMap cannot have a null key but can have multiple null values.
+• Java TreeMap is non synchronized.
+• Java TreeMap maintains ascending order.
+
+
+ConcurrentHashMap
+• ConcurrentHashMap is an enhancement of Hashmap as we know that while dealing with threads in our application HashMap is not good choice because performace wise hashmp is not upto the mark.
+
+• Underlaying data structure for Concurrenthashmap is hashtable
+
+• Concurrenthashmap is thread safe
+
+• At a time any no of thread are applicable for a read operation without locking the Concurrenthashmap object which is not there in hashmap
+
+• In Concurrenthashmap the object is divided into number of segments according to concurrency level
+• concurrency level Concurrenthashmap is 16.
+• In Concurrenthashmap,at a time any number of threads can perform retrival operation but for updated in the object, the thread must lock the perticular segment in which the thread wants  to operate  this is called segment locking or bucket locking
+• inserting null object is not possible in concurrenthashmap as key or value.
+
+• Comparable interface
+Java Comparable interface is used to order the objects of the user-defined class. This interface is found in java.lang package and contains only one method named compareTo(Object). It provides a single sorting sequence only, i.e., you can sort the elements on the basis of single data member only
+
+compareTo(Object obj) method
+public int compareTo(Object obj): It is used to compare the current object with the specified object. It returns
+	• positive integer, if the current object is greater than the specified object.
+	• negative integer, if the current object is less than the specified object.
+	• zero, if the current object is equal to the specified object.
+
+Java Comparator interface is used to order the objects of a user-defined class.
+This interface is found in java.util package and contains 2 methods compare(Object obj1,Object obj2) and equals(Object element).
+It provides multiple sorting sequences, i.e., you can sort the elements on the basis of any data member, for example, rollno, name, age or anything else.
+
+Comparable	Comparator
+1) Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price.	The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.
+2) Comparable affects the original class, i.e., the actual class is modified.	Comparator doesn't affect the original class, i.e., the actual class is not modified.
+3) Comparable provides compareTo() method to sort elements.	Comparator provides compare() method to sort elements.
+4) Comparable is present in java.lang package.	A Comparator is present in the java.util package.
+5) We can sort the list elements of Comparable type by Collections.sort(List) method.	We can sort the list elements of Comparator type by Collections.sort(List, Comparator) method
+
+We can use comparable to define defualt natural sorting.
+We can use copmarator to define customized sorting order.
+
+Multithreading
+What is multi threading
+Multithreading in Java is a process of executing multiple threads simultaneously.
+Java Multithreading is mostly used in games, animation, etc.
+
+Advantages 
+1) It doesn't block the user because threads are independent and you can perform multiple operations at the same time.
+2) You can perform many operations together, so it saves time.
+3) Threads are independent, so it doesn't affect other threads if an exception occurs in a single thread.
+
+Thread
+A thread is a lightweight subprocess, the smallest unit of processing. It is a separate path of execution.
+
+
+Thread scheduller
+A component of Java that decides which thread to run or execute and which thread to wait is called a thread scheduler in Java.
+
+Ways to define instantiate & start a new  thread
+We can define thread in two ways
+1)By extending thread class
+2)By implemeting runnable interface.
+
+Which best apporoach
+Among he two ways of defining a thread implements runnable mechanism is recommended to use.
+In the first approach our class always extending thread class& hence there is chance of extending any other class but in the second approach we can extends some other class also while implementing runnable interface hence 2nd approach is recommended to use.
+
+Thread priority
+• Every thread in java has some priority but the range of thread priority is 1 to 10(1 is least and 10 is highest)
+• Thread.MIN_priority--1
+• Thread.NORM_priority--5
+• Thread.Max_priority--10
+• Thread scheduler use this priority while allocation cpu 
+• The thread which is having highest priority will get chance first.
+• How to prevent excecution of thread
+• If two threads having same priority then we cant expect exact excution order it depends on thread scheduler
+• Default priority of main  thread is 5
+The methods to prevents thread execution
+• We can prevent thread from execution by using methods  
+• Yeild 
+• Yield () method causes to pause current executing thread for giving chance to reamaing waiting threads of same priority.
+• If there are no waiting threads or all waiting threads have low priority then the same thread will continue its excution once again.
+• Public void native yield()
+Join
+If  thread want to wait until completing some other thread then we should go for join() method
+Whenever we are using join () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error.
+
+Sleep
+If thread don’t want to perform any operation for perticular amount of time then we should go for sleep()
+Whenever we are using join () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error.
+
+Sychronization
+• Synchronized is the modifier applicable only for methods and blocks& we cant apply for classes and variables.if a method or block declared as synchronized then at a time only one thread is allowed to execute that method or block on the given object.
+• The main advantages of sychronized keyword is it can resolve the inconsistancy problem
+• The main linitation of synchronized keyword is it increses waiting time of  threads & effect the performance of the system.
+• Hence if there is no requirement then its never recommended to use sychronized keyword.
+
+Syschronized block
+• If very few lines of code requires sycronization then it is never recommended to declare the entire method as sychronized .we have to declrae entire methods as sysnchronized .we have to declare those few lines of code inside sychronized block.
+• The main advantages of sychronized block over sychronized method is it reduces the waiting time of thread and improves the performance of the system.
+
+Inter thread communicatiion methods.
+Two thread will communicate with other by using Wait ,Notify ,NitifyAll
+• The thread which requires updation it has to call wait() method.the thread which is responsible to update  it has to call notify methods
+• We can call wait () ,notify and notifyAll() methods only from sychronized area otherwise we will get runtime exception. Saying IllgalMonitorStateException.
+
+• If thread calls wait() method it releases lock immediately and entred into the waiting state.the releases lock of only current object but not all locks. After calling notify and notifyAll() methods thread releases the lock but nt immediately. Except these wait(),notify,notifyAll() there is no other case where thread release lock.
+
+• Notify vs NotifyAll()
+• We can use notify() to  only one waiting thread but which waiting thread will be notified we cant expect eaxclty.All remaining thread have to wait for further notifications.
+• But in case of notifyALL() all waiting threads will be notifying but the thread will be excecuted one by one.
+
+Deadlock&startvation
+• If two thread are waiting for each other forever.such type of situation is called Deadlock
+• There is no resolution technoque but  but several prevention techniques are possible.
+• Sychronized keyword is the only reseaon for deadlock hence while using sychronized keyword we have to take very much care.
+
+• A long  waiting thread which ends at certain point of time is called starvation.
+
+Daemon threads
+• The threads which are waiting in the ackground are called daemon thread
+• Ex.garbage collector.
+• The main objective of daemon threads is to provide support for non daemon threds.
+• We can check whether thread is daemon or not by using isDaemon() method.
+• Main thread is always non daemon &its not possible to change its daemon nature
+
+How to kill thread
+A thread can stop or kill another thread by using stop() method then automatically running thread enterd into dead state.it is deprecated method and not recommended to to use.
+
+Suspending &resuming thread.
+A thread can suspend another thread by using susped()method
+A thread can resume a suspended thread by using resume().method.
+
+String handling
+Object
+The most common method which are required for any java object are encapsulated into saperate class which is nothing but objct class.sun people made this class as parent for all java classess so that its method are bydefault available to every java class automatically.
+Every class in java is child class of object either directly or indirectly.if ur class wont exends any other class then only our class is direct child class of object.
+
+
+From <https://www.javatpoint.com/why-string-is-immutable-or-final-in-java> 
+
+
+Why string is immutable in java
+The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. The reason of making string final is to destroy the immutability and to not allow others to extend it.
+
+The String objects are cached in the String pool, and it makes the String immutable. The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
+
+
+To String
+We can use this method to find strng representation of an object.
+Hashcode
+For every object jvm will assign one unique id which is nothing but hashcode.
+Jvm uses hashcode will saving object into hashcode or hashset or hashmap.
+Based on our requirement we can generate hashcode by overriding hashcode method in our class.
+Equals()
+We can use  equals method to check equality of two objects.
+
+Diff b/w ==operator and .equals method
+== operator is always meant for referance comparision where as .equls() meant for content comparision.
+
+== operator is applicable for both premitives and object referance
+In case of  object referance == opeartor is always meant for referance comparation i.e
+If two referance pointing to the same object then only ==operator returns true.
+.equals()
+It is method applicable for only for object referance but not for primitives
+By default .equals method present in object class I also meant for referance comparasion only
+We cant override .equlas method for content comparation.
+
+Immutable 
+Once we created a string object we cant perform any changes in the existing object ,if are trying to perform any changes with those changes new object will be created.this behaviour is nothing but immutability of the string object.
+
+How to create immutable class
+1. Public class Immutable{
+2. final String pancardNumber;    
+3. public Employee(String pancardNumber)  
+4. {    
+5. this.pancardNumber=pancardNumber;    
+6. }  
+7. public String getPancardNumber(){    
+8. return pancardNumber;    
+9. }    
+10. }    
+11. public class ImmutableDemo  
+12. {  
+13. public static void main(String ar[])  
+14. {  
+15. Employee e = new Employee("ABC123");  
+16. String s1 = e.getPancardNumber();  
+17. System.out.println("Pancard Number: " + s1);  
+18. }  
+19. } 
+The above class is immutable because:
+	• The instance variable of the class is final i.e. we cannot change the value of it after creating an object.
+	• The class is final so we cannot create the subclass.
+	• There is no setter methods i.e. we have no option to change the value of the instance variable.
+
+
+Mutable
+Once we crrated a string buffer object we can perform any changes in the existing object.this behavoiur is nothing but mutability of stringbuffer object
+
+StringBuffer
+If the content will changes frequently it is never recommended to go for string beacause for every change compulsory new object will created to handle this sumpolsary we should go for stringbuffer where changes will be performed in existing object  only instead of creating new object.
+
+Stringbuilder
+Evry method present in stringbuffer is sychronized.hence at atime only one thread is allowed to access stringbuffer object it incfeases the waiting time of thread  &effects performance of the system.
+To resolve this problem we should go for stringbuilder.
+Stringbuilder is same as stringbuffer but sstringbuffer is synchronized and thread safe and stringbuilder is not synchronized.
+Stringbuffer performance is low and stringbuilder performance is high.
+
+String vs stringbuffer and stringbuilder
+If the content will not change frequently then we should go for String 
+If content will change frequently and thread safety required then go for String buffer
+If content will change frequently and thread safety is not required then go for stringbuilder.
+
+
+Wrapper classes
+The main objective of wrapper classes are
+1)to wrap primitive into object form so that we can handle primitive just like object
+To define several utility methods for premitives
+
+Auto boxing 
+Automatic conversion of primitive value to the wrapper object by compiler is called Autoboxing
+
+ Autounboxing
+
+Auttomatic conversion of wrapper object to the primitive type by compiler is called Auto unboxing
+
+Excepintion handling
+Exception 
+When unwanted ,unexpected event that distrupt the normal low of program is called exception.
+
+
+Checked exception
+the exception is checked by the compiler for smooth excution of program at  runtime  are  called as checked exception.
+Checked exception and example 
+SqlException,classnotfoundException,filenotfoundException
+
+
+Unchecked exception
+If the exception is not checed by the compiler then that exception is called as uncheced exception
+
+Custom exception
+To meet programing requirement some times we have creaete our own exception is known as custom exception.
+Ex.TooOldException,Insufficient balance
+Compiletime error 
+
+Runtime error
+Try 
+To maintain the risky code
+Catch
+To maintain handling code
+Final
+We can use final keyword with method ,variable and classess.
+If we decalre class as final then we cant create the child class 
+If we declare the varibale as final then reassignment of variable is not possible.
+If declare the method as final the method overriding is not 
+Finally 
+It is block associated with try -catch To maitain the clean up code which should be  always executed  irrespective of whether exception raised or not and exception handled or not.such type place is nothing but finally block.finally will executed then return will be excuted.
+	• 
+Finalize
+It is method which should excuted by garbage collector before destroying the  any object to perform cleanup activities.
+
+Throw
+The main purpose of throw keyword is to handover iur created exception manually to the jvm.
+Sometimes we can create exception object maunally & handover that object to the JVM explicitly by using throw keyword.
+We can use throw keyword for customized exceptions.
+
+Throws
+The main purpose of throws keyword is to delegate the responsibity of exception handling to the caller methods in case of checked exception ,to convince compiler.
+
+Exception propagation
+The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us called exception propogation.
+
+
+Serialization and deserialization
+The concept representing an object state as a byte stream.byte sream has all the informattion about the object. Is called serialization
+
+Advantages
+It is mainly used to travel objects state on the network
+
+Deserialization
+Byte stream is converted into an object.
+Serialization and deserialization is plateform independent,it means you can serialize an object on one plateform and deserialize it on a different plateform.
+
+Checked exception and example 
+SqlException,classnotfoundException,filenotfoundException,checked by the at at the runtime is called checked exception
+
+
+ clasLoader
+The Java ClassLoader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine. The Java run time system does not need to know about files and file systems because of classloaders. Java classes aren’t loaded into memory all at once, but when required by an application. At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
+
+
