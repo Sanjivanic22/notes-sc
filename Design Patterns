@@ -1,0 +1,63 @@
+#Important design patterns
+##Singletone design pattern
+
+The class that allows us to create only one object in any situation is called singletone class
+To develop singletone min standard required.
+
+1)take private constructor inside java class to(to stop new operator based object creation of class)
+
+2) private static member variable to hold current lass obj referance(this is useful to check whether that single object is created or not)
+
+3)take public static factory mehod having singletone logic.i.e create and return object by checking whether object is already created or not)
+
+
+package com.nt.test;
+
+public class Printer {
+//private static member variable
+private static Printer INSTANCE;
+//private constructor
+private Printer() {
+System.out.println("Printer::0-param constructor");	
+}
+//factory method
+public static Printer getInstance() {
+	if(INSTANCE==null)
+		INSTANCE=new Printer();
+	return INSTANCE;
+}
+//b.method
+public void printData(String msg) {
+	System.out.println(msg);
+}
+
+}
+
+package com.nt.test;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Printer p1=null,p2=null;
+	
+		 p1=Printer.getInstance();
+		 p2=Printer.getInstance();
+		 System.out.println(p1.hashCode()+" "+p2.hashCode());
+	System.out.println("(p1==p2?)"+(p1==p2));
+	p1.printData("hello1");
+	p1.printData("hello2");
+	}
+
+}
+
+
+
+
+
+Factory method design pattern
+Factory method design pattern defines set of rules and guidelines for creating object of same family classess when multiple features are creating those object
+
+Factory Design pattern
+Provides abstraction on creating one of several related classes object based on the data h
+That is supplied.
+
