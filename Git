@@ -1,0 +1,54 @@
+Git
+===
+Versin Control system-its developed to co-ordinate the work among the developes
+
+Features of Git
+=================
+Open source-GPL license
+distributed-on another machin  user can easily clone
+scalable-large no users can use
+security-secure,uses SHAI to name and identity the object
+speed-most of the operation on local repo
+branching and Merging-
+branch-it will diverge from main ,we can create multiple branches,we can merge after completion of work
+staging area-preview of next commit
+
+benefit of git
+==============
+save time
+offline working 
+undo mistake
+track change
+
+import terminology
+Branch-repository diverge from main working director
+checkout-used for the act of switching b/w diff version of target 
+clone- making copy from server
+merge-combining branches
+origine-remote repository from project was initially cloned
+pull-recieve the data from the server(GITHUB)
+push-upload local repository to server
+Git ignore-user for intentionaly untrack the file
+git diff-shw changes b/w commit ,working tree
+Git Rm-from removing files
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
