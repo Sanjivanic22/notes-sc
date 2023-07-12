@@ -6,6 +6,76 @@ each representing a specific business capability and running as a separate proce
 
 ## what is diferance b/w Microservice and Monolithic architecture.
 --------------------------------------------------------------------
+Microservices                                                             
+1)are small and focused on bussiness capabilities.
+2)Microservices can developed,deployed and scaled independatly.allowing  for agility and flexibility.
+3)microservices are allow to use of diffenert tecnology,programming language for each service depending on the specific requirement
+
+ Monolithic
+--------------
+1)Monolthic are larger and contains all functionality in signle unit
+2)monolithic requirs the entire application to be delpoyed and scale.d as whole
+3) entire application is developed in single technology stack.
+
+Advatanges 
+---------------
+1)Scalability
+2)felexibility and agility
+3)modularity and maintanability
+4) microservices architecture allow you to use diffrenet tecnnologies ,programming language and framework based on there requirement.
+5) with the microservces if one service fails or experiences issue.it doesnt affect the entire system.
+service can be designed to handle failure gracefully. and implement resillience .such as circuit breaker or retry mechnism.
+6) ensure scalability and performance
+microservice can optimize resource allocation by allowing each service to scale indepently based on the requirement.
+
+What is Api gateways?
+-----------------------
+In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access the 
+underlaying microservices.
+it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
+API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
+it can handle the authentication and authorzation validate caces token.
+
+What is cicuit braking and wh to y it is so important?
+-------------------------------------------------------------
+circuit breaking is mechanism use in microservice to improve the resillience and functinonality of the system.
+it helps to prevent failure in once service from cascading and affecting the overall system.
+
+circuit breaking is mechanism to handle the service failure prevent cascading failures and imrpove the system resillince .
+it enables services and client application to handle n/w and service disruption more effectively leading to more robust and eliable MS.
+
+What is fallback method with circuit breaker?
+-------------------------------------------------
+WHat is Eureka server?
+=-----------------------
+Eureka server is compoent of netflix,service discovery and resistration tool for building microservice based application.
+eureka server acts as centralized registry where MS can register themselves and discover service within the system.
+eureka servver server provides diffenet kind of functionality.
+service registration
+service discovery
+load balancing
+failover and fault tolarance
+
+what is service descovery?
+-----------------------------
+Microservices can query the eureka server to discover other registed services and obtain thair metadata.
+this them to dynamically locate and communicate with other service without hardcoding their locations.
+
+What is load balancing
+in mS architure load balancer play crucial role in distributing incoming n/w  traffice across the multiple instace of service.
+it help to optmize resource utilization improve scalability and ensure high availabiliy.
+
+Containeratin?
+--------------
+container pkges the microservices with its dependancies .making it easier to deploy and manage across diff env.
+
+
+
+ 
+
+
+
+
 
 
 
