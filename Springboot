@@ -1,11 +1,13 @@
-Springboot
+what is Springboot?
+------------------
 	• Springboot is project i.e built on the top of spring framework
 	• It provides esier and faster ways to set up ,configure and run both simple and web based application.
 	• It provides rapid application development.
 	
 	•  Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
 
-Advantages
+   Advantages
+---------------
 	• Springboot reduce the lots of development time and increase the productivity
 	• It avaoides boilerplate code ,annotation and xml configurations
 	• It provides lots of plugins to develop and test springboot app very easily build tool like maven and gradle
@@ -14,13 +16,16 @@ Advantages
 	•  increased productivity, reduced configuration, simplified dependency management, and easier deployment.
 	
 	Disadvatages
+     ----------------------
 	It is very tough and time consuming process to convert existing legacy spring framework project into spring boot app.
 	It is application only for brand new/greenfield spring project
 	• 
 	• Application
+   --------------------------
 	• Using springboot we can develop the stanalone apps,web app,distributed app and entrprise app.
 	
 	• Profiling
+      =======================
 	• Profile is also called as environment
 	• The setup required to execute the app or project for development is called profile or env
 	• This include .class file.properties/yml file,libraries servers ,db s/w like oracle etc.
@@ -28,6 +33,7 @@ Advantages
 	• To make spring work only for certain profile activation we can use @profile annotation along with stearotype annotation for @Bean annotation.
 	
 Diff b/w spring and springboot
+=======================================
 	• Spring framework widely used Java EE framework for building application
 	• Springboot framework is widely used to develop Rest Apis.
 	• Spring simplifies the JAVA EE develpement that makes programmer productive
