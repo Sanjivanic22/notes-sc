@@ -1,10 +1,12 @@
 ## Spring 
+-=================
 Spring is opensource lightweight framework 
 Which is used to develop any kind of application
 It is like framework of framework because it support vrious framework like struts and hibernate.
 Spring framework comprise several modules such as IOC,AOP,springn core,spring mvc
 
 Advantages
+==========
 Spring framework provides predefined libraries and templates
 Spring framework privide loos coupling
 Manages the dependancies injection and IOC automatically
@@ -12,10 +14,13 @@ Spring framwork very easy to  testing
 Spring web framework is well design mvc framework which provide the greate alteranative to another ````framework like struts.
 
 Application
+==============
 IOC container
 Is responsible to instatiate,configure and assemble the objects
 The IOC container get information from the xml file and work accordingly
+
 Type
+======
 Bean factory
 Xml beanfactory is implementation class to use the bean factory we need to create the instance of xmlbeanfactory.
 The constructor of Xml beanfactory class recieves the resource object so we need to pass the resource object to create the object of beanfactory.
@@ -24,14 +29,17 @@ ClassPathXmlapplication context class is the implementation class of application
 The constructor of ClassPathXmlapplication class receives string so we can pass the name of xml file to create the interface of applicationcontext.
 
 Dependancy lookup
+==================
 Is approach where we get the resource after demand
 It is tightlly coupled and not easy for testing to solve the problem we should go for dependancy injection.
 
 Dependancy injection
+======================
 Depenancy injection is design pattern thet removes the dependancies  from the programming code so that it can be easy to test and manage the application.
 Dependancy injection makes our code loosely coupled.
 
 Constructor injection
+=======================
 Here Our Ioc container uses parameterised constructor to create the target bean class object.
 In that process we inject the dependant class object to target class object.
 
@@ -44,6 +52,7 @@ If all properties of spring bean class are mandatory to participate in the injec
 Should go for constructor injection.
 
 Settter injection
+===========================
 Here IOC container calls the setter of target class to assign dependant class object to target class object.
 <property>tag used for setter injection
 We can inject the 
@@ -55,19 +64,24 @@ If we want to involve only our choice of propetries into the spring class the we
 
 
 Spring bean scope
+===================
 When we defining bean we have the option  of declaring a scope for that bean.
 
 Singletone
+===========
 If scope is set to singletone scope ,the spring IOC container creates exactly one instance of the object defined by that bean defination.
 It is default scope if no scope is specified
 IOC container creates only one oject for spring bean class nad reuses that object.
+
 Prototype
+=============
 If scope is set to prototype ,the spring IOC container creates a new instance of the object.
  every time a resquest for that specific bean is mode as rule 
 use the prototype scope for all state-full beans and singletom scope for stateless beans.
 To define prototype ,you can set the  scope property to prototype in the bean configuration file.
 
 Scope=Request (for http protocol)
+================================
 IOC container keep spring bean class object as request attribute of we app env.
 
 Scope="session"
