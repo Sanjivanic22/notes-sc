@@ -32,6 +32,37 @@ Git ignore-user for intentionaly untrack the file
 git diff-shw changes b/w commit ,working tree
 Git Rm-from removing files
 
+Git commands and uses
+---------------------
+open with desktop
+then 
+mkdir project --create folder
+touch names.txt-->create file
+git status --check status or untrack and trak fils
+git add names.txt-->add the file in staged area
+git commit -m "names.txt added"-->commit the untrack file
+vin names.txt -->write somting in file
+ git restore --staged names.txt-->restore the file which added and modified
+ git log-->check history
+ rm -rf names.txt-->for deleting file
+ git reset 58e840b22c77f5c43638fc694fb6a3495da772ae--> for not showing the status in history so just copy hash id next to that below id it will remove
+ previous comments
+ git branch matster
+ git branch --list
+ git branch login
+ git merge login
+ git pull upstream main
+ gt push origin main
+ fork
+ git clone url
+ git 
+ merge conflict
+ same line cheged by different person the n github will confused which chage need to cinsider
+ 
+ gimerge all commit at atime
+ pick squash
+ 
+ 
 
 
 
