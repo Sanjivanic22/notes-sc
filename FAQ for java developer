@@ -9,6 +9,17 @@ what is internal working of hashmap
 what is diff b/w hashmap and hashset
 what is load factor of hashmap when it should be 75%
 
+1)what is hashmap
+hashmap is allows 
+2)how hashmap internally works?
+3) what is concurrent hashmap?
+4)what is concurrentModificationException 
+5)aleady hashtable is there why should go for concurrentHashmap
+6)what is diff b/w arraylist and linkedlist
+7)what is oop and their concepts
+8)what is encapsulation and abstraction 
+9)how can we achieve the abstraction
+
 what is concurrent hashmap
 -----------------------------
 what is concurrentmodificationException
