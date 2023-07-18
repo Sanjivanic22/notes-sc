@@ -1,0 +1,14 @@
+Junit5
+
+
+AsertApi
+it is used to validate the test.is current test pass/fail
+expected value is compared with actual result.
+Junit5 has provide class :Assertions()
+which contains all static methods "asert method".
+assertEquals(expected,actual)-- this method is used to compared expected value with actual value
+assertNull(object)-This method is used to specifythat given object is not null it holds some data,else Test fails.
+
+assertNUll(object):given object is null ,else test fail
+assertDoesNotThrow(Executable):
+
