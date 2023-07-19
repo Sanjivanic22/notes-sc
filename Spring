@@ -90,6 +90,7 @@ Ioc container keeps spring bean class object as session attribute of web app env
 Global session
 
 Autowring
+=============
 Autowiring enable you to inject the object depndancy .it internally uses setter or constructor injection.
 Autowiring work with object dependancy.
 
@@ -100,18 +101,22 @@ No
 Default autowiring mode,its mean no autowiring by default.
 
 Byname
+--------
 Inject the onject dependancy.according to proptery name and bean name.
 In this case proptery name bean name must be same internally call setter method .
 
 Bytype
+---------
 Inject the object dependancy according to type property name and bean name can be different.
 Internally call setter method.
 
 Constructor
+------------
 Inject by calling constructor of class calls constructor having the large no of parameter.
 Autodected-deprecated.
 
 Spring ORM
+============
 It is spring module providing abstraction on multiple ORM framework like hiberanate like 
 O-r mapping 
 The process of Linking Db tables with java classes and Db table cols with the properties of classes and having  Synchronization b/w them is called o-r mapping.
@@ -122,10 +127,12 @@ It is a spring module providing abstraction on multiple ORM frameworks like hibe
 It supplies mutiple templates classes like hibernate template 
 
 Spring AOP
+==============
 AOP is methodology of programming  to solve the problems related OOP style programming,but it is bult on the top of of oops style programming.In AOP code is not clumzy,becoz the primary and secondary logics are saperated
 Improves the redability  and modularity of the code.
 
 AOP principle/terminology
+--------------------------
 A) Aspect(what you want apply)
 It is class that represent secondary logic.this is called as middleware service or cross cutting concern
 
@@ -149,3 +156,25 @@ The output /outcome f weaving process done spring Aop enabled framework or softw
 Spring container
 Spring container is at the core of the spring framework.
 The container will creates the object,wire them together,configure them and manage their complete life cycle from creation till destruction.the spring container uses DI to manage the componenets that make up an application.
+
+Spring MVC
+=============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
