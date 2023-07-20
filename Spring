@@ -126,6 +126,39 @@ It is a spring module providing abstraction on multiple ORM frameworks like hibe
 
 It supplies mutiple templates classes like hibernate template 
 
+
+Spring MVC
+=============
+## SPRING MVC FLOW
+ -------------------------------
+ Client Sends a Request:
+
+The client (typically a web browser) sends an HTTP request to the server for a specific URL or endpoint.
+DispatcherServlet Receives the Request:
+
+The request is intercepted by the front controller of Spring MVC, known as the DispatcherServlet. It acts as the central entry point for all requests.
+Handler Mapping:
+
+The DispatcherServlet consults the configured HandlerMapping to determine which controller (handler) should process the request based on the request URL or other criteria.
+The HandlerMapping maps the request to the appropriate controller method based on the configured URL patterns or mappings.
+Controller Method Execution:
+
+Once the appropriate controller method is determined, the DispatcherServlet invokes that method to process the request.
+The controller method performs the required business logic, data processing, or interacts with other components or services as needed.
+The method may also prepare a model object that holds the data to be rendered by the view.
+Model and View Resolution:
+
+After the controller method has processed the request, it returns a logical view name and model data.
+The DispatcherServlet consults the configured ViewResolver to determine the appropriate View implementation for the returned view name.
+The ViewResolver resolves the logical view name to an actual view, which can be a JSP, Thymeleaf template, JSON, XML, etc.
+Rendering the View:
+
+The resolved view is responsible for rendering the model data into the final response format.
+The view may use the model data to populate dynamic content in the response, apply a template, or generate a specific format like HTML, JSON, XML, etc.
+Sending the Response:
+
+The DispatcherServlet sends the final response back to the client, which contains the rendered view or response data.
+
 Spring AOP
 ==============
 AOP is methodology of programming  to solve the problems related OOP style programming,but it is bult on the top of of oops style programming.In AOP code is not clumzy,becoz the primary and secondary logics are saperated
@@ -156,11 +189,6 @@ The output /outcome f weaving process done spring Aop enabled framework or softw
 Spring container
 Spring container is at the core of the spring framework.
 The container will creates the object,wire them together,configure them and manage their complete life cycle from creation till destruction.the spring container uses DI to manage the componenets that make up an application.
-
-Spring MVC
-=============
-
-
 
 
 
