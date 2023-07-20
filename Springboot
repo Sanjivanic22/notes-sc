@@ -31,6 +31,41 @@ what is Springboot?
 	• This include .class file.properties/yml file,libraries servers ,db s/w like oracle etc.
 	• From development to release/maintainance the project code/app code has executed in diff env/profiles like dev,test/prod profile.
 	• To make spring work only for certain profile activation we can use @profile annotation along with stearotype annotation for @Bean annotation.
+
+
+How to handle the exception in springboot
+=============================================
+
+we can handle the exception in spring boot using some anootataions like
+@ExceptionHandler
+----------------------
+by using this annotation you can define method in your controller class to handle the specific exceptions.
+Annnotated method can have a specific exception type as a parameter,allowing you to handle the perticular exception.
+
+@ControllerAdvise
+------------------------
+Allows you to define global exception handler that are applied across multiple controler
+it is useful for centralizing exception handling logic and applying consistant error handling across the app
+@ResponseStatus
+-----------------
+to define http status code to be return when the exception occures.
+
+What is diff b/w @RequestParam and @PathVarible
+=================================================
+@RequestParam
+------------------
+this annotation is used extract the query parameter or form data from the request url
+it allow you to retrive individual request parameter by name and provides options for setting default values .handling optional parameter and binding to diff data
+types.
+
+@PathVarible
+-----------------
+this annotation is used  to extract patahvariable from the request URL
+thsi is dynamic part of url that embeded with & ?
+
+
+
+
 	
 Diff b/w spring and springboot
 =======================================
