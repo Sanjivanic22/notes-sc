@@ -1,0 +1,399 @@
+JDBC
+===========
+	Ø What is JDBC
+	Ø Java database connectivity
+	Ø Used for connect java application to database application
+	
+	Ø Steps to work with jdbc 
+	1) Register jdbc driver s/w with the drivermanager service
+	2) Create or establish the connection with db s/w from java app byusing jdbc driver that is there with drivermanager service
+	3) Create statement object
+	4) Send and Execute the sql qurieis in  DB s/w  using statement object
+	5) Use the statement to gather sql query result and to process the results
+	6) Close the connection with DB s/w
+	
+	Ø Five types of driver
+	Ø Type 1--->is odbc driver (open db connectvity)it s default driver jdk setup
+	Ø Type 2
+	Ø Type 3 is used for developing the app
+	Ø Type 4
+	Ø Type 5
+	
+	Ø Statement interface
+	Ø Is used for all ddl and dml operation in database
+	
+	Ø Int  executeUpdate(strng sqlStatement):this method is used for perform the all  ddl and dml operation with db except select
+	 if  operation get success return non zero vlue else return 0.
+	
+Ø            Resultset executeQuery(string selectStatement): this is used for execute the select stattement here.
+Ø For selecting record for DB we have executeQuery() of statement interface this method return rfernce
+Ø Of REsultSet interface and ResultSet interfec from java.sql.pkg which is used for hold the data fetch by select command
+Ø Syntax
+Ø ResultSet ref=statementref.executeQuery(String sqlQuery);
+Ø Boolean next(): this method check where record present in db or not if present return true otherwise return false.
+Ø String getString(int ndex):      this method is used for fetch data from db table using its index
+Ø Note :if we use * in select i.e wildcard select then first column in table consider first index.
+Ø Int getInt(int index):  fetch integer type of data from database table using its index
+Ø Float  getInt(int index):  fetch float type of data from database table using its index
+Ø Long  getInt(int index):  fetch  long type of data from database table using its index
+
+Ø We can fetch usng columnname also
+Ø String  getString(String columnName)
+Ø Sql injection:where we can saperate the variable from the sql statement by using ""+ symbol
+	Ø Steps
+	Ø Add java.sql pkg
+	Ø Import java.sql.*;
+	Ø Create the ref of statement inteface
+	Ø       This method return statement of statement inteface.
+	Ø Call its executeQuery() and executeUpdate()
+	
+	Ø Preparedstatement interface
+	
+Ø Used for execute all ddl and dml command like statement
+Ø Avoid the sql injection to pass run time parameter to sql statement
+Ø Is a pre compiled statement.(only one time qury execute only change the value)
+Ø          steps to work
+Ø Create the refernce of preparedStatement interface
+Ø PreparedStatement ref=connref.preparedStatement(String sqlStatement);
+Ø ? Means parameter
+Ø Use its executeUpdate() and executeQuery()  
+Ø F want to pass parameter to sql statement  preparesStament provide the some inbuilt method as 
+Ø Void setXXX()
+Ø Void setInt (index,String data()
+	Ø Resultset
+Ø 
+	Ø callableStatemnet
+	Ø How to call procedure using jdbc
+	Ø We have callableStatement interface for that.
+Ø Procedure:
+Ø Procedure s same like as function in c
+Ø  Which is used for writing the sql query. And reuse it.
+Ø How to create procedure in mysql
+Ø Delmiter//
+Ø Create procedure procedurenae(variablename datatype(size))
+Ø Begin
+Ø Write here sql statement
+Ø end
+Ø //
+Ø mysql> delimiter //
+Ø mysql> create procedure saverecord(name varchar(200),email varchar(200),contact varchar(200))
+Ø     -> begin
+Ø     -> insert into register values(name,email,contact);
+Ø     -> end
+Ø     -> //
+Ø Query OK, 0 rows affected (0.16 sec)
+
+Ø //
+Ø Syntax:
+Ø Steps to work
+Ø Add java.sql.*;
+Ø Create the referance of callableStatemet interface we have
+Ø prepareCall() method of coonection interface
+Ø Sysntax
+Ø callableStatemnt ref=connref.prepareCall("{call procedurename(?,?,?........}");
+Ø ? Indicate parameter
+Ø For passng the parameter to procedure we have setXXX() method of preparedStatement nterface
+Ø callableStatement is chld interface of PreparedStatement.
+
+Ø Call its execute() method for execue the procedure
+Ø This method return false if statemnet executed successfully otherwise return true
+
+Ø How to store image in database
+Ø Create the table with blob datatype
+Ø create table studreg(rid int(5) primary key auto_increment,name varchar(200),photo blob);
+Ø Blob datatype(data in the form of byte or bits)
+Ø Read the image from hard disk
+Ø We can use FleInputStream class from java.io.pkg
+Ø Syntax:
+Ø FileInputStream ref=new FileInputStream(Strng path);
+
+Ø Call the setBinayStream() of PreparedStatement interface
+Ø If we want to store the image in db we have to call setBinaryStream() method of preparedstatement interface
+Ø Sysntax:
+Ø Void setBinaryStream(int index,InputStream,int length);
+Ø ,InputStream=path of image where it is present,we need to specify the object of InputStream class
+	Ø ResultsetMetadata
+	
+	Ø How to load the db credentials using property file
+	Ø Sometimes if we set the database credentials n jva hard code or in java file and if your application deploy on server and after that credentials may change so we have to perform  change in .java file and then again we need to recomplie it nad again redeployee it ,so it very tadius task so better to set your db  configuration in .properties file and access in java file from .properties file.spo the benefit is when we want to chage the configuration e=we need to change only properties file no need to change .java file.
+Ø How to configure property file.
+Ø Propertyname=value;
+Ø Eg.driver=com
+
+Ø How to load property file in java class
+Ø Read the file by using stream class
+Ø InputStream ref=new FleInputStream("property filename");
+Ø Create the object of property class
+Ø Properties p=new Properties();
+Ø P.load(ref);
+Ø Access the values usng property name
+Ø If we want to access the value by using propert name
+Ø String val=propertyref.getProperty("propertyname);
+Ø What is sql injection
+Ø Making special sql instructions part of the sql query by sending them along with input values of the application to change the sql query behaviour thus application hehavior is called sql injection problem
+Ø Hackers and jackers are use this technique to getc into other account without username and password.
+
+SERVLET
+===========
+	Ø Servlet 
+	Ø is server side technology of java which s used for create the dynamic web application or web pages
+	Ø Server side technology
+	Ø Those programming or technology used server server  for its execute the application called Server side technology.
+	Ø Those technology cannot execute its application without server called as server side technology
+	Ø What is Server
+	Ø Is software or application program it has ability to manage the application at central location and provide the access to remote machne browser or client.as well as  accept the request from remote client and give response as per the request
+	Ø Eg.apache tomcat,glassfish
+	Ø Client means browser
+	
+	Ø What is dynamic webpages
+	Ø Those pages can work with db as wll as generate runtime response, as well asgenerate runtime html from server side.
+	Ø Servlet container
+	Ø Is some inbuilt api which is responsible for manage the overall activity of servlet
+	Ø How to submit form to servlet
+	
+	Ø <input type='text' name='controlname' value=''/>//used for create the text box using html
+	Ø <input type='password' name='controlname' value=''/>//use for create the password box
+	Ø <input type='checkbox' name='controlname' value=''/>use for create the checkbox
+	Ø <input type='radio' name='controlname' value=''/>use for create the radio button
+	Ø <input type='textarea' name='controlname' value=''/>use for create the textarea
+	Ø <select name='controlname'>
+	Ø <option>value</option>
+	Ø </select>:create the drop down box or combobox using html
+	Ø <input type='submit' name='controlname' value=''/>:create the submit button
+	Ø Name:indicate identify of control at server side at the time of data fetching
+	Ø Value:ndicte the actual data resent in control
+	Ø If want to communicate html to servlet we have form tag
+	Ø <form name="formname" action="urlname" method="GET/POST"enctype="multipart-formdata/application-x-ww-urlencoded">
+	Ø </form>
+	Ø Method==way of form data submission
+	Ø GET-->if we use the GET method then all html form data visible at browser address bar in th form of name and value pair
+	Ø POST--->if we use html form data not visible at rowser address send varieently body header of page
+	Ø 
+	Ø Syntax:
+	Ø String value=request.getParameter(""html control name mention in form tag)
+Session management
+Session
+Session is communication period b/w client and server over the n/w
+Why use the session?
+The major goal of session is because http is stateless protocol
+Means every request of client consider as new client by the server every time.even client is same
+If we use the  session then stateless protocol convert into the statefull protocol.
+Means if we use the session server create the one session id for client and when client revisit to server then server verify the client session id if session id found then consider it s new client
+
+Note: every client having different session id.
+
+Real time example of session management
+1)to maintain the client data privacy
+2)to store data temporary at client side
+	3) To provide the security in some cases
+	4) Count the online login user
+	5) Session I concept of  application development
+	Type of session management
+	1) Http session interface
+	2) Url rewriting
+	3) Hidden field
+	4) Cookies
+Session handling using http session
+Steps
+1)Add javax.servlet.*;
+2)Create the reference of http session interface
+getSession() method f httpservletRequest is there for create the referance of HttpSession interface
+And this method return the referance of httpsession interface
+Sysntax:
+HttpSession sesssion=requeststref.getSession(boolean):this method is used for create the new session
+If we pass true in it
+Or
+HttpSession session=requestref.getSession():
+this method can use the existing session created by user.
+
+3)Use its method to work with http session
+If we want to work with this we have some methods
+String getId():this method return the session id generated by serer for client
+
+Void setAttribute(Object key,object value):
+This method can store the data in session in the form of key and value pair.
+Void getAttribute(Object key,object value):
+This method return the session data using ts key if not found return null
+
+Boolean isNew():
+This method is used for check wheather session is new or not if new return true otherwise return false.
+	
+Void invalidate():this methods is used to logout the session.
+Void setMaxInactiveInterval(int second):
+Terminate the session forcefully by using this method
+
+How to upload file to the server
+1)creaete the file uplading control inhtml
+<input type="file" name="controname" value=""/>
+2)write the form tag 
+Sysntax
+<form name="formname" action="servleturl" methdod="POST">-
+Enctype="multipart/form-data">
+</form>
+//when we upload file to server compusary POST method should not use get
+Enctype :encoding type
+2 types of enctype
+Application/x-www-url encode(default)
+Multipart/form-data-this is optional means when we upload file to server we must specify enctye
+This enctype send data via body of page in the form request header as well as form request
+3)wrte file uploadng logic
+There are 2 ways to write the file uploading logic
+1)we can write manual logic
+2)you can use inbuilt library 
+Common-io.jar
+File-upload.jar
+Download this jars and add in lib folder
+3)write the file uploading code
+1)Access the root folder path using servlet
+Request.getRealPath("/"):this method can return the servlet root folder path of yourproject
+2)che ck request is multipart or not if we want to check the multipart request for file uploading we have the 
+boolean b=ServletFileUpload.isMultipartContent(request);
+This method return true if the uploadng possible otherwse return false
+3)we beed to specify the location where we want to store our file when upload it on server
+For that we have the cla name s 
+DiskFileItemFactory
+So need to create the object of this class
+DiskFileItemFactory factory=new DiskFileItemFactory();
+ factory.setRepository(new File(path));
+4)create the object of servletFileupload class and pass factoryy referance in it
+5)parse the request:
+This method can parse the request content and convert in collecton.
+ try {
+				List fileList=fileUpload.parseRequest(request);
+			} catch (FileUploadException e) {
+				e.printStackTrace();
+			}
+6)Iterate the collection name fetch file itom
+Iterator ref=fileList.iterator();
+While(ref.hasNext())
+{
+Object obj=ref.next();
+FileItem fileItem=(FileItom)obj;
+}
+
+
+JSP
++=====
+• jsp
+• it is tag based scripting language
+• no need to write pure java class files for dynamic webpages
+• no need to configure url in web.xml files
+• easy to integrate the ui like as html,css ,bootstrapetc
+
+• every page internally converted to servlet
+
+• how every jsp page convert to servlet
+• with the help of jasper container
+• jsp container are the some inbuilt api or classes and interfaces 
+• which is responsible for convert the jsp to servlet
+• jsp page ---->jsp container--->sevlet.java-->servlet.class--->apache tomcat
+• if we want to work with jsp we have some inbuilt tags and some inbuilt object
+
+• 1)declaration
+• is used for declare the variable,function and classes in jsp.
+• Sysntax:
+• <%!
+• int a,b,c
+• %>
+
+• 2)scriptlet 
+• if we want to write the pure bussiness logic we can use scriplet
+• <% 
+• a=100;
+• b=200;
+• c=a+b;jn blboi
+• out.prinln("<h1>Addition is &nbsp;"+c+</h1>");
+• %>
+
+• 3)expression
+• is used for display the output on web page like as out.println()
+• if we pass run time value from jsp to any html control
+• or element we can use expression tag
+• sysntax;
+• <%=expression%>
+• note we canot give the ; in expression tag
+• what happened if we give
+• out.println(expression;); like that
+
+• 4)directive
+• is used for apply the page specific attribute in jsp as well as  include the another page content as wells s use the third party tag library in jsp
+• syntax:
+• <%@attribute subattribute="value"%>
+• there are 3 attribute
+• page:its is used for apply page specific attribute like as importing package in jsp page,checkworking page or notetc
+• sysntax:
+• <%@page subattribute="value"%>
+• if we use page directive we have subattribute
+
+• import
+• is used for import the another page content in jsp
+• syntax:
+• <%page import="packagename" %>
+• e.g
+• <%page import="java.util.*" %>
+
+• isErrorpage
+check working page is error page or not
+if here is possibily exception may be occure on working page then set working page isErrorPage is true
+<%@page isErrorPage="true"%>
+
+errorPage:
+this used for redirect control on anther mention by user when exception generate on working page
+<%@page isErrorPage=""true errorPage="filename"%/ >
+
+isELIgnored
+this is used for  whether expression language can use in jsp page or not
+if we set isELIgnored="false" means we use the expression language.
+syntax:
+<% page isELIgnored="false"%>
+
+session: this is used for decide the session object can use on jsp page or not if we set
+ true the we use the session on jsp otherwise not
+ <%@page session="true|false"%>
+ 
+pageInfo
+
+contentType
+used for decide the response type of jsp page by default it is text/html
+<%@page contentType='text/html'%>
+
+charSet
+it is used for set the unicode charactor on jsp page
+<%@page charSet='UTF-8'%>
+include:
+used for anather page content in jsp page
+syntax:
+<%@include file='filename'/>
+
+taglib:
+used for use the third party tag library in jsp page
+<%taglib uri="tag library path" prefix="starting letter of tag"%>
+
+
+inbuilt object of jsp
+out:printwriter
+request;it is member of HttpServletRequest
+response:it is mmber of HttpservletResponse
+Seesion:it is mmber of Httpsssion interfaces
+application :it is mmber of  servletContext
+config:it is member of servletConfig
+page :points current page like as this
+
+
+Q: What is JSP? A: JSP (JavaServer Pages) is a technology used to create dynamic web pages in Java.
+Q: What is the difference between JSP and Servlets? A: JSP is a high-level view technology that simplifies the process of creating dynamic web pages, while servlets are low-level controller components used to handle requests and generate responses.
+Q: What is a JSP tag? A: A JSP tag is a predefined set of instructions used to insert dynamic content into a JSP page.
+Q: What are the types of JSP tags? A: There are three types of JSP tags:
+1. Directive tags: Used to provide instructions to the JSP container.
+2. Action tags: Used to perform actions such as forward, include, and redirect.
+3. Expression tags: Used to insert dynamic content into a JSP page.
+Q: What is the difference between JSP and JSF? A: JSP is a technology used to create dynamic web pages, while JSF (JavaServer Faces) is a component-based framework used to create web applications.
+Q: What is the use of the JSP page directive? A: The JSP page directive is used to provide instructions to the JSP container such as the language used, error page, session behavior, and buffer size.
+Q: What is the use of the JSP include directive? A: The JSP include directive is used to include another JSP page or HTML file into a JSP page.
+Q: What is JSP expression language? A: JSP expression language is a syntax used to insert dynamic content into a JSP page using expressions.
+Q: What is the use of JSP EL? A: JSP EL is used to simplify the process of inserting dynamic content into a JSP page and to make the code more readable.
+Q: What is JSP custom tag? A: JSP custom tag is a tag created by the user to perform a specific action in a JSP page.
+Q: What is the difference between JSP include directive and JSP include action? A: JSP include directive includes the content of another JSP page or HTML file at compile time, while JSP include action includes the content at runtime.
+Q: What is JSP implicit object? A: JSP implicit object is a set of objects provided by the JSP container to a JSP page to access request, response, session, application, and other objects.
+
+
