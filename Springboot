@@ -87,11 +87,73 @@ For example, booking a flight ticket is also a transaction where the end user ha
 
  Now, to book a ticket he does an online payment and due to some reason(system failure) the payment has been canceled so, the ticket is not booked for him. But, the problem is that his information gets stored on the user_info table. On a large scale, more than thousands of these things happen within a single day. So, it is not good practice to store a single action of the transaction(Here, only user info is stored not the payment info).
 
-To overcome these problems, spring provides transaction management 
-
- which uses annotation to handle these issues
+To overcome these problems, spring provides transaction management  which uses annotation to handle these issues
 . In such a scenario, spring stores the user information in temporary memory and then checks for payment information if the payment is successful then it will complete 
 the transaction otherwise it will roll back the transaction and the user information does not gets stored in the database.
+
+
+spring data jpa
+======================
+Entities and Mapping: 
+----------------------
+Entities represent persistent data objects that are mapped to database tables.
+Spring Data JPA uses annotations such as @Entity, @Table, @Column, and @Id to define entities and their mappings to database tables and columns.
+
+Repositories:
+-----------------
+ Repositories provide an abstraction for performing CRUD 
+ (Create, Read, Update, Delete) operations on entities.
+ The CrudRepository interface provides basic CRUD methods,````````````
+ while the JpaRepository interface extends it with additional querying capabilities. 
+ Custom repository methods can be defined using method naming conventions or by writing JPQL or native SQL queries.
+
+Query Methods:
+--------------
+ Spring Data JPA allows you to define repository methods by method name conventions.
+ By following naming patterns, you can easily define queries without writing explicit JPQL or SQL queries. 
+ For example, findByFirstName(String firstName) generates a query to find entities by the firstName attribute.
+
+Associations: 
+--------------
+Spring Data JPA supports different types of associations between entities, such as one-to-one, one-to-many, 
+many-to-one, and many-to-many relationships. 
+These associations are defined using annotations like @OneToOne, 
+@OneToMany, @ManyToOne, and @ManyToMany.
+
+Transactions: 
+---------------
+Transactions ensure data consistency and integrity during database operations. Spring Data JPA leverages 
+the transaction management capabilities provided by Spring Framework, allowing you to annotate methods or classes 
+with @Transactional to enable transactional behavior.
+
+Paging and Sorting: 
+-----------------------
+Spring Data JPA provides built-in support for pagination and sorting. 
+You can use methods like findAll(Pageable pageable) or findAll(Sort sort) to retrieve data in paginated or sorted formats.
+
+Auditing: 
+--------------
+Spring Data JPA offers auditing capabilities to automatically track and store additional information about entity modifications, 
+such as creation and modification timestamps, and the user responsible for the changes. This is achieved using annotations like
+ @CreatedBy, @LastModifiedBy, @CreatedDate, and @LastModifiedDate.
+
+Native Queries: 
+--------------
+Spring Data JPA allows you to execute native SQL queries using the @Query annotation with the nativeQuery parameter set 
+to true. This is useful for complex queries that cannot be expressed using JPQL or require the use of database-specific features.
+
+Caching:
+-------------
+ Spring Data JPA integrates with the Spring Framework's caching capabilities. 
+ You can enable caching for repository methods using annotations like @Cacheable, @CacheEvict, and @CachePut, 
+ reducing database access and improving application performance.
+
+Specifications and Criteria API:
+----------------------------------
+Specifications and the Criteria API provide a way to build complex queries dynamically. 
+Specifications allow you to define reusable query conditions, while the Criteria API provides a type-safe and object-oriented way 
+to build queries programmatically.
+
 
 
  Q: What is the auto-configuration feature in Spring Boot? 
