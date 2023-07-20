@@ -1,14 +1,15 @@
-##Core java
+>
+# Core java
 Core Java refers to the fundamental components of the Java programming language, including its syntax, language constructs, and standard libraries. Java is a general-purpose programming language that is used for a wide range of applications, from developing desktop applications to building web applications, mobile apps, and enterprise systems.
 
 
-##Jdbc
+## Jdbc
 JDBC (Java Database Connectivity) is a Java API used for connecting Java applications to relational databases. It provides a standard interface for Java applications to access and manipulate data stored in databases, regardless of the specific database management system (DBMS) being used.
 
-##Servlet
+## Servlet
 Servlets are a Java technology used for creating server-side web applications. They are designed to handle requests from clients (e.g., web browsers) and generate dynamic responses based on the client's request.
 
-##Jsp
+## Jsp
 SP (JavaServer Pages) is a technology used for developing web applications in Java. It allows developers to write dynamic web pages using Java code that can interact with databases, handle form data, and generate dynamic HTML content.
 
 Spring 
@@ -31,12 +32,10 @@ Spring Boot is a popular open-source framework for building Java-based applicati
 microservices
 Microservices is a software architecture style that involves developing applications as a suite of small, independently deployable services that communicate with each other through lightweight APIs. Each service is designed to perform a specific business function and can be developed, deployed, and scaled independently, allowing for greater agility, flexibility, and scalability.
 
-> 
+ 
 Spring rest
 Spring rest is part of spring framework wich is used to develop the restfull webservices .in java
 Spring REST is a module of the Spring Framework that is used to build RESTful web services. REST stands for Representational State Transfer and is an architectural style that is used for designing distributed systems, such as web services.
 
-
-![image](https://github.com/Sanjivanic22/notes-sc/assets/68500983/0c9362de-592d-44c5-ada8-5ce33630b26a)
 
 
