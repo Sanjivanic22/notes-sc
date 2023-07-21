@@ -1,0 +1,532 @@
+coding Questions list
+## String programs
+========================
+1) Reverse String
+------------------
+public class ReversedString {
+
+public static void main(String[] args) {
+
+String str="Sanjivani",nstr="";
+char ch;
+System.out.println("original word:"+str);
+for(int i =0;i<str.length();i++) {
+
+	ch =str.charAt(i);
+
+	nstr=ch+nstr;
+
+}
+
+System.out.println("Reversed word:"+nstr);
+
+}
+
+by using inbuilt function
+=================================
+public class ReversedString {
+
+public static void main(String[] args) {
+
+//using StringBuilder
+
+	String input="Sanjivani";
+
+	StringBuilder sb=new StringBuilder();
+
+	//append
+
+	sb.append(input);
+
+	//reverse
+
+	sb.reverse();
+
+	System.out.println(sb);
+
+}
+
+}
+
+check if string is palindome
+==================================
+public class StringPalindrom {
+
+public static void main(String[] args) {
+
+	String str="Kayak";
+
+	str=str.toLowerCase();
+
+	boolean isPalindrom=checkPalindrom(str);
+
+	if(isPalindrom) {
+
+		System.out.println("the string is palindrom");
+
+	}
+
+	else {
+
+		System.out.println("The Sring is not palindrom");
+
+	}
+
+}
+
+public static boolean checkPalindrom(String str) {
+
+	int left=0;
+
+	int right=str.length()-1;
+
+	while(left<right) {
+
+		if(str.charAt(left)!=str.charAt(right)){
+
+			return false;
+
+		}
+
+		left++;
+
+		right--;
+
+	}
+
+	return true;
+
+}
+
+}
+
+Count the frequency of character
+=========================================
+public class FrequencyCharacter {
+	 public static void main(String[] args) {
+	        String str ="Sanjivani";
+	        Map<Character, Integer> frequencyMap = countCharacterFrequency(str);
+
+	        System.out.println("Character Frequency:");
+	        for (Map.Entry<Character, Integer> entry : frequencyMap.entrySet()) {
+	            System.out.println(entry.getKey() + ": " + entry.getValue());
+	        }
+	 }
+	    public static Map<Character, Integer> countCharacterFrequency(String str) {
+	        Map<Character, Integer> frequencyMap = new HashMap<>();
+
+	        for (char c : str.toCharArray()) {
+	            frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
+	        }
+
+	        return frequencyMap;
+	    }
+
+	   
+	   
+}
+
+REmove Repeated word using hashmap
+=============================================
+
+public class RemoveRepeatedWordFromStringusingHashMap {
+
+public static void main(String[] args) {
+
+String str="how are you how do you do";	
+
+String result=removeRepatedWord(str);
+
+System.out.println(result);
+
+}
+
+public static String removeRepatedWord(String str) {
+
+	String[] words=str.split("");
+
+	HashMap<String,Integer> uniqueFrequencyMap=new HashMap<String, Integer>();
+
+	for(String word:words) {
+
+		uniqueFrequencyMap.put(word,uniqueFrequencyMap.getOrDefault(word, 0)+1);
+
+	}
+
+	StringBuilder sb=new StringBuilder();
+
+	for(String word:words) {
+
+		if(uniqueFrequencyMap.get(word)==1) {
+
+		sb.append(word).append("");	
+
+		}
+
+	}
+
+	return sb.toString().trim();
+
+}
+
+}
+
+Remove duplicate String
+===========================
+public class RemovDuplicateString {
+
+public static void main(String[] args) {
+
+	String [] fruits= {"mango","apple","mango","Grapes","Apple"};
+
+	String[] uniquefruits=removeDuplicates(fruits);
+
+	System.out.println("withoutDuplicates:"+Arrays.toString(uniquefruits));
+
+}
+
+public static String[] removeDuplicates(String[] arr) {
+	HashSet<String> uniqueSet=new HashSet<String>();
+
+	String [] result=new String[arr.length];
+
+	int index=0;
+
+	for(String fruits:arr) {
+
+		if(uniqueSet.add(fruits)) {
+
+			result[index]=fruits;
+
+			index++;
+
+		}
+
+	}
+
+	return Arrays.copyOf(result, index);
+
+}
+
+}
+
+Remove duplicate character from string
+==========================================
+public class RemoveDuplicateCharacter {
+
+	 public static void main(String[] args) {
+
+	        String str = "Hello, World!";
+
+	        String result = removeDuplicateCharacters(str);
+
+
+
+	        System.out.println("String after removing duplicates: " + result);
+
+	    }
+
+public static String removeDuplicateCharacters(String str) {
+
+	        Set<Character> uniqueChars = new HashSet<>();
+
+	        StringBuilder result = new StringBuilder();
+
+	        for (char c : str.toCharArray()) {
+
+	            if (!uniqueChars.contains(c)) {
+
+	                uniqueChars.add(c);
+
+	                result.append(c);
+
+	            }
+
+	        }
+
+     return result.toString();
+
+	    }
+
+}
+
+find the length of longest substring without repeating character
+=================================================================
+
+package com.nt.main;
+import java.util.HashSet;
+
+import java.util.Set;
+
+public class LongestSubstringwithoutDuplicates {
+
+    public static void main(String[] args) {
+
+        String str = "abcabcbb";
+
+        int longestLength = lengthOfLongestSubstring(str);
+
+        System.out.println("Length of the longest substring without repeating characters: " + longestLength);
+
+    }
+
+
+	  public static int lengthOfLongestSubstring(String str) {
+
+	        int length = str.length();
+
+	        int maxLength = 0;
+
+	        int start = 0;
+
+	        int end = 0;
+
+	        Set<Character> charSet = new HashSet<>();
+
+	        while (end < length) {
+
+	            char c = str.charAt(end);
+
+	            if (!charSet.contains(c)) {
+
+	                charSet.add(c);
+
+	                int currentLength = end - start + 1;
+
+	                maxLength = Math.max(maxLength, currentLength);
+
+	                end++;
+
+	            } else {
+
+	                charSet.remove(str.charAt(start));
+
+	                start++;
+
+	            }
+
+	        }
+
+     return maxLength;
+
+	    }
+
+}
+
+check if a string is a valid paranthesis expression
+======================================================
+public class ValidParanthesis {
+
+	public static void main(String[] args) {
+
+        String str1 = "()";
+
+        String str2 = "{[()]}";
+
+        String str3 = "{[}]";
+
+        System.out.println(str1 + " is " + (isValidParentheses(str1) ? "valid" : "invalid") + " parentheses expression");
+
+        System.out.println(str2 + " is " + (isValidParentheses(str2) ? "valid" : "invalid") + " parentheses expression");
+
+        System.out.println(str3 + " is " + (isValidParentheses(str3) ? "valid" : "invalid") + " parentheses expression");
+
+    }
+
+	    public static boolean isValidParentheses(String str) {
+
+	        Stack<Character> stack = new Stack<>();
+
+	        for (char c : str.toCharArray()) {
+
+	            if (c == '(' || c == '[' || c == '{') {
+
+	                stack.push(c);
+
+	            } else if (c == ')' || c == ']' || c == '}') {
+
+	                if (stack.isEmpty()) {
+
+	                    return false;
+
+	                }
+
+	                char top = stack.pop();
+
+	                if ((c == ')' && top != '(') || (c == ']' && top != '[') || (c == '}' && top != '{')) {
+
+	                    return false;
+
+	                }
+
+	            }
+
+	        }
+
+	        return stack.isEmpty();
+
+	    }
+	    
+
+	}
+check if two strings are anagram
+=======================================
+
+public class AnagramStringchecker {
+
+	 public static void main(String[] args) {
+
+	        String str1 = "listened";
+
+	        String str2 = "silent";
+
+	        boolean areAnagrams = areAnagrams(str1, str2);
+
+	        System.out.println(str1 + " and " + str2 + " are " + (areAnagrams ? "anagrams" : "not anagrams"));
+
+	    }
+
+	    public static boolean areAnagrams(String str1, String str2) {
+
+	        if (str1.length() != str2.length()) {
+
+	            return false;
+
+	        }
+
+	        char[] charArray1 = str1.toCharArray();
+
+	        char[] charArray2 = str2.toCharArray();
+
+	        Arrays.sort(charArray1);
+
+	        Arrays.sort(charArray2);
+
+
+	        return Arrays.equals(charArray1, charArray2);
+
+	    }
+
+	}
+
+find nonreapinting character in string
+=========================================
+
+public class FirstNonRepeatingCharacter {
+
+	public static void main(String[] args) {
+
+        String str = "abaccdbdef";
+
+        char firstNonRepeatingChar = findFirstNonRepeatingChar(str);
+
+
+        if (firstNonRepeatingChar != ' ') {
+
+            System.out.println("First non-repeating character: " + firstNonRepeatingChar);
+
+        } else {
+
+            System.out.println("No non-repeating character found in the string.");
+
+        }
+
+	}
+
+	    public static char findFirstNonRepeatingChar(String str) {
+
+	        Map<Character, Integer> charCountMap = new HashMap<>();
+
+
+
+	        // Count the frequency of each character in the string
+
+	        for (char c : str.toCharArray()) {
+
+	            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+
+	        }
+
+
+
+	        // Find the first non-repeating character
+
+	        for (char c : str.toCharArray()) {
+
+	            if (charCountMap.get(c) == 1) {
+
+	                return c;
+
+	            }
+
+	        }
+
+	        // If there is no non-repeating character, return a default value (such as a space character)
+
+	        return ' ';
+
+	    }
+
+}
+
+compress a string by replacing repeated charcater with their count	
+===================================================================
+
+public class StringCompressor {
+
+	public static void main(String[] args) {
+
+        String str = "aabbbccccdd";
+
+        String compressedString = compressString(str);
+
+        System.out.println("Compressed string: " + compressedString);
+
+    }
+
+	    public static String compressString(String str) {
+
+	        StringBuilder compressed = new StringBuilder();
+
+	        int count = 1;
+
+
+
+	        for (int i = 0; i < str.length(); i++) {
+
+	            // Check if the current character is the same as the next character
+
+	            if (i + 1 < str.length() && str.charAt(i) == str.charAt(i + 1)) {
+
+	                count++;
+
+	            } else {
+
+	                // Append the current character and its count to the compressed string
+
+	                compressed.append(str.charAt(i));
+
+	                compressed.append(count);
+
+	                count = 1;
+
+	            }
+
+	        }
+
+     // Check if the compressed string is shorter than the original string
+
+	        if (compressed.length() < str.length()) {
+
+	            return compressed.toString();
+
+	        } else {
+
+	            return str;
+
+	        }
+
+	    }    
+
+	}	  
+
