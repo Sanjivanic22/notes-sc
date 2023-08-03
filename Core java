@@ -88,6 +88,8 @@ We can create our own marker interfface but customization of jvm required
 Object Oriented Programming
 ============================
 object 
+An entity that has state and behavior is known as an object e.g., chair, bike, marker, pen, table, car, etc. It can be physical or logical (tangible and intangible).
+The example of an intangible object is the banking system.
 class
 Is_A relation(Inheritance)
 ============================
@@ -95,7 +97,7 @@ Inheritance in Java is a mechanism in which one object acquires all the properti
  When you inherit from an existing class, you can reuse methods and fields of the parent class. Moreover, you can add new methods and fields in your current class also.
 
 Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
-• By using extends key  we can implements is-a relationship
+• By using extends keyword  we can implements is-a relationship
 • For r Method Overriding (so runtime polymorphism can be achieved).
 • For Code Reusability.
 • We use the inheritance.
@@ -105,12 +107,12 @@ multiple and hybrid inheritance is supported through interface only.
 To reduce the complexity and simplify the language, multiple inheritance is not supported in java.
 
 
-Has_A relation
+Has_A relationship
 ==================
 If a class have an entity reference, it is known as Aggregation. Aggregation represents HAS-A relationship.
-For code reusability we use the Aggregation
-Has -a relationship is also known as composition or aggregation 
-There is not specific keyword for has- arelationship the mostly use keyword is new keyword.
+For code reusability we use the Aggregation.
+Has-A relationship is also known as composition or aggregation. 
+There is not specific keyword for has-relationship the mostly use keyword is new keyword.
 
 The main disadvantage of has a relationship is it increases dependancy b/w classes and creates maitainance problem.
 
@@ -295,7 +297,8 @@ It provides multiple sorting sequences, i.e., you can sort the elements on the b
 
 Comparable Comparator
 ========================
-1) Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price.	The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.
+1) Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price
+.The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.
 2) Comparable affects the original class, i.e., the actual class is modified.	Comparator doesn't affect the original class, i.e., the actual class is not modified.
 3) Comparable provides compareTo() method to sort elements.	Comparator provides compare() method to sort elements.
 4) Comparable is present in java.lang package.	A Comparator is present in the java.util package.
@@ -417,13 +420,12 @@ The most common method which are required for any java object are encapsulated i
 Every class in java is child class of object either directly or indirectly.if ur class wont exends any other class then only our class is direct child class of object.
 
 
-From <https://www.javatpoint.com/why-string-is-immutable-or-final-in-java>
-
 Why string is immutable in java
 =================================
 The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. The reason of making string final is to destroy the immutability and to not allow others to extend it.
 
-The String objects are cached in the String pool, and it makes the String immutable. The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
+The String objects are cached in the String pool, and it makes the String immutable. The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. 
+For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
 
 
 To String
@@ -487,7 +489,7 @@ Once we crrated a string buffer object we can perform any changes in the existin
 
 StringBuffer
 =============
-If the content will changes frequently it is never recommended to go for string beacause for every change compulsory new object will created to handle this sumpolsary we should go for stringbuffer where changes will be performed in existing object  only instead of creating new object.
+If the content will changes frequently it is never recommended to go for string beacause for every change compulsory new object will created to handle this cumpolsary we should go for stringbuffer where changes will be performed in existing object  only instead of creating new object.
 
 Stringbuilder
 ================
