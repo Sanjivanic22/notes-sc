@@ -1,0 +1,151 @@
+DIFF B/W SOAP AND REST.
+========================
+soap (simple object access protocol)and rest(representational state transfer) are two different architecture style
+for designedning webservices.
+they have didtict chractristics and approaches for comminucation and data exchange.
+
+soap-it is protocol which means it has specific set of rules and statndards for communication.
+it typically uses xml for message formatting.
+
+Rest-it is an architecture style.not a protocol and it is relies on existing http methods (get,post,put,delete)for
+ communication.it can use various data format like json,xml,or even plain text.
+
+saop uses xml for msg formatting.which can make it more verbose and harder to read.
+rest -it is more flexible ad can use various data fromats,with json being most common due to its simplicity and compatibility 
+with javascript
+
+saop is maintains state b/w request using ws-reliable messaning statndards.
+(A stateless system sends a stateful systems expect a response, track information, and resend the request if no response is received.
+rest is stateless which means(A stateless system sends a request to the server and relays the response (or the state) back without storing any information.)
+
+soap is less effiecient in terms of performanace due to xml parsing and overhead of additional standards.
+rest is more efficient especially when using json,as it has smaller msg size and less processing.
+
+soap:used in enterprise level app,especially when security and reliability are critical
+rest:more commonly used for web and moblile app ,especially when simplicity and scalability are priorities
+
+WebServices
+Integration of two different applications which might be running in same Server or 
+different Server, also applications developed in same language.
+To do integration, minimum two applications are required, in that one application 
+behaves like Provider and another application behaves like Consumer.
+
+
+Every application will be developed using three Layers. Those are:
+1) Presentation Layer ( PL )
+2) Service Layer ( SL )
+3) Data Access Layer ( DAL )
+To integrate application these three layers cannot be used. We need fourth layer, i.e.,
+Integration Layer (IL) at both applications side.
+Every Integration Layer will be connected to its respected Service Layer (i.e. same 
+application) and another application’s Integration Layer.
+
+Once request is made to Provider Application, Provider returns response after 
+processing with HTTP Status.
+
+Every HTTP Status will be having one code and its equal message. Those are given as:
+Code Message
+1XX ------ Information
+2XX ------ Success
+3XX ------ Redirect
+4XX ------ Client Side Error
+5XX ------ Server Side Error
+
+Based on Design Patterns and Theory concepts (Architecture and Flow) WebServices is 
+divided into two types.
+1) SOAP ( Old Coding / Old Model )
+2) ReST ( New Coding / New Model )
+
+ReST is light weight design compared with SOAP (light weight = less memory).
+JAX – WS ---> Java API for XML Web Services
+JAX – RS ---> JAVA API for XML ReST Services.
+ReST stands for Representational State Transfer.
+Here Representation means “Global Format” 
+ State means “Data” 
+ Transfer means “sending (request) and receiving (response)”.
+ReST means “It is a process (Architecture) of sending and receiving global data between 
+two applications”.
+Here Global Formats are XML, JSON.
+XML ---> Extensible Markup Language
+JSON ---> Javascript Object Notation.
+protocol://IPAddress:portNo/ProjectName/FCURLWebXml/ClassPath/MethodPath
+http://localhost:2018/providerApp/rest/provider/msg
+
+GET This option is used to indicate fetching Resource from 
+Server to Client.
+2. POST It indicates create new Resource at Server side.
+3. PUT It indicates modify existed Resource at Server side.
+patch:it indicates partially modify existed resource at server side 
+4. DELETE It indicates remove existed Resource at Server side.
+5. HEAD It indicates do some work at Server side and return 
+nothing (empty Body to Client).
+6. OPTIONS It indicates execute multiple blocks or multiple tasks 
+or multithreading
+Here Resource means --> It can be a File / Audio / Video / Image / Text etc…
+HEAD and OPTIONS are not used in ReST application development.
+
+HTTP Status : 200 OK
+-----------------
+If Server provided response back without any problem (successfully), then HTTP 
+Status is: 200 OK.
+
+2) HTTP Status: 204 No Content
+-----------------------------
+  Server executed request, but no response body. [Provider method returns void type] 
+then HTTP Status is: 204 No Content.
+
+3) HTTP Status: 404 Not Found:
+-------------------------------------
+ If request URL is wrong (URL case-sensitive) i.e. either case or spell is wrong, then 
+HTTP Status is: 404 Not Found.
+
+4) HTTP Status: 405 Method Not Allowed:
+--------------------------------------------
+ If request URL is valid, but HTTP Method Type (GET, POST, PUT, …) is not matched 
+then HTTP Status is: 405 Method Not Allowed.
+
+5) HTTP Status: 500 Internal Server Error:
+--------------------------------------------
+ If Server side (Provider application) gets any problem (ex. Exception, URL duplicate, 
+same Method Type duplicate,…) then HTTP Status is: 500 Internal Server Error.
+
+1) Query Parameters (?, &)
+Ex: http://............?sid=5&sname=A
+
+2) Matrix Parameters ( ; )
+Ex: http://............;sid=5&sname=A
+3) Path parameters ( / )
+Ex: http://............/5/A
+4) Form Parameter ( K = V )
+[ HTML FORM / Form Class ]
+( uses HTTPRequest Body )
+5) Header Parameter ( K = V )
+ [ HttpRequest Head ]
+ ( used for Security details like username / password / token / otp …..)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
