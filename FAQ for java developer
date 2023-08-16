@@ -501,6 +501,7 @@ Static methods belong to the class itself rather than a specific instance. They 
 Static members are associated with the class itself, not with any specific instance.
 Static members are loaded and initialized when the class is loaded by the Java Virtual Machine (JVM).
 Static members can be accessed directly from the class or through an object instance.
+
 Non-Static (Instance) Members:
 Non-static variables (also known as instance variables) are specific to each instance/object of a class. Each instance of the class has its own copy of instance variables.
 Non-static methods belong to individual objects/instances of a class. They can access instance variables and other instance members directly.
