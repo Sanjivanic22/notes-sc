@@ -36,7 +36,8 @@ Ex: 1) Runnable  It contains only run() method
 method (SAM) we write any number of default and static methods.
 
 Default method
-	• Until 1.7 version onwards inside interface we can take only public abstract methods and public static final variables (every method present inside interface is always public and abstract whether we are declaring or not). 
+	• Until 1.7 version onwards inside interface we can take only public abstract methods and public static final variables (every method present inside interface is always public and 
+abstract whether we are declaring or not). 
 	•  Every variable declared inside interface is always public static final whether we are declaring or not. 
 	•  But from 1.8 version onwards in addition to these, we can declare default concrete methods also inside interface, which are also known as defender methods. 
 	
