@@ -76,10 +76,10 @@ IV.Processing by min() and max() methods
 
                                         map()	                                           flatMap()
 The function passed to map() operation returns a single value for a single input.	The function you pass to flatmap() operation returns an arbitrary number of values as the output.
-One-to-one mapping occurs in map().	One-to-many mapping occurs in flatMap().
-Only perform the mapping.	Perform mapping as well as flattening.
-Produce a stream of value.	Produce a stream of stream value.
-map() is used only for transformation.	flatMap() is used both for transformation and mapping.
+One-to-one mapping occurs in map().	                                                One-to-many mapping occurs in flatMap().
+Only perform the mapping.	                                                        Perform mapping as well as flattening.
+Produce a stream of value.	                                                        Produce a stream of stream value.
+map() is used only for transformation.	                                                flatMap() is used both for transformation and mapping.
 
 // Java program using map() function
 import java.io.*;
