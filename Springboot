@@ -187,6 +187,79 @@ A: You can create a RESTful web service in Spring Boot by using the @RestControl
 Q: What is Spring Boot Test?
  A: Spring Boot Test is a module of Spring Boot that provides support for testing Spring-based applications.
 
+springboot anotations
+@SpringBootApplication
+A single @SpringBootApplication annotation is used to enable the following annotations:
+	• @EnableAutoConfiguration: It enables the Spring Boot auto-configuration mechanism.
+	• @ComponentScan: It scans the package where the application is located.
+@Configuration: It allows us to register extra beans in the context or import additional configuration classes.
+
+2.@Controller
+this annotation is used to amark the class as wbecontroller.it typically handle the incomming http request ,perfrom request processing logics and 
+return a value a response.
+
+
+`@RestController`
+this annotation is specialized version of @controller that conbines the @controller and @ResponseBody annotation.
+it is used to mark class as restful webserbice controlller.it handles the http request and directly return the response body in format such json or xml.
+
+`@RequestMapping`:
+It is used to map the web requests. It has many optional elements like consumes, header, method, name, params, path, produces, and value.
+We use it with the class as well as the method.
+
+• @GetMapping: It maps the HTTP GET requests on the specific handler method. 
+It is used to create a web service endpoint that fetches It is used instead of using: @RequestMapping(method = RequestMethod.GET)
+
+• @PostMapping: It maps the HTTP POST requests on the specific handler method.
+It is used to create a web service endpoint that creates It is used instead of using: @RequestMapping(method = RequestMethod.POST)
+
+`@PathVariable`: Used to bind a method parameter to a URI template variable in a request URL.
+this is used extract pathvariable from the request url.path variable are dynamic part of url that embede with &?
+
+6. `@RequestParam`: Binds a method parameter to a query parameter in the request.
+this annotation is used to extract the query parameter or form data from the request URL.it allows you to retrive individual request parameter by name and provides options for setting default values.
+handling optional parameter and providing to diff datatypes 
+
+• @RequestBody: It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to convert the body of the request.
+When we annotate a method parameter with @RequestBody, the Spring framework binds the incoming HTTP request body to that parameter.
+
+• @ResponseBody: It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object into JSON and XML format.
+
+ @Autowired: Used for dependency injection. It automatically wires up dependencies by type.
+Spring provides annotation-based auto-wiring by providing @Autowired annotation. It is used to autowire spring bean on setter methods, instance variable, and constructor.
+When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type.
+
+ `@Qualifier`: Used along with `@Autowired` to specify which bean should be injected if there are multiple beans of the same type.
+Is used to specify which bean should be injected when multiple beans of the same type are present.it is often used in conjuction with @Autowird to clarify which specific bean should be wired. 
+
+
+   Used to inject values from external sources(properties files, environment variables, etc.) into Spring beans.
+
+ `@Component`: Indicates that a class is a Spring component and should be automatically detected and registered as a bean.
+
+
+ `@Service`: A specialization of `@Component` used to mark a class as a service.
+
+13. `@Repository`: A specialization of `@Component` used to mark a class as a data repository.
+
+14. `@Configuration`: Indicates that a class provides Spring configuration, typically for bean definitions.
+
+15. `@EnableScheduling`: Used to enable scheduling capabilities for methods within a Spring bean.
+
+16. `@Transactional`: Used to annotate methods or classes to indicate that they should be executed within a transaction context.
+
+17. `@EnableCaching`: Enables Spring's caching support for methods within a class.
+
+18. `@Valid`: Used to trigger validation of method parameters or request body objects.
+
+19. `@ExceptionHandler`: Used to define methods that handle exceptions thrown by the application.
+
+20. `@Async`: Marks a method as asynchronous, allowing it to be executed in a separate thread.
+
+
+
+
+
 
 
 
