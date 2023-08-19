@@ -1,3 +1,8 @@
+Design patterns are reusable solutions to common problems that arise during software design and development. They provide templates or guidelines for structuring code to address
+specific challenges, making the code more maintainable, flexible, and easier to understand. Design patterns are not specific to any particular 
+programming language but rather describe general approaches to solving problems in software architecture and design.
+
+
 #Important design patterns
 ##Singletone design pattern
 
