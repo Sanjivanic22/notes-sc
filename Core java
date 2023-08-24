@@ -12,25 +12,110 @@ Java Architecture can be explained by using the following steps:
 
 The Java architecture includes the three main components:
 ==========================================================
-	• Java Virtual Machine (JVM)
-          =============================
-	Jvm is abstract machine,it is called java virtual machine because it doesn’t physically exist
-	It is speciification  that provides runtime env in which java bytecode can be exceuted
-	It will load
-	Verifies code
-	Exceute the code also provides runtime env
+JDK(java development kit)
+The JDK is a software package that contains everything you need for Java application development.
+It includes the JRE, so it provides the runtime environment to execute Java applications.
+It also includes development tools like the Java compiler (javac), debugger, profiler, and various utilities for creating, compiling, and debugging Java applications.
+Developers use the JDK to write, compile, and test Java code.
 
-	• Java Runtime Environment (JRE)
-         ==================================
-	It is java runtime env used for developing application it is used to provide the runtime env.it is implementation of jvm.
-	It contains set of libraries and other file that are uses at runtime.
-	
-	• Java Development Kit (JDK)
-       ================================
-	Jd is java development kit I
-	It is software development env which is used to develop the java app and applets
-	It contains the JRE+development tools
-	
+JRE (Java Runtime Environment):
+
+The JRE is a subset of the JDK.
+It provides the runtime environment necessary to run compiled Java applications.
+The JRE includes the Java Virtual Machine (JVM) and the runtime libraries required for executing Java applications.
+End-users who only need to run Java applications use the JRE.
+
+JVM (Java Virtual Machine):
+
+The JVM is a virtual machine that executes Java bytecode.
+It's responsible for loading Java classes, verifying them, and executing them.
+The JVM abstracts the underlying hardware and operating system, allowing Java applications to be platform-independent.
+It manages memory, performs garbage collection, and provides support for features like multithreading and exception handling.
+Multiple implementations of the JVM exist for different platforms.
+
+OOP(Object oriented programming)
+=====================================
+Object-Oriented Programming is a methodology or paradigm to design a program using classes and objects. 
+It simplifies software development and maintenance by providing some concepts:
+object 
+--------
+An entity that has state and behavior is known as an object e.g., chair, bike, marker, pen, table, car, etc. It can be physical or logical (tangible and intangible).
+The example of an intangible object is the banking system.
+
+class
+==========
+Collection of objects is called class. It is a logical entity.
+
+A class can also be defined as a blueprint from which you can create an individual object. Class doesn't consume any space.
+
+Is_A relation(Inheritance)
+============================
+When one object acquires all the properties and behaviors of a parent object, it is known as inheritance. 
+It provides code reusability. It is used to achieve runtime polymorphism
+ .
+ When you inherit from an existing class, you can reuse methods and fields of the parent class.
+Moreover, you can add new methods and fields in your current class also.
+Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
+• By using extends keyword  we can implements is-a relationship
+• For r Method Overriding (so runtime polymorphism can be achieved).
+• For Code Reusability.
+• We use the inheritance.
+ there can be three types of inheritance in java:
+single inheritance
+-----------------
+When a class inherits another class, it is known as a single inheritance. 
+multilevel 
+When there is a chain of inheritance, it is known as multilevel inheritance.
+hierarchical.
+-------------------
+When two or more classes inherits a single class, it is known as hierarchical inheritance.
+
+
+multiple and hybrid inheritance is supported through interface only.
+why multiple inheritance is supported by the java
+To reduce the complexity and simplify the language, multiple inheritance is not supported in java.
+Consider a scenario where A, B, and C are three classes. The C class inherits A and B classes. If A and B classes have the same method and you call it from child class object, there will be ambiguity to call the method of A or B class.
+
+Since compile-time errors are better than runtime errors, Java renders compile-time error if you inherit 2 classes. So whether you have same method or different, there will be compile time error.
+
+
+Has_A relationship
+==================
+If a class have an entity reference, it is known as Aggregation. Aggregation represents HAS-A relationship.
+For code reusability we use the Aggregation.
+Has-A relationship is also known as composition or aggregation. 
+There is not specific keyword for has-relationship the mostly use keyword is new keyword.
+
+The main disadvantage of has a relationship is it increases dependancy b/w classes and creates maitainance problem.
+
+Composition vs aggregation
+===========================
+Composition
+--------------
+In case of composition whenever container object is destroyed contained object will be destroyed automatically .i.e without exixting container object there is not chance of existing contained object 
+i.e container and contained object having strong association 
+Ex. Usniversity is composed or several departments 
+Wenever we are closing university all departments will closed.the relation b/w usniversity object & department object is strong association is nothing but compsition.
+
+Aggregation
+-------------
+In case of aggregation whenever container object is destroyed there is gurranty of destruction of contained object .i.e without exixting container object  there may be chnace of existing  contained object 
+i.e container object just maintains referances of contained object
+This relationship is called  weakassociation which is nothibng but aggregation.
+
+Ex.several profecers will work in th department
+Wherver we are closing the department still there may be a chance of existing professors.this relationship b/w department is nothing but aggegation..
+
+
+Composition is stronger tha aggregation,in short ,a relationship b/w two object is refered as associtaion ,nd an association is known as composition when object owns another
+ while association is known as agrregation wen object uses another object.
+
+POLymorphism
+Polymorphism in Java is a concept by which we can perform a single action in different ways.
+Polymorphism is derived from 2 Greek words: poly and morphs. The word "poly" means many and "morphs" means forms. So polymorphism means many forms.
+There are two types of polymorphism in Java: 
+compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
+
 Encapsulation
 ==============
 Encasulating data and corresponding method into ingle module is called encapsulation
@@ -85,58 +170,7 @@ By implemeting clonable interface our object will be in position to provide exac
 As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
 We can create our own marker interfface but customization of jvm required
 
-Object Oriented Programming
-============================
-object 
-An entity that has state and behavior is known as an object e.g., chair, bike, marker, pen, table, car, etc. It can be physical or logical (tangible and intangible).
-The example of an intangible object is the banking system.
-class
-Is_A relation(Inheritance)
-============================
-Inheritance in Java is a mechanism in which one object acquires all the properties and behaviors of a parent object. It is an important part of OOPs (Object Oriented programming system).
- When you inherit from an existing class, you can reuse methods and fields of the parent class. Moreover, you can add new methods and fields in your current class also.
 
-Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
-• By using extends keyword  we can implements is-a relationship
-• For r Method Overriding (so runtime polymorphism can be achieved).
-• For Code Reusability.
-• We use the inheritance.
- there can be three types of inheritance in java: single, multilevel and hierarchical.
-multiple and hybrid inheritance is supported through interface only.
-
-To reduce the complexity and simplify the language, multiple inheritance is not supported in java.
-
-
-Has_A relationship
-==================
-If a class have an entity reference, it is known as Aggregation. Aggregation represents HAS-A relationship.
-For code reusability we use the Aggregation.
-Has-A relationship is also known as composition or aggregation. 
-There is not specific keyword for has-relationship the mostly use keyword is new keyword.
-
-The main disadvantage of has a relationship is it increases dependancy b/w classes and creates maitainance problem.
-
-Composition vs aggregation
-===========================
-Composition
---------------
-In case of composition whenever container object is destroyed contained object will be destroyed automatically .i.e without exixting container object there is not chance of existing contained object 
-i.e container and contained object having strong association 
-Ex. Usniversity is composed or several departments 
-Wenever we are closing university all departments will closed.the relation b/w usniversity object & department object is strong association is nothing but compsition.
-
-Aggregation
--------------
-In case of aggregation whenever container object is destroyed there is gurranty of destruction of contained object .i.e without exixting container object  there may be chnace of existing  contained object 
-i.e container object just maintains referances of contained object
-This relationship is called  weakassociation which is nothibng but aggregation.
-
-Ex.several profecers will work in th department
-Wherver we are closing the department still there may be a chance of existing professors.this relationship b/w department is nothing but aggegation..
-
-
-Composition is stronger tha aggregation,in short ,a relationship b/w two object is refered as associtaion ,nd an association is known as composition when object owns another
- while association is known as agrregation wen object uses another object.
 
 
 Collection
