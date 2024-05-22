@@ -64,13 +64,20 @@ nohup stands for "no hang up," and it's used to run a command or script so that 
 cd /appl/aims/data/prd/pss/pss-order/inbox/edi867
 [aimsuser@tryprmaim01 edi867]$ ls -lrt
 
-cp /tmp/schatt0/edi867/* .
-(cp /tmp/schatt0/edi867 /appl/aims/data/prd/pss/pss-order/inbox/edi867)
-This command copies all files from the /tmp/schatt0/edi867/ directory to the current directory (.). Here's what each part of the command does:
-ex .cp BOSSLGA.xls /appl/aims/data/prd/pss/pss-order/inbox/
 
+
+copy files from local to server
+====================================
+ sudo su - amisuser
 [aimsuser@tryprmaim01 ~]$ cd /appl/aims/data/prd/pss/pss-order/inbox/edi867
 [aimsuser@tryprmaim01 edi867]$ ls -lrt
 total 0
 [aimsuser@tryprmaim01 edi867]$ cp /tmp/schatt0/edi867/* .
 [aimsuser@tryprmaim01 edi867]$ ls -lrt
+
+cp /tmp/schatt0/edi867/* .
+(cp /tmp/schatt0/edi867 /appl/aims/data/prd/pss/pss-order/inbox/edi867)
+This command copies all files from the /tmp/schatt0/edi867/ directory to the current directory (.). Here's what each part of the command does:
+ex .cp BOSSLGA.xls /appl/aims/data/prd/pss/pss-order/inbox/
+
+
