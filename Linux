@@ -1,0 +1,63 @@
+Linux commands
+================
+Cd -
+The cd command is highly popular, along with ls . It refers to “change directory” and, as its name suggests, switches you to the directory you're trying to …
+
+Pwd 
+
+The pwd command stands for “print working directory,” and it outputs the absolute path of the directory you're in. For example, if your username is “john” and ...
+
+
+Less for reading 
+View -for viewing the data in file
+Vi filename-for view insert
+Rm filename
+In the previous section, we deleted the Sample-Copy file. The rm command is used to delete files and folders and is 
+ 
+Cat
+The cat command is a multi-purpose utility in the Linux system. It can be used to create a file, display content of the file, copy the content of one file to ...
+
+ls 
+The ls command is used to list files and directories in the current working directory. 
+
+Cp-for copy or backup
+The cp and mv commands are equivalent to the copy-paste and cut-paste in Windows. But since Linux doesn't really have a command for renaming files, we also make ...
+
+Mkdir
+---------------
+The mkdir command allows you to create directories from within the terminal. The default syntax is mkdir followed by the directory 
+
+Rmdir
+------
+
+The rmdir command is used to delete permanently an empty directory. To perform this command the user running this command must be having sudo privileges in the …
+
+For sudo access
+-------------------------
+Sudo su - Jboss,hsadmin
+
+mv command. Use the mv command to move or rename files and directories. To move items, enter the file name followed by the destination directory: mv filename
+For rename the file 
+-------------------------------
+Mv sanj sanjivani
+
+For backup
+-------------------
+Mv sanj sanj_chg1230_bkp
+
+The find command is used to find a particular file within a directory. It also supports various options to find a file such as byname, by type, by date, and ...
+
+
+Whenever want to login sudo 
+Try to login first root folder -sudo su -
+Then 
+Sudo su - hsadmin
+
+running the script
+====================
+sh spPartsJob.sh 
+
+running the script in backgroud
+====================================
+nohup sh spPastServiceDateOrderRescheduleJob.sh & (The & at the end puts the command in the background, allowing you to continue using the terminal while the script runs.))
+nohup stands for "no hang up," and it's used to run a command or script so that it ignores the hangup signal (SIGHUP), enabling it to continue running even after you log out or close the terminal session
