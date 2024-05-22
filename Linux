@@ -61,3 +61,10 @@ running the script in backgroud
 ====================================
 nohup sh spPastServiceDateOrderRescheduleJob.sh & (The & at the end puts the command in the background, allowing you to continue using the terminal while the script runs.))
 nohup stands for "no hang up," and it's used to run a command or script so that it ignores the hangup signal (SIGHUP), enabling it to continue running even after you log out or close the terminal session
+cd /appl/aims/data/prd/pss/pss-order/inbox/edi867
+[aimsuser@tryprmaim01 edi867]$ ls -lrt
+
+cp /tmp/schatt0/edi867/* .
+(cp /tmp/schatt0/edi867 /appl/aims/data/prd/pss/pss-order/inbox/edi867)
+This command copies all files from the /tmp/schatt0/edi867/ directory to the current directory (.). Here's what each part of the command does:
+ex .cp BOSSLGA.xls /appl/aims/data/prd/pss/pss-order/inbox/
