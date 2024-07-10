@@ -44,6 +44,19 @@ abstract whether we are declaring or not).
 	• We can declare default method with the keyword “default” as follows
 	•  1) default void m1(){ 
 	• 2) System.out.println (“Default Method”);
+
+Default method
+-------------------
+n Java, default methods were introduced as part of Java 8 to enhance the functionality of interfaces without breaking backward compatibility.
+Default methods are methods defined in an interface with a default keyword.
+They provide a default implementation that can be overridden by classes that implement the interface.
+
+Purpose:
+
+Default methods allow interfaces to have methods with implementations without requiring all implementing classes to provide their own implementation.
+They facilitate the evolution of interfaces by adding new methods without forcing all implementing classes to modify their code.
+
+
 	•  
 	
 Predicate
