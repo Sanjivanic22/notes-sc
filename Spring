@@ -13,25 +13,59 @@ Manages the dependancies injection and IOC automatically
 Spring framwork very easy to  testing
 Spring web framework is well design mvc framework which provide the greate alteranative to another ````framework like struts.
 
-Application
-==============
+IOC container and types
+=========================
 IOC container
-Is responsible to instatiate,configure and assemble the objects
-The IOC container get information from the xml file and work accordingly
+======================
+The IOC container is INVERSION of control which is responsible to instantiate, configure and assemble the objects. 
+The IoC container gets informations from the XML file and works accordingly. 
+The main tasks performed by IoC container are:
+=>to instantiate the application class
+=>to configure the object
+=>to assemble the dependencies between the objects
 
-Type
-======
-Bean factory
-Xml beanfactory is implementation class to use the bean factory we need to create the instance of xmlbeanfactory.
-The constructor of Xml beanfactory class recieves the resource object so we need to pass the resource object to create the object of beanfactory.
+There are two types of IoC containers. They are:
+==================================================
+1)BeanFactory
+2)ApplicationContext
 
-ClassPathXmlapplication context class is the implementation class of application context
-The constructor of ClassPathXmlapplication class receives string so we can pass the name of xml file to create the interface of applicationcontext.
+In the spring both BeanFactory and ApplicationContext are interfaces used for managing beans. 
+
+Difference between BeanFactory and the ApplicationContext
+==================================================================
+
+Using BeanFactory
+=====================
+
+Xml beanfactory is implementation class to use the bean factory for that we need to create the instance of xmlbeanfactory.
+ To use the BeanFactory, we need to create the instance of XmlBeanFactory class as given below:
+
+Resource resource=new ClassPathResource("applicationContext.xml");  
+BeanFactory factory=new XmlBeanFactory(resource); 
+ 
+The constructor of XmlBeanFactory class receives the Resource object so we need to pass the resource object to create the object of BeanFactory.
+
+
+Using ApplicationContext
+=============================
+the ApplicationContext interface is built on top of the BeanFactory interface. 
+It adds some extra functionality than BeanFactory such as simple integration with Spring's AOP, message resource handling (for I18N), event propagation, application layer specific context (e.g. WebApplicationContext) for web application.
+ So it is better to use ApplicationContext than BeanFactory.
+The ClassPathXmlApplicationContext class is the implementation class of ApplicationContext interface.
+ 
+We need to instantiate the ClassPathXmlApplicationContext class to use the ApplicationContext as given below:
+
+ApplicationContext context =   
+    new ClassPathXmlApplicationContext("applicationContext.xml"); 
+
+The constructor of ClassPathXmlApplicationContext class receives string, so we can pass the name of the xml file to create the instance of ApplicationContext.
 
 Dependancy lookup
 ==================
-Is approach where we get the resource after demand
-It is tightlly coupled and not easy for testing to solve the problem we should go for dependancy injection.
+in Dependancy lookup we will  get the resource after demand.
+
+i) dependency lookup makes the code tightly coupled. If resource is changed, we need to perform a lot of modification in the code.
+ii)Not easy for testing This approach creates a lot of problems while testing the application especially in black box testing.
 
 Dependancy injection
 ======================
