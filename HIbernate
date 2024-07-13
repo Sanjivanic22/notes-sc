@@ -31,81 +31,18 @@ Support versoning and timestamping
 Support both single row and bulk row operations.
 Auto schema generation.
 
-3 important object of hibernate persistence logic
-=====================================================
-configuration object
+
+4) What are the core interfaces of Hibernate?
+The core interfaces of Hibernate framework are:
+onfiguration object
 -------------------------
 by creating bject of this class we can activate hibernate f/w by collecting hibernate jars/libraries from the classpath or
 buld path.using this object we can create HB session factory object.
 configuration config=new configuration ();
-
-SessionFcatory object
---------------------
-this object designed based on th factory design pattern abstraction towords session object creation.
-it is heavy weight object bec it contains multiple small object representing diff comp and services.
-session factory object is thread safe.
-
-Session object
-===================
-it is con++ object i.e it contains jdbc con object that is collected jdbc con pool represeted by session factory object and lots o-r mapping metadata
-info.create dthrough session factory object
-it is base object for programmer to give persstence instruction to hibernate f/w using etity class objects.
-
-Dialects
-================
-it is comp of hiberante f/w that is capable of genertaing both pregenerted /static and dynamic sql queries.
-Dialect are useful to generate optimized sql queries as required for the underlaying DB s/w
-used to assign sesnible,intelligent default values to the configuration properties which are not specifies in hibertanet
-cfg file.
-
-
-JPA is s/w specification that provides bunch of rules and guidelines t develop ORM s/w or tools
-@Entity-to mark given java class as model class
-@table-to map entity class with DB table
-@Id-to mark entity class peprperty as id property
-@column-to map each property with DB table column
-@Type-to specify hibernate data type
-@Transient-to make certain property not participating persistence operations
-@DynamicInsert/update makes hibernate dialect to generate sql query dynamically only by involving those
-properties whose values are not null
-
-
-HibernateUtil class
-=====================
-Utility classes are helper classes that required in multiple parts of project representing boilerplate code
-Generators in HB
-increment
-if DB is empty then it generate 1 as the identity value
-Bulk operation in HB
-to select or manipulate 1 or more records/object having our choice criteria values we need to go for Bulk oprtaion concept
-a)Hql/jpql
-it is object based query language.these query will be written by using entity class names and their property names
-HB dialect internally convert HQL queries into DB specific sql queries
-b)Native sql query
-c)criteria API or QBC
-
-Pagination
-The process of displaying no.of records page bypage is called pagination.this avaoid loading all records.
-i.e load only those records/object that are required to display in the current package to improve performance
-whiat is problem of granularity
-if we design classes having composition and db table without user defined datatypes i.e designing db table with more column.make the programmmer
-to map more java classes with single DB table but basic o-r mapping does not support that process.so it is called problem of granularity
-to address this use component mapping.
-
-
-Association mapping
-if we keep db tables in relationship with their relevent entity classes should kept relationship by mapping them through association mapping
-one to many unidirectional association mapping
-since we want to impletement one to may unidirectional association having parent to child navigation.so parent entity class should
-have special collection type property to hold multiple object of child class.
-
-4) What are the core interfaces of Hibernate?
-The core interfaces of Hibernate framework are:
 	• Configuration
 	• Configuration is a class which is present in org.hibernate.cfg package. It activates Hibernate framework. It reads both configuration file and mapping files.
 	
 	It activate Hibernate Framework
-=======================================
 Configuration cfg=new Configuration();
 It read both cfg file and mapping files
 cfg.configure();
@@ -119,9 +56,17 @@ cfg.configure();
 	buildSessionFactory() method gathers the meta-data which is in the cfg Object. 
 From cfg object it takes the JDBC information and create a JDBC Connection.
 SessionFactory factory=cfg.buildSessionFactory();
-	
-	Session:
-===============
+
+this object designed based on th factory design pattern abstraction towords session object creation.
+it is heavy weight object bec it contains multiple small object representing diff comp and services.
+session factory object is thread safe.
+
+Session object
+===================
+it is con++ object i.e it contains jdbc con object that is collected jdbc con pool represeted by session factory object and lots o-r mapping metadata
+info.create dthrough session factory object
+it is base object for programmer to give persstence instruction to hibernate f/w using etity class objects.
+
 	• it is base object for programmer to give persstence instruction to hibernate f/w using etity class objects.
 	
 	• Session is an interface which is present in org.hibernate package. Session object is created based upon SessionFactory object i.e. factory.
@@ -140,39 +85,81 @@ SessionFactory factory=cfg.buildSessionFactory();
 	
 	
 	• Criteria
+======================
 	• Criteria is a simplified API for retrieving entities by composing Criterion objects.
 	• The Session is a factory for Criteria. Criterion instances are usually obtained via the factory methods on Restrictions.
 	
 	Transaction
+=====================
 
 • Transaction object is used whenever we perform any operation and based upon that operation there is some change in database.
 • Transaction object is used to give the instruction to the database to make the changes that happen because of operation as a permanent by using commit() method.
 Transaction tx=session.beginTransaction();
 tx.commit();
 
+Dialects
+================
+it is comp of hiberante f/w that is capable of genertaing both pregenerted /static and dynamic sql queries.
+Dialect are useful to generate optimized sql queries as required for the underlaying DB s/w
+used to assign sesnible,intelligent default values to the configuration properties which are not specifies in hibertanet
+cfg file.
+EX. <property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>  
+
+HibernateUtil class
+=====================
+Utility classes are helper classes that required in multiple parts of project representing boilerplate code
+Generators in HB
+increment
+if DB is empty then it generate 1 as the identity value
+Bulk operation in HB
+to select or manipulate 1 or more records/object having our choice criteria values we need to go for Bulk oprtaion concept
+a)Hql/jpql
+it is object based query language.these query will be written by using entity class names and their property names
+HB dialect internally convert HQL queries into DB specific sql queries
+b)Native sql query
+c)criteria API or QBC
+
 Cascadig in hibernate
 =================================
 Cascading is a feature in Hibernate, which is an object-relational mapping (ORM) tool used in Java to map Java classes to database tables. Cascading refers to the ability to automatically propagate the state of an entity (i.e., an instance of a mapped class) across associations between entities. For example, if you have a Customer entity that has a one-to-many relationship with an Order entity, you can define cascading to specify that when a customer is deleted, all of their orders should be deleted as well.
 Cascading in Hibernate refers to the automatic persistence of related entities. When a change is made to an entity, such as an update or deletion, the changes can be cascaded to related entities as well. Cascading can be configured using annotations, such as @OneToMany(cascade = CascadeType.ALL), or through XML configuration files. It is important to use cascading carefully, as it can lead to unwanted changes being made to related entities if not configured properly.
-Different Cascade Types in Hibernate
-Hibernate provides several types of cascade options that can be used to manage the relationships between entities. Here are the different cascade types in Hibernate:
-2. CascadeType.ALL
-3. CascadeType.PERSIST
-4. CascadeType.MERGE
-5. CascadeType.REMOVE
-6. CascadeType.REFRESH
-7. CascadeType.DETACH
-8. CascadeType.REPLICATE
-9. CascadeType.SAVE_UPDATE
-These cascade types can be used individually or in combination to manage the relationships between entities based on the requirements of the application. It is important to use cascade types carefully, as they can lead to unintended consequences if not used properly.
-1. CascadeType.ALL
-• CascadeType.ALL is a cascading type in Hibernate that specifies that all state transitions (create, update, delete, and refresh) should be cascaded from the parent entity to the child entities.
-• When CascadeType.ALL is used, and any operation performed on the parent entity will be automatically propagated to all child entities. This means that if you persist, update, or delete a parent entity, all child entities associated with it will also be persisted, updated, or deleted accordingly.
-• For example, consider a scenario where you have a Customer entity with a one-to-many relationship to Order entities. By using CascadeType.ALL, any operation performed on the Customer entity (such as persist, merge, remove, or refresh) will also be propagated to all associated Order entities.
-• Here’s an example of how CascadeType.ALL can be used:
 
+Lazy loading and egger loading
+---------------------------------
+In Hibernate, lazy loading and eager loading are two strategies used to control how related entities are fetched from the database.
+These strategies help in managing performance and memory usage by controlling when and how related data is loaded.
+
+Lazy Loading
+=============
+Lazy loading is a design pattern commonly used in programming to defer the initialization of an object until it is actually needed. This can improve the efficiency and performance of a program by avoiding the loading of unnecessary data, 
+especially when dealing with resource-intensive operations or large datasets.
+Lazy loading is a strategy where related entities or collections are loaded only when they are accessed for the first time.
+This can help reduce the initial load time and memory consumption, as only the required data is fetched from the database.
+
+Key Points:
+
+On-Demand Loading: Data is fetched when it is accessed.
+Default Behavior: Collections and associations are typically lazy-loaded by default in Hibernate.
+Proxy Objects: Hibernate uses proxy objects to support lazy loading. When an association is marked as lazy, Hibernate creates a proxy for the related entity, which is only initialized when accessed.
+Performance: Can improve performance by reducing the number of queries executed at initial load time.
+
+Eager Loading
+==================
+Eager loading is a design pattern used to fetch related data from the database immediately when the primary data is fetched. 
+Unlike lazy loading, where data is fetched on demand, eager loading loads all necessary data upfront, reducing the number of database queries at the cost of potentially loading more data than needed.
+Eager loading is a strategy where related entities or collections are loaded immediately along with their parent entity. This means all the necessary data is fetched in a single query, which can reduce the number of database queries at the cost of potentially loading more data than necessary.
+
+Key Points:
+
+Immediate Loading: Data is fetched immediately along with the parent entity.
+FetchType.EAGER: Associations are marked with FetchType.EAGER to be eagerly loaded.
+Performance: Can lead to performance issues if too much unnecessary data is loaded, especially in scenarios with complex relationships or large datasets.
+
+Session.Save and session.persist
+=====================================
 
 Save 
+-------
 Can generate the generated id value as seriazable wrapper object
 Return type is seriazable
 Can work with generator to gennerate the value to id/identity property dynamically
@@ -182,6 +169,7 @@ Signature:
 Public seriazable save(Object obj)
 
 Persist
+----------
 Cannot return id value
 Return type is void
 Cannot work with generator
@@ -214,156 +202,70 @@ Ses.load()
 	• If we specify proxy interface name in the proxy attricbute the proxy class will be generated based on proxy interface,this allows to take our entity class as final class
 	
 	• Prefer using ses.load() in layered apps.  The records asked in DAO class is actualy will be displayed either in the client app/int the view comp(jsp),so DAO gives proxy project to client app/view component by calling ses.load() and the real hit to DB s/w takes place when non-identifier ethods are called on proxy object from client app/biew comp.  
+Hibernate Cache
+=================
+Hibernate caching improves the performance of the application by pooling the object in the cache. It is useful when we have to fetch the same data multiple times.
 
-Q: What is Hibernate? 
-A: Hibernate is an object-relational mapping (ORM) tool for Java that provides a framework for mapping object-oriented domain models to relational databases.
+There are mainly two types of caching:
 
-Q: What are the benefits of using Hibernate? 
-A: Some benefits of using Hibernate include 
-increased productivity, improved performance, reduced database access code, and improved maintainability.
+First Level Cache, and
+Second Level Cache
 
-Q: What is the SessionFactory in Hibernate? 
-A: The SessionFactory in Hibernate is responsible for creating and managing sessions.
+diff b/w first level cache and second level cache
 
-Q: What is a Session in Hibernate? 
-A: A Session in Hibernate is a single-threaded object that represents a connection to the database and provides methods for querying and persisting objects.
-
-Q: What is an Entity in Hibernate? 
-A: An Entity in Hibernate is a Java class that is mapped to a database table.
-
-Q: What is an Identifier in Hibernate?
- A: An Identifier in Hibernate is a unique identifier that is used to identify an Entity.
-
-Q: What is a Mapping in Hibernate?
- A: A Mapping in Hibernate is the process of mapping an Entity to a database table.
-
-Q: What is a HQL in Hibernate? 
-A: HQL (Hibernate Query Language) is a query language that is used to perform database operations in Hibernate.
-
-Q: What is a Criteria API in Hibernate? 
-A: The Criteria API in Hibernate is an alternative to HQL that provides a type-safe way to construct queries.
-
-Q: What is a Cache in Hibernate? 
-A: A Cache in Hibernate is a mechanism that is used to store frequently accessed data in memory to improve performance.
-
-Q: What is Lazy Loading in Hibernate? 
-A: Lazy Loading in Hibernate is a technique that is used to defer the loading of associated objects until they are actually needed.
-1. lazy=true: This attribute suggests that the proxy object will be created lazily, i.e., it will be instantiated only when it is actually needed. This can be useful for improving performance by deferring the creation of the proxy until it is necessary.
+First-Level Cache (Session Cache)
+======================================
+Scope: The first-level cache is associated with the Hibernate Session object. Each Session object has its own first-level cache, and it is not shared between Session instances.
+Default: It is enabled by default and cannot be disabled.
+Lifecycle: The first-level cache exists as long as the session is open. Once the session is closed, the cache is destroyed.
+Granularity: It caches objects based on their identifiers (primary keys).
+Usage: It ensures that within a single session, the same object is not loaded multiple times. It helps in reducing the number of SQL queries sent to the database by storing already fetched objects.
+Implementation: This cache is implemented by Hibernate and does not require any special configuration.
 
 
-Q: What is Eager Loading in Hibernate? 
-A: Eager Loading in Hibernate is a technique that is used to load all associated objects immediately along with the parent object.
-
-Q: What is a Session Cache in Hibernate? 
-A: The Session Cache in Hibernate is a cache that is used to store the data that is loaded during a session.
-
-Q: What is a Second-Level Cache in Hibernate?
- A: The Second-Level Cache in Hibernate is a cache that is used to store data that is shared across multiple sessions.
-
-Q: What is a Transaction in Hibernate? 
-A: A Transaction in Hibernate is a unit of work that consists of one or more database operations that are executed as a single, atomic operation.
+Second-Level Cache (SessionFactory Cache)
+============================================
+Scope: The second-level cache is associated with the SessionFactory object. It is shared among multiple sessions.
+Default: It is not enabled by default and needs to be configured explicitly.
+Lifecycle: The second-level cache exists as long as the SessionFactory is open. It can be used across multiple sessions.
+Granularity: It can cache entities, collections, and query results.
+Usage: It helps in reducing the number of SQL queries sent to the database across multiple sessions by storing data that is frequently accessed. This can significantly improve the performance of the application.
+Implementation: It requires a caching provider (e.g., Ehcache, Infinispan, Hazelcast) and additional configuration in the Hibernate settings.
 
 
-• Java
+Key Differences
+====================
+Feature	First-Level Cache	                Second-Level Cache
+Scope	Single Session	                         Multiple Sessions
+Default Behav Enabled by default	          Not enabled by default
+ConfigurationNo special configuration needed	 Requires explicit configuration and a cache provider
+Lifecycle Lives within the session	    Lives within the SessionFactory
+Granularit Entities by identifier (primary key)	Entities, collections, and query results
+Usage	Ensures the same object is not loaded multiple times within a session	Reduces database access across sessions
+Performance	Improves performance within a session	Improves performance across multiple sessions
 
-@OneToMany(mappedBy="customer", cascade=CascadeType.ALL)
-private Set<Order> orders;
-• This code defines a one-to-many relationship between a Customer entity and an Order entity and specifies that all state transitions should be cascaded to the associated orders. This means that when a Customer entity is saved, updated, or deleted, all of its associated Order entities will also be saved, updated, or deleted accordingly.
-2. CascadeType.PERSIST
-• CascadeType.PERSIST is a cascading type in Hibernate that specifies that the create (or persist) operation should be cascaded from the parent entity to the child entities.
-• When CascadeType.PERSIST is used, any new child entities associated with a parent entity will be automatically persisted when the parent entity is persisted. However, updates or deletions made to the parent entity will not be cascaded to the child entities.
-• For example, consider a scenario where you have a Customer entity with a one-to-many relationship to Order entities. By using CascadeType.PERSIST, any new Order entities associated with a Customer entity will be persisted when the Customer entity is persisted. However, if you update or delete a Customer entity, any associated Order entities will not be automatically updated or deleted.
-• Here’s an example of how CascadeType.PERSIST can be used:
-• Java
+Association mapping
+==============================
+if we keep db tables in relationship with their relevent entity classes should kept relationship by mapping them through association mapping
+one to many unidirectional association mapping
+since we want to impletement one to may unidirectional association having parent to child navigation.so parent entity class should
+have special collection type property to hold multiple object of child class.
+Types of Associations
+One-to-One (1:1)
+One-to-Many (1)
+Many-to-One (N:1)
+Many-to-Many (N)
 
-@OneToMany(mappedBy="customer", cascade=CascadeType.PERSIST)
-private Set<Order> orders;
-• This code defines a one-to-many relationship between a Customer entity and an Order entity and specifies that the persistent operation should be cascaded to the associated orders. This means that when a Customer entity is persisted, any new Order entities associated with it will also be persisted automatically. However, updates or deletions made to the Customer entity will not be cascaded to the associated Order entities.
-3. CascadeType.MERGE
-• CascadeType.MERGE is a cascading type in Hibernate that specifies that the update (or merge) operation should be cascaded from the parent entity to the child entities.
-• When CascadeType.MERGE is used, any changes made to a detached parent entity (i.e., an entity that is not currently managed by the persistence context) will be automatically merged with its associated child entities when the parent entity is merged back into the persistence context. However, new child entities that are not already associated with the parent entity will not be automatically persisted.
-• For example, consider a scenario where you have a Customer entity with a one-to-many relationship to Order entities. By using CascadeType.MERGE, any changes made to a detached Customer entity (such as changes made in a different session or transaction) will be automatically merged with its associated Order entities when the Customer entity is merged back into the persistence context.
-• Here’s an example of how CascadeType.MERGE can be used:
-• Java
+JPA
+----=
+JPA is s/w specification that provides bunch of rules and guidelines t develop ORM s/w or tools
 
-@OneToMany(mappedBy="customer", cascade=CascadeType.MERGE)
-private Set<Order> orders;
-• This code defines a one-to-many relationship between a Customer entity and an Order entity and specifies that the merge operation should be cascaded to the associated orders. This means that when a detached Customer entity is merged back into the persistence context, any changes made to the Customer entity will be automatically merged with its associated Order entities. However, new Order entities that are not already associated with the Customer entity will not be automatically persisted.
-4. CascadeType.REMOVE
-• CascadeType.REMOVE is a cascading type in Hibernate that specifies that the delete operation should be cascaded from the parent entity to the child entities.
-• When CascadeType.REMOVE is used, any child entities associated with a parent entity will be automatically deleted when the parent entity is deleted. However, updates or modifications made to the parent entity will not be cascaded to the child entities.
-• For example, consider a scenario where you have a Customer entity with a one-to-many relationship to Order entities. By using CascadeType.REMOVE, any Order entities associated with a Customer entity will be automatically deleted when the Customer entity is deleted.
-• Here’s an example of how CascadeType.REMOVE can be used:
-• Java
-
-@OneToMany(mappedBy="customer", cascade=CascadeType.REMOVE)
-private Set<Order> orders;
-• This code defines a one-to-many relationship between a Customer entity and an Order entity and specifies that the remove operation should be cascaded to the associated orders. This means that when a Customer entity is deleted, any associated Order entities will also be deleted automatically. However, updates or modifications made to the Customer entity will not be cascaded to the associated Order entities.
-5. CascadeType.REFRESH
-• CascadeType.REFRESH is a cascading type in Hibernate that specifies that the refresh operation should be cascaded from the parent entity to the child entities.
-• When CascadeType.REFRESH is used, any child entities associated with a parent entity will be automatically refreshed when the parent entity is refreshed. This means that the latest state of the child entities will be loaded from the database and any changes made to the child entities will be discarded.
-• For example, consider a scenario where you have a Customer entity with a one-to-many relationship to Order entities. By using CascadeType.REFRESH, any associated Order entities will be automatically refreshed when the Customer entity is refreshed.
-• Here’s an example of how CascadeType.REFRESH can be used:
-• Java
-
-@OneToMany(mappedBy="customer", cascade=CascadeType.REFRESH)
-private Set<Order> orders;
-• This code defines a one-to-many relationship between a Customer entity and an Order entity and specifies that the refresh operation should be cascaded to the associated orders. This means that when a Customer entity is refreshed, any associated Order entities will also be refreshed automatically. Any changes made to the Order entities will be discarded, and the latest state of the Order entities will be loaded from the database.
-6. CascadeType.DETACH
-• CascadeType.DETACH is a cascading type in Hibernate that specifies that the detach operation should be cascaded from the parent entity to the child entities.
-• When CascadeType.DETACH is used, any child entities associated with a parent entity will be automatically detached when the parent entity is detached. This means that the child entities will become detached from the persistence context and their state will no longer be managed by Hibernate.
-• For example, consider a scenario where you have a Customer entity with a one-to-many relationship to Order entities. By using CascadeType.DETACH, any associated Order entities will be automatically detached when the Customer entity is detached.
-• Here’s an example of how CascadeType.DETACH can be used:
-• Java
-
-@OneToMany(mappedBy="customer", cascade=CascadeType.DETACH)
-private Set<Order> orders;
-• This code defines a one-to-many relationship between a Customer entity and an Order entity and specifies that the detach operation should be cascaded to the associated orders. This means that when a Customer entity is detached, any associated Order entities will also be detached automatically. The Order entities will become detached from the persistence context and their state will no longer be managed by Hibernate.
-7. CascadeType.REPLICATE
-• CascadeType.REPLICATE is a cascading type in Hibernate that specifies that the replicate operation should be cascad
-
-
-10. What is Hibernate and why is it used?
-Hibernate is an open-source object-relational mapping (ORM) framework for Java. It provides a convenient and efficient way to interact with relational databases using object-oriented concepts. Hibernate simplifies the process of mapping Java objects to database tables and performing database operations without writing complex SQL queries.
-The primary purpose of Hibernate is to bridge the gap between the object-oriented programming paradigm and the relational database world. It eliminates the need for writing repetitive and error-prone JDBC code by handling the underlying database operations transparently.
-
-
-11. Explain the differences between Hibernate and JDBC.
-
-12. What are the core interfaces/classes in Hibernate?
-13. Session
-14. Session factiry
-15. Query
-16. Criteria
-17. Transaction
-18. Entuy
-
-19. Describe the Hibernate Session and SessionFactory.
-
-20. What is the purpose of Hibernate mapping files (XML or annotations)?
-
-21. Explain the different types of associations in Hibernate
-22. .
-23. What is lazy loading in Hibernate?
-
-24. What is the difference between transient, persistent, and detached objects in Hibernate?
-
-25. Explain the Hibernate caching mechanisms and their types.
-
-26. What is the purpose of the Hibernate Query Language (HQL)?
-
-27. How do you perform eager loading in Hibernate?
-
-28. Describe the different fetching strategies in Hibernate.
-
-29. Explain the concept of cascading in Hibernate and its types.
-30. How do you handle transactions in Hibernate?
-31. What is the difference between save and persist methods in Hibernate?
-32. How can you handle concurrency control in Hibernate?
-
-33. What is the purpose of the Hibernate second-level cache?
-34. Explain the difference between merge and update methods in Hibernate.
-35. How do you optimize Hibernate performance?
-
-36. What are the best practices for using Hibernate in a multi-threaded environment?
+@Entity-to mark given java class as model class
+@table-to map entity class with DB table
+@Id-to mark entity class peprperty as id property
+@column-to map each property with DB table column
+@Type-to specify hibernate data type
+@Transient-to make certain property not participating persistence operations
+@DynamicInsert/update makes hibernate dialect to generate sql query dynamically only by involving those
+properties whose values are not null
 
