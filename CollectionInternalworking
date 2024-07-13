@@ -1,0 +1,47 @@
+Internal working of HashMap
+==================================
+
+The HashMap class in Java is part of the Java Collections Framework and is used to store key-value pairs. 
+
+Internal Structure
+
+A HashMap consists of an array of buckets, where each bucket is a linked list (or a tree structure in case of a large number of collisions in Java 8 and later). Each bucket corresponds to a hash code calculated from the key.
+
+Entry (or Node): Each element in the HashMap is stored in an instance of the HashMap.Entry class (or Node class). An Entry object contains:
+
+key: The key of the key-value pair.
+value: The value associated with the key.
+next: A reference to the next Entry in the same bucket (for handling collisions).
+Key Operations
+1. put() Method
+The put method adds a key-value pair to the HashMap.
+
+
+Hash Calculation: The hash code for the key is calculated and further processed to find the index of the array (bucket).
+Index Calculation: The index in the array is determined by the formula (n - 1) & hash, where n is the length of the array.
+
+Handling Collisions: If the bucket at the calculated index is already occupied, the HashMap traverses the linked list (or tree) to find the correct spot for the new entry. If the key already exists, the value is updated.
+Resize: If the load factor exceeds a certain threshold, the HashMap will resize itself by doubling the array size and rehashing all entries.
+2. get() Method
+The get method retrieves the value associated with a given key.
+
+.
+Bucket Traversal: The HashMap traverses the bucket at the calculated index to find the matching key and return its value.
+Handling Collisions
+Initially, collisions are handled using linked lists. If the number of entries in a bucket exceeds a threshold (default is 8), the linked list is transformed into a balanced tree (red-black tree) to improve performance from O(n) to O(log n) for lookups and insertions.
+
+Resize Operation
+When the number of entries exceeds the product of the current capacity and load factor (default is 0.75), the HashMap resizes itself:
+
+The capacity is doubled.
+All existing entries are rehashed and redistributed into the new array.
+Performance
+Average Time Complexity: O(1) for put and get operations, assuming a good hash function and uniform distribution.
+Worst Case Time Complexity: O(n) for put and get operations, if all keys hash to the same bucket and form a single linked list. However, with treeification, the worst-case time complexity is improved to O(log n).
+
+Internal working of linkedList
+===================================
+
+internal working of set
+============================
+
