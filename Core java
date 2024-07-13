@@ -1,6 +1,18 @@
 ## Core java concept
 =======================
 
+Java is Pass by Value or call by referance?
+----------------------------------------------
+Java is strictly "pass-by-value." When passing primitives, the actual value is copied. 
+When passing objects, the reference to the object is copied (not the object itself), 
+meaning the method gets a copy of the reference pointing to the same object. 
+Thus, while the term "pass-by-value" might initially be confusing when dealing with objects, it accurately describes how Java handles parameter passing.
+
+Key Points
+Primitive Types: Passing a primitive type to a method results in passing a copy of the value. Changes to the parameter do not affect the original variable.
+Object References: Passing an object to a method results in passing a copy of the reference. Changes to the object's state via the parameter reference affect the original object.
+
+
 Java Architecture
 ===================
 Java Architecture is a collection of components, i.e., JVM, JRE, and JDK. It integrates the process of interpretation and compilation. It defines all the processes involved in creating a Java program
