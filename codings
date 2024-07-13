@@ -22,6 +22,280 @@ System.out.println("Reversed word:"+nstr);
 
 }
 
+
+2)How to iterrate map using  java 8
+import java.util.HashMap;
+import java.util.Map;
+
+public class IterateMap {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("One", 1);
+        map.put("Two", 2);
+        map.put("Three", 3);
+
+        map.forEach((key, value) -> {
+            System.out.println("Key: " + key + ", Value: " + value);
+        });
+    }
+}
+
+using entry set
+=====================
+import java.util.HashMap;
+import java.util.Map;
+
+public class IterateMap {
+    public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("One", 1);
+        map.put("Two", 2);
+        map.put("Three", 3);
+
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+    }
+}
+
+3)How to remove remove duplicate from arraylist
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("One");
+        list.add("Two");
+        list.add("Three");
+        list.add("One");
+        list.add("Two");
+
+        System.out.println("Original List: " + list);
+
+        Set<String> set = new HashSet<>(list); // Convert to set to remove duplicates
+        List<String> uniqueList = new ArrayList<>(set); // Convert back to list
+
+        System.out.println("List after removing duplicates: " + uniqueList);
+    }
+}
+
+using LinkedHashSet
+=======================
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("One");
+        list.add("Two");
+        list.add("Three");
+        list.add("One");
+        list.add("Two");
+
+        System.out.println("Original List: " + list);
+
+        Set<String> set = new LinkedHashSet<>(list); // Use LinkedHashSet to maintain order
+        List<String> uniqueList = new ArrayList<>(set); // Convert back to list
+
+        System.out.println("List after removing duplicates: " + uniqueList);
+    }
+}
+4)How to remove duplicate from linkedlist
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
+public class RemoveDuplicatesFromLinkedList {
+    public static void main(String[] args) {
+        LinkedList<String> linkedList = new LinkedList<>();
+        linkedList.add("One");
+        linkedList.add("Two");
+        linkedList.add("Three");
+        linkedList.add("One");
+        linkedList.add("Two");
+
+        System.out.println("Original LinkedList: " + linkedList);
+
+        Set<String> set = new LinkedHashSet<>(linkedList); // Use LinkedHashSet to maintain order
+        linkedList.clear(); // Clear the original list
+        linkedList.addAll(set); // Add unique elements back to the list
+
+        System.out.println("LinkedList after removing duplicates: " + linkedList);
+    }
+}
+
+5)Singletone class
+ackage com.nt.test;
+
+public class Printer {
+//private static member variable
+private static Printer INSTANCE;
+//private constructor
+private Printer() {
+System.out.println("Printer::0-param constructor");	
+}
+//factory method
+public static Printer getInstance() {
+	if(INSTANCE==null)
+		INSTANCE=new Printer();
+	return INSTANCE;
+}
+//b.method
+public void printData(String msg) {
+	System.out.println(msg);
+}
+
+}
+
+package com.nt.test;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Printer p1=null,p2=null;
+	
+		 p1=Printer.getInstance();
+		 p2=Printer.getInstance();
+		 System.out.println(p1.hashCode()+" "+p2.hashCode());
+	System.out.println("(p1==p2?)"+(p1==p2));
+	p1.printData("hello1");
+	p1.printData("hello2");
+	}
+
+}
+
+6)Immutable class
+
+public final class ImmutableClass {
+    private final String name;
+    private final int age;
+    private final List<String> hobbies;
+
+    public ImmutableClass(String name, int age, List<String> hobbies) {
+        this.name = name;
+        this.age = age;
+        // Create a new list to ensure the original list cannot be modified
+        this.hobbies = new ArrayList<>(hobbies);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    // Return a copy of the list to ensure the original list cannot be modified
+    public List<String> getHobbies() {
+        return new ArrayList<>(hobbies);
+    }
+
+    @Override
+    public String toString() {
+        return "ImmutableClass{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", hobbies=" + hobbies +
+                '}';
+    }
+}
+Explanation:
+final Class: The class is declared as final to prevent subclassing.
+Private and Final Fields: All fields are private and final, ensuring they can be assigned only once.
+Constructor: The constructor initializes all fields. For the hobbies list, a new ArrayList is created to ensure the original list cannot be modified from outside the class.
+No Setter Methods: The class does not have any setter methods, ensuring the fields cannot be modified after object creation.
+Getters: The getters for mutable fields return a new copy of the list, preventing external modification of the internal list.
+
+7)concurrentModificatiobRxception
+====================================
+List <Integer> list=new ArrayList<>();
+list.add(1);
+list.add(2);
+list.add(3);
+list.add(4);
+try{
+Iterator <Integer> iterator=new Iterator<>();
+Integer value=iterator.next();
+while(iterator.hashNext){
+if(value%2==0){
+list.remove(list);
+
+}
+}
+catch(concurrentModificatiobRxception e){
+Systrm.out.println("concurrentModificatiobRxception caugght"+e);
+Sysout("list after modification attempt "+ list);
+
+}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------
+1) Reverse String
+------------------
+public class ReversedString {
+
+public static void main(String[] args) {
+
+String str="Sanjivani",nstr="";
+char ch;
+System.out.println("original word:"+str);
+for(int i =0;i<str.length();i++) {
+
+	ch =str.charAt(i);
+
+	nstr=ch+nstr;
+
+}
+
+System.out.println("Reversed word:"+nstr);
+
+}
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class ComparatorExample {
+    public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+        list.add("Date");
+
+        // Sort strings by length using lambda expression
+        Comparator<String> lengthComparator = (s1, s2) -> Integer.compare(s1.length(), s2.length());
+
+        Collections.sort(list, lengthComparator);
+
+        System.out.println("Sorted by length: " + list);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 by using inbuilt function
 =================================
 public class ReversedString {
