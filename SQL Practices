@@ -1,3 +1,172 @@
+'INDEX
+In SQL databases, an index is a database object that improves the speed of data retrieval operations on a table. Indexes are created on one or more columns of a table and function similarly to the index of a book, allowing the database to find rows more quickly and efficiently.
+
+Types of Indexes
+Primary Index: Automatically created when a primary key is defined. Ensures that data in the indexed columns is unique and helps quickly locate rows.
+Unique Index: Ensures that all values in the indexed column(s) are unique.
+Non-Unique Index: Speeds up retrieval operations but does not enforce uniqueness.
+Composite Index: Created on multiple columns, allowing searches based on multiple criteria.
+Full-Text Index: Used for full-text searches within text data.
+Clustered Index: Sorts and stores the data rows in the table based on their key values. Each table can have only one clustered index.
+Non-Clustered Index: Creates a separate structure from the data rows. Each table can have multiple non-clustered indexes.
+
+How Indexes Work
+Indexes are created using the CREATE INDEX statement. When an index is created, the database generates a data structure (usually a B-tree) that stores the indexed columns' 
+values along with pointers to the corresponding rows in the table. This structure allows the database to quickly locate rows based on the indexed columns.
+
+Database Index: In databases, an index is a data structure that improves the speed of data retrieval operations on a database table at the cost of additional writes and 
+storage space to maintain the index data structure.
+
+Faster Query Performance: By creating an index on columns that are frequently used in WHERE clauses, JOIN conditions, or ORDER BY clauses, you can significantly speed up query performance.
+
+SQL JOINS
+=================
+SQL joins are used to combine rows from two or more tables based on a related column between them. Types of Joins
+INNER JOIN
+===========
+An INNER JOIN returns rows that have matching values in both tables. It only includes rows where the join condition is true.
+If no matching rows are found when performing an INNER JOIN, the query will return an empty result set. This means that none of the rows from either of the tables meet the join condition specified in the ON clause.
+
+SELECT employees.name, departments.department_name
+FROM employees
+INNER JOIN departments ON employees.department_id = departments.department_id;
+
+LEFT JOIN (LEFT OUTER JOIN)
+============================
+
+A LEFT JOIN returns all rows from the left table and the matched rows from the right table. If there is no match, the result is NULL on the side of the right table.
+
+SELECT employees.name, departments.department_name
+FROM employees
+LEFT JOIN departments ON employees.department_id = departments.department_id;
+
+RIGHT JOIN (RIGHT OUTER JOIN)
+===============================
+A RIGHT JOIN returns all rows from the right table and the matched rows from the left table. If there is no match, the result is NULL on the side of the left table.
+SELECT employees.name, departments.department_name
+FROM employees
+RIGHT JOIN departments ON employees.department_id = departments.department_id;
+
+FULL JOIN (FULL OUTER JOIN)
+=================================
+A FULL JOIN returns all rows when there is a match in either the left or right table. If there is no match, the result is NULL for missing matches on either side.
+SELECT employees.name, departments.department_name
+FROM employees
+FULL JOIN departments ON employees.department_id = departments.department_id;
+
+A CROSS JOIN 
+====================
+returns the Cartesian product of the two tables, meaning it combines all rows from the left table with all rows from the right table. It does not require any condition.
+
+Example
+sql
+Copy code
+SELECT employees.name, departments.department_name
+FROM employees
+CROSS JOIN departments;
+
+SELF JOIN
+A SELF JOIN is a regular join but the table is joined with itself. It is useful for comparing rows within the same table.
+
+Example
+sql
+Copy code
+SELECT a.name AS Employee1, b.name AS Employee2
+FROM employees a, employees b
+WHERE a.manager_id = b.employee_id;
+
+
+SQL constraints are used to specify rules for data in a table.
+=================================================================
+
+SQL constraints are used to specify rules for the data in a table.
+Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+
+
+• NOT NULL - Ensures that a column cannot have a NULL value
+• 
+
+create table person(
+  2  ID int not null,
+  3  firstname char(20) not null,
+  4  lastname char(20) not null,
+  5  age int);
+
+• UNIQUE - Ensures that all values in a column are different
+The UNIQUE constraint ensures that all values in a column are different.
+Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+
+A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+ create table person(
+  2  ID int not null unique,
+  3  lastname char(20) not null,
+  4  firstname char(20),
+  5  age int);
+
+alter table persons
+  2  add unique(ID);
+
+
+• PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely
+•  identifies each row in a table
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+CREATE TABLE Persons (
+    ID int NOT NULL PRIMARY KEY,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int
+);
+create table persons(
+  2  ID int not null,
+  3  lastname varchar(255) not null,
+  4  firstname varchar(255),
+  5  age int,
+  6  constraint PK_persons primary key(ID,lastname));
+
+
+• FOREIGN KEY - Prevents actions that would destroy links between tables
+SQL FOREIGN KEY Constraint
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
+
+A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+
+The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+CREATE TABLE Orders (
+    OrderID int NOT NULL PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+);
+
+
+• CHECK - Ensures that the values in a column satisfies a specific condition
+SQL CHECK Constraint
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+create table person(
+  2  ID int not null,
+  3  firstname varchar(255),
+  4  lastname varchar(255) not null,
+  5  age int check (age>=18)
+  6  );
+
+• DEFAULT - Sets a default value for a column if no value is specified
+The DEFAULT constraint is used to set a default value for a column.
+
+The default value will be added to all new records, if no other value is specified.
+
+
 Selecting data from from table
  select empno,ename from emp;
 
@@ -233,6 +402,33 @@ ADD column_name datatype;
 ALTER TABLE table_name
 DROP COLUMN column_name;
 ALTER TABLE Customers
+
+
+diff b/w delete /drop and truncate
+
+DDELETE:
+
+Removes specific rows based on a condition.
+Can be rolled back within a transaction.
+Triggers and constraints are activated.
+Slower for large datasets.	
+Syntax: DELETE FROM table_name WHERE condition;
+
+DROP:
+
+Removes the entire table or database object.
+Cannot be rolled back.
+Very fast because it deletes the entire object.
+Syntax: DROP TABLE table_name;
+
+TRUNCATE:
+
+Deletes all rows in the table but retains the table structure.
+Generally cannot be rolled back.
+Does not activate triggers in some databases.
+Resets auto-increment counters.
+Faster than DELETE for large datasets.
+Syntax: TRUNCATE TABLE table_name;
 DROP COLUMN Email;
 
 ALTER TABLE table_name
@@ -269,111 +465,4 @@ The TRUNCATE TABLE statement is used to delete the data inside a table, but not 
 
 TRUNCATE TABLE table_name;
 
-SQL constraints are used to specify rules for data in a table.
 
-SQL constraints are used to specify rules for the data in a table.
-Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
-Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
-
-
-• NOT NULL - Ensures that a column cannot have a NULL value
-• 
-
-create table person(
-  2  ID int not null,
-  3  firstname char(20) not null,
-  4  lastname char(20) not null,
-  5  age int);
-
-• UNIQUE - Ensures that all values in a column are different
-The UNIQUE constraint ensures that all values in a column are different.
-Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
-
-A PRIMARY KEY constraint automatically has a UNIQUE constraint.
-However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
- create table person(
-  2  ID int not null unique,
-  3  lastname char(20) not null,
-  4  firstname char(20),
-  5  age int);
-
-alter table persons
-  2  add unique(ID);
-
-
-• PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely
-•  identifies each row in a table
-The PRIMARY KEY constraint uniquely identifies each record in a table.
-
-Primary keys must contain UNIQUE values, and cannot contain NULL values.
-
-A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
-
-CREATE TABLE Persons (
-    ID int NOT NULL PRIMARY KEY,
-    LastName varchar(255) NOT NULL,
-    FirstName varchar(255),
-    Age int
-);
-create table persons(
-  2  ID int not null,
-  3  lastname varchar(255) not null,
-  4  firstname varchar(255),
-  5  age int,
-  6  constraint PK_persons primary key(ID,lastname));
-
-
-• FOREIGN KEY - Prevents actions that would destroy links between tables
-SQL FOREIGN KEY Constraint
-The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
-
-A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
-
-The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
-
-CREATE TABLE Orders (
-    OrderID int NOT NULL PRIMARY KEY,
-    OrderNumber int NOT NULL,
-    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
-);
-
-
-• CHECK - Ensures that the values in a column satisfies a specific condition
-SQL CHECK Constraint
-The CHECK constraint is used to limit the value range that can be placed in a column.
-
-If you define a CHECK constraint on a column it will allow only certain values for this column.
-
-If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
-
-create table person(
-  2  ID int not null,
-  3  firstname varchar(255),
-  4  lastname varchar(255) not null,
-  5  age int check (age>=18)
-  6  );
-
-• DEFAULT - Sets a default value for a column if no value is specified
-The DEFAULT constraint is used to set a default value for a column.
-
-The default value will be added to all new records, if no other value is specified.
-
-• CREATE INDEX - Used to create and retrieve data from the database very quickly
-
-AUTO INCREMENT Field
-Auto-increment allows a unique number to be generated automatically when a new record is inserted into a table.
-
-Often this is the primary key field that we would like to be created automatically every time a new record is inserted.
-
-You will have to create an auto-increment field with the sequence object (this object generates a number sequence).
-
-Use the following CREATE SEQUENCE syntax:
-CREATE SEQUENCE seq_person
-MINVALUE 1
-START WITH 1
-INCREMENT BY 1
-CACHE 10;
-INSERT INTO Person(Personid,FirstName,LastName)
-VALUES (seq_person.nextval,'Lars','Monsen');
-
- select * from orders where orderdate='198;
