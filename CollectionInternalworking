@@ -39,9 +39,122 @@ Performance
 Average Time Complexity: O(1) for put and get operations, assuming a good hash function and uniform distribution.
 Worst Case Time Complexity: O(n) for put and get operations, if all keys hash to the same bucket and form a single linked list. However, with treeification, the worst-case time complexity is improved to O(log n).
 
+Internal working of ArrayList
+================================
+An `ArrayList` in Java is a resizable array implementation of the `List` interface, part of the `java.util` package.
+It provides dynamic array capabilities, allowing elements to be added or removed while automatically managing the underlying array's size.
+
+### Internal Structure
+
+An `ArrayList` maintains an array to store elements, and it dynamically resizes this array as elements are added or removed.
+
+### Key Fields
+
+1. **elementData**: An array of `Object` type that stores the elements.
+2. **size**: The number of elements in the `ArrayList`.
+
+### Adding Elements
+
+When you add an element using `add(E e)`, the `ArrayList` ensures that there is enough capacity in the `elementData` array.
+If there isn't enough capacity, it resizes the array.
+
+### Resizing the Array
+
+When the array needs to be resized, it typically grows by 50% of its current size. 
+This growth strategy helps balance the trade-off between the time it takes to copy elements and the memory overhead of the extra capacity.
+
+### Accessing Elements
+
+Accessing elements is done in constant time because `ArrayList` provides random access to elements via the underlying array.
+
+
+### Removing Elements
+
+When you remove an element using `remove(int index)`, the `ArrayList` shifts all subsequent elements to the left to fill the gap.
+
+### Ensuring Capacity
+
+You can manually ensure that the `ArrayList` has enough capacity to accommodate a certain number of elements without resizing.
+
+### Summary
+
+- **Dynamic Resizing**: The `ArrayList` automatically resizes its underlying array when needed.
+- **Access Time**: Accessing elements is fast (O(1)) because it uses an array.
+- **Addition/Removal Time**: Adding or removing elements can be slower (O(n)) if it involves shifting elements.
+- **Capacity Management**: The `ArrayList` manages its capacity to minimize the need for resizing while balancing memory usage and performance.
+
+This internal structure allows `ArrayList` to provide a flexible and efficient implementation for dynamic arrays.
+
 Internal working of linkedList
 ===================================
+A `LinkedList` in Java is a part of the `java.util` package and implements the `List` and `Deque` interfaces, providing a doubly-linked list implementation.
+This means each element in the list is stored in a separate node, with each node containing references to both the previous and next nodes in the list. 
+This structure allows for efficient insertions and deletions.
+
+### Internal Structure
+
+A `LinkedList` consists of a series of nodes, where each node contains:
+- **Data**: The element stored in the node.
+- **Next reference**: A reference to the next node in the list.
+- **Previous reference**: A reference to the previous node in the list.
+
+### Fields in `LinkedList`
+
+A `LinkedList` has the following key fields:
+- **head**: A reference to the first node in the list.
+- **tail**: A reference to the last node in the list.
+- **size**: The number of elements in the list.
+
+### Adding Elements
+ Adding at the End
+
+When you add an element at the end using `add(E e)`:
+
+1. A new node is created.
+2. The `next` reference of the current `tail` node (if it exists) is updated to point to the new node.
+3. The `prev` reference of the new node is updated to point to the current `tail` node.
+4. The `tail` reference of the list is updated to point to the new node.
+5. If the list was empty, the `head` reference is also updated to point to the new node.
+
+#### Adding at a Specific Position
+
+When you add an element at a specific position using `add(int index, E element)`:
+
+1. The list is traversed to the specified index.
+2. The references are updated similarly to maintain the doubly-linked structure.
+
+### Removing Elements
+
+#### Removing by Index
+
+When you remove an element by index using `remove(int index)`:
+
+1. The list is traversed to the specified index.
+2. The node at that position is unlinked by updating the references of the adjacent nodes.
+
+### Traversing the List
+
+To traverse the list, you start at the `head` and follow the `next` references to reach the `tail`. This is typically done using an iterator.
+
+### Summary
+
+- A `LinkedList` consists of nodes, each containing data and references to the next and previous nodes.
+- The `head` and `tail` references point to the first and last nodes, respectively.
+- Adding elements involves updating references of adjacent nodes.
+- Removing elements involves unlinking the target node and updating adjacent references.
+- Traversing is typically done using an iterator that follows the `next` references from the `head` to the `tail`.
+
+This internal structure allows for efficient insertions and deletions at both ends and at specific positions but may be slower for random access 
+compared to `ArrayList` due to the need to traverse nodes.
 
 internal working of set
 ============================
+In Java, the Set interface is part of the java.util package and represents a collection that does not allow duplicate elements. 
+The most commonly used implementations of the Set interface are HashSet, LinkedHashSet, and TreeSet. 
+Each of these implementations has different internal workings and use cases.
+Here, we will explore the internal workings of each.
 
+HashSet: Uses a hash table for storage, provides constant-time performance for basic operations (add, remove, contains), but does not maintain any order.
+LinkedHashSet: Extends HashSet with a doubly-linked list to maintain insertion order while providing the same constant-time performance for basic operations.
+TreeSet: Uses a red-black tree to store elements in a sorted order, provides log(n) time performance for basic operations, and supports additional operations such as range view and ordered iteration.
+Each implementation of the Set interface serves different use cases depending on the requirements for order, performance, and additional operations.
