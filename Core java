@@ -1,5 +1,10 @@
 ## Core java concept
 =======================
+concurrentModificationEXaception
+----------------------
+A ConcurrentModificationException in Java is thrown when a collection (e.g., ArrayList, HashMap) is modified while being iterated over using methods like Iterator or enhanced for loop. This exception is typically encountered when you modify the collection directly (e.g., using add, remove, or put methods) during iteration.
+
+
 
 Java is Pass by Value or call by referance?
 ----------------------------------------------
