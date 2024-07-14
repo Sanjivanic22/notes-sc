@@ -50,18 +50,16 @@ it is useful for centralizing exception handling logic and applying consistant e
 -----------------
 to define http status code to be return when the exception occures.
 
-What is diff b/w @RequestParam and @PathVarible
-=================================================
-@RequestParam
-------------------
-this annotation is used extract the query parameter or form data from the request url
-it allow you to retrive individual request parameter by name and provides options for setting default values .handling optional parameter and binding to diff data
-types.
 
-@PathVarible
------------------
-this annotation is used  to extract patahvariable from the request URL
-thsi is dynamic part of url that embeded with & ?
+what is the diff b/w put ,post and Patch
+=============================================
+post -is user for create the new resourse on server
+ex.createing new user  account on the server
+put-is user for updating to existing resources on the server
+ex.updating a users information 
+Patch-is used for updating some of the data or partial information on server 
+ex updating  users phone or mail id.
+
 
 Diff b/w spring and springboot
 =======================================
