@@ -1,7 +1,7 @@
-## what is monolithic architecture
+## what is microservice architecture
 -----------------------------------------
 Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
-loosely coupled services.that communicate with other over well defined API'S.  In this approach, an application is divided into a set of services, 
+loosely coupled servicesthat communicate with other over well defined API'S.  In this approach, an application is divided into a set of services, 
 each representing a specific business capability and running as a separate process or container.
 
 ## what is diferance b/w Microservice and Monolithic architecture.
