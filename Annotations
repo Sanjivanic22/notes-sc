@@ -184,11 +184,22 @@ When we annotate a method parameter with @RequestBody, the Spring framework bind
 @ResponseBody: 
 It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object into JSON and XML format.
 
+What is diff b/w @RequestParam and @PathVarible
+=================================================
 @PathVariable:
 It is used to extract the values from the URI. It is most suitable for the RESTful web service, where the URL contains a path variable.
 We can define multiple @PathVariable in a method.
 
-@RequestParam: 
+this annotation is used  to extract patahvariable from the request URL
+thsi is dynamic part of url that embeded with & ?
+
+
+@RequestParam
+------------------
+this annotation is used extract the query parameter or form data from the request url
+it allow you to retrive individual request parameter by name and provides options for setting default values .handling optional parameter and binding to diff data
+types.
+
 It is used to extract the query parameters form the URL. It is also known as a query parameter. It is most suitable for web applications. 
 It can specify default values if the query parameter is not present in the URL.
 
