@@ -195,7 +195,15 @@ thsi is dynamic part of url that embeded with & ?
 
 
 @RequestParam
-------------------
+------------------ 
+n Spring MVC, the @RequestParam annotation is used to read the form data and bind it automatically to the parameter present in the provided method.
+So, it ignores the requirement of HttpServletRequest object to read the provided data.
+
+Including form data, it also maps the request parameter to query parameter and parts in multipart requests. 
+If the method parameter type is Map and a request parameter name is specified, then the request parameter value is converted to a Map else the map parameter
+is populated with all request parameter names and values.
+
+
 this annotation is used extract the query parameter or form data from the request url
 it allow you to retrive individual request parameter by name and provides options for setting default values .handling optional parameter and binding to diff data
 types.
