@@ -112,12 +112,35 @@ public void service1()
 It is a class-level annotation. The repository is a DAOs (Data Access Object) that access the database directly. 
 The repository does all the operations related to the database.
 
+@Autowired: Used for dependency injection. It automatically wires up dependencies by type.
+Spring provides annotation-based auto-wiring by providing @Autowired annotation. It is used to autowire spring bean on setter methods, instance variable, and constructor.
+When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type.
 
+ `@Qualifier`: Used along with `@Autowired` to specify which bean should be injected if there are multiple beans of the same type.
+Is used to specify which bean should be injected when multiple beans of the same type are present.it is often used in conjuction with @Autowird to clarify which specific bean should be wired. 
+Used to inject values from external sources(properties files, environment variables, etc.) into Spring beans.
+
+`@Component`: Indicates that a class is a Spring component and should be automatically detected and registered as a bean.
 Spring Boot Annotations
+==========================
+@SpringBootApplication
+A single @SpringBootApplication annotation is used to enable the following annotations:
+ It auto-configures the bean that is present in the classpath and configures it to run the methods.
+	• @EnableAutoConfiguration: It enables the Spring Boot auto-configuration mechanism.
+	• @ComponentScan: It scans the package where the application is located.
+@Configuration: It allows us to register extra beans in the context or import additional configuration classes.
 
-@EnableAutoConfiguration: It auto-configures the bean that is present in the classpath and configures it to run the methods. 
-The use of this annotation is reduced in Spring Boot 1.2.0 release because developers provided an alternative of the annotation, i.e. @SpringBootApplication.
-@SpringBootApplication: It is a combination of three annotations @EnableAutoConfiguration, @ComponentScan, and @Configuration.
+2.@Controller
+this annotation is used to amark the class as wbecontroller.it typically handle the incomming http request ,perfrom request processing logics and 
+return a value a response.
+
+
+`@RestController`
+this annotation is specialized version of @controller that conbines the @controller and @ResponseBody annotation.
+it is used to mark class as restful webserbice controlller.it handles the http request and directly return the response body in format such json or xml.
+
+
+
 
 Spring MVC and REST Annotations
 -----------------------------------
