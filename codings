@@ -76,26 +76,14 @@ public class RemoveDuplicates {
         System.out.println("List after removing duplicates: " + uniqueList);
     }
 }
+using java 8
+List<Integer>uniquelist=list.stream()
+				.distinct()
+				.collect(Collectors.toList());
+		System.out.println("after removing duplicates"+uniquelist);
+	
 
-using LinkedHashSet
-=======================
-public class RemoveDuplicates {
-    public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("One");
-        list.add("Two");
-        list.add("Three");
-        list.add("One");
-        list.add("Two");
 
-        System.out.println("Original List: " + list);
-
-        Set<String> set = new LinkedHashSet<>(list); // Use LinkedHashSet to maintain order
-        List<String> uniqueList = new ArrayList<>(set); // Convert back to list
-
-        System.out.println("List after removing duplicates: " + uniqueList);
-    }
-}
 4)How to remove duplicate from linkedlist
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -119,7 +107,11 @@ public class RemoveDuplicatesFromLinkedList {
         System.out.println("LinkedList after removing duplicates: " + linkedList);
     }
 }
-
+using java8
+List<String>uniquelist=list.stream()
+			.distinct()
+			.collect(Collectors.toList());
+	System.out.println("Liinkedlist after removing duplicates"+uniquelist);
 5)Singletone class
 ackage com.nt.test;
 
@@ -161,19 +153,19 @@ public class Test {
 }
 
 6)Immutable class
-
-public final class ImmutableClass {
+public final class ImmutablePerson {
     private final String name;
     private final int age;
     private final List<String> hobbies;
 
-    public ImmutableClass(String name, int age, List<String> hobbies) {
+    // Constructor to initialize fields
+    public ImmutablePerson(String name, int age, List<String> hobbies) {
         this.name = name;
         this.age = age;
-        // Create a new list to ensure the original list cannot be modified
-        this.hobbies = new ArrayList<>(hobbies);
+        this.hobbies = Collections.unmodifiableList(hobbies);
     }
 
+    // Getter methods for fields
     public String getName() {
         return name;
     }
@@ -182,20 +174,47 @@ public final class ImmutableClass {
         return age;
     }
 
-    // Return a copy of the list to ensure the original list cannot be modified
     public List<String> getHobbies() {
-        return new ArrayList<>(hobbies);
+        return hobbies;
     }
+
+    // No setters are provided
 
     @Override
     public String toString() {
-        return "ImmutableClass{" +
+        return "ImmutablePerson{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", hobbies=" + hobbies +
                 '}';
     }
 }
+
+public class ImmutableClassExample {
+    public static void main(String[] args) {
+        List<String> hobbies = new ArrayList<>();
+        hobbies.add("Reading");
+        hobbies.add("Swimming");
+
+        ImmutablePerson person = new ImmutablePerson("John", 30, hobbies);
+
+        System.out.println("Person: " + person);
+
+        // Attempting to modify the original hobbies list
+        hobbies.add("Cycling");
+        System.out.println("Person after modifying hobbies list: " + person);
+
+        // Attempting to modify the returned hobbies list
+        try {
+            person.getHobbies().add("Cycling");
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Cannot modify hobbies list: " + e.getMessage());
+        }
+
+        System.out.println("Person: " + person);
+    }
+}
+
 Explanation:
 final Class: The class is declared as final to prevent subclassing.
 Private and Final Fields: All fields are private and final, ensuring they can be assigned only once.
