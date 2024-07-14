@@ -19,24 +19,10 @@ public Integer getCost()
 return cost;  
 }     
 }  
-@Autowired: Spring provides annotation-based auto-wiring by providing @Autowired annotation.
-It is used to autowire spring bean on setter methods, instance variable, and constructor. When we use @Autowired annotation, the spring container auto-wires 
-the bean by matching data-type.
 
-Example
-@Component  
-public class Customer  
-{  
-private Person person;  
-@Autowired  
-public Customer(Person person)   
-{   
-this.person=person;  
-}  
-}  
 @Configuration: 
 It is a class-level annotation. The class annotated with @Configuration used by Spring Containers as a source of bean definitions.
-
+It allows us to register extra beans in the context or import additional configuration classes.
 Example
 
 @Configuration  
@@ -58,6 +44,9 @@ public class ScanComponent
 {  
 // ...  
 }  
+
+ @EnableAutoConfiguration: It enables the Spring Boot auto-configuration mechanism.
+
 @Bean: 
 It is a method-level annotation. It is an alternative of XML <bean> tag. It tells the method to produce a bean to be managed by Spring Container.
 
@@ -81,21 +70,7 @@ public class Student
 {  
 .......  
 }  
-@Controller: The @Controller is a class-level annotation. It is a specialization of @Component. It marks a class as a web request handler. 
-It is often used to serve web pages. By default, it returns a string that indicates which route to redirect. 
-It is mostly used with @RequestMapping annotation.
 
-Example
-@Controller  
-@RequestMapping("books")  
-public class BooksController   
-{  
-@RequestMapping(value = "/{name}", method = RequestMethod.GET)  
-public Employee getBooksByName()   
-{  
-return booksTemplate;  
-}  
-}  
 @Service: It is also used at class level. It tells the Spring that class contains the business logic.
 Example
 
@@ -112,15 +87,28 @@ public void service1()
 It is a class-level annotation. The repository is a DAOs (Data Access Object) that access the database directly. 
 The repository does all the operations related to the database.
 
-@Autowired: Used for dependency injection. It automatically wires up dependencies by type.
-Spring provides annotation-based auto-wiring by providing @Autowired annotation. It is used to autowire spring bean on setter methods, instance variable, and constructor.
-When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type.
 
- `@Qualifier`: Used along with `@Autowired` to specify which bean should be injected if there are multiple beans of the same type.
-Is used to specify which bean should be injected when multiple beans of the same type are present.it is often used in conjuction with @Autowird to clarify which specific bean should be wired. 
+@Autowired: Spring provides annotation-based auto-wiring by providing @Autowired annotation.Used for dependency injection. It automatically wires up dependencies by type.
+the spring container auto-wires the bean by matching data-type.
+It is used to autowire spring bean on setter methods, instance variable, and constructor. 
+
+
+Example
+@Component  
+public class Customer  
+{  
+private Person person;  
+@Autowired  
+public Customer(Person person)   
+{   
+this.person=person;  
+}  
+}  
+
+ `@Qualifier`: Used along with `@Autowired`to specify which bean should be injected when multiple beans of the same type are present.
 Used to inject values from external sources(properties files, environment variables, etc.) into Spring beans.
 
-`@Component`: Indicates that a class is a Spring component and should be automatically detected and registered as a bean.
+
 Spring Boot Annotations
 ==========================
 @SpringBootApplication
@@ -130,17 +118,28 @@ A single @SpringBootApplication annotation is used to enable the following annot
 	• @ComponentScan: It scans the package where the application is located.
 @Configuration: It allows us to register extra beans in the context or import additional configuration classes.
 
-2.@Controller
-this annotation is used to amark the class as wbecontroller.it typically handle the incomming http request ,perfrom request processing logics and 
-return a value a response.
+
+@Controller: The @Controller is a class-level annotation. It is a specialization of @Component. is used to amark the class as wbecontroller.
+it typically handle the incomming http request ,perfrom request processing logics and return a value a response.
+It is often used to serve web pages. By default, it returns a string that indicates which route to redirect. 
+It is mostly used with @RequestMapping annotation.
+
+Example
+@Controller  
+@RequestMapping("books")  
+public class BooksController   
+{  
+@RequestMapping(value = "/{name}", method = RequestMethod.GET)  
+public Employee getBooksByName()   
+{  
+return booksTemplate;  
+}  
+}  
 
 
 `@RestController`
 this annotation is specialized version of @controller that conbines the @controller and @ResponseBody annotation.
 it is used to mark class as restful webserbice controlller.it handles the http request and directly return the response body in format such json or xml.
-
-
-
 
 Spring MVC and REST Annotations
 -----------------------------------
@@ -187,42 +186,26 @@ It binds the method return value to the response body. It tells the Spring Boot 
 What is diff b/w @RequestParam and @PathVarible
 =================================================
 @PathVariable:
-It is used to extract the values from the URI. It is most suitable for the RESTful web service, where the URL contains a path variable.
+It is used to extract the values/patahvariable from the request URL thsi is dynamic part of url that embeded with & ?. 
+It is most suitable for the RESTful web service, where the URL contains a path variable.
 We can define multiple @PathVariable in a method.
-
-this annotation is used  to extract patahvariable from the request URL
-thsi is dynamic part of url that embeded with & ?
-
 
 @RequestParam
 ------------------ 
-n Spring MVC, the @RequestParam annotation is used to read the form data and bind it automatically to the parameter present in the provided method.
-So, it ignores the requirement of HttpServletRequest object to read the provided data.
-
-Including form data, it also maps the request parameter to query parameter and parts in multipart requests. 
-If the method parameter type is Map and a request parameter name is specified, then the request parameter value is converted to a Map else the map parameter
+In Spring MVC, the @RequestParam annotation is used to extract the query parameter or form data from the request url,
+it read the form data and bind it automatically to the parameter present in the provided method.
+it allow you to retrive individual request parameter by name and provides options for setting default values if the query parameter is not present in the URL.
+ If the method parameter type is Map and a request parameter name is specified, then the request parameter value is converted to a Map else the map parameter
 is populated with all request parameter names and values.
-
-
-this annotation is used extract the query parameter or form data from the request url
-it allow you to retrive individual request parameter by name and provides options for setting default values .handling optional parameter and binding to diff data
-types.
-
-It is used to extract the query parameters form the URL. It is also known as a query parameter. It is most suitable for web applications. 
-It can specify default values if the query parameter is not present in the URL.
 
 @RequestHeader: 
 It is used to get the details about the HTTP request headers. We use this annotation as a method parameter.
 The optional elements of the annotation are name, required, value, defaultValue. 
 For each detail in the header, we should specify separate annotations. We can use it multiple time in a method
 
-@RestController: It can be considered as a combination of @Controller and @ResponseBody annotations. 
-The @RestController annotation is itself annotated with the @ResponseBody annotation. 
-It eliminates the need for annotating each method with @ResponseBody.
-
 @RequestAttribute: It binds a method parameter to request attribute.
-It provides convenient access to the request attributes from a controller method. With the help of @RequestAttribute annotation, 
-we can access objects that are populated on the server-side.
+It provides convenient access to the request attributes from a controller method. 
+With the help of @RequestAttribute annotation, we can access objects that are populated on the server-side.
 
 To handle the exception in springboot
 =======================================
