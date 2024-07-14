@@ -36,16 +36,15 @@ it provides centralized point,encapsulating the complexity of the ms ecosystem a
 API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
 it can handle the authentication and authorzation validate caces token.
 
+we use AWS API Gateway, a fully managed service provided by Amazon Web Services that makes it easy to create, publish, maintain, monitor, and secure APIs 
+at any scale.'"
+
 What is cicuit braking and wh to y it is so important?
 -------------------------------------------------------------
 circuit breaking is mechanism use in microservice to improve the resillience and functinonality of the system.
-it helps to prevent failure in once service from cascading and affecting the overall system.
+it helps to prevent failure in once service from cascading and affecting the overall system to improve the system resilience
+it enables services and client application to handle n/w and service disruption more effectively leading to more robust and reliable MS.
 
-circuit breaking is mechanism to handle the service failure prevent cascading failures and imrpove the system resillince .
-it enables services and client application to handle n/w and service disruption more effectively leading to more robust and eliable MS.
-
-What is fallback method with circuit breaker?
--------------------------------------------------
 WHat is Eureka server?
 =-----------------------
 Eureka server is compoent of netflix,service discovery and resistration tool for building microservice based application.
@@ -58,21 +57,47 @@ failover and fault tolarance
 
 what is service descovery?
 -----------------------------
-Microservices can query the eureka server to discover other registed services and obtain thair metadata.
-this them to dynamically locate and communicate with other service without hardcoding their locations.
+in microservices Service discovery  enables the automatic detection of services within a microservice architecture. 
+This process allows services to find and communicate with each other without hard-coding their network locations. 
+Service discovery addresses the dynamic nature of microservices, where instances of services can scale up or down, move across different hosts, 
+or restart at different network addresses.
 
-What is load balancing
-in mS architure load balancer play crucial role in distributing incoming n/w  traffice across the multiple instace of service.
-it help to optmize resource utilization improve scalability and ensure high availabiliy.
+Service Registry:
+A central repository that maintains the list of service instances and their network locations (IP addresses and ports).
+The service registry is updated dynamically as services start and stop.
+
+What is load balanncer
+----------------------------
+A load balancer  is a component that distributes incoming network traffic across multiple service instances to ensure no single instance becomes a bottleneck. 
+Load balancing enhances the reliability, availability, and scalability of microservices by managing the distribution of workloads and ensuring optimal 
+resource utilization.
 
 Containeratin?
 --------------
-container pkges the microservices with its dependancies .making it easier to deploy and manage across diff env.
+container pkges the microservices with its dependancies making it easier to deploy and manage across diff env.
+
+Restetemplate
+=================
+RestTemplate is a synchronous client provided by Spring Framework to perform HTTP requests and handle responses.
+It's widely used in Spring-based applications to interact with RESTful web services.
+
+previously we are having resttemplate for communication but now we are having 
+as of 6.1 resteclient offers modern API for sychronuous http access,for asynchronuous and streaming scenarios, consider reactive webclient
+
+spring cloud openfien client -can communicate with APIs(we need to add dependancies of open fien)
 
 
+ Sysnchrous &Asychronous
+============================
+Synchronous Processing: 
+Suitable for tasks where operations are dependent on the results of previous operations and blocking is acceptable.
 
- 
+Example: Simple script execution, basic function calls.
 
+Asynchronous Processing:
+Ideal for tasks that can be performed independently and where non-blocking execution improves efficiency and responsiveness.
+
+Example: Network requests, I/O operations, real-time applications.
 
 
 
