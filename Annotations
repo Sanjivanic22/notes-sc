@@ -182,7 +182,20 @@ It eliminates the need for annotating each method with @ResponseBody.
 It provides convenient access to the request attributes from a controller method. With the help of @RequestAttribute annotation, 
 we can access objects that are populated on the server-side.
 
+To handle the exception in springboot
+=======================================
+
+@ExceptionHandler
+----------------------
+by using this annotation you can define method in your controller class to handle the specific exceptions.
+Annnotated method can have a specific exception type as a parameter,allowing you to handle the perticular exception.
+
+@ControllerAdvise
+------------------------
+Allows you to define global exception handler that are applied across multiple controler
+it is useful for centralizing exception handling logic and applying consistant error handling across the app
+@ResponseStatus
+-----------------
+to define http status code to be return when the exception occures.
 
 
-Springboot Annotations
-===========================
