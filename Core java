@@ -324,7 +324,9 @@ A Map can't be traversed, so you need to convert it into Set using keySet() or e
 
 Hashmap
 ==========
-Java HashMap class implements the Map interface which allows us to store key and value pair, where keys should be unique. If you try to insert the duplicate key, it will replace the element of the corresponding key. It is easy to perform operations using the key index like updation, deletion, etc. HashMap class is found in the java.util package.
+Java HashMap class implements the Map interface which allows us to store key and value pair, where keys should be unique.
+If you try to insert the duplicate key, it will replace the element of the corresponding key. 
+It is easy to perform operations using the key index like updation, deletion, etc. HashMap class is found in the java.util package.
 
 • Java HashMap contains values based on the key.
 • Java HashMap contains only unique keys.
@@ -333,12 +335,10 @@ Java HashMap class implements the Map interface which allows us to store key and
 • Java HashMap maintains no order.
 • The initial default capacity of Java HashMap class is 16 with a load factor of 0.75
 
-Internal  of HashMap
-=====================
-
 linkedHashMap
 ==============
-Java LinkedHashMap class is Hashtable and Linked list implementation of the Map interface, with predictable iteration order. It inherits HashMap class and implements the Map interface.
+Java LinkedHashMap class is Hashtable and Linked list implementation of the Map interface, with predictable iteration order. 
+It inherits HashMap class and implements the Map interface.
 
 • Java LinkedHashMap contains values based on the key.
 • Java LinkedHashMap contains unique elements.
@@ -359,7 +359,8 @@ Java TreeMap class is a red-black tree based implementation. It provides an effi
 
 ConcurrentHashMap
 ===================
-• ConcurrentHashMap is an enhancement of Hashmap as we know that while dealing with threads in our application HashMap is not good choice because performace wise hashmp is not upto the mark.
+• ConcurrentHashMap is an enhancement of Hashmap as we know that while dealing with threads in our application HashMap is not good choice 
+because performace wise hashmp is not upto the mark.
 
 • Underlaying data structure for Concurrenthashmap is hashtable
 
@@ -369,12 +370,16 @@ ConcurrentHashMap
 
 • In Concurrenthashmap the object is divided into number of segments according to concurrency level
 • concurrency level Concurrenthashmap is 16.
-• In Concurrenthashmap,at a time any number of threads can perform retrival operation but for updated in the object, the thread must lock the perticular segment in which the thread wants  to operate  this is called segment locking or bucket locking
+• In Concurrenthashmap,at a time any number of threads can perform retrival operation but for updated in the object, 
+the thread must lock the perticular segment in which the thread wants  to operate  this is called segment locking or bucket locking
 • inserting null object is not possible in concurrenthashmap as key or value.
 
 • Comparable interface
 ==========================
-Java Comparable interface is used to order the objects of the user-defined class. This interface is found in java.lang package and contains only one method named compareTo(Object). It provides a single sorting sequence only, i.e., you can sort the elements on the basis of single data member only
+comparable interface is use for default natural sorting order.
+Java Comparable interface is used to order the objects of the user-defined class.
+This interface is found in java.lang package and contains only one method named compareTo(Object). 
+It provides a single sorting sequence only, i.e., you can sort the elements on the basis of single data member only
 
 compareTo(Object obj) method
 public int compareTo(Object obj): It is used to compare the current object with the specified object. It returns
@@ -382,20 +387,26 @@ public int compareTo(Object obj): It is used to compare the current object with 
 	• negative integer, if the current object is less than the specified object.
 	• zero, if the current object is equal to the specified object.
 
+Comparator
+========================
+java caomparatir interface use for customize sorting order
 Java Comparator interface is used to order the objects of a user-defined class.
 This interface is found in java.util package and contains 2 methods compare(Object obj1,Object obj2) and equals(Object element).
 It provides multiple sorting sequences, i.e., you can sort the elements on the basis of any data member, for example, rollno, name, age or anything else.
 
-Comparable Comparator
-========================
+dif b/w comparable and comparator
+---------------------------------------
 1) Comparable provides a single sorting sequence. In other words, we can sort the collection on the basis of a single element such as id, name, and price
 .The Comparator provides multiple sorting sequences. In other words, we can sort the collection on the basis of multiple elements such as id, name, and price etc.
-2) Comparable affects the original class, i.e., the actual class is modified.	Comparator doesn't affect the original class, i.e., the actual class is not modified.
-3) Comparable provides compareTo() method to sort elements.	Comparator provides compare() method to sort elements.
-4) Comparable is present in java.lang package.	A Comparator is present in the java.util package.
-5) We can sort the list elements of Comparable type by Collections.sort(List) method.	We can sort the list elements of Comparator type by Collections.sort(List, Comparator) method
-
-We can use comparable to define defualt natural sorting.
+2) Comparable affects the original class, i.e., the actual class is modified.	
+ Comparator doesn't affect the original class, i.e., the actual class is not modified.
+3) Comparable provides compareTo() method to sort elements.	
+ Comparator provides compare() method to sort elements.
+4) Comparable is present in java.lang package.	
+ A Comparator is present in the java.util package.
+5) We can sort the list elements of Comparable type by Collections.sort(List) method.	
+We can sort the list elements of Comparator type by Collections.sort(List, Comparator) method
+6)We can use comparable to define defualt natural sorting.
 We can use copmarator to define customized sorting order.
 
 Multithreading
@@ -427,7 +438,8 @@ We can define thread in two ways
 Which best apporoach
 =====================
 Among he two ways of defining a thread implements runnable mechanism is recommended to use.
-In the first approach our class always extending thread class& hence there is chance of extending any other class but in the second approach we can extends some other class also while implementing runnable interface hence 2nd approach is recommended to use.
+In the first approach our class always extending thread class& hence there is chance of extending any other class but 
+in the second approach we can extends some other class also while implementing runnable interface hence 2nd approach is recommended to use.
 
 Thread priority
 =================
@@ -437,23 +449,28 @@ Thread priority
 • Thread.Max_priority--10
 • Thread scheduler use this priority while allocation cpu 
 • The thread which is having highest priority will get chance first.
-• How to prevent excecution of thread
 • If two threads having same priority then we cant expect exact excution order it depends on thread scheduler
 • Default priority of main  thread is 5
-The methods to prevents thread execution
+
+
+ How to prevent excecution of thread
+===========================================
 • We can prevent thread from execution by using methods  
 • Yeild 
+----------
 • Yield () method causes to pause current executing thread for giving chance to reamaing waiting threads of same priority.
 • If there are no waiting threads or all waiting threads have low priority then the same thread will continue its excution once again.
 • Public void native yield()
+
 Join
+---------
 If  thread want to wait until completing some other thread then we should go for join() method
 Whenever we are using join () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error.
 
 Sleep
 ======
 If thread don’t want to perform any operation for perticular amount of time then we should go for sleep()
-Whenever we are using join () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error.
+Whenever we are using sleep () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error.
 
 Sychronization
 ================
