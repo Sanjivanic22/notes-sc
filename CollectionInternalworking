@@ -25,7 +25,6 @@ Resize: If the load factor exceeds a certain threshold, the HashMap will resize 
 2. get() Method
 The get method retrieves the value associated with a given key.
 
-.
 Bucket Traversal: The HashMap traverses the bucket at the calculated index to find the matching key and return its value.
 Handling Collisions
 Initially, collisions are handled using linked lists. If the number of entries in a bucket exceeds a threshold (default is 8), the linked list is transformed into a balanced tree (red-black tree) to improve performance from O(n) to O(log n) for lookups and insertions.
@@ -45,43 +44,25 @@ An `ArrayList` in Java is a resizable array implementation of the `List` interfa
 It provides dynamic array capabilities, allowing elements to be added or removed while automatically managing the underlying array's size.
 
 ### Internal Structure
-
 An `ArrayList` maintains an array to store elements, and it dynamically resizes this array as elements are added or removed.
 
-### Key Fields
-
-1. **elementData**: An array of `Object` type that stores the elements.
-2. **size**: The number of elements in the `ArrayList`.
-
 ### Adding Elements
-
-When you add an element using `add(E e)`, the `ArrayList` ensures that there is enough capacity in the `elementData` array.
+When you add an element the `ArrayList` ensures that there is enough capacity in the array.
 If there isn't enough capacity, it resizes the array.
 
 ### Resizing the Array
-
 When the array needs to be resized, it typically grows by 50% of its current size. 
 This growth strategy helps balance the trade-off between the time it takes to copy elements and the memory overhead of the extra capacity.
 
 ### Accessing Elements
-
 Accessing elements is done in constant time because `ArrayList` provides random access to elements via the underlying array.
-
-
 ### Removing Elements
 
-When you remove an element using `remove(int index)`, the `ArrayList` shifts all subsequent elements to the left to fill the gap.
+When you remove an element  the `ArrayList` shifts all subsequent elements to the left to fill the gap.
 
 ### Ensuring Capacity
 
 You can manually ensure that the `ArrayList` has enough capacity to accommodate a certain number of elements without resizing.
-
-### Summary
-
-- **Dynamic Resizing**: The `ArrayList` automatically resizes its underlying array when needed.
-- **Access Time**: Accessing elements is fast (O(1)) because it uses an array.
-- **Addition/Removal Time**: Adding or removing elements can be slower (O(n)) if it involves shifting elements.
-- **Capacity Management**: The `ArrayList` manages its capacity to minimize the need for resizing while balancing memory usage and performance.
 
 This internal structure allows `ArrayList` to provide a flexible and efficient implementation for dynamic arrays.
 
@@ -92,7 +73,7 @@ This means each element in the list is stored in a separate node, with each node
 This structure allows for efficient insertions and deletions.
 
 ### Internal Structure
-
+========================
 A `LinkedList` consists of a series of nodes, where each node contains:
 - **Data**: The element stored in the node.
 - **Next reference**: A reference to the next node in the list.
@@ -154,7 +135,13 @@ The most commonly used implementations of the Set interface are HashSet, LinkedH
 Each of these implementations has different internal workings and use cases.
 Here, we will explore the internal workings of each.
 
-HashSet: Uses a hash table for storage, provides constant-time performance for basic operations (add, remove, contains), but does not maintain any order.
-LinkedHashSet: Extends HashSet with a doubly-linked list to maintain insertion order while providing the same constant-time performance for basic operations.
-TreeSet: Uses a red-black tree to store elements in a sorted order, provides log(n) time performance for basic operations, and supports additional operations such as range view and ordered iteration.
+HashSet:
+Uses a hash table for storage, provides constant-time performance for basic operations (add, remove, contains), but does not maintain any order.
+
+LinkedHashSet:
+Extends HashSet with a doubly-linked list to maintain insertion order while providing the same constant-time performance for basic operations.
+
+TreeSet:
+Uses a red-black tree to store elements in a sorted order, provides log(n) time performance for basic operations,
+and supports additional operations such as range view and ordered iteration.
 Each implementation of the Set interface serves different use cases depending on the requirements for order, performance, and additional operations.
