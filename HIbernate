@@ -120,9 +120,15 @@ b)Native sql query
 c)criteria API or QBC
 
 Cascadig in hibernate
-=================================
-Cascading is a feature in Hibernate, which is an object-relational mapping (ORM) tool used in Java to map Java classes to database tables. Cascading refers to the ability to automatically propagate the state of an entity (i.e., an instance of a mapped class) across associations between entities. For example, if you have a Customer entity that has a one-to-many relationship with an Order entity, you can define cascading to specify that when a customer is deleted, all of their orders should be deleted as well.
-Cascading in Hibernate refers to the automatic persistence of related entities. When a change is made to an entity, such as an update or deletion, the changes can be cascaded to related entities as well. Cascading can be configured using annotations, such as @OneToMany(cascade = CascadeType.ALL), or through XML configuration files. It is important to use cascading carefully, as it can lead to unwanted changes being made to related entities if not configured properly.
+=================================. 
+Cascading refers to the ability to automatically propagate the state of an entity (i.e., an instance of a mapped class) across associations between entities. 
+For example, if you have a Customer entity that has a one-to-many relationship with an Order entity, you can define cascading to specify that when a customer 
+is deleted, all of their orders should be deleted as well.
+Cascading in Hibernate refers to the automatic persistence of related entities. When a change is made to an entity, such as an update or deletion, 
+the changes can be cascaded to related entities as well.
+Cascading can be configured using annotations, such as @OneToMany(cascade = CascadeType.ALL),
+or through XML configuration files. It is important to use cascading carefully, as it can lead to unwanted changes being made to related entities if 
+not configured properly.
 
 Lazy loading and egger loading
 ---------------------------------
@@ -131,10 +137,9 @@ These strategies help in managing performance and memory usage by controlling wh
 
 Lazy Loading
 =============
-Lazy loading is a design pattern commonly used in programming to defer the initialization of an object until it is actually needed. This can improve the efficiency and performance of a program by avoiding the loading of unnecessary data, 
+Lazy loading is a design pattern commonly used in programming to defer the initialization of an object until it is actually needed. 
+This can improve the efficiency and performance of a program by avoiding the loading of unnecessary data, 
 especially when dealing with resource-intensive operations or large datasets.
-Lazy loading is a strategy where related entities or collections are loaded only when they are accessed for the first time.
-This can help reduce the initial load time and memory consumption, as only the required data is fetched from the database.
 
 Key Points:
 
@@ -146,8 +151,11 @@ Performance: Can improve performance by reducing the number of queries executed 
 Eager Loading
 ==================
 Eager loading is a design pattern used to fetch related data from the database immediately when the primary data is fetched. 
-Unlike lazy loading, where data is fetched on demand, eager loading loads all necessary data upfront, reducing the number of database queries at the cost of potentially loading more data than needed.
-Eager loading is a strategy where related entities or collections are loaded immediately along with their parent entity. This means all the necessary data is fetched in a single query, which can reduce the number of database queries at the cost of potentially loading more data than necessary.
+Unlike lazy loading, where data is fetched on demand, eager loading loads all necessary data upfront, reducing the number of database queries at the cost of 
+potentially loading more data than needed.
+Eager loading is a strategy where related entities or collections are loaded immediately along with their parent entity. 
+This means all the necessary data is fetched in a single query, which can reduce the number of database queries at the cost of potentially 
+loading more data than necessary.
 
 Key Points:
 
@@ -204,10 +212,10 @@ Ses.load()
 	• Prefer using ses.load() in layered apps.  The records asked in DAO class is actualy will be displayed either in the client app/int the view comp(jsp),so DAO gives proxy project to client app/view component by calling ses.load() and the real hit to DB s/w takes place when non-identifier ethods are called on proxy object from client app/biew comp.  
 Hibernate Cache
 =================
-Hibernate caching improves the performance of the application by pooling the object in the cache. It is useful when we have to fetch the same data multiple times.
+Hibernate caching improves the performance of the application by pooling the object in the cache. 
+It is useful when we have to fetch the same data multiple times.
 
 There are mainly two types of caching:
-
 First Level Cache, and
 Second Level Cache
 
@@ -215,11 +223,13 @@ diff b/w first level cache and second level cache
 
 First-Level Cache (Session Cache)
 ======================================
-Scope: The first-level cache is associated with the Hibernate Session object. Each Session object has its own first-level cache, and it is not shared between Session instances.
+Scope: The first-level cache is associated with the Hibernate Session object. Each Session object has its own first-level cache, 
+and it is not shared between Session instances.
 Default: It is enabled by default and cannot be disabled.
 Lifecycle: The first-level cache exists as long as the session is open. Once the session is closed, the cache is destroyed.
 Granularity: It caches objects based on their identifiers (primary keys).
-Usage: It ensures that within a single session, the same object is not loaded multiple times. It helps in reducing the number of SQL queries sent to the database by storing already fetched objects.
+Usage: It ensures that within a single session, the same object is not loaded multiple times.
+It helps in reducing the number of SQL queries sent to the database by storing already fetched objects.
 Implementation: This cache is implemented by Hibernate and does not require any special configuration.
 
 
@@ -229,7 +239,8 @@ Scope: The second-level cache is associated with the SessionFactory object. It i
 Default: It is not enabled by default and needs to be configured explicitly.
 Lifecycle: The second-level cache exists as long as the SessionFactory is open. It can be used across multiple sessions.
 Granularity: It can cache entities, collections, and query results.
-Usage: It helps in reducing the number of SQL queries sent to the database across multiple sessions by storing data that is frequently accessed. This can significantly improve the performance of the application.
+Usage: It helps in reducing the number of SQL queries sent to the database across multiple sessions by storing data that is frequently accessed.
+This can significantly improve the performance of the application.
 Implementation: It requires a caching provider (e.g., Ehcache, Infinispan, Hazelcast) and additional configuration in the Hibernate settings.
 
 
@@ -240,7 +251,7 @@ Scope	Single Session	                         Multiple Sessions
 Default Behav Enabled by default	          Not enabled by default
 ConfigurationNo special configuration needed	 Requires explicit configuration and a cache provider
 Lifecycle Lives within the session	    Lives within the SessionFactory
-Granularit Entities by identifier (primary key)	Entities, collections, and query results
+Granularit Entities by identifier (primary key) 	Entities, collections, and query results
 Usage	Ensures the same object is not loaded multiple times within a session	Reduces database access across sessions
 Performance	Improves performance within a session	Improves performance across multiple sessions
 
@@ -268,4 +279,7 @@ JPA is s/w specification that provides bunch of rules and guidelines t develop O
 @Transient-to make certain property not participating persistence operations
 @DynamicInsert/update makes hibernate dialect to generate sql query dynamically only by involving those
 properties whose values are not null
+volatile-
+When a variable is declared volatile, any write to that variable is immediately visible to all other threads. 
+Similarly, all reads of the volatile variable will see the most recent write by any thread.
 
