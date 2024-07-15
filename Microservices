@@ -1,3 +1,7 @@
+R u having hands on exprience in microservice
+-----------------------------------------------
+yes i am having hands on experience we have migrated the monolithic architecture to microservices architecture
+
 ## what is microservice architecture
 -----------------------------------------
 Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
@@ -99,9 +103,35 @@ Ideal for tasks that can be performed independently and where non-blocking execu
 
 Example: Network requests, I/O operations, real-time applications.
 
+how microservices communicate with each other -byusing service descovery services communicate with each other.
 
+hystrix
+===========
+It helps to control the interactions between distributed services by adding fault tolerance logic, thereby ensuring that failures in one service
+do not cascade and cause system-wide outages.
+Hystrix helps in preventing cascading failures in a microservice architecture. 
+If one service fails, it ensures that the failure does not propagate to other services by isolating the faulty service.
 
+how can we achive loose coupling b/w two services.
+-----------------------------------------------------
+Loose coupling between two services in a microservices architecture can be achieved using various strategies and patterns. 
+1. Use APIs and Contracts
+APIs (Application Programming Interfaces) define clear and well-documented contracts between services. 
+By interacting through APIs, services remain independent of each other's internal implementations.
 
+2. API Gateway
+An API Gateway acts as an intermediary between clients and microservices. 
+It helps in abstracting the underlying services, allowing them to evolve independently without impacting the clients.
 
+3. Service Registry and Discovery
+Using a service registry (e.g., Eureka, Consul), services can register themselves and discover other services dynamically. 
+This removes the need for hard-coded service addresses.
+
+4. Message-Driven Communication
+Using message brokers (e.g., RabbitMQ, Kafka) allows services to communicate asynchronously by exchanging messages through queues or topics. 
+This decouples the services as they don't need to be aware of each other's existence.
+
+5. Asynchronous Processing
+Using asynchronous processing helps to decouple services by allowing them to handle requests and responses independently
 
 
