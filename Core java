@@ -142,14 +142,11 @@ If methdo names and arhuments must be matched  i.e method signature must be matc
 
 Abstraction
 ==================
-Abstract class
-A class which is declared with the abstract keyword is known as an abstract class in Java. 
-It can have abstract and non-abstract methods (method with the body).
 
 Abstraction
 Abstraction is a process of hiding the implementation details and showing only functionality to the user.
-There are two ways to achieve abstraction in java
 
+There are two ways to achieve abstraction in java
 Abstract class (0 to 100%)
 Interface (100%)
 
@@ -165,20 +162,20 @@ It can have constructors and static methods also.
 It can have final methods which will force the subclass not to change the body of the method.
 
 Abstract Method in Java
+=========================
 A method which is declared as abstract and does not have implementation is known as an abstract method.
 
 Interface in Java
+=======================
 
 An interface in Java is a blueprint of a class. It has static constants and abstract methods.
-The interface in Java is a mechanism to achieve abstraction. There can be only abstract methods in the Java interface, not method body. 
+There can be only abstract methods in the Java interface, not method body. 
 It is used to achieve abstraction and multiple inheritance in Java.
 
 Java Interface also represents the IS-A relationship.
-
 It cannot be instantiated just like the abstract class.
 
 Since Java 8, we can have default and static methods in an interface.
-
 Since Java 9, we can have private methods in an interface.
 
 Interface 
@@ -203,10 +200,6 @@ Every method present inside abstract need not to be public or abstract.we can ta
 Tehere is no restriction like interface
 We can take
 
-Abstarct class
-----------------
-fOr any java class if we don’t want instanciation then we have to declare that class as abstract i.e for abstract classess instanciation is not possible.
-
 Marker interface
 ==================
 An interface which has no member is known as a marker or tagged interface, for example, Serializable, Cloneable, Remote, etc.
@@ -218,10 +211,6 @@ By implementing seriazable interface we can send object across the n/w and we ca
 By implemeting clonable interface our object will be in position to provide exactly duplicate object
 As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
 We can create our own marker interfface but customization of jvm required
-
-ABSTRACT METHOD
------------------
-Eventhough we don’t know about the implemetation still we can declare a method with abstract modifier that means abstract method can have only declaration but not implemetion hence every abstarct method declaration should end with ;
 
 
 Encapsulation
@@ -238,9 +227,9 @@ The encapsulate class is easy to test. So, it is better for unit testing.
 
 Fail-Fast and FailSafe
 ============================
-Fail-Fast systems abort operation as-fast-as-possible exposing failures immediately and stopping the whole operation. Whereas, Fail-Safe systems don't abort an operation in the case of a failure. Such systems try to avoid raising failures as much as possible.
-FACTORY METHOD
-----------------
+Fail-Fast systems abort operation as-fast-as-possible exposing failures immediately and stopping the whole operation. 
+Whereas, Fail-Safe systems don't abort an operation in the case of a failure. Such systems try to avoid raising failures as much as possible.
+
 Collection
 ==============
 If we want to represent Group of individual object as single entity then we should go for collection.
