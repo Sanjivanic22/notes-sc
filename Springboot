@@ -216,6 +216,17 @@ A: You can create a RESTful web service in Spring Boot by using the @RestControl
 Q: What is Spring Boot Test?
  A: Spring Boot Test is a module of Spring Boot that provides support for testing Spring-based applications.
 
+what is swagger
+==================
+whenever we have to write some Rest APIs at that stage we have to give documentation to rest api we use swagger for documnetation purpose and 
+then swagger actually runs on url and we give that url to our client of API .swagger is used for documnettaion in our project.
+
+can we change port of tomcat server 
+yes we can change from application .properties wheere server.port mention .we can change from there.
+
+if we dont want to run our application on tomcat server is there any way.
+yes we cange enbedded server from to mcat server to jetty .thrre is way you jetty configured this also done using application.properties 
+but you have to make sure thatt jetty dependancy should be add in pom.xml file.
 
 
 
