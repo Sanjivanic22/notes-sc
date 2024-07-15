@@ -1,38 +1,78 @@
 what is Springboot?
 ------------------
-	• Springboot is project i.e built on the top of spring framework
+•  Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
+ that makes it easier to create and run Java applications.
 	• It provides esier and faster ways to set up ,configure and run both simple and web based application.
 	• It provides rapid application development.
-	
-	•  Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
+2. It simplifies the configuration and setup process, allowing developers to focus more on writing code for their applications.
+a. Configurations
+b. Dependency Management
+C. Embedded Server
 
-   Advantages
----------------
-	• Springboot reduce the lots of development time and increase the productivity
+Spring Boot provide many advantages over normal spring framework
+====================================================================
+        • Springboot reduce the lots of development time and increase the productivity
 	• It avaoides boilerplate code ,annotation and xml configurations
 	• It provides lots of plugins to develop and test springboot app very easily build tool like maven and gradle
 	• It test the web application easily with the help of different embedded http srvers like tomcat and jetti
 	• Here don’t need to deployee the war files.
 	•  increased productivity, reduced configuration, simplified dependency management, and easier deployment.
-	
+	b. Production Ready applications- Metrix, Health Check and many features are designed for production ready application.
+c. Rapid Development- Opinionated approach and auto-configuration enable developers to quickly develop apps
+d. Provide Dependency Management- No need to manage separate dependencies manually.
+e. Autoconfiguration - Spring Boot AutoConfigure things by default.
+
+
 	Disadvatages
      ----------------------
 	It is very tough and time consuming process to convert existing legacy spring framework project into spring boot app.
-	It is application only for brand new/greenfield spring project
-	• 
+	It is application only for brand new spring project
+	
 	• Application
    --------------------------
 	• Using springboot we can develop the stanalone apps,web app,distributed app and entrprise app.
+
+working of springBoot app
+===========================
+1. Spring Boot starts by scanning the starter dependencies in pom.xml
+Then download and auto-configure the module as you included in pom.xml
+For example we have to create web application then we have to put spring-boot-starter-web dependency in pom.xml.
+When we start the project spring boot downloads all the dependency required for web and configure the things like spring mvc.
+
+Diff b/w spring and springboot
+=======================================
+Configuration:
+Spring: Requires extensive configuration, often using XML or Java annotations.
+Spring Boot: Uses auto-configuration and convention-over-configuration, significantly reducing the amount of setup required.
+
+Dependency Management:
+Spring: Requires manual management of dependencies.
+Spring Boot: Provides starter dependencies that aggregate commonly used dependencies into simple-to-use groups.
+
+Embedded Server:
+Spring: Applications typically need to be deployed to an external server.
+Spring Boot: Includes embedded servers, allowing you to run applications directly with java -jar.
+
+Starter Projects:
+Spring: Does not include starter projects.
+Spring Boot: Provides starter projects to quickly get started with different types of applications.
+
+Development Speed:
+Spring: Requires more setup and configuration, which can slow down initial development.
+Spring Boot: Accelerates development with its opinionated defaults and auto-configuration.
+
+Microservices:
+Spring: Can be used to build microservices, but requires more manual configuration.
+Spring Boot: Designed with microservices in mind, making it easier to create and deploy microservices.
 	
 	• Profiling
       =======================
-	• Profile is also called as environment
-	• The setup required to execute the app or project for development is called profile or env
-	• This include .class file.properties/yml file,libraries servers ,db s/w like oracle etc.
-	• From development to release/maintainance the project code/app code has executed in diff env/profiles like dev,test/prod profile.
-	• To make spring work only for certain profile activation we can use @profile annotation along with stearotype annotation for @Bean annotation.
-
-
+-> Profiling in Spring Boot is a way to define and manage different configurations for different environments
+(such as development, testing, staging, production, etc.) within the same application.
+It allows you to specify which set of configurations should be used when the application runs in a specific environment.
+• To make spring work only for certain profile activation we can use @profile annotation along with stearotype annotation for @Bean annotation.
+• From development to release/maintainance the project code/app code has executed in diff env/profiles like dev,test/prod profile.
+	
 How to handle the exception in springboot
 =============================================
 
@@ -44,8 +84,9 @@ Annnotated method can have a specific exception type as a parameter,allowing you
 
 @ControllerAdvise
 ------------------------
-Allows you to define global exception handler that are applied across multiple controler
+Allows you to define global exception handler that are applied across multiple controler.
 it is useful for centralizing exception handling logic and applying consistant error handling across the app
+
 @ResponseStatus
 -----------------
 to define http status code to be return when the exception occures.
@@ -60,35 +101,26 @@ ex.updating a users information
 Patch-is used for updating some of the data or partial information on server 
 ex updating  users phone or mail id.
 
-
-Diff b/w spring and springboot
-=======================================
-	• Spring framework widely used Java EE framework for building application
-	• Springboot framework is widely used to develop Rest Apis.
-	• Spring simplifies the JAVA EE develpement that makes programmer productive
-	• Springboot shorten the code length and provide easier way to develop webapp
-	• Primary feature of spring is dependancy injection
-	• Primary features of springboot is  autoconfiguration.
-	• Spring helps us to develop loosly coupled app
-	• Spring boot help us to create the standalone app with cofiguration
-	• Developers need to write lots of boiler plate code
-	• In spring boot  it reduces the boiler plates code 
-	• In spring define dependancues for the spring project in pom.xml.
-	• In spring boot there is strater in pom.xml file that internally take care of downloading the dependancies.
-
 Transaction management
 =========================
-In an enterprise application, a transaction is a sequence of actions performed by the application that together pipelined to perform a single operation. 
+-> Spring's transaction management simplifies handling transactions in Java applications, ensuring data consistency and integrity with minimal boilerplate code.
+
+->In an enterprise application, a transaction is a sequence of actions performed by the application that together pipelined to perform a single operation.
+-> in applications that involve multiple database operations.
+-> that allows developers to define transaction boundaries declaratively or programmatically.
+-> A transaction must be atomic, consistent, isolated, and durable (ACID properties).
+->  You can use  The @Transactional annotations to define transaction boundaries Using @Transactional Annotation and 
+ annotation can be applied to methods or classes. When applied to a class, it affects all public methods of the class.
+
 For example, booking a flight ticket is also a transaction where the end user has to enter his information and then make a payment to book the ticket.
 
- if a user has entered his information the user’s information gets stored in the user_info table
+if a user has entered his information the user’s information gets stored in the user_info table
 
  Now, to book a ticket he does an online payment and due to some reason(system failure) the payment has been canceled so, the ticket is not booked for him. But, the problem is that his information gets stored on the user_info table. On a large scale, more than thousands of these things happen within a single day. So, it is not good practice to store a single action of the transaction(Here, only user info is stored not the payment info).
-
 To overcome these problems, spring provides transaction management  which uses annotation to handle these issues
 . In such a scenario, spring stores the user information in temporary memory and then checks for payment information if the payment is successful then it will complete 
 the transaction otherwise it will roll back the transaction and the user information does not gets stored in the database.
-
+ 
 
 spring data jpa
 ======================
@@ -153,7 +185,6 @@ Specifications allow you to define reusable query conditions, while the Criteria
 to build queries programmatically.
 
 
-
  Q: What is the auto-configuration feature in Spring Boot? 
 A: The auto-configuration feature in Spring Boot automatically configures the application based on the dependencies that are added to the classpath.
 
@@ -184,78 +215,6 @@ A: You can create a RESTful web service in Spring Boot by using the @RestControl
 
 Q: What is Spring Boot Test?
  A: Spring Boot Test is a module of Spring Boot that provides support for testing Spring-based applications.
-
-springboot anotations
-@SpringBootApplication
-A single @SpringBootApplication annotation is used to enable the following annotations:
-	• @EnableAutoConfiguration: It enables the Spring Boot auto-configuration mechanism.
-	• @ComponentScan: It scans the package where the application is located.
-@Configuration: It allows us to register extra beans in the context or import additional configuration classes.
-
-2.@Controller
-this annotation is used to amark the class as wbecontroller.it typically handle the incomming http request ,perfrom request processing logics and 
-return a value a response.
-
-
-`@RestController`
-this annotation is specialized version of @controller that conbines the @controller and @ResponseBody annotation.
-it is used to mark class as restful webserbice controlller.it handles the http request and directly return the response body in format such json or xml.
-
-`@RequestMapping`:
-It is used to map the web requests. It has many optional elements like consumes, header, method, name, params, path, produces, and value.
-We use it with the class as well as the method.
-
-• @GetMapping: It maps the HTTP GET requests on the specific handler method. 
-It is used to create a web service endpoint that fetches It is used instead of using: @RequestMapping(method = RequestMethod.GET)
-
-• @PostMapping: It maps the HTTP POST requests on the specific handler method.
-It is used to create a web service endpoint that creates It is used instead of using: @RequestMapping(method = RequestMethod.POST)
-
-`@PathVariable`: Used to bind a method parameter to a URI template variable in a request URL.
-this is used extract pathvariable from the request url.path variable are dynamic part of url that embede with &?
-
-6. `@RequestParam`: Binds a method parameter to a query parameter in the request.
-this annotation is used to extract the query parameter or form data from the request URL.it allows you to retrive individual request parameter by name and provides options for setting default values.
-handling optional parameter and providing to diff datatypes 
-
-• @RequestBody: It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to convert the body of the request.
-When we annotate a method parameter with @RequestBody, the Spring framework binds the incoming HTTP request body to that parameter.
-
-• @ResponseBody: It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object into JSON and XML format.
-
- @Autowired: Used for dependency injection. It automatically wires up dependencies by type.
-Spring provides annotation-based auto-wiring by providing @Autowired annotation. It is used to autowire spring bean on setter methods, instance variable, and constructor.
-When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type.
-
- `@Qualifier`: Used along with `@Autowired` to specify which bean should be injected if there are multiple beans of the same type.
-Is used to specify which bean should be injected when multiple beans of the same type are present.it is often used in conjuction with @Autowird to clarify which specific bean should be wired. 
-
-
-   Used to inject values from external sources(properties files, environment variables, etc.) into Spring beans.
-
- `@Component`: Indicates that a class is a Spring component and should be automatically detected and registered as a bean.
-
-
- `@Service`: A specialization of `@Component` used to mark a class as a service.
-
-13. `@Repository`: A specialization of `@Component` used to mark a class as a data repository.
-
-14. `@Configuration`: Indicates that a class provides Spring configuration, typically for bean definitions.
-
-15. `@EnableScheduling`: Used to enable scheduling capabilities for methods within a Spring bean.
-
-16. `@Transactional`: Used to annotate methods or classes to indicate that they should be executed within a transaction context.
-
-17. `@EnableCaching`: Enables Spring's caching support for methods within a class.
-
-18. `@Valid`: Used to trigger validation of method parameters or request body objects.
-
-19. `@ExceptionHandler`: Used to define methods that handle exceptions thrown by the application.
-
-20. `@Async`: Marks a method as asynchronous, allowing it to be executed in a separate thread.
-
-
-
 
 
 
