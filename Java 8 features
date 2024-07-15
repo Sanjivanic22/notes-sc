@@ -203,8 +203,12 @@ word is null
 
 Java noshron
 Nashron is a jvascript engine ..it is used to excute javascript code .dynamically at jvm.
-
-
-
 public static void main(String[] args)
+
+what is MetaSpace how it is diff from permanenet generation
+=============================================================
+before java 8 there is concept of permanent generation and generally whenever claases are loaded those are store in parment genration.and 
+they are never unloaded in parmanant geneation.
+from java 8 the concept metaspace which can load classess and if you think you have not loaded some classess then you can unload those classess 
+i.e concept of metaspace.
 
