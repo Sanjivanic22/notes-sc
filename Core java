@@ -474,7 +474,8 @@ Whenever we are using sleep () we should compulsary handle the inturrupted excep
 
 Sychronization
 ================
-• Synchronized is the modifier applicable only for methods and blocks& we cant apply for classes and variables.if a method or block declared as synchronized then at a time only one thread is allowed to execute that method or block on the given object.
+• Synchronized is the modifier applicable only for methods and blocks& we cant apply for classes and variables.
+if a method or block declared as synchronized then at a time only one thread is allowed to execute that method or block on the given object.
 • The main advantages of sychronized keyword is it can resolve the inconsistancy problem
 • The main linitation of synchronized keyword is it increses waiting time of  threads & effect the performance of the system.
 • Hence if there is no requirement then its never recommended to use sychronized keyword.
@@ -489,7 +490,9 @@ Two thread will communicate with other by using Wait ,Notify ,NitifyAll
 • The thread which requires updation it has to call wait() method.the thread which is responsible to update  it has to call notify methods
 • We can call wait () ,notify and notifyAll() methods only from sychronized area otherwise we will get runtime exception. Saying IllgalMonitorStateException.
 
-• If thread calls wait() method it releases lock immediately and entred into the waiting state.the releases lock of only current object but not all locks. After calling notify and notifyAll() methods thread releases the lock but nt immediately. Except these wait(),notify,notifyAll() there is no other case where thread release lock.
+• If thread calls wait() method it releases lock immediately and entred into the waiting state.the releases lock of only current object but not all locks. 
+After calling notify and notifyAll() methods thread releases the lock but nt immediately. 
+Except these wait(),notify,notifyAll() there is no other case where thread release lock.
 
 • Notify vs NotifyAll()
 ==========================
@@ -514,7 +517,8 @@ Daemon threads
 
 How to kill thread
 ====================
-A thread can stop or kill another thread by using stop() method then automatically running thread enterd into dead state.it is deprecated method and not recommended to to use.
+A thread can stop or kill another thread by using stop() method then automatically running thread enterd into dead state.
+it is deprecated method and not recommended to to use.
 
 Suspending &resuming thread.
 =============================
@@ -523,29 +527,33 @@ A thread can resume a suspended thread by using resume().method.
 
 String handling
 ==================
-Object
+Object class
 The most common method which are required for any java object are encapsulated into saperate class which is nothing but objct class.sun people made this class as parent for all java classess so that its method are bydefault available to every java class automatically.
 Every class in java is child class of object either directly or indirectly.if ur class wont exends any other class then only our class is direct child class of object.
 
 
 Why string is immutable in java
 =================================
-The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. The reason of making string final is to destroy the immutability and to not allow others to extend it.
+The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
+The reason of making string final is to destroy the immutability and to not allow others to extend it.
 
-The String objects are cached in the String pool, and it makes the String immutable. The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. 
+The String objects are cached in the String pool, and it makes the String immutable. 
+The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. 
 For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
 
 
 To String
 ============
-We can use this method to find strng representation of an object.
+We can use this method to find string representation of an object.
 
 Hashcode
 ==========
 For every object jvm will assign one unique id which is nothing but hashcode.
 Jvm uses hashcode will saving object into hashcode or hashset or hashmap.
 Based on our requirement we can generate hashcode by overriding hashcode method in our class.
+
 Equals()
+---------
 We can use  equals method to check equality of two objects.
 
 Diff b/w ==operator and .equals method
@@ -555,6 +563,7 @@ Diff b/w ==operator and .equals method
 == operator is applicable for both premitives and object referance
 In case of  object referance == opeartor is always meant for referance comparation i.e
 If two referance pointing to the same object then only ==operator returns true.
+
 .equals()
 It is method applicable for only for object referance but not for primitives
 By default .equals method present in object class I also meant for referance comparasion only
@@ -564,40 +573,14 @@ Immutable
 ============
 Once we created a string object we cant perform any changes in the existing object ,if are trying to perform any changes with those changes new object will be created.this behaviour is nothing but immutability of the string object.
 
-How to create immutable class
-================================
- Public class Immutable{
- final String pancardNumber;    
-public Employee(String pancardNumber)  
- {    
- this.pancardNumber=pancardNumber;    
- }  
- public String getPancardNumber(){    
- return pancardNumber;    
- }    
- }    
- public class ImmutableDemo  
- {  
- public static void main(String ar[])  
- {  
- Employee e = new Employee("ABC123");  
- String s1 = e.getPancardNumber();  
- System.out.println("Pancard Number: " + s1);  
- }  
- } 
-The above class is immutable because:
-	• The instance variable of the class is final i.e. we cannot change the value of it after creating an object.
-	• The class is final so we cannot create the subclass.
-	• There is no setter methods i.e. we have no option to change the value of the instance variable.
-
-
 Mutable
 ========
 Once we crrated a string buffer object we can perform any changes in the existing object.this behavoiur is nothing but mutability of stringbuffer object
 
 StringBuffer
 =============
-If the content will changes frequently it is never recommended to go for string beacause for every change compulsory new object will created to handle this cumpolsary we should go for stringbuffer where changes will be performed in existing object  only instead of creating new object.
+If the content will changes frequently it is never recommended to go for string beacause for every change compulsory new object will created to
+handle this cumpolsary we should go for stringbuffer where changes will be performed in existing object  only instead of creating new object.
 
 Stringbuilder
 ================
@@ -612,7 +595,6 @@ If the content will not change frequently then we should go for String
 If content will change frequently and thread safety required then go for String buffer
 If content will change frequently and thread safety is not required then go for stringbuilder.
 
-
 Wrapper classes
 ================
 The main objective of wrapper classes are
@@ -625,7 +607,6 @@ Automatic conversion of primitive value to the wrapper object by compiler is cal
 
  Autounboxing
 ===============
-
 Auttomatic conversion of wrapper object to the primitive type by compiler is called Auto unboxing
 
 Excepintion handling
@@ -633,17 +614,19 @@ Excepintion handling
 Exception 
 When unwanted ,unexpected event that distrupt the normal low of program is called exception.
 
-
 Checked exception
-the exception is checked by the compiler for smooth excution of program at  runtime  are  called as checked exception.
+-----------------------
+the exception is checked by the compiler for smooth excution of program at runtime are called as checked exception.
 Checked exception and example 
 SqlException,classnotfoundException,filenotfoundException
 
-
 Unchecked exception
-If the exception is not checed by the compiler then that exception is called as uncheced exception
+--------------------
+If the exception is not checed by the compiler then that exception is called as unchecked exception
+ex.arithmeticException
 
 Custom exception
+-------------------
 To meet programing requirement some times we have creaete our own exception is known as custom exception.
 Ex.TooOldException,Insufficient balance
 Compiletime error 
@@ -654,43 +637,51 @@ To maintain the risky code
 Catch
 To maintain handling code
 Final
+-------
 We can use final keyword with method ,variable and classess.
 If we decalre class as final then we cant create the child class 
 If we declare the varibale as final then reassignment of variable is not possible.
 If declare the method as final the method overriding is not 
+
 Finally 
-It is block associated with try -catch To maitain the clean up code which should be  always executed  irrespective of whether exception raised or not and exception handled or not.such type place is nothing but finally block.finally will executed then return will be excuted.
+---------
+It is block associated with try -catch To maitain the clean up code which should be  always executed  irrespective of whether exception raised or not 
+and exception handled or not.such type place is nothing but finally block.finally will executed then return will be excuted.
 	• 
 Finalize
+--------------
 It is method which should excuted by garbage collector before destroying the  any object to perform cleanup activities.
 
 Throw
+---------
 The main purpose of throw keyword is to handover iur created exception manually to the jvm.
 Sometimes we can create exception object maunally & handover that object to the JVM explicitly by using throw keyword.
 We can use throw keyword for customized exceptions.
 
 Throws
+----------
 The main purpose of throws keyword is to delegate the responsibity of exception handling to the caller methods in case of checked exception ,to convince compiler.
 
 Exception propagation
+---------------------
 The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us called exception propogation.
 
 
 Serialization and deserialization
+======================================
 The concept representing an object state as a byte stream.byte sream has all the informattion about the object. Is called serialization
-
-Advantages
-It is mainly used to travel objects state on the network
+It is mainly used to travel objects state on the network.
 
 Deserialization
+--------------------
 Byte stream is converted into an object.
 Serialization and deserialization is plateform independent,it means you can serialize an object on one plateform and deserialize it on a different plateform.
 
-Checked exception and example 
-SqlException,classnotfoundException,filenotfoundException,checked by the at at the runtime is called checked exception
-
-
- clasLoader
-The Java ClassLoader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine. The Java run time system does not need to know about files and file systems because of classloaders. Java classes aren’t loaded into memory all at once, but when required by an application. At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
+clasLoader
+-----------------
+The Java ClassLoader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine. 
+The Java run time system does not need to know about files and file systems because of classloaders.
+Java classes aren’t loaded into memory all at once, 
+but when required by an application. At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
 
 
