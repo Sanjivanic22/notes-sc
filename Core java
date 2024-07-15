@@ -224,6 +224,7 @@ It is a way to achieve data hiding in Java because other class will not be able 
 
 The encapsulate class is easy to test. So, it is better for unit testing.
 
+Ex.in world java the class is unit where instance variable and instance methods declared or wrapping in single unit as class which is nothing but encapsulation.
 
 Fail-Fast and FailSafe
 ============================
@@ -514,6 +515,58 @@ Daemon threads
 • The main objective of daemon threads is to provide support for non daemon threds.
 • We can check whether thread is daemon or not by using isDaemon() method.
 • Main thread is always non daemon &its not possible to change its daemon nature
+
+Thread life cycle
+===================
+1. New state
+Definition: When a thread is created, it is in the new state. It remains in this state until the start() method is called.
+
+Example:
+Thread thread = new Thread(new RunnableTask()); // Thread is in NEW state
+
+2. Runnable
+Definition: When the start() method is called on a thread, it moves to the runnable state. In this state, the thread is eligible to run by the JVM, but it is not running yet. 
+The actual running of the thread depends on the thread scheduler.
+
+Example:
+thread.start(); // Thread moves to RUNNABLE state
+
+3. Blocked
+Definition: A thread enters the blocked state when it is waiting for a monitor lock to enter a synchronized block/method.
+
+Example:
+synchronized (lock) {
+    // Critical section
+}
+If a thread tries to enter this synchronized block and the lock is already held by another thread, it will move to the blocked state.
+
+4. Waiting
+Definition: A thread enters the waiting state when it is waiting indefinitely for another thread to perform a particular action (e.g., waiting on an object's monitor with Object.wait()).
+
+Example:
+synchronized (lock) {
+    lock.wait(); // Thread enters WAITING state
+}
+5. Timed Waiting
+Definition: A thread enters the timed waiting state when it is waiting for another thread to perform a specific action within a stipulated time.
+This can happen with methods like Thread.sleep(), Object.wait(long timeout), Thread.join(long millis), etc.
+
+Example:
+Thread.sleep(1000); // Thread enters TIMED_WAITING state
+6. Terminated
+Definition: A thread enters the terminated state once its run() method completes or when it is explicitly terminated (e.g., by an uncaught exception).
+
+Example:
+class RunnableTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+
+Thread thread = new Thread(new RunnableTask());
+thread.start(); // Thread runs and completes
+// Now the thread is in TERMINATED state
 
 How to kill thread
 ====================
