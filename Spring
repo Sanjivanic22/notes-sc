@@ -67,6 +67,12 @@ ApplicationContext context =
 
 The constructor of ClassPathXmlApplicationContext class receives string, so we can pass the name of the xml file to create the instance of ApplicationContext.
 
+spring bean life cycle
+==========================
+spring bean life will start from the bean creation and end with bean destruction
+init and destry methods are impiratant in spring bean life cycle which can configure in xml file with init-initailization and 
+init-destruction .or programatically we can do with @ initailization and @disposable method
+
 Dependancy lookup
 ==================
 in Dependancy lookup we will  get the resource after demand.
@@ -158,6 +164,14 @@ Constructor
 Inject by calling constructor of class calls constructor having the large no of parameter.
 Autodected-deprecated.
 
+Spring Transaction in spring
+=============================
+In spring transaction can be handle in two ways.
+i.e Programatically and declaratively
+1) in programatic we have to write series of code  to commit your transaction and rollback transaction.
+that means we need to write for commit or rollback transaction
+there is one more way that is declarative way where we write template in xml
+whenever the is runtime exception the spring will automatically rollback the transaction and if there no exception then spring will commit the transaction.
 Spring ORM
 ============
 It is spring module providing abstraction on multiple ORM framework like hiberanate like 
