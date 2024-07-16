@@ -73,6 +73,17 @@ spring bean life will start from the bean creation and end with bean destruction
 init and destry methods are impiratant in spring bean life cycle which can configure in xml file with init-initailization and 
 init-destruction .or programatically we can do with @ initailization and @disposable method
 
+Spring bean life cycle is maintained by IOC Container
+
+1. Container gets started.
+
+2. Container creates the object of bean as per request.
+
+3. Dependencies is created
+
+4. Dependencies is injected
+
+5. Destroyed when container closed.
 Dependancy lookup
 ==================
 in Dependancy lookup we will  get the resource after demand.
