@@ -1,0 +1,40 @@
+Agile methodology
+---------------------
+
+it is iterative and incremental process
+
+here customer no need to wait for long time
+we develop test and release price of software to the customer with few number of features
+we can accept /accommodate requirement changes
+there will be the good communication b/w customer and business analyst ,developer and tester
+
+advantages
+requirement allowed in any stage of development ,we can accommodate the requirement in the middle of development.
+release will be very fast
+
+scrum
+--------
+scrum is f/w through which we build s/w product by following agile principle
+scrum includes group of people called as srum team normally 5-9 numbers
+
+it ithis involved people like
+product owner-define features of project according to market values
+adjust features and priority every iteration as need accept or reject work result
+scrum master-the main role is facilitating and driving the agile process
+
+dev &QA team-develop and test the software
+
+scrum terminology
+-------------------
+user story
+a feature /module in s/w
+
+epic-collection of user stories
+
+product backlog-contains list of user stories by prepared by product owner
+sprint/iteration-period of time to complete the user stories ,decided by the product owner and team usually 2,4 weeks
+
+spring planning meeting 
+
+meeting conduct with
+
