@@ -194,6 +194,140 @@ Usage: git stash drop
 This command discards the most recently stashed changeset.
 
 
+Git 
+
+
+Common Git Commands
+Setup
+Configure Git
+
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+Basic Commands
+
+1)Initialize a Repository
+git init
+Creates a new Git repository in the current directory.
+
+2)Clone a Repository
+
+git clone https://github.com/user/repo.git
+Copies a remote repository to your local machine.
+
+3)Check Status
+
+git status
+Shows the status of your working directory and staging area.
+
+4)Add Changes
+
+git add <file>
+git add .
+Adds changes in the specified file(s) or all changes to the staging area.
+
+5)Commit Changes
+
+git commit -m "Commit message"
+Records changes in the repository with a descriptive message.
+
+6)View Commit History
+
+git log
+Shows a log of commits in the current branch.
+
+7)Branching and Merging
+Create a New Branch
+
+git branch <branch-name>
+Creates a new branch.
+
+8)Switch to a Branch
+
+git checkout <branch-name>
+Switches to the specified branch.
+
+9)Create and Switch to a New Branch
+
+git checkout -b <branch-name>
+Creates a new branch and switches to it immediately.
+
+10)Merge a Branch
+git merge <branch-name>
+Merges the specified branch into the current branch.
+
+11)Delete a Branch
+
+git branch -d <branch-name>
+Deletes the specified branch.
+
+Working with Remotes
+--------------------------
+1)Add a Remote
+
+git remote add origin https://github.com/user/repo.git
+Adds a remote repository.
+
+2)Fetch Changes
+
+git fetch
+Downloads objects and refs from another repository.
+
+3)Pull Changes
+
+git pull
+Fetches and integrates changes from a remote repository to your local branch.
+
+4)Push Changes
+git push
+Uploads your local branch commits to the remote repository.
+
+Advanced Commands
+-----------------------
+1)Stash Changes
+
+git stash
+Temporarily saves your modified files and reverts them to the last committed state.
+
+2)Apply Stashed Changes
+git stash apply
+Applies the most recently stashed changes.
+
+2)Revert a Commit
+
+git revert <commit-hash>
+Creates a new commit that undoes the changes made by the specified commit.
+
+3)Reset to a Previous State
+git reset --hard <commit-hash>
+Resets your working directory and index to the specified commit.
+
+4)Delete a Local Branch (Safely)
+
+git branch -d <branch-name>
+This command deletes the branch only if it has been fully merged with its upstream branch or another branch. It is a safe way to delete branches that have already been integrated.
+
+5)Force Delete a Local Branch
+git branch -D <branch-name>
+This command forcefully deletes the branch regardless of its merge status. Use this with caution, as it can potentially delete work that hasn't been merged.
+
+Deleting a Remote Branch
+To delete a branch from a remote repository, you need to use the git push command with the --delete option:
+
+Delete a Remote Branch
+git push origin --delete <branch-name>
+
+git branch -d <branch-name>: Safely delete a local branch that has been fully merged.
+git branch -D <branch-name>: Forcefully delete a local branch, regardless of its merge status.
+git push origin --delete <branch-name>: Delete a branch from the remote repository.
+
+Best Practices
+Write Meaningful Commit Messages: Describe what changes were made and why.
+Branch Frequently: Use branches for new features, bug fixes, and experiments.
+Regularly Pull from Remote: Stay updated with changes from others to avoid conflicts.
+Review and Test Before Merging: Ensure that code is reviewed and tested before merging into the main branch.
+Keep Repositories Clean: Delete branches that are no longer needed.
+
 
 
 
