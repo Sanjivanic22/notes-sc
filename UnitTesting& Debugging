@@ -1,0 +1,270 @@
+JUnit is a popular testing framework for Java that is used to write and run repeatable automated tests. 
+JUnit 5, the latest version, consists of three main sub-projects: JUnit Platform, JUnit Jupiter, and JUnit Vintage. 
+JUnit Jupiter is the combination of the new programming model and extension model for writing tests and extensions in JUnit 5.
+
+Here's an overview of some common JUnit annotations and their uses:
+
+### Core Annotations
+
+1. **@Test**
+   - Used to indicate that the method is a test method.
+   - Example:
+     ```java
+     @Test
+     void testMethod() {
+         // test code
+     }
+     ```
+
+2. **@BeforeEach**
+   - Indicates that the annotated method should be executed before each `@Test` method.
+   - Example:
+     ```java
+     @BeforeEach
+     void setUp() {
+         // initialization code
+     }
+     ```
+
+3. **@AfterEach**
+   - Indicates that the annotated method should be executed after each `@Test` method.
+   - Example:
+     ```java
+     @AfterEach
+     void tearDown() {
+         // cleanup code
+     }
+     ```
+
+4. **@BeforeAll**
+   - Indicates that the annotated method should be executed once before all `@Test` methods in the current class.
+   - The method must be static.
+   - Example:
+     ```java
+     @BeforeAll
+     static void initAll() {
+         // setup code
+     }
+     ```
+
+5. **@AfterAll**
+   - Indicates that the annotated method should be executed once after all `@Test` methods in the current class.
+   - The method must be static.
+   - Example:
+     ```java
+     @AfterAll
+     static void tearDownAll() {
+         // cleanup code
+     }
+     ```
+
+### Additional Annotations
+
+1. **@Disabled**
+   - Used to disable a test class or test method.
+   - Example:
+     ```java
+     @Disabled
+     @Test
+     void skippedTest() {
+         // this test will be skipped
+     }
+     ```
+
+2. **@Tag**
+   - Used to tag and filter tests.
+   - Example:
+     ```java
+     @Tag("fast")
+     @Test
+     void fastTest() {
+         // fast test code
+     }
+     ```
+
+3. **@DisplayName**
+   - Used to define a custom display name for the test class or test method.
+   - Example:
+     ```java
+     @DisplayName("Custom Test Name")
+     @Test
+     void testWithCustomName() {
+         // test code
+     }
+     ```
+
+4. **@ParameterizedTest**
+   - Indicates that the annotated method is a parameterized test.
+   - Used in conjunction with other annotations like `@ValueSource`, `@MethodSource`, `@CsvSource`, etc., to pass different parameters to the test method.
+   - Example:
+     ```java
+     @ParameterizedTest
+     @ValueSource(strings = {"Hello", "JUnit"})
+     void testWithParameters(String argument) {
+         // test code using 'argument'
+     }
+     ```
+
+5. **@RepeatedTest**
+   - Indicates that the annotated method should be repeated a specified number of times.
+   - Example:
+     ```java
+     @RepeatedTest(5)
+     void repeatedTest() {
+         // test code
+     }
+     ```
+
+6. **@ExtendWith**
+   - Used to register extensions for the test class or test method.
+   - Example:
+     ```java
+     @ExtendWith(MyExtension.class)
+     class MyTestClass {
+         // test code
+     }
+     ```
+
+### Example Test Class
+
+Here's a simple example demonstrating some of these annotations:
+
+```java
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class MyTest {
+
+    @BeforeAll
+    static void initAll() {
+        System.out.println("Before All");
+    }
+
+    @BeforeEach
+    void init() {
+        System.out.println("Before Each");
+    }
+
+    @Test
+    @DisplayName("Simple Test")
+    void testMethod() {
+        System.out.println("Test");
+        assertEquals(2, 1 + 1);
+    }
+
+    @RepeatedTest(3)
+    void repeatedTest() {
+        System.out.println("Repeated Test");
+        assertEquals(2, 1 + 1);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void parameterizedTest(int number) {
+        System.out.println("Parameterized Test with number: " + number);
+        assertTrue(number > 0);
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("After Each");
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("After All");
+    }
+}
+```
+Mockito
+
+Mockito is a popular open-source Java framework used for unit testing by creating mock objects.
+ It allows developers to simulate the behavior of complex objects and define how they should behave when certain methods are called. 
+This is particularly useful for testing classes that have dependencies on other classes.
+
+Key Features of Mockito
+Creating Mocks: Mockito can create mock objects for interfaces and classes.
+Stubbing Methods: You can define the return value for specific method calls on mock objects.
+Verifying Behavior: Mockito can verify that certain methods were called on the mock objects.
+Argument Capturing: Mockito allows capturing arguments passed to methods on mock objects.
+Annotations: Mockito provides annotations to simplify the creation and management of mocks.
+
+Basic Mockito Annotations
+@Mock: Used to create and inject mock instances.
+@InjectMocks: Used to inject mock objects into the class under test.
+@Captor: Used to create an ArgumentCaptor instance to capture method arguments.
+
+
+Debugging
+-------------
+
+Print Statements (Logging)
+
+Adding System.out.println() statements to print variable values and program flow can help identify issues.
+Use a logging framework (like Log4j or SLF4J) for more sophisticated logging that can be enabled or disabled as needed
+
+
+
+Eclipse
+
+Setting Breakpoints
+---------------------
+Double-click the left margin next to the line number where you want a breakpoint.
+
+Running in Debug Mode
+------------------------
+
+Click the debug icon (a bug) or right-click your class and select "Debug As > Java Application".
+
+Stepping Through Code
+---------------------------
+
+Use the following options to control execution:
+Step Over (F6): Execute the next line, stepping over method calls.
+-----------------------------------------------------------------
+
+What It Does: Executes the current line of code and moves to the next line. If the current line contains a method call, the debugger will execute the entire method and then move to the next line in the current method without entering the called method.
+When to Use: Use Step Over when you are confident that the method call on the current line works correctly or when you are not interested in debugging the internal workings of that method.
+
+Step Into (F5): Enter the method call.
+----------------------------------------
+What It Does: Moves the debugger into the method that is called on the current line. This allows you to see the internal execution of the called method line by line.
+When to Use: Use Step Into when you want to debug the details of a method call to understand its internal behavior or to verify that it is functioning correctly.
+
+
+Step Out (F7): Exit the current method and return to the caller.
+-----------------------------------------------------------------
+What It Does: Executes the remaining lines of the current method and returns to the caller method. The debugger stops at the line in the caller method immediately after the method call.
+When to Use: Use Step Out when you have finished debugging a method and want to quickly return to the caller method to continue debugging there.
+
+
+Resume (F8): Continue execution until the next breakpoint.
+-------------------------------------------------------------
+
+What It Does: The Resume function continues the execution of your program from the current point until it hits the next breakpoint or the program finishes. It effectively lets the program run without interruption, pausing only if another breakpoint is encountered.
+When to Use: Use the Resume function when you have finished debugging the current section of code and want to let the program run normally until the next point of interest (another breakpoint) or until it completes execution.
+Inspecting Variables
+
+Hover over variables or use the "Variables" view to see values.
+
+
+Step Over (F6): Use this to execute the current line and move to the next line in the current method, skipping over any method calls.
+Step Into (F5): Use this to go inside a method call on the current line and debug it line by line.
+Step Out (F7): Use this to complete the execution of the current method and return to the caller method, resuming debugging there.
+This example shows a test class with various JUnit 5 annotations, including a simple test method, a repeated test, and a parameterized test.
+
+Junit5
+
+
+AsertApi
+it is used to validate the test.is current test pass/fail
+expected value is compared with actual result.
+Junit5 has provide class :Assertions()
+which contains all static methods "asert method".
+assertEquals(expected,actual)-- this method is used to compared expected value with actual value
+assertNull(object)-This method is used to specifythat given object is not null it holds some data,else Test fails.
+
+assertNUll(object):given object is null ,else test fail
+assertDoesNotThrow(Executable):
+
