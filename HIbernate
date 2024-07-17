@@ -163,28 +163,66 @@ Immediate Loading: Data is fetched immediately along with the parent entity.
 FetchType.EAGER: Associations are marked with FetchType.EAGER to be eagerly loaded.
 Performance: Can lead to performance issues if too much unnecessary data is loaded, especially in scenarios with complex relationships or large datasets.
 
-Session.Save and session.persist
-=====================================
+Save() & Persist method
+-------------------------
 
-Save 
--------
-Can generate the generated id value as seriazable wrapper object
-Return type is seriazable
+Save ()
+==========
+Returns the identifier (primary key) of the entity as a Serializable type.
+Example: Serializable id = session.save(entity);
+
+Can be used to save both transient and detached entities.
+If the entity is detached, it will be reassociated with the session and its state will be updated in the database.
+
+Generates the identifier immediately and assigns it to the entity before the transaction is committed.
+The identifier is available to the application immediately after the save() method is called.
 Can work with generator to gennerate the value to id/identity property dynamically
 It is direct method of hB f/w
-Cannot give guarantee for this method availability in all ORM f/w
-Signature:
-Public seriazable save(Object obj)
 
-Persist
-----------
-Cannot return id value
-Return type is void
-Cannot work with generator
-It is gathered an implemented by collecting from jpa specification
-Available in multiple ORM f/w
-Signatue :
-Public void persist(Object obj)
+Executes an INSERT statement immediately if the entity doesn't have an identifier assigned.
+
+Persist()
+============
+
+Returns void.
+Example: entityManager.persist(entity);
+
+Can only be used with transient entities.
+Throws an EntityExistsException if you try to persist a detached entity.
+
+The identifier is not generated until the transaction is committed (i.e., at flush time).
+The identifier is not available to the application until after the transaction is committed.
+
+Delays the INSERT statement until the transaction is committed (or the persistence context is flushed).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Transient vs. Detached Entities
+
+
+
+
+Generation of Identifier
+
+
+
+
+
+
+Synchronization with Database
+
 
 SES.GET()&SES.LOAD()
 -================================
