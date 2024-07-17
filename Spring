@@ -194,6 +194,22 @@ It is a spring module providing abstraction on multiple ORM frameworks like hibe
 
 It supplies mutiple templates classes like hibernate template 
 
+How can we disable configuration in spring?
+============================================
+To disable auto-configuration for a specific class or feature in a Spring Boot application, you can use the @EnableAutoConfiguration annotation 
+along with the exclude attribute. This allows you to exclude specific auto- configuration classes from being applied.
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MultipartAutoConfiguration.class}}
+
+public class YourApplication {
+
+public static void main(String[] args) {
+
+SpringApplication.run(YourApplication.class, args);
+
+}
+
+2) also using the spring.autoconfigure.exclude property in the application properties or YML file.
 
 Spring MVC
 =============
@@ -323,6 +339,25 @@ The process of applying or mixups secondary logics with primary logics and gener
 
 Proxy class
 The output /outcome f weaving process done spring Aop enabled framework or software is called proxy class.
+
+the key differences between SOAP and REST:
+=================================================================================
+
+| Aspect                   | SOAP (Simple Object Access Protocol)              | REST (Representational State Transfer)             |
+|--------------------------|---------------------------------------------------|---------------------------------------------------|
+| **Protocol/Architecture**| Protocol                                          | Architectural Style                               |
+| **Communication Style**  | XML-based messaging                               | Standard HTTP methods (GET, POST, PUT, DELETE)    |
+| **Transport**            | Primarily HTTP, also supports SMTP, TCP, etc.     | Primarily HTTP/HTTPS                              |
+| **Message Format**       | Strictly XML with envelope, header, and body      | Flexible formats: JSON, XML, HTML, plain text     |
+| **Statefulness**         | Generally stateful                                | Stateless                                         |
+| **Resource Focus**       | Focus on actions and operations                   | Focus on resources (identified by URIs)           |
+| **Contract**             | Strongly typed, formal contract via WSDL          | No formal contract, URI endpoints and HTTP methods|
+| **Security**             | Built-in WS-Security for end-to-end security      | Relies on HTTPS, OAuth, JWT for security          |
+| **Performance**          | Heavier due to XML and additional overhead        | Lighter, generally faster due to JSON             |
+| **Scalability**          | Complex to scale due to overhead                  | Easier to scale horizontally due to statelessness |
+| **Error Handling**       | Standardized fault elements in message body       | HTTP status codes (e.g., 200, 404, 500)           |
+| **Use Cases**            | Enterprise applications, complex transactions     | Web/mobile applications, microservices            |
+| **Examples**             | Banking services, payment gateways                | Social media platforms, e-commerce websites       |
 
 
 
