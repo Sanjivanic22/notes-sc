@@ -72,7 +72,109 @@ Spring Boot: Designed with microservices in mind, making it easier to create and
 It allows you to specify which set of configurations should be used when the application runs in a specific environment.
 • To make spring work only for certain profile activation we can use @profile annotation along with stearotype annotation for @Bean annotation.
 • From development to release/maintainance the project code/app code has executed in diff env/profiles like dev,test/prod profile.
-	
+In Spring Boot, you can activate a profile in several ways. Here are the common methods to activate a profile:
+
+### 1. Using Application Properties or YAML File
+ 2. Using Command-Line Arguments
+3. Using Environment Variables
+4. Using Programmatically in Code
+6. Using `@ActiveProfiles` in Tests
+5.Using `applicationContextInitializer`
+
+You can specify the active profile in your `application.properties` or `application.yml` file.
+
+#### application.properties:
+```properties
+spring.profiles.active=dev
+```
+
+#### application.yml:
+```yaml
+spring:
+  profiles:
+    active: dev
+```
+
+### 2. Using Command-Line Arguments
+
+You can activate a profile when running your Spring Boot application from the command line.
+
+#### Example:
+```bash
+java -jar myapp.jar --spring.profiles.active=dev
+```
+
+Or, if you are using Maven:
+
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+### 3. Using Environment Variables
+
+You can set an environment variable to specify the active profile.
+
+#### Example:
+```bash
+export SPRING_PROFILES_ACTIVE=dev
+```
+
+### 4. Using Programmatically in Code
+
+You can activate a profile programmatically in your main application class.
+
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        System.setProperty(AbstractEnvironment.ACTIVE_PROFILES_PROPERTY_NAME, "dev");
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+### 5. Using `applicationContextInitializer`
+
+You can also activate a profile using `ApplicationContextInitializer`.
+
+#### Example:
+public class MyApplicationContextInitializer
+        implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+
+    @Override
+    public void initialize(ConfigurableApplicationContext applicationContext) {
+        ConfigurableEnvironment environment = applicationContext.getEnvironment();
+        environment.addActiveProfile("dev");
+    }
+}
+```
+
+Then, register the initializer in your main application class:
+
+@SpringBootApplication
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(MyApplication.class);
+        application.addInitializers(new MyApplicationContextInitializer());
+        application.run(args);
+    }
+}
+```
+
+### 6. Using `@ActiveProfiles` in Tests
+
+You can activate profiles in tests using the `@ActiveProfiles` annotation.
+
+#### Example:
+@SpringBootTest
+@ActiveProfiles("test")
+public class MyApplicationTests {
+    @Test
+    public void contextLoads() {
+    }
+}
+```
+
+
 How to handle the exception in springboot
 =============================================
 
