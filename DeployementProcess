@@ -29,7 +29,9 @@ Deployment in IT involves moving an application or system from development throu
 - **Automation and Orchestration**: Use tools like Jenkins, Ansible, and Kubernetes for automated deployment and management.
 
 ### 6. Post-Deployment
-- **Monitoring and Logging**: Monitor application health and analyze logs for issues.(splunk tool,new relic)
+- **Monitoring and Logging**: Monitor application health and analyze logs for issues.(splunk tool,new relic),
+Logging: Collect and analyze logs using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Splunk to identify and troubleshoot problems.
+
 - **Rollback Plan**: Have a plan to revert changes if needed.
 - **Feedback**: Gather user feedback for continuous improvement.
 
