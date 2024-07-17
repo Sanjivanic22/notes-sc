@@ -1,0 +1,136 @@
+Deployment in IT involves moving an application or system from development through various stages (such as testing and staging) to production
+
+### 1. Development Phase
+- **Code Development**: Developers write and commit code.(git)
+- **Build**: Code is compiled, tested, and packaged.(maven ,gradle)
+
+### 2. Continuous Integration (CI)
+- **Automated Builds and Tests**: CI tools (like Jenkins) automatically build and run unit tests on new code commits.
+
+### 3. Testing Phase
+- **Deploy to Test Environment**: Application is deployed for integration and system testing.
+- **Automated and Manual Testing**: Ensure functionality and catch bugs.
+
+### 4. Staging Phase
+- **Deploy to Staging Environment**: Test the application in an environment similar to production.
+- **User Acceptance Testing (UAT)**: End-users test the application to validate requirements.
+
+### 5. Deployment to Production
+#### Pre-Deployment
+- **Approval and Backup**: Get necessary approvals and back up data.
+
+#### Deployment Strategies
+- **Blue-Green Deployment**: Use two environments; switch traffic to the new version after verification.
+- **Canary Deployment**: Gradually roll out the new version to a small user subset.
+- **Rolling Deployment**: Update a few servers at a time.
+- **Recreate Deployment**: Replace the old version with the new version all at once.
+
+#### Tools
+- **Automation and Orchestration**: Use tools like Jenkins, Ansible, and Kubernetes for automated deployment and management.
+
+### 6. Post-Deployment
+- **Monitoring and Logging**: Monitor application health and analyze logs for issues.(splunk tool,new relic)
+- **Rollback Plan**: Have a plan to revert changes if needed.
+- **Feedback**: Gather user feedback for continuous improvement.
+
+### 7. Documentation and Communication
+- **Document**: Record the deployment process and any issues.
+- **Communicate**: Update stakeholders and team members on deployment status.
+
+In this way .deployement happene from development through various stages (such as testing and staging) to production.
+
+
+
+
+
+
+
+
+
+
+1)Development Phase
+code developemnt (Developers write code and commit changes to a version control system (e.g., Git).)
+Build Process: The application is built using build tools (e.g., Maven, Gradle). 
+This might include compiling code, running unit tests, and packaging the application (e.g., JAR, WAR files).
+
+2)Continuous Integration (CI)
+Automated Builds: CI servers (e.g., Jenkins, Travis CI, GitLab CI) automatically trigger builds upon code commits.
+Unit Tests: Automated tests are run to ensure code changes do not break existing functionality.
+Code Quality Checks: Tools like SonarQube might be used to analyze code quality and enforce coding standards.
+3)Testing Phase
+Deploy to Test Environment: The application is deployed to a test environment where integration tests, system tests, and user acceptance tests (UAT) are conducted.
+
+Automated Tests: Automated integration and functional tests are executed to verify the application's behavior.
+
+Manual Testing: QA teams perform manual testing to find bugs and issues that automated tests might miss.
+4) Staging Phase
+Deploy to Staging Environment: The application is deployed to a staging environment, which closely mirrors the production environment.
+
+End-to-End Testing: Comprehensive testing is done to ensure the application works as expected in an environment similar to production.
+
+User Acceptance Testing (UAT): End-users or stakeholders test the application to ensure it meets their requirements and expectations.
+
+5). Deployment to Production
+6). Post-Deployment
+7). Documentation and Communication
+
+1. Development Phase
+Code Development: Developers write code and commit changes to a version control system (e.g., Git).
+Build Process: The application is built using build tools (e.g., Maven, Gradle). 
+This might include compiling code, running unit tests, and packaging the application (e.g., JAR, WAR files).
+
+2. Continuous Integration (CI)
+Automated Builds: CI servers (e.g., Jenkins, Travis CI, GitLab CI) automatically trigger builds upon code commits.
+Unit Tests: Automated tests are run to ensure code changes do not break existing functionality.
+Code Quality Checks: Tools like SonarQube might be used to analyze code quality and enforce coding standards.
+
+3. Testing Phase
+Deploy to Test Environment: The application is deployed to a test environment where integration tests, system tests, and user acceptance tests (UAT) are conducted.
+
+Automated Tests: Automated integration and functional tests are executed to verify the application's behavior.
+
+Manual Testing: QA teams perform manual testing to find bugs and issues that automated tests might miss.
+
+4. Staging Phase
+
+Deploy to Staging Environment: The application is deployed to a staging environment, which closely mirrors the production environment.
+
+End-to-End Testing: Comprehensive testing is done to ensure the application works as expected in an environment similar to production.
+
+User Acceptance Testing (UAT): End-users or stakeholders test the application to ensure it meets their requirements and expectations.
+
+5. Deployment to Production
+
+a. Pre-Deployment Checks
+Approval: Obtain necessary approvals from stakeholders, QA, and change management teams.
+
+Backup: Backup the existing production environment and databases to prevent data loss.
+
+b. Deployment Strategies
+Blue-Green Deployment: Two identical production environments are used. One (blue) is live, and the other (green) is idle. The new version is deployed to the green environment, and traffic is switched to it once it's verified.
+
+Canary Deployment: The new version is gradually rolled out to a small subset of users. If no issues are detected, the rollout continues to more users.
+Rolling Deployment: The new version is deployed to a few servers at a time until all servers are updated.
+Recreate (Big Bang) Deployment: The old version is stopped, and the new version is deployed across all servers at once. This is riskier and usually avoided for large applications.
+c. Deployment Tools
+
+Deployment Automation: Tools like Jenkins, GitLab CI, Bamboo, and CircleCI automate the deployment process.
+
+Configuration Management: Tools like Ansible, Chef, Puppet, and SaltStack manage configurations and ensure consistency across environments.
+
+Container Orchestration: Docker and Kubernetes manage containerized applications and handle deployment, scaling, and operation of application containers.
+
+6. Post-Deployment
+Monitoring: Monitor the application using tools like Prometheus, Grafana, New Relic, or Datadog to ensure it is running smoothly and to detect any issues.
+
+Logging: Collect and analyze logs using tools like ELK Stack (Elasticsearch, Logstash, Kibana) or Splunk to identify and troubleshoot problems.
+
+Rollback Plan: Have a rollback plan in place to revert to the previous version if critical issues are detected.
+
+Feedback Loop: Gather feedback from end-users and stakeholders to identify any issues or improvements for future releases.
+
+7. Documentation and Communication
+Documentation: Document the deployment process, changes made, and any issues encountered and resolved.
+
+Communication: Communicate the deployment status and any potential impacts to all relevant stakeholders and teams.
+
