@@ -166,7 +166,9 @@ Java optional clause
 It is public final class and used to deal with nullpointerException in java app
 It provides methods which are used to check the presence of values for perticular variable.
 
-Java 8 has introduced a new class Optional in java.util package. It can help in writing a neat code without using too many null checks. By using Optional, we can specify alternate values to return or alternate code to run. This makes the code more readable because the facts which were hidden are now visible to the developer.
+Java 8 has introduced a new class Optional in java.util package. It can help in writing a neat code without using too many null checks.
+By using Optional, we can specify alternate values to return or alternate code to run. 
+This makes the code more readable because the facts which were hidden are now visible to the developer.
 It provides methods which are used to check the presence of value for particular variable.
 public static <T> Optional<T> empty()
 public static <T> Optional<T> ofNullable(T value)
