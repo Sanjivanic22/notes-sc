@@ -290,6 +290,53 @@ public class ComparatorExample {
 }
 
 
+second highest number in list
+package com.nt.main;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class SecondHighestNumber {
+public static void main(String[] args) {
+	List<Integer>list=Arrays.asList(1,2,4,6,8,6);
+	Optional<Integer>secondHighestnumber=list.stream()
+			.distinct()
+			.sorted((a,b)->b-a)
+			.skip(1)
+			.findFirst();
+	if(secondHighestnumber.isPresent()) {
+		System.out.println("The second highest number is"+secondHighestnumber.get());
+		
+	}else {
+		System.out.println("The list dosent have second highest number in list:");
+	}
+}
+}
+
+write pattern 
+1111*
+111**
+11***
+1****
+*****
+
+public static void main(String[] args) {
+	int n = 5; // number of rows
+    
+    for (int i = 1; i <= n; i++) {
+        for (int j = n; j >= 1; j--) {
+            if (j > i) {
+                System.out.print("1");
+            } else {
+                System.out.print("*");
+            }
+        }
+        System.out.println();
+    }
+}
+}
+
 
 
 
