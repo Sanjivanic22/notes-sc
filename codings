@@ -340,6 +340,136 @@ public static void main(String[] args) {
 
 
 
+//*
+//***
+//*****
+//*******
+//*********
+//*******
+//*****
+//***
+//*
+
+public class DiamondPattern {
+	
+	    public static void main(String[] args) {
+	        int n = 5; // number of rows (for half part)
+	        for(int i=1;i<=n;i++) {
+	        	for(int j=i;j<n;j++) {
+	        	System.out.print(" ");	
+	        	}
+	        	for(int k=1;k<=(2*i-1);k++) {
+	        		System.out.print("*");
+	        	}
+	        	System.out.println("");
+	        }
+	        
+	       //lower half
+	        for (int i = n - 1; i >= 1; i--) {
+	            for (int j = n; j > i; j--) {
+	                System.out.print(" ");
+	            }
+	            for (int k = 1; k <= (2 * i - 1); k++) {
+	                System.out.print("*");
+	            }
+	            System.out.println();
+	        }
+	    }
+}
+//*****
+//****
+//***
+//**
+//*
+
+public class InvertedRightAngleTraingl {
+public static void main(String[] args) {
+	
+	        int n = 5; // number of rows
+	        
+	       for(int i=n;i>=1;i--) {
+	    	   for(int j=1;j<=i;j++) {
+	    		   System.out.print("#");
+	    	   }
+	    	   System.out.println("");
+	       }
+	    }
+
+
+
+}
+//*
+//***
+//*****
+//*******
+//*********
+
+
+public class PyramidPatterns {
+	
+	    public static void main(String[] args) {
+	        int n=5;
+	        for(int i=1;i<=n;i++) {
+	        	for(int j=i;j<n;j++) 
+	        	{
+	        	System.out.print("");	
+	        	}
+	        	for(int k=1;k<=(2*i-1);k++) {
+	        		System.out.print("*");
+	        	}
+	        	System.out.println("");
+	        }
+	    }
+}
+
+
+
+//*
+//**
+//***
+//****
+//*****
+
+public class RightAngleTrainglePatterns {
+public static void main(String[] args) {
+	int n=5;
+	for(int i=0;i<=n;i++) {
+		for(int j=1;j<=i;j++) {
+			System.out.print("*");
+		}
+		System.out.println("");
+	}
+ }
+}
+
+//*
+//* *
+//*   *
+//*     *
+//*********
+public class HollowPyramid {
+	
+	    public static void main(String[] args) {
+	        int n = 5; // number of rows
+	        
+	        for (int i = 1; i <= n; i++) {
+	            for (int j = i; j < n; j++) {
+	                System.out.print(" ");
+	            }
+	            for (int k = 1; k <= (2 * i - 1); k++) {
+	                if (k == 1 || k == (2 * i - 1) || i == n) {
+	                    System.out.print("*");
+	                } else {
+	                    System.out.print(" ");
+	                }
+	            }
+	            System.out.println();
+	        }
+	    }
+	}
+
+
+
 
 
 
