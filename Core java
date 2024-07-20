@@ -738,3 +738,189 @@ Java classes aren’t loaded into memory all at once,
 but when required by an application. At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
 
 
+(7) what is the diff b/w  collection and collections
+Definition: Collection is an interface in the Java Collections Framework. It is the root interface of the collection hierarchy.
+
+Definition: Collections is a utility class in the java.util package. It provides static methods that operate on or return collections.
+ 
+8) which annotation you will use to create put end point.
+@Putmapping
+
+(1) Can you explain your authentication & authorization flow in your application."
+
+Authentication Flow
+====================
+User Registration:
+
+Input: User provides registration details (e.g., username, password, email).
+Process: Application validates the input, hashes the password using a secure algorithm (e.g., bcrypt, Argon2), and stores the user details in the database.
+Output: Confirmation of successful registration or error messages if validation fails.
+
+User Login:
+
+Input: User provides login credentials (username and password).
+Process:
+The application retrieves the user details from the database using the provided username.
+The hashed password from the database is compared with the hash of the provided password.
+If the credentials are valid, a session or token (e.g., JWT - JSON Web Token) is generated.
+Output:
+For session-based authentication: A session ID is created and stored on the server, and a session cookie is sent to the client.
+For token-based authentication: A JWT is generated, signed, and sent to the client.
+Token Management:
+
+Access Token: A short-lived token used for authentication and typically includes user identity and claims.
+Refresh Token: A longer-lived token used to obtain a new access token without re-authenticating the user.
+
+
+Authorization Flow
+=======================
+
+User Roles and Permissions:
+
+Roles: Define a set of permissions. For example, roles like Admin, User, and Guest.
+Permissions: Specific actions that a role can perform. For example, read, write, delete, update.
+Access Control:
+
+Input: An authenticated user's request to access a resource.
+Process:
+The application extracts the token from the request headers.
+The token is validated and decoded to extract user identity and roles.
+The requested resource and action are checked against the user's roles and permissions.
+Output: Access is granted or denied based on the user's permissions.
+Example Authentication & Authorization Flow Using JWT
+User Registration:
+
+User submits registration form.
+Application hashes the password and saves user details in the database.
+User Login:
+
+User submits login form.
+Application verifies credentials.
+Application generates a JWT with user details and roles, signs it, and returns it to the client.
+Token Storage:
+
+Client stores the JWT (e.g., in local storage or a secure cookie).
+Protected Resource Request:
+
+Client includes JWT in the Authorization header (e.g., Authorization: Bearer <token>) of the request.
+Server middleware/filters extract and validate the JWT.
+Server decodes the token to extract user identity and roles.
+Server checks if the user has the necessary permissions to access the resource.
+If authorized, the server processes the request and returns the appropriate response.
+Token Refresh:
+
+Client sends refresh token request when the access token is about to expire.
+Server validates the refresh token.
+If valid, server issues a new access token and optionally a new refresh token.
+
+9)diff b/w arraylist and linked list?
+
+10) Hashmap & Hashtable?
+===============================
+Key Differences:
+Thread Safety:
+
+HashMap: Not synchronized and not thread-safe. If multiple threads access a HashMap concurrently, and at least one of the threads modifies it structurally,
+it must be externally synchronized.
+Hashtable: Synchronized and thread-safe. Every method in Hashtable is synchronized, making it safe for use by multiple threads.
+
+Null Keys and Values:
+
+HashMap: Allows one null key and multiple null values.
+Hashtable: Does not allow any null key or null value.
+Performance:
+
+HashMap: Generally faster since it is not synchronized and has less overhead.
+Hashtable: Slower due to synchronization overhead.
+Legacy:
+
+HashMap: Part of the Java Collections Framework and introduced in Java 1.2.
+Hashtable: A legacy class from Java 1.0, retrofitted to implement the Map interface.
+Iterators:
+
+HashMap: The iterators are fail-fast, meaning they will throw a ConcurrentModificationException if the map is structurally modified after the iterator is created.
+Hashtable: The enumerators are not fail-fast.
+Initial Capacity and Load Factor:
+
+HashMap: Provides control over initial capacity and load factor.
+Hashtable: Has default initial capacity of 11 and load factor of 0.75, but does not provide as much flexibility as HashMap.
+
+
+12)How we can convert hashmap to a Synchronized,
+
+To convert a HashMap to a synchronized (thread-safe) version in Java, you can use the Collections.synchronizedMap method. 
+This method returns a synchronized (thread-safe) map backed by the specified map.
+
+13)Is Hashmap maintained the order of dada?
+
+No, HashMap does not maintain the order of data. 
+In a HashMap, the order of the entries is not guaranteed. The entries are stored in a hash table, and their order can change as the HashMap is resized or when entries are added or removed.
+
+
+14)diff bw/ treemap and linkedhashmap map?
+TreeMap
+===========
+
+Ordering:
+
+A TreeMap stores entries in a sorted order based on the natural ordering of its keys or according to a specified comparator.
+The keys are sorted either in ascending order by default or in a custom order defined by a Comparator.
+
+Implementation:
+
+TreeMap is implemented using a Red-Black Tree, a type of self-balancing binary search tree.
+
+Performance:
+
+Operations like put, get, remove, and containsKey have a time complexity of O(log n) due to the underlying tree structure.
+
+Null Keys:
+
+TreeMap does not allow null keys, as null cannot be compared to other keys.
+
+Use Case:
+
+Use TreeMap when you need to maintain keys in a sorted order and when the performance of sorted operations is crucial.
+
+LinkedHashMap
+====================
+
+Ordering:
+
+A LinkedHashMap maintains the order of insertion. This means entries are returned in the order in which they were inserted.
+It also has an option for access-order, which can be used to order entries based on their access time.
+
+Implementation:
+
+LinkedHashMap is implemented using a combination of a hash table and a doubly-linked list. Each entry maintains a reference to the previous and next entry, thus maintaining a doubly-linked list.
+
+Performance:
+
+Operations like put, get, remove, and containsKey have a time complexity of O(1) on average due to the underlying hash table structure.
+
+Null Keys and Values:
+
+LinkedHashMap allows one null key and multiple null values.
+
+Use Case:
+
+Use LinkedHashMap when you need to maintain the order of elements based on their insertion or access order and when fast iteration is required.
+
+
+15) Explain intermediate and termminal operation in stream.
+
+Intermediate Operations
+Intermediate operations transform a stream into another stream. These operations are lazy; they are not executed until a terminal operation is invoked on the stream. 
+Intermediate operations return a new stream, allowing multiple operations to be chained together. Examples include:
+
+filter, map ,sorted, distinct,limit,skip
+
+Terminal operations produce a result or a side effect and mark the end of the stream processing. Once a terminal operation is invoked, the stream is considered consumed and can no longer be used. Examples include:
+forEach,toarray,Reduce collect,count,anymatch,allmatch,noneMatch,findFirst,FindAny.
+
+
+20)what is use of @ transactional annotation
+ It defines the scope of a transaction. By placing @Transactional on a method or a class, you indicate that the method or all methods within the class should be executed within a transaction context.
+
+
+
