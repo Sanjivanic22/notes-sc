@@ -19,6 +19,12 @@ public Integer getCost()
 return cost;  
 }     
 }  
+@SpringBootApplication
+A single @SpringBootApplication annotation is used to enable the following annotations:
+ It auto-configures the bean that is present in the classpath and configures it to run the methods.
+	• @EnableAutoConfiguration: It enables the Spring Boot auto-configuration mechanism.
+	• @ComponentScan: It scans the package where the application is located.
+@Configuration: It allows us to register extra beans in the context or import additional configuration classes.
 
 @Configuration: 
 It is a class-level annotation. The class annotated with @Configuration used by Spring Containers as a source of bean definitions.
@@ -34,7 +40,7 @@ return new Vehicle();
 }  
 }  
 @ComponentScan: 
-It is used when we want to scan a package for beans. It is used with the annotation @Configuration. 
+It scans the package where the application is located.. It is used with the annotation @Configuration. 
 We can also specify the base packages to scan for Spring Components.
 
 Example
