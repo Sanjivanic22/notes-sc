@@ -1,0 +1,388 @@
+Singleton Class, Create the Singleton Class in 2 ways.(direct and thread safe) 
+
+2. Hash Map implementation.
+### Class Overview
+
+public class HashMapImplementation<K, V> {
+    private static final int INITIAL_CAPACITY = 16;
+    private static final float LOAD_FACTOR = 0.75f;
+ 
+    private Node<K, V>[] table;
+    private int size = 0;
+}
+- **`K` and `V`**: These are generic types representing the key (`K`) and value (`V`) in the map.
+- **`INITIAL_CAPACITY`**: This is the initial size of the hash table (array) that stores the entries (key-value pairs). It is set to 16.
+- **`LOAD_FACTOR`**: This determines when the hash table should be resized to avoid collisions. A load factor of 0.75 means that the table will be resized when it is 75% full.
+- **`table`**: This is an array of `Node<K, V>` that stores the entries. It represents the hash table.
+- **`size`**: This keeps track of the number of key-value pairs stored in the map.
+
+### Node Class
+
+static class Node<K, V> {
+    final K key;
+    V value;
+    Node<K, V> next;
+
+    Node(K key, V value, Node<K, V> next) {
+        this.key = key;
+        this.value = value;
+        this.next = next;
+    }
+}
+
+- **`Node<K, V>`**: This is a static inner class that represents each entry in the hash map. Each node contains:
+  - **`key`**: The key for the entry.
+  - **`value`**: The value associated with the key.
+  - **`next`**: A reference to the next node in the chain, which is used to handle collisions (through chaining).
+
+### Constructor
+public HashMapImplementation() {
+    table = new Node[INITIAL_CAPACITY];
+}
+- **Constructor**: Initializes the `table` with an array of `Node` objects, with the initial capacity defined by `INITIAL_CAPACITY` (16 in this case).
+
+### `put` Method
+public void put(K key, V value) {
+    int index = indexFor(key.hashCode(), table.length);
+    Node<K, V> current = table[index];
+    for (Node<K, V> node = current; node != null; node = node.next) {
+        if (node.key.equals(key)) {
+            node.value = value;
+            return;
+        }
+    }
+    table[index] = new Node<>(key, value, current);
+    size++;
+    if (size > table.length * LOAD_FACTOR) {
+        resize(2 * table.length);
+    }
+}
+```
+
+- **`put(K key, V value)`**: This method adds a key-value pair to the map.
+  - **`indexFor(key.hashCode(), table.length)`**: Computes the index in the array where the key-value pair should be stored. The `indexFor` method uses the hash code of the key and the length of the table to compute the index.
+  - **Collision Handling (Chaining)**: If there's already a `Node` at the computed index, the code iterates through the linked list (`for` loop) to check if the key already exists. If it does, the value is updated. If not, a new `Node` is added at the beginning of the list.
+  - **Resize Check**: After adding the new node, the method checks if the size of the map exceeds the `LOAD_FACTOR`. If it does, the table is resized (doubled in capacity) using the `resize` method.
+
+### `get` Method
+
+```java
+public V get(K key) {
+    int index = indexFor(key.hashCode(), table.length);
+    Node<K, V> node = table[index];
+    while (node != null) {
+        if (node.key.equals(key)) {
+            return node.value;
+        }
+        node = node.next;
+    }
+    return null;
+}
+```
+
+- **`get(K key)`**: This method retrieves the value associated with the specified key.
+  - **Index Calculation**: The method calculates the index where the key should be located.
+  - **Search in Linked List**: It then traverses the linked list at that index, checking each node's key. If a match is found, it returns the corresponding value. If no match is found, it returns `null`.
+
+### `indexFor` Method
+
+```java
+private int indexFor(int hashCode, int length) {
+    return hashCode & (length - 1);
+}
+```
+
+- **`indexFor(int hashCode, int length)`**: This method calculates the index in the array for a given hash code. The expression `hashCode & (length - 1)` ensures the index is within the bounds of the array.
+  - **`& (length - 1)`**: This operation works efficiently when `length` is a power of 2, which is why the initial capacity is 16 (a power of 2). This bitwise operation effectively performs a modulo operation but is faster.
+
+### `resize` Method
+
+```java
+private void resize(int newCapacity) {
+    Node<K, V>[] oldTable = table;
+    table = new Node[newCapacity];
+    size = 0;
+    for (Node<K, V> head : oldTable) {
+        while (head != null) {
+            put(head.key, head.value);
+            head = head.next;
+        }
+    }
+}
+```
+
+- **`resize(int newCapacity)`**: This method doubles the size of the table and rehashes all existing entries into the new table.
+  - **Rehashing**: The method iterates through each `Node` in the old table, re-inserting them into the new, larger table. This process is necessary because the indices may change due to the increased table size.
+  - **Resets Size**: The `size` is reset to `0` and incremented during re-insertion to accurately reflect the number of elements in the map after resizing.
+public class Test {
+public static void main(String[] args) {
+	HashMap<String ,Integer> map=new HashMap();
+	map.put("one",1);
+	map.put("Two",2);
+	map.put("three",3);
+	
+	System.out.println("Value for key is:"+map.get("One"));
+	System.out.println("Value for key is:"+map.get("Two"));
+	System.out.println("Value for key is"+map.get("Three"));
+}
+}
+
+ 3. Thread related questions, 
+Synchronized
+===============
+public class SynchronizedDemo {
+public static void main(String[] args)throws InterruptedException {
+	Counter counter=new Counter();
+	
+	//create multiple thread that will increment counter
+	Thread thread1=new Thread(()->incrementCounter(counter));
+	Thread thread2=new Thread(()->incrementCounter(counter));
+	Thread thread3=new Thread(()->incrementCounter(counter));
+	
+	//start thread
+	thread1.start();
+	thread2.start();
+	thread3.start();
+	
+	//wait for all thread to finish
+	try {
+		thread1.join();
+		thread2.join();
+		thread3.join();
+		
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	System.out.println("final count:"+counter.getCount());
+}
+
+private static Object incrementCounter(Counter counter) {
+	//use Instream to replace loop
+	
+	IntStream.range(0, 1000).forEach(i->counter.increament());
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+}
+Life Cycles, States.
+class MyThread extends Thread {
+	@Override
+	public void run() {
+	try {
+		//simulate somework with sleep(timing waiting state)
+		System.out.println(Thread.currentThread().getName()+"is in time waiting state");
+		Thread.sleep(2000);
+		//simulate a synchromized block (blocked state if another waiting thread is holing the lock)
+		synchronized (this) {
+			System.out.println(Thread.currentThread().getName()+"is in Runnble state");
+		//wait idefinitely(waiting state)
+			synchronized (this) {
+			System.out.println(Thread.currentThread().getName()+"is in waiting state");
+			wait();
+			}
+		}
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	}
+}
+public class ThreadLifeCycleDemo {
+	 public static void main(String[] args) throws InterruptedException {
+	        MyThread thread = new MyThread();
+	        //new state
+	        System.out.println(thread.getName()+"is in new state");
+	        //start the thread(Runnable state)
+	        thread.start();
+	        System.out.println(thread.getName()+"is in Runnable state");
+	        //insure thread moves to timed  waiting state
+	        Thread.sleep(500);
+//synchromize on the thread to simulate blocked state
+	        synchronized (thread) {
+				//notify the thread to move it out of waiting state
+			thread.notify();
+	        
+	        	 }
+	       //wait for the thread to finish(terminated state) 
+	    thread.join();
+	    System.out.println(thread.getName()+"is in terminated state");
+	 }
+	}
+ 4. ways of creating the thread, which do you prefer and why ? 
+5. Wait vs Sleep
+public class SleepExample {
+
+	public static void main(String[] args) {
+		Thread thread=new Thread(()->{
+			System.out.println("Thread going to sleep");
+			try {
+				Thread.sleep(3000);
+			}
+			catch(InterruptedException e) {
+				e.printStackTrace();
+				
+			}
+			System.out.println("Thread wake up after sleeping");
+		});
+		thread.start();
+	}
+
+}
+
+public class WaitNotify {
+
+	public static final Object lock=new Object();
+	public static void main(String[] args) throws InterruptedException {
+		Thread thread1=new Thread(()->{
+			
+			synchronized (lock) {
+				try {
+					System.out.println("THread 1:waiting for notification");
+					lock.wait();
+					System.out.println("thread 2 got notification");
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}); 
+		
+		Thread thread2=new Thread(()->{
+		synchronized(lock) {
+			System.out.println("Thread 1: waiting for notification");
+			lock.notify();
+			System.out.println("Thread 2 :notification sent");
+		}	
+		});
+	thread1.start();
+	Thread.sleep(1000);
+	thread2.start();
+}
+}
+
+ 6. Serialization. 
+=========================
+
+public class Person {
+private static final long serialVersionUID=1L;
+private String name;
+private int age;
+private transient String  password;
+public Person(String name, int age,String password) {
+	super();
+	this.name = name;
+	this.age = age;
+	this.password=password;
+}
+@Override
+public String toString() {
+	return "Person [name=" + name + ", age=" + age + "]";
+}
+
+
+}
+
+public class SerializationDemo {
+
+	public static void main(String[] args) {
+		Person person=new Person("John Doe",30,"mySecretPassword");
+		try(FileOutputStream fileOut=new FileOutputStream("C:\\Users\\SCHATTEK\\Desktop\\New folder\\Sanj.txt"); 
+			ObjectOutputStream out=new ObjectOutputStream(fileOut)){
+			out.writeObject(person);
+			System.out.println("Serialize data is saved in Desktop");
+		
+		} catch (IOException i) {
+			i.printStackTrace();
+		}
+	}
+
+}
+
+public class DeserializeDemo {
+
+	public static void main(String[] args) {
+		Person person=null;
+		try(FileInputStream fileIn=new FileInputStream("C:\\Users\\SCHATTEK\\Desktop\\New folder\\Sanj.txt");
+		ObjectInputStream in=new ObjectInputStream(fileIn))
+		{
+					person =(Person)in.readObject();
+					System.out.println("Deseriliazed person"+person);
+		}catch (IOException |ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+				}
+	}
+
+
+
+7. Comparable vs Comparator 
+comparable
+package com.nt.compare;
+
+public class Person implements Comparable<Person>{
+String name;
+private int age;
+
+	public Person(String name, int age) {
+	super();
+	this.name = name;
+	this.age = age;
+}
+
+	@Override
+	public int compareTo(Person o) {
+	return Integer.compare(this.age, o.age);
+		
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return name+" "+age;
+	}
+	
+
+}
+
+public class Main {
+public static void main(String[] args) {
+	List<Person> people=new ArrayList<>();
+	people.add(new Person("Sanju",27));
+	people.add(new Person("Kunal",23));
+	people.add(new Person("Nikhil",27));
+	
+	//Collections.sort(people);//ordering by age
+	Collections.sort(people,new NameComparator());
+	System.out.println(people);
+}
+}
+
+Compaartor
+===============
+public class NameComparator implements Comparator<Person>{
+
+	@Override
+	public int compare(Person o1, Person o2) {
+		return o1.name.compareTo(o2.getName());
+	
+	}
+
+}
+
+8. Rest API, Service, Annotation, Repository, JPA, Junit
+
