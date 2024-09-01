@@ -502,5 +502,56 @@ public class NameComparator implements Comparator<Person>{
 
 }
 
-8. Rest API, Service, Annotation, Repository, JPA, Junit
+8. Rest API
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+}
+
+, Service, Annotation, Repository, JPA, Junit
+package com.example.hitcounter;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.concurrent.atomic.AtomicInteger;
+
+@RestController
+public class HitCounterController {
+
+    // AtomicInteger is used to handle concurrency and ensure thread-safety.
+    private final AtomicInteger counter = new AtomicInteger(0);
+
+    // Define a GET endpoint at "/hit"
+    @GetMapping("/hit")
+    public String hit() {
+        // Increment the counter and return the current count
+        int currentCount = counter.incrementAndGet();
+        return "API hit count: " + currentCount;
+    }
+}
+
+without using AtomicIntegere
+----------------------------------
+package com.example.hitcounter;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HitCounterController {
+
+    // Simple integer counter
+    private int counter = 0;
+
+    // Synchronized method to handle thread safety
+    @GetMapping("/hit")
+    public synchronized String hit() {
+        counter++;
+        return "API hit count: " + counter;
+    }
+}
 
