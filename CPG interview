@@ -555,3 +555,240 @@ public class HitCounterController {
     }
 }
 
+SQL
+-------
+Index
+An index in SQL is a database object that improves the speed of data retrieval operations on a table by providing quick access to rows.
+Indexes are especially useful for columns that are frequently searched, filtered, or sorted. However, indexes come with some trade-offs,
+such as increased storage space and slower write operations (inserts, updates, deletes) due to the need to update the index.
+
+1. Types of Indexes
+	• Single-Column Index: An index on a single column of a table.
+	• Composite Index (Multi-Column Index): An index on two or more columns of a table.
+	• Unique Index: Ensures that the values in the indexed column(s) are unique.
+	• Full-Text Index: Used for full-text searches in columns containing large text data.
+	• Clustered Index: Determines the physical order of data in the table (usually the primary key).
+	• Non-Clustered Index: A separate structure that points to the data in the table.
+
+2. Creating an Index
+Single-Column Index
+---------------------
+CREATE INDEX idx_column_name
+ON table_name(column_name);
+Example: If you have a customers table and frequently search by the last_name column:
+
+CREATE INDEX idx_last_name
+ON customers(last_name);
+
+Composite Index (Multi-Column Index)
+------------------------------------
+CREATE INDEX idx_column1_column2
+ON table_name(column1, column2);
+Example: If you often query by both last_name and first_name:
+
+CREATE INDEX idx_last_name_first_name
+ON customers(last_name, first_name
+
+Unique Index
+-------------------
+A unique index ensures that no two rows have the same value in the indexed column(s).
+CREATE UNIQUE INDEX idx_unique_column_name
+ON table_name(column_name);
+Example: If the email column in the customers table should be unique:
+
+CREATE UNIQUE INDEX idx_unique_email
+ON customers(email);
+
+Full-Text Index
+--------------------
+Full-text indexes are used for full-text searches and are typically used on large text columns.
+
+CREATE FULLTEXT INDEX idx_fulltext_column_name
+ON table_name(column_name);
+Example: If you have a products table with a description column, and you want to search through descriptions:
+
+CREATE FULLTEXT INDEX idx_fulltext_description
+ON products(description);
+
+3. Dropping an Index
+------------------------
+To remove an index when it's no longer needed:
+
+DROP INDEX idx_name ON table_name;
+Example:
+DROP INDEX idx_last_name ON customers;
+
+clustered index
+----------------------
+A clustered index is a type of index in a database that directly affects the physical order of data in the table. In a table with a clustered index, 
+the rows are stored in the same order as the index. This means that there can be only one clustered index per table because there can be only one physical 
+order of the data.
+
+Key Concepts of Clustered Index
+	1. Physical Order: The rows in the table are stored on disk in the same order as the clustered index. This can make data retrieval very fast,
+especially for range queries.
+	2. Primary Key: In many databases, the primary key is automatically a clustered index by default. This is because primary keys are often used in 
+queries, and having them as clustered indexes speeds up these operations.
+	3. One Per Table: Since the clustered index defines the physical order of the table, you can only have one clustered index per table.
+	4. Improved Performance: Clustered indexes are especially efficient for queries that return a range of values, as the data is physically stored 
+in the order of the index.
+
+Creating a Clustered Index
+To create a clustered index, you specify the CLUSTERED keyword when creating the index. 
+
+Advantages of Clustered Indexes
+	1. Faster Data Retrieval: Because the rows are stored in order, clustered indexes significantly improve the performance of queries that retrieve a range of data or sort data by the index column(s).
+	2. Efficient for Range Queries: Queries like SELECT * FROM table WHERE column BETWEEN x AND y are much faster with a clustered index.
+	3. Primary Key as Clustered Index: Having the primary key as the clustered index makes it faster to retrieve rows based on their primary key.
+
+Disadvantages of Clustered Indexes
+	1. Slower Insert/Update/Delete: Since the physical order of the rows must be maintained, operations that change the data can be slower.
+	2. Disk Space: Clustered indexes can lead to more fragmentation and may require additional storage.
+	3. Only One Per Table: Since a table can only have one clustered index, careful consideration is needed when choosing the column(s) to index.
+When to Use a Clustered Index
+	• Primary Key: Most tables should have their primary key as the clustered index.
+	• Frequent Range Queries: If your queries often retrieve a range of values (e.g., dates), a clustered index on the relevant column is beneficial.
+	• Sorting Requirements: If you frequently need to sort the data by a specific column, a clustered index on that column can improve performance.
+	
+Example Scenario: Optimizing a Table with Clustered Index
+Consider a transactions table with columns transaction_id, user_id, transaction_date, and amount. If most of your queries filter by transaction_date,
+creating a clustered index on this column can improve performance:
+
+How can remove defualt clustured index on primarykey  in any database	
+---------------------------------------------------------------------------------------------------
+o remove the clustered index on the primary key in a database system where the primary key is automatically created as a clustered index (such as SQL Server), you'll typically need to:
+	1. Drop the primary key constraint.
+	2. Recreate the primary key as a non-clustered index.
+	3. Optionally, create a clustered index on a different column or columns if needed.
+	
+	• Dropping and Recreating the Primary Key: You drop the primary key to remove the automatic clustered index and then recreate it as a non-clustered index.
+	• Optional Clustered Index: You can create a clustered index on a different column if needed, but this is optional.
+
+non-clustered
+	
+A non-clustered index in a database is a type of index that maintains a separate structure from the table data. While a clustered index determines the physical order of data in the table (i.e., the data is stored in the same order as the index), a non-clustered index creates a logical ordering of data that is different from the physical order of rows.
+
+Characteristics of a Non-Clustered Index:
+Separate Structure: A non-clustered index has a separate structure from the actual table data. It contains pointers or references to the physical data rows rather than the data itself.
+Multiple Non-Clustered Indexes: You can have multiple non-clustered indexes on a table, unlike the clustered index, where there can only be one per table.
+Logical Ordering: The data is stored in one place, and the index is stored in another. The index will point to the location of the data rows, allowing for efficient lookups.
+Structure of a Non-Clustered Index:
+Index Key: The columns that are part of the non-clustered index are known as the index key.
+Row Locator: In a non-clustered index, each entry includes a pointer to the actual data row. This pointer could be a row identifier (RID) in a heap or a clustered index key if the table has a clustered index.
+Creating a Non-Clustered Index
+In SQL, you can create a non-clustered index using the CREATE INDEX statement. Here's how you can do it in Oracle Database:
+
+CREATE INDEX index_name 
+ON table_name (column_name);
+Example:
+Let's say you have a table Employees with the following structure:
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    DepartmentID INT
+);
+You might want to create a non-clustered index on the LastName column to speed up queries that filter or sort by LastName.
+
+CREATE INDEX idx_lastname 
+ON Employees (LastName);
+How Non-Clustered Index Works:
+When you execute a query that filters data based on the LastName column:
+
+
+SELECT * 
+FROM Employees 
+WHERE LastName = 'Smith';
+The database engine uses the non-clustered index idx_lastname to quickly find all records where LastName = 'Smith'. The index provides a list of pointers to the rows in the actual table data. 
+The engine then retrieves the corresponding rows from the table using these pointers.
+
+Advantages of Non-Clustered Indexes:
+Improves Query Performance: Non-clustered indexes can significantly improve the performance of queries, especially those that involve searching, sorting, or filtering.
+Multiple Indexes: Since you can create multiple non-clustered indexes on a table, you can optimize queries for different columns.
+Flexibility: Non-clustered indexes can be created on columns that are not part of the primary key, providing flexibility in optimizing queries based on different needs.
+
+Disadvantages of Non-Clustered Indexes:
+Additional Storage: Non-clustered indexes require additional storage since they are separate from the actual table data.
+Maintenance Overhead: Indexes need to be maintained, which can introduce overhead during insert, update, and delete operations.
+
+
+stored procedure
+---------------------
+A stored procedure is a set of SQL statements that can be stored in the database and executed as a unit. Stored procedures are typically used to 
+encapsulate logic that can be reused across multiple applications or queries, improving performance and reducing redundancy.
+
+Key Features of Stored Procedures:
+Precompiled Execution: Stored procedures are compiled once and then stored in the database, allowing for faster execution compared to ad-hoc queries.
+Modular Programming: Stored procedures allow developers to break down complex logic into manageable, reusable components.
+Security: Access to data can be controlled by granting permission to execute the procedure without granting direct access to the underlying tables.
+Reduced Network Traffic: Since the logic is executed on the server, the amount of data sent over the network can be reduced.
+Structure of a Stored Procedure:
+A stored procedure typically includes the following components:
+
+Procedure Name: The name used to call the procedure.
+Parameters: Input, output, and input/output parameters can be passed to and from the procedure.
+SQL Statements: The body of the procedure, which can include queries, control-of-flow statements, and more.
+Syntax for Creating a Stored Procedure in SQL:
+Here is the general syntax for creating a stored procedure in an SQL database like Oracle:
+
+CREATE [OR REPLACE] PROCEDURE procedure_name 
+  [ (parameter_1 [IN | OUT | IN OUT] datatype, 
+     parameter_2 [IN | OUT | IN OUT] datatype, 
+     ...
+   ) ]
+AS
+BEGIN
+  -- SQL statements
+END;
+Example of a Stored Procedure:
+Let's consider a stored procedure in Oracle that retrieves the total salary of all employees in a specific department.
+
+CREATE OR REPLACE PROCEDURE GetTotalSalaryByDept (
+    p_dept_id IN Employees.DepartmentID%TYPE,
+    p_total_salary OUT NUMBER
+) 
+AS
+BEGIN
+    SELECT SUM(Salary)
+    INTO p_total_salary
+    FROM Employees
+    WHERE DepartmentID = p_dept_id;
+END;
+
+Explanation:
+GetTotalSalaryByDept: The name of the stored procedure.
+p_dept_id: An input parameter that takes the department ID for which we want to calculate the total salary.
+p_total_salary: An output parameter that will store the calculated total salary.
+How to Execute a Stored Procedure:
+You can execute a stored procedure using the EXEC or CALL statement.
+
+DECLARE
+  v_total_salary NUMBER;
+BEGIN
+  GetTotalSalaryByDept(10, v_total_salary);
+  DBMS_OUTPUT.PUT_LINE('Total Salary: ' || v_total_salary);
+END;
+
+
+Explanation:
+The procedure GetTotalSalaryByDept is called with 10 as the department ID.
+The total salary for department 10 is returned in the v_total_salary variable.
+
+
+Benefits of Using Stored Procedures:
+Performance: Since they are precompiled, stored procedures can execute faster than dynamic SQL queries.
+Reusability: Stored procedures can be reused across different applications, promoting code reuse.
+Maintainability: Centralizing business logic in stored procedures makes it easier to update and maintain.
+Security: Stored procedures can encapsulate sensitive business logic and limit direct access to the underlying tables.
+Conclusion:
+Stored procedures are a powerful tool for encapsulating and reusing complex logic within a database. They offer performance benefits, improve code 
+maintainability, and can enhance security by controlling access to data. Using stored procedures, developers can create modular, reusable components that
+can be invoked from different parts of an application, making database management more efficient.
+Joins
+
+
+normalization
+triggers
+
+
