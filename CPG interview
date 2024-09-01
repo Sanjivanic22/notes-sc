@@ -786,9 +786,228 @@ Stored procedures are a powerful tool for encapsulating and reusing complex logi
 maintainability, and can enhance security by controlling access to data. Using stored procedures, developers can create modular, reusable components that
 can be invoked from different parts of an application, making database management more efficient.
 Joins
+SQL JOINS
+=================
+SQL joins are used to combine rows from two or more tables based on a related column between them. Types of Joins
+INNER JOIN
+===========
+An INNER JOIN returns rows that have matching values in both tables. It only includes rows where the join condition is true.
+If no matching rows are found when performing an INNER JOIN, the query will return an empty result set. This means that none of the rows from either of the tables meet the join condition specified in the ON clause.
 
+SELECT employees.name, departments.department_name
+FROM employees
+INNER JOIN departments ON employees.department_id = departments.department_id;
+
+LEFT JOIN (LEFT OUTER JOIN)
+============================
+
+A LEFT JOIN returns all rows from the left table and the matched rows from the right table. If there is no match, the result is NULL on the side of the right table.
+
+SELECT employees.name, departments.department_name
+FROM employees
+LEFT JOIN departments ON employees.department_id = departments.department_id;
+
+RIGHT JOIN (RIGHT OUTER JOIN)
+===============================
+A RIGHT JOIN returns all rows from the right table and the matched rows from the left table. If there is no match, the result is NULL on the side of the left table.
+SELECT employees.name, departments.department_name
+FROM employees
+RIGHT JOIN departments ON employees.department_id = departments.department_id;
+
+FULL JOIN (FULL OUTER JOIN)
+=================================
+A FULL JOIN returns all rows when there is a match in either the left or right table. If there is no match, the result is NULL for missing matches on either side.
+SELECT employees.name, departments.department_name
+FROM employees
+FULL JOIN departments ON employees.department_id = departments.department_id;
+
+A CROSS JOIN 
+====================
+returns the Cartesian product of the two tables, meaning it combines all rows from the left table with all rows from the right table. It does not require any condition.
+
+Example
+sql
+Copy code
+SELECT employees.name, departments.department_name
+FROM employees
+CROSS JOIN departments;
+
+SELF JOIN
+A SELF JOIN is a regular join but the table is joined with itself. It is useful for comparing rows within the same table.
+
+Example
+sql
+Copy code
+SELECT a.name AS Employee1, b.name AS Employee2
+FROM employees a, employees b
+WHERE a.manager_id = b.employee_id;
+
+
+SQL constraints are used to specify rules for data in a table.
+=================================================================
+
+SQL constraints are used to specify rules for the data in a table.
+Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+
+
+• NOT NULL - Ensures that a column cannot have a NULL value
+• 
+
+create table person(
+  2  ID int not null,
+  3  firstname char(20) not null,
+  4  lastname char(20) not null,
+  5  age int);
+
+• UNIQUE - Ensures that all values in a column are different
+The UNIQUE constraint ensures that all values in a column are different.
+Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+
+A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+However, you can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+ create table person(
+  2  ID int not null unique,
+  3  lastname char(20) not null,
+  4  firstname char(20),
+  5  age int);
+
+alter table persons
+  2  add unique(ID);
+
+
+• PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Uniquely
+•  identifies each row in a table
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+
+Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+CREATE TABLE Persons (
+    ID int NOT NULL PRIMARY KEY,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int
+);
+create table persons(
+  2  ID int not null,
+  3  lastname varchar(255) not null,
+  4  firstname varchar(255),
+  5  age int,
+  6  constraint PK_persons primary key(ID,lastname));
+
+
+• FOREIGN KEY - Prevents actions that would destroy links between tables
+SQL FOREIGN KEY Constraint
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables.
+
+A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+
+The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+CREATE TABLE Orders (
+    OrderID int NOT NULL PRIMARY KEY,
+    OrderNumber int NOT NULL,
+    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+);
+
+
+• CHECK - Ensures that the values in a column satisfies a specific condition
+SQL CHECK Constraint
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+create table person(
+  2  ID int not null,
+  3  firstname varchar(255),
+  4  lastname varchar(255) not null,
+  5  age int check (age>=18)
+  6  );
+
+• DEFAULT - Sets a default value for a column if no value is specified
+The DEFAULT constraint is used to set a default value for a column.
+
+The default value will be added to all new records, if no other value is specified.
 
 normalization
-triggers
+Normalization is carried out in a series of steps, each referred to as a normal form (NF). Each subsequent normal form builds upon the previous one, addressing specific issues in the database design. Here are the commonly used normal forms:
 
+1. First Normal Form (1NF):
+Objective: Ensure that each column in a table contains atomic (indivisible) values, and each column contains only one value per row.
+
+Characteristics:
+
+No repeating groups or arrays in a single column.
+Each record is unique and identifiable by a primary key.
+Example:
+Consider a table where each record stores multiple phone numbers in a single field:
+
+EmployeeID	Name	PhoneNumbers
+1	John	123-4567, 987-6543
+To bring this table into 1NF, you should create separate records for each phone number:
+
+EmployeeID	Name	PhoneNumber
+1	John	123-4567
+1	John	987-6543
+2. Second Normal Form (2NF):
+Objective: Ensure that each non-key column is fully functionally dependent on the entire primary key.
+
+Characteristics:
+
+The table must first meet the criteria for 1NF.
+No partial dependencies, meaning non-key attributes should not depend on a part of a composite primary key (if it exists).
+Example:
+Consider a table with a composite primary key:
+
+CourseID	StudentID	Instructor	CourseName
+1	101	Smith	Math
+1	102	Smith	Math
+Here, Instructor depends only on CourseID, not on the entire composite key (CourseID, StudentID). To normalize to 2NF, split the table:
+
+Course Table: | CourseID | Instructor | CourseName | |----------|------------|------------| | 1 | Smith | Math |
+Enrollment Table: | CourseID | StudentID | |----------|-----------| | 1 | 101 | | 1 | 102 |
+3. Third Normal Form (3NF):
+Objective: Eliminate transitive dependencies, where non-key columns depend on other non-key columns.
+
+Characteristics:
+
+The table must first meet the criteria for 2NF.
+No transitive dependency, meaning non-key attributes should not depend on other non-key attributes.
+Example:
+Consider the following table:
+
+EmployeeID	EmployeeName	Department	DepartmentLocation
+1	John	Sales	Building A
+Here, DepartmentLocation depends on Department, not directly on EmployeeID. To normalize to 3NF, split the table:
+
+Employee Table: | EmployeeID | EmployeeName | Department | |------------|--------------|------------| | 1 | John | Sales |
+Department Table: | Department | DepartmentLocation | |------------|---------------------| | Sales | Building A |
+Higher Normal Forms:
+Beyond 3NF, there are additional normal forms like Boyce-Codd Normal Form (BCNF), Fourth Normal Form (4NF), and Fifth Normal Form (5NF), which handle even more specific cases of redundancy and dependency.
+
+BCNF: A stronger version of 3NF, where every determinant must be a candidate key.
+4NF: Addresses multi-valued dependencies, ensuring that no record contains more than one independent multi-valued fact about an entity.
+5NF: Deals with cases where information can be reconstructed from smaller pieces of data without loss of information.
+
+Advantages of Normalization:
+Reduced Data Redundancy: By eliminating redundant data, storage space is conserved, and the risk of inconsistent data is minimized.
+Improved Data Integrity: With well-structured tables, maintaining accurate and consistent data becomes easier.
+Efficient Data Updates: Insert, update, and delete operations become more efficient, as data changes need to be made in fewer places.
+
+Disadvantages of Normalization:
+Complex Queries: Highly normalized databases might require more complex joins, potentially leading to slower query performance.
+Overhead in Design: Normalization requires careful planning and understanding of the data, which can be time-consuming.
+
+Denormalization:
+Sometimes, for performance reasons, a database might be partially denormalized, meaning some redundancy is reintroduced to optimize query performance. Denormalization is typically done in cases where query performance is more critical than data storage efficiency.
+
+triggers
+==========
+Triggers are a type of stored procedure in a database that automatically execute or "trigger" in response to certain events on a particular table or view.
+Triggers are used to enforce business rules, validate data, or maintain audit trails by executing predefined actions automatically when specific 
+conditions are met.
 
