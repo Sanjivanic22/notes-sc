@@ -726,6 +726,13 @@ The main objective of wrapper classes are
 1)to wrap primitive into object form so that we can handle primitive just like object
 To define several utility methods for premitives
 
+Creating Wrapper Objects:
+
+Integer integerObject = new Integer(10); // Deprecated in Java 9, use valueOf instead
+Integer integerObject = Integer.valueOf(10); // Preferred way
+Boolean booleanObject = Boolean.valueOf(true);
+Character characterObject = Character.valueOf('a');
+
 Auto boxing 
 ==============
 Automatic conversion of primitive value to the wrapper object by compiler is called Autoboxing
