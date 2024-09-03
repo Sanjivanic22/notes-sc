@@ -33,16 +33,15 @@ Java is Pass by Value or call by referance?
 Java is strictly "pass-by-value." When passing primitives, the actual value is copied. 
 When passing objects, the reference to the object is copied (not the object itself), 
 meaning the method gets a copy of the reference pointing to the same object. 
-Thus, while the term "pass-by-value" might initially be confusing when dealing with objects, it accurately describes how Java handles parameter passing.
-
 Key Points
 Primitive Types: Passing a primitive type to a method results in passing a copy of the value. Changes to the parameter do not affect the original variable.
-Object References: Passing an object to a method results in passing a copy of the reference. Changes to the object's state via the parameter reference affect the original object.
-
+Object References: Passing an object to a method results in passing a copy of the reference. Changes to the object's state via the parameter reference 
+affect the original object.
 
 Java Architecture
 ===================
-Java Architecture is a collection of components, i.e., JVM, JRE, and JDK. It integrates the process of interpretation and compilation. It defines all the processes involved in creating a Java program
+Java Architecture is a collection of components, i.e., JVM, JRE, and JDK. It integrates the process of interpretation and compilation. 
+It defines all the processes involved in creating a Java program.
 Java Architecture can be explained by using the following steps:
 	• There is a process of compilation and interpretation in Java.
 	• Java compiler converts the Java code into byte code.
@@ -58,8 +57,7 @@ It also includes development tools like the Java compiler (javac), debugger, pro
 Developers use the JDK to write, compile, and test Java code.
 
 JRE (Java Runtime Environment):
-
-The JRE is a subset of the JDK.
+he JRE is a subset of the JDK.
 It provides the runtime environment necessary to run compiled Java applications.
 The JRE includes the Java Virtual Machine (JVM) and the runtime libraries required for executing Java applications.
 End-users who only need to run Java applications use the JRE.
@@ -70,7 +68,7 @@ The JVM is a virtual machine that executes Java bytecode.
 It's responsible for loading Java classes, verifying them, and executing them.
 The JVM abstracts the underlying hardware and operating system, allowing Java applications to be platform-independent.
 It manages memory, performs garbage collection, and provides support for features like multithreading and exception handling.
-Multiple implementations of the JVM exist for different platforms.
+
 
 OOP(Object oriented programming)
 =====================================
@@ -87,18 +85,18 @@ Collection of objects is called class. It is a logical entity.
 
 A class can also be defined as a blueprint from which you can create an individual object. Class doesn't consume any space.
 
+
 Is_A relation(Inheritance)
 ============================
+Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
 When one object acquires all the properties and behaviors of a parent object, it is known as inheritance. 
 It provides code reusability. It is used to achieve runtime polymorphism
  .
  When you inherit from an existing class, you can reuse methods and fields of the parent class.
-Moreover, you can add new methods and fields in your current class also.
-Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
+
 • By using extends keyword  we can implements is-a relationship
 • For r Method Overriding (so runtime polymorphism can be achieved).
-• For Code Reusability.
-• We use the inheritance.
+
  there can be three types of inheritance in java:
 single inheritance
 -----------------
@@ -109,14 +107,13 @@ hierarchical.
 -------------------
 When two or more classes inherits a single class, it is known as hierarchical inheritance.
 
-
 multiple and hybrid inheritance is supported through interface only.
+
 why multiple inheritance is supported by the java
+----------------------------------------------------------
 To reduce the complexity and simplify the language, multiple inheritance is not supported in java.
-Consider a scenario where A, B, and C are three classes. The C class inherits A and B classes. If A and B classes have the same method and you call it from child class object, there will be ambiguity to call the method of A or B class.
-
-Since compile-time errors are better than runtime errors, Java renders compile-time error if you inherit 2 classes. So whether you have same method or different, there will be compile time error.
-
+Consider a scenario where A, B, and C are three classes. The C class inherits A and B classes. 
+If A and B classes have the same method and you call it from child class object, there will be ambiguity to call the method of A or B class.
 
 Has_A relationship
 ==================
@@ -145,21 +142,62 @@ This relationship is called  weakassociation which is nothibng but aggregation.
 Ex.several profecers will work in th department
 Wherver we are closing the department still there may be a chance of existing professors.this relationship b/w department is nothing but aggegation..
 
-
 Composition is stronger tha aggregation,in short ,a relationship b/w two object is refered as associtaion ,nd an association is known as composition when object owns another
  while association is known as agrregation wen object uses another object.
 
 POLymorphism
+===================
 Polymorphism in Java is a concept by which we can perform a single action in different ways.
-Polymorphism is derived from 2 Greek words: poly and morphs. The word "poly" means many and "morphs" means forms. So polymorphism means many forms.
+ So polymorphism means many forms.
 There are two types of polymorphism in Java: 
 compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
 Overloading
 ===============
 Two methods are said to be overloaded if method names are same but argument as different is called oveloading
+public class Calculator {
+    // Overloaded method to add two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Overloaded method to add three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Overloaded method to add two double values
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+
 Overriding
 ==============
 If methdo names and arhuments must be matched  i.e method signature must be matched is called overriding.
+class Animal {
+    // Method to be overridden
+    public void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    // Overriding the sound method
+    @Override
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal();  // Animal reference, Animal object
+        Animal myDog = new Dog();        // Animal reference, Dog object
+
+        myAnimal.sound();  // Calls Animal's sound method
+        myDog.sound();     // Calls Dog's sound method (overridden method)
+    }
+}
 
 
 Abstraction
@@ -171,66 +209,79 @@ Abstraction is a process of hiding the implementation details and showing only f
 There are two ways to achieve abstraction in java
 Abstract class (0 to 100%)
 Interface (100%)
+Diff b/w abstrcat class and interface
+======================================
+In Java, both abstract classes and interfaces are used to define abstract types that specify what a class must do, but not how it does it.
+However, they serve different purposes and have distinct characteristics.
 
-Abstract class in Java
-A class which is declared as abstract is known as an abstract class. 
-It can have abstract and non-abstract methods. It needs to be extended and its method implemented. It cannot be instantiated.
+1. Purpose
+Abstract Class: Used to represent a base class that other classes can inherit from. It can provide some default behavior (implemented methods) while leaving 
+some methods abstract for subclasses to implement.
+Interface: Used to represent a contract that a class must adhere to. It’s purely about defining the behavior that implementing classes must provide,
+without providing any implementation (until Java 8 introduced default methods).
+2. Syntax
+Abstract Class: Declared with the abstract keyword. It can have both abstract methods (without implementation) and concrete methods (with implementation).
 
-Points to Remember
-An abstract class must be declared with an abstract keyword.
-It can have abstract and non-abstract methods.
-It cannot be instantiated.
-It can have constructors and static methods also.
-It can have final methods which will force the subclass not to change the body of the method.
+abstract class Animal {
+    abstract void sound(); // Abstract method
+    void eat() { // Concrete method
+        System.out.println("This animal eats");
+    }
+}
+Interface: Declared with the interface keyword. It can have abstract methods , default methods (with implementation, introduced in Java 8), and static methods.
+interface Animal {
+    void sound(); // Abstract method
+    default void eat() { // Default method (Java 8+)
+        System.out.println("This animal eats");
+    }
+}
+3. Method Implementation
+Abstract Class: Can have both abstract and concrete methods. Subclasses can inherit and use the concrete methods or override them.
+Interface: Prior to Java 8, all methods were implicitly abstract. From Java 8 onward, interfaces can have default and static methods with implementations.
+4. Inheritance
+Abstract Class: A class can inherit from only one abstract class (single inheritance).
+Interface: A class can implement multiple interfaces (multiple inheritance of type).
+5. Fields/Variables
+Abstract Class: Can have instance variables (fields) and can define methods to manipulate these variables.
 
-Abstract Method in Java
-=========================
-A method which is declared as abstract and does not have implementation is known as an abstract method.
+Interface: Can only have public, static, and final variables (essentially constants). Instance variables are not allowed.
+abstract class Animal {
+    int age; // Instance variable
+}
 
-Interface in Java
-=======================
+interface Animal {
+    int AGE = 10; // Constant (implicitly public, static, and final)
+}
+6. Constructors
+Abstract Class: Can have constructors. These constructors are called when a subclass is instantiated.
+Interface: Cannot have constructors because interfaces cannot be instantiated.
+7. Access Modifiers
+Abstract Class: Can have methods with any access modifier (public, protected, private, or default).
+Interface: Methods are implicitly public. From Java 9 onward, private methods are allowed within interfaces to share code between default methods.
+8. When to Use
+Abstract Class:
+Use when classes share a common base of code (fields or methods).
+Use when you want to provide some common functionality that can be inherited by subclasses.
+Use when you expect future classes to have many common methods or fields.
+Interface:
+Use to define a contract that multiple classes can implement.
+Use when you want to achieve multiple inheritance in Java.
+Use when you want to provide flexibility for unrelated classes to implement the same set of behaviors.
+9. Example Use Cases
+Abstract Class: A Vehicle abstract class where all vehicles have common properties (like speed, fuel) and behaviors (like startEngine()), but startEngine() may be implemented differently in subclasses (Car, Bike).
 
-An interface in Java is a blueprint of a class. It has static constants and abstract methods.
-There can be only abstract methods in the Java interface, not method body. 
-It is used to achieve abstraction and multiple inheritance in Java.
-
-Java Interface also represents the IS-A relationship.
-It cannot be instantiated just like the abstract class.
-
-Since Java 8, we can have default and static methods in an interface.
-Since Java 9, we can have private methods in an interface.
-
-Interface 
-=============
-Any service requireent specification or any contrct b/w client and service provider or 100% pure abstract class is nothing but an interface.
-We can declare bu using interface keyword ,for imlement we use implement keyword.
-
-
-Diff b/w inerface & abstract
-===============================
-Interface
----------
-If we don’t know any thing about implementaion just we have the requirement specification .then go for interface
-Every method present inside interface is by default public and abstract
-For the interface variable compulsory we should perform initialization at the time of declaration only
-Inside interface cant take instance ,static and constructor
-
-Abstract
----------
-If we are talking about  implementaion but not completely then go for abstract
-Every method present inside abstract need not to be public or abstract.we can take concrete method also
-Tehere is no restriction like interface
-We can take
+Interface: A Flyable interface for classes that can fly (Bird, Airplane), where each class implements its own version of the fly() method.
 
 Marker interface
 ==================
-An interface which has no member is known as a marker or tagged interface, for example, Serializable, Cloneable, Remote, etc.
+An interface which has no member is known as a marker or tagged interface, for example, Serializable, Cloneable, Remote, random access method.etc.
 They are used to provide some essential information to the JVM so that JVM may perform some useful operation.
 If an interface wont contains any method & by implementing that interface if our object will get ability such type of interface are called marker interface.
-EX.Seriazable.clonable,signle thread method and random access method.
+
 By implementing seriazable interface we can send object across the n/w and we can save state of object to a file this extra ability is provided through seriazable interface
 
 By implemeting clonable interface our object will be in position to provide exactly duplicate object
+
 As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
 We can create our own marker interfface but customization of jvm required
 
@@ -264,14 +315,14 @@ If we want to represent group of individual object where insertion order is pres
 Lis interface found in java.util package and inherits the Collection interface.
 The implementation classes of List interface are ArrayList, LinkedList, Stack and Vector. The ArrayList and LinkedList are widely used in Java programming. 
 
-
 ArrayList
 ===========
 Java ArrayList class uses a dynamic array for storing the elements. It is like an array, but there is no size limit. We can add or remove elements anytime.
 
 • Java ArrayList class can contain duplicate elements.
 • Java ArrayList class maintains insertion order.
-• Java ArrayList class is non synchronized Java ArrayList imlements  random access interface,so that we can access element with same speed. Heance if our frequesnt operation  is retrivval operation then best datastructure is arraylist.
+• Java ArrayList class is non synchronized Java ArrayList imlements  random access interface,so that we can access element with same speed. Heance if our frequesnt operation 
+is retrivval operation then best datastructure is arraylist.
 • But if our frequesnt operation operation is inserstion or deletion in the middle then arraylist is worst choice because it required several shift operators.
 
 • linkedList
@@ -284,7 +335,6 @@ Java LinkedList class uses a doubly linked list to store the elements. It provid
 • In Java LinkedList class, manipulation is fast because no shifting needs to occur.
 •  if our frequesnt operation operation is inserstion or deletion in the middle then the best datastructure is linkedlist .
 • if our frequesnt operation  is retrivval operation then linkedlist is not good choice.
-
 
 Vector
 =========
