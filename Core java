@@ -864,8 +864,19 @@ The process of delegating the responsibility of exception handling from one meth
 
 Serialization and deserialization
 ======================================
-The concept representing an object state as a byte stream.byte sream has all the informattion about the object. Is called serialization
-It is mainly used to travel objects state on the network.
+Serialization in Java is the process of converting an object into a byte stream, thereby making it possible to save the object to a file or transmit it 
+over a network. This byte stream can later be deserialized back into a copy of the original object. Serialization is commonly used in Java for various
+purposes such as saving an object’s state, deep copying objects, and transferring objects between Java programs over a network.
+	1. Serializable Interface:
+		○ An object can be serialized only if its class implements the java.io.Serializable interface. This interface is a marker interface (an interface with no methods) and serves to indicate that a class is eligible for serialization.
+	2. ObjectOutputStream and ObjectInputStream:
+		○ ObjectOutputStream: Used to write serialized objects to an output stream.
+		○ ObjectInputStream: Used to read serialized objects from an input stream.
+	3. Transient Keyword:
+		○ Fields marked with the transient keyword are not included in the serialization process. This is useful for fields that you don't want to serialize, such as sensitive data (passwords) or system resources (file handles).
+	4. serialVersionUID:
+		○ A unique identifier for each class, serialVersionUID is used during deserialization to verify that the sender and receiver of a serialized object have loaded classes that are compatible with respect to serialization.
+		○ If no serialVersionUID is declared, the JVM will automatically generate one at runtime, which may lead to unexpected InvalidClassException if the class definition changes.
 
 Deserialization
 --------------------
@@ -885,9 +896,6 @@ Definition: Collection is an interface in the Java Collections Framework. It is 
 
 Definition: Collections is a utility class in the java.util package. It provides static methods that operate on or return collections.
  
-8) which annotation you will use to create put end point.
-@Putmapping
-
 (1) Can you explain your authentication & authorization flow in your application."
 
 Authentication Flow
@@ -955,7 +963,6 @@ Client sends refresh token request when the access token is about to expire.
 Server validates the refresh token.
 If valid, server issues a new access token and optionally a new refresh token.
 
-9)diff b/w arraylist and linked list?
 
 10) Hashmap & Hashtable?
 ===============================
@@ -1047,22 +1054,5 @@ LinkedHashMap allows one null key and multiple null values.
 Use Case:
 
 Use LinkedHashMap when you need to maintain the order of elements based on their insertion or access order and when fast iteration is required.
-
-
-15) Explain intermediate and termminal operation in stream.
-
-Intermediate Operations
-Intermediate operations transform a stream into another stream. These operations are lazy; they are not executed until a terminal operation is invoked on the stream. 
-Intermediate operations return a new stream, allowing multiple operations to be chained together. Examples include:
-
-filter, map ,sorted, distinct,limit,skip
-
-Terminal operations produce a result or a side effect and mark the end of the stream processing. Once a terminal operation is invoked, the stream is considered consumed and can no longer be used. Examples include:
-forEach,toarray,Reduce collect,count,anymatch,allmatch,noneMatch,findFirst,FindAny.
-
-
-20)what is use of @ transactional annotation
- It defines the scope of a transaction. By placing @Transactional on a method or a class, you indicate that the method or all methods within the class should be executed within a transaction context.
-
 
 
