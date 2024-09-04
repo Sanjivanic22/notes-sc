@@ -1,19 +1,26 @@
 #Java 8 features
 
 Lambda expression
+It is also known as annonymous function or closures.
 Help us to write our code in functional style.it provides clear and concise way to implement single abstract method by using expression.
 It is very useful in collection library in which it helps to iterate, filter and extract data
-It is also known as annonymous function or closures.
+ They are particularly useful for passing behavior as arguments to methods and creating instances of functional interfaces.
 
 In case of lambda expression  we don’t need to define the method for providing  the implementation we just need to write implementation code.
-Drawable d=new Drawable(){
-Public void draw(){
-}}
+simple lambada function
+---------------------------
+// Lambda expression to add two numbers
+BinaryOperator<Integer> add = (x, y) -> x + y;
+
+// Using the lambda expression
+
+int result = add.apply(3, 5);
+System.out.println(result);  // Output will be 8
 
 Method referance
-Java 8 method  referance is usd to refer method of functional interface.
-Is is compact and easy  form of lambda expression.
-Each time when we are using lambda expression to just refering method you can replace your lambda expression with method referance.
+======================
+in Java are a shorthand notation for calling methods that can be used wherever a functional interface is expected. They provide a more concise and readable way to refer to methods compared to using lambda expressions.
+They are particularly useful when the lambda expression simply calls an existing method or constructor, making your code more concise and expressive.
 
 Type of method referance
 Referance of static method
@@ -21,52 +28,75 @@ Referance of instance method
 Referance of constructor by using new keyword
 
 Mapping out the instance,static method or cinstructor by using :: colon operator.
+in Java 8 is a shorthand notation of a lambda expression that refers to a method directly.
+ It can be used when a lambda expression simply calls an existing method.
+// Lambda expression to convert a string to uppercase
+        Function<String, String> toUpperCaseLambda = s -> s.toUpperCase();
+
+        // Method reference to convert a string to uppercase
+        Function<String, String> toUpperCaseMethodRef = String::toUpperCase;
+//testing 
+System.out.println(toUpperCaseLambda.apply("hello"));
 
 
 Functional interface 
 If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method or single abstract method (SAM). 
+ Functional interfaces are used as the target types for lambda expressions and method references.
 
 Ex: 1) Runnable  It contains only run() method 
-
-2) Comparable  It contains only compareTo() method
-
- 3) ActionListener  It contains only actionPerformed() 
-
-4) Callable  It contains only call() method Inside functional interface in addition to single Abstract 
+    2) Comparable  It contains only compareTo() method
+    3) ActionListener  It contains only actionPerformed() 
+    4) Callable  It contains only call() method Inside functional interface in addition to single Abstract 
 method (SAM) we write any number of default and static methods.
 
 Default method
-	• Until 1.7 version onwards inside interface we can take only public abstract methods and public static final variables (every method present inside interface is always public and 
-abstract whether we are declaring or not). 
-	•  Every variable declared inside interface is always public static final whether we are declaring or not. 
-	•  But from 1.8 version onwards in addition to these, we can declare default concrete methods also inside interface, which are also known as defender methods. 
-	
-	• We can declare default method with the keyword “default” as follows
-	•  1) default void m1(){ 
-	• 2) System.out.println (“Default Method”);
+=========================
+In Java 8, a default method is a method that is defined in an interface with the default keyword and provides a default implementation.
+ This feature allows developers to add new methods to interfaces without breaking the existing implementations of those interfaces.
 
-Default method
--------------------
-n Java, default methods were introduced as part of Java 8 to enhance the functionality of interfaces without breaking backward compatibility.
-Default methods are methods defined in an interface with a default keyword.
-They provide a default implementation that can be overridden by classes that implement the interface.
+Key Features of Default Methods:
+1. Backward Compatibility
+Evolving Interfaces: Before Java 8, adding a new method to an existing interface would break all the classes that implement that interface because they would be forced to implement the new method. Default methods solve this problem by providing a method implementation in the interface itself, so existing classes do not need to change.
+Interface Flexibility: This allows interfaces to be extended with new functionality over time without disrupting existing codebases.
 
-Purpose:
+2. Multiple Inheritance of Behavior
+Combining Interfaces: A class can implement multiple interfaces that contain default methods. This enables multiple inheritance of behavior, which was not possible before Java 8. It allows developers to combine different behaviors in a single class without the need for extensive boilerplate code.
+Code Reuse: Default methods allow for code reuse across multiple implementing classes without forcing them to extend an abstract class or base class.
 
-Default methods allow interfaces to have methods with implementations without requiring all implementing classes to provide their own implementation.
-They facilitate the evolution of interfaces by adding new methods without forcing all implementing classes to modify their code.
+3. Ease of Use for API Designers
+API Evolution: Default methods allow API designers to evolve interfaces with minimal impact on existing code. This is especially useful in large frameworks and libraries where maintaining backward compatibility is critical.
+Adding Utility Methods: Designers can add utility methods directly in interfaces, which can be used by all implementing classes, improving code consistency and reducing duplication.
+
+4. Functional Programming Support
+Enhanced Functional Interfaces: Default methods work seamlessly with functional interfaces, enhancing their usability. For example, the Iterable interface in Java 8 was updated with a forEach method, allowing for functional-style iteration over collections.
 
 
-	•  
-	
+5. Encapsulation
+Encapsulating Common Code: Default methods allow the encapsulation of common code in interfaces, reducing the need to repeat logic across multiple classes. This helps in maintaining cleaner and more maintainable codebases.
+
+6. Improved Multiple Inheritance Mechanism
+Resolving Diamond Problem: Java resolves potential conflicts (e.g., the diamond problem) between default methods from multiple interfaces using a well-defined set of rules, allowing safe and predictable multiple inheritance of behavior.
+
+7. Enhanced Flexibility
+Optional Implementation: Implementing classes have the option to override default methods if they need to provide a custom implementation, offering flexibility while still providing a default behavior.
+
+
 Predicate
- A predicate is a function with a single argument and returns boolean value.
-  To implement predicate functions in Java, Oracle people introduced Predicate interface in 1.8 version (i.e.,Predicate). 
- Predicate interface present in Java.util.function package. 
- It’s a functional interface and it contains only one method
- i.e., test() Ex: interface Predicate 
-{ public boolean test(T t); }
+In Java, the Predicate interface is a functional interface from the java.util.function package.
+It represents a boolean-valued function of one argument and is often used for filtering or matching operations. 
+The Predicate interface has a single abstract method, test, which evaluates the condition and returns a boolean result.
+ A predicate is a function with a single argument and returns boolean value.
+ 
  As predicate is a functional interface and hence it can refers lambda expression.
+
+simple predicate function
+--------------------------
+ // Predicate to check if a number is greater than 10
+        Predicate<Integer> isGreaterThanTen = x -> x > 10;
+
+//predicate to check number is even
+Predicate<Integer> isEven = number -> number % 2 == 0;
+
 
 
 Stream
@@ -75,6 +105,16 @@ This consist of class,interface and enums to allow functional style operation on
 We can use stream by importing java.util.stream
 We can use stream to filter,collect,print and convert from one data structor to other.
 
+15) Explain intermediate and termminal operation in stream.
+
+Intermediate Operations
+Intermediate operations transform a stream into another stream. These operations are lazy; they are not executed until a terminal operation is invoked on the stream. 
+Intermediate operations return a new stream, allowing multiple operations to be chained together. Examples include:
+
+filter, map ,sorted, distinct,limit,skip
+
+Terminal operations produce a result or a side effect and mark the end of the stream processing. Once a terminal operation is invoked, the stream is considered consumed and can no longer be used. Examples include:
+forEach,toarray,Reduce collect,count,anymatch,allmatch,noneMatch,findFirst,FindAny.
 We can process the objects in the following 2 phases 
 1.Configuration 
 Filter
@@ -202,10 +242,13 @@ public class OptionalDemo {
 Output
 word is null
 
+The BiFunction interface
+=============================
+ in Java is a functional interface that represents a function that accepts two arguments and produces a result. It is part of the java.util.function package, which was introduced in Java 8 to provide a variety of functional interfaces for use in functional-style programming
+
 
 Java noshron
-Nashron is a jvascript engine ..it is used to excute javascript code .dynamically at jvm.
-public static void main(String[] args)
+Nashron is a jvascript engine ..it is used to excute javascript code dynamically at jvm.
 
 what is MetaSpace how it is diff from permanenet generation
 =============================================================
