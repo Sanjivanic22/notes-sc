@@ -1054,5 +1054,13 @@ LinkedHashMap allows one null key and multiple null values.
 Use Case:
 
 Use LinkedHashMap when you need to maintain the order of elements based on their insertion or access order and when fast iteration is required.
+GENERiCS
+=============
+Generics is powerful feature that allows you to write flexible, reusable, and type-safe code. By using generics, you can define classes, interfaces, and methods with type parameters,
+enabling them to operate on various data types while providing compile-time type checking.
 
+Why Use Generics?
+Type Safety: Generics allow you to catch type-related errors at compile time, rather than at runtime, reducing the likelihood of ClassCastException.
+Reusability: Generics enable you to create classes, interfaces, and methods that work with different data types, making your code more flexible and reusable.
+Elimination of Type Casting: With generics, you don't need to cast objects when retrieving them from a collection, as the type is already known.
 
