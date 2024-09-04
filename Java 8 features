@@ -19,7 +19,8 @@ System.out.println(result);  // Output will be 8
 
 Method referance
 ======================
-in Java are a shorthand notation for calling methods that can be used wherever a functional interface is expected. They provide a more concise and readable way to refer to methods compared to using lambda expressions.
+in Java Method referance are a shorthand notation for calling methods that can be used wherever a functional interface is expected.
+They provide a more concise and readable way to refer to methods compared to using lambda expressions.
 They are particularly useful when the lambda expression simply calls an existing method or constructor, making your code more concise and expressive.
 
 Type of method referance
@@ -28,8 +29,7 @@ Referance of instance method
 Referance of constructor by using new keyword
 
 Mapping out the instance,static method or cinstructor by using :: colon operator.
-in Java 8 is a shorthand notation of a lambda expression that refers to a method directly.
- It can be used when a lambda expression simply calls an existing method.
+
 // Lambda expression to convert a string to uppercase
         Function<String, String> toUpperCaseLambda = s -> s.toUpperCase();
 
@@ -40,9 +40,9 @@ System.out.println(toUpperCaseLambda.apply("hello"));
 
 
 Functional interface 
+===========================
 If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method or single abstract method (SAM). 
  Functional interfaces are used as the target types for lambda expressions and method references.
-
 Ex: 1) Runnable  It contains only run() method 
     2) Comparable  It contains only compareTo() method
     3) ActionListener  It contains only actionPerformed() 
