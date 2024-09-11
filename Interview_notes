@@ -69,8 +69,38 @@ Instead, access is provided through controlled means such as getters and setters
 
 
 ### 2. **Inheritance**
-Inheritance allows a class to inherit fields and methods from another class. The class that is inherited from is called the **parent** or **superclass**, 
-and the class that inherits is called the **child** or **subclass**.
+Is_A relation(Inheritance)
+============================
+Inheritance represents the IS-A relationship which is also known as a parent-child relationship.
+When one object acquires all the properties and behaviors of a parent object, it is known as inheritance. 
+It provides code reusability. It is used to achieve runtime polymorphism
+ .
+ When you inherit from an existing class, you can reuse methods and fields of the parent class.
+
+• By using extends keyword  we can implements is-a relationship
+
+ there can be three types of inheritance in java:
+=======================================================
+single inheritance
+-----------------
+When a class inherits another class, it is known as a single inheritance.
+
+multilevel 
+--------------
+When there is a chain of inheritance, it is known as multilevel inheritance.
+
+hierarchical.
+-------------------
+When two or more classes inherits a single class, it is known as hierarchical inheritance.
+
+multiple and hybrid inheritance is supported through interface only.
+
+why multiple inheritance is supported by the java
+----------------------------------------------------------
+To reduce the complexity and simplify the language, multiple inheritance is not supported in java.
+
+Consider a scenario where A, B, and C are three classes. The C class inherits A and B classes. 
+If A and B classes have the same method and you call it from child class object, there will be ambiguity to call the method of A or B class.
 
 - **Purpose**: Promotes code reuse and establishes a natural hierarchy between classes.
 - **How**: Use the `extends` keyword in Java to create a child class that inherits from a parent class.
@@ -96,6 +126,8 @@ In this case, the `Car` class inherits the `start` method from the `Vehicle` cla
 
 ### 3. **Polymorphism**
 Polymorphism allows objects of different classes to be treated as objects of a common superclass. There are two types of polymorphism:
+polymorphism means one action can perform in different ways.
+
 - **Compile-time polymorphism (Method Overloading)**: When multiple methods have the same name but different parameter lists.
 - **Run-time polymorphism (Method Overriding)**: When a subclass provides a specific implementation of a method that is already defined in its superclass.
 
