@@ -126,13 +126,16 @@ In this case, the `Car` class inherits the `start` method from the `Vehicle` cla
 
 ### 3. **Polymorphism**
 
-Polymorphism in Java is a concept by which we can perform a single action in different ways.
+Polymorphism in Java is a concept by which we can perform a single action in different ways
+Polymorphism allows objects of different classes to be treated as objects of a common superclass.
+ **Purpose**: Allows a single interface to be used for a general class of actions, making the system more flexible and scalable.
 
-There are two types of polymorphism in Java: 
+There are two types of polymorphism:
+
 compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
 Overloading
 ===============
-Two methods are said to be overloaded if method names are same but argument as different is called oveloading
+
  **Compile-time polymorphism (Method Overloading)**: When multiple methods have the same name but different parameter lists.
 public class Calculator {
     // Overloaded method to add two integers
@@ -181,37 +184,7 @@ public class Main {
     }
 }
 
-Polymorphism allows objects of different classes to be treated as objects of a common superclass. There are two types of polymorphism:
-
-
-- **Purpose**: Allows a single interface to be used for a general class of actions, making the system more flexible and scalable.
-
-#### Example (Method Overriding):
-```java
-class Animal {
-    public void sound() {
-        System.out.println("Animal makes a sound");
-    }
-}
-
-class Dog extends Animal {
-    @Override
-    public void sound() {
-        System.out.println("Dog barks");
-    }
-}
-
-public class Main {
-    public static void main(String[] args) {
-        Animal animal = new Dog(); // Polymorphism
-        animal.sound();  // Output: Dog barks
-    }
-}
-```
-
 In this example, the `sound()` method is overridden in the `Dog` class. Although the object is of type `Animal`, the actual method invoked is from the `Dog` class, demonstrating runtime polymorphism.
-
----
 
 ### 4. **Abstraction**
 Abstraction is the concept of hiding the implementation details and exposing only the essential features of an object.
@@ -245,7 +218,7 @@ Diff b/w abstrcat class and interface
 ======================================
 
 1. Purpose
-Abstract Class: Used to represent a base class that other classes can inherit from. It can provide some default behavior (implemented methods) while leaving 
+Abstract Class: Used to represent a base class that other classes can inherit from. It can provide some default behavior while leaving 
 some methods abstract for subclasses to implement.
 Interface: Used to represent a contract that a class must adhere to. It’s purely about defining the behavior that implementing classes must provide,
 without providing any implementation (until Java 8 introduced default methods).
@@ -271,10 +244,6 @@ interface Animal {
 Abstract Class: Can have both abstract and concrete methods. Subclasses can inherit and use the concrete methods or override them.
 Interface: Prior to Java 8, all methods were implicitly abstract. From Java 8 onward, interfaces can have default and static methods with implementations.
 
-4. Inheritance
-Abstract Class: A class can inherit from only one abstract class (single inheritance).
-Interface: A class can implement multiple interfaces (multiple inheritance of type).
-
 5. Fields/Variables
 Abstract Class: Can have instance variables (fields) and can define methods to manipulate these variables.
 
@@ -289,11 +258,6 @@ interface Animal {
 6. Constructors
 Abstract Class: Can have constructors. These constructors are called when a subclass is instantiated.
 Interface: Cannot have constructors because interfaces cannot be instantiated.
-
-7. Access Modifiers
-Abstract Class: Can have methods with any access modifier (public, protected, private, or default).
-Interface: Methods are implicitly public. From Java 9 onward, private methods are allowed within interfaces to share code between default methods.
-
 8. When to Use
 Abstract Class:
 Use when classes share a common base of code (fields or methods).
