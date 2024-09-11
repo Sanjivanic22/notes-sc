@@ -240,3 +240,185 @@ class Cat implements Animal {
 ```
 
 In this example, both `Dog` and `Cat` implement the `Animal` interface and provide their own implementations of the `sound()` method. The user doesn't need to know how the `sound()` method works, just that it exists.
+
+Diff b/w abstrcat class and interface
+======================================
+
+1. Purpose
+Abstract Class: Used to represent a base class that other classes can inherit from. It can provide some default behavior (implemented methods) while leaving 
+some methods abstract for subclasses to implement.
+Interface: Used to represent a contract that a class must adhere to. It’s purely about defining the behavior that implementing classes must provide,
+without providing any implementation (until Java 8 introduced default methods).
+
+2. Syntax
+Abstract Class: Declared with the abstract keyword. It can have both abstract methods (without implementation) and concrete methods (with implementation).
+
+abstract class Animal {
+    abstract void sound(); // Abstract method
+    void eat() { // Concrete method
+        System.out.println("This animal eats");
+    }
+}
+Interface: Declared with the interface keyword. It can have abstract methods , default methods (with implementation, introduced in Java 8), and static methods.
+interface Animal {
+    void sound(); // Abstract method
+    default void eat() { // Default method (Java 8+)
+        System.out.println("This animal eats");
+    }
+}
+
+3. Method Implementation
+Abstract Class: Can have both abstract and concrete methods. Subclasses can inherit and use the concrete methods or override them.
+Interface: Prior to Java 8, all methods were implicitly abstract. From Java 8 onward, interfaces can have default and static methods with implementations.
+
+4. Inheritance
+Abstract Class: A class can inherit from only one abstract class (single inheritance).
+Interface: A class can implement multiple interfaces (multiple inheritance of type).
+
+5. Fields/Variables
+Abstract Class: Can have instance variables (fields) and can define methods to manipulate these variables.
+
+Interface: Can only have public, static, and final variables (essentially constants). Instance variables are not allowed.
+abstract class Animal {
+    int age; // Instance variable
+}
+
+interface Animal {
+    int AGE = 10; // Constant (implicitly public, static, and final)
+}
+6. Constructors
+Abstract Class: Can have constructors. These constructors are called when a subclass is instantiated.
+Interface: Cannot have constructors because interfaces cannot be instantiated.
+
+7. Access Modifiers
+Abstract Class: Can have methods with any access modifier (public, protected, private, or default).
+Interface: Methods are implicitly public. From Java 9 onward, private methods are allowed within interfaces to share code between default methods.
+
+8. When to Use
+Abstract Class:
+Use when classes share a common base of code (fields or methods).
+Use when you want to provide some common functionality that can be inherited by subclasses.
+Use when you expect future classes to have many common methods or fields.
+
+Interface:
+Use to define a contract that multiple classes can implement.
+Use when you want to achieve multiple inheritance in Java.
+Use when you want to provide flexibility for unrelated classes to implement the same set of behaviors.
+
+9. Example Use Cases
+Abstract Class: A Vehicle abstract class where all vehicles have common properties (like speed, fuel) and behaviors (like startEngine()), but startEngine() may be implemented differently in subclasses (Car, Bike).
+
+Interface: A Flyable interface for classes that can fly (Bird, Airplane), where each class implements its own version of the fly() method.
+
+Marker interface
+==================
+If an interface wont contains any method & by implementing that interface if our object will get ability such type of interface are called marker interface.
+An interface which has no member is known as a marker or tagged interface, for example, Serializable, Cloneable, Remote, random access method.etc.
+
+They are used to provide some essential information to the JVM so that JVM may perform some useful operation.
+
+By implementing seriazable interface we can send object across the n/w and we can save state of object to a file this extra ability is provided through seriazable interface
+
+By implemeting clonable interface our object will be in position to provide exactly duplicate object
+
+As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
+We can create our own marker interfface but customization of jvm required.
+
+Collection
+Set 
+Hashset
+hashtable
+
+List
+is datastructor in collection whenere we want to represent group of individual object as single entity where duplicates are allowed and
+insertion order is preserved then we can go for LIST .
+
+diff b/w Arraylist and linkedlist
+
+1. Underlying Data Structure:
+ArrayList:
+Internally, ArrayList is backed by a dynamic array (resizable array).
+Elements are stored in a contiguous block of memory.
+
+LinkedList:
+Internally, LinkedList is implemented as a doubly linked list.
+Each element (node) contains a reference to both the next and the previous node, making it a chain of elements connected via pointers.
+
+2. Performance:
+Access (Get/Set):
+ArrayList:
+Accessing elements is fast because it allows random access (constant-time access) via the index.
+Time complexity for access is O(1).
+Example: arrayList.get(index) is very efficient.
+
+LinkedList:
+Accessing elements is slower because it requires traversing the list from the beginning or end to reach the desired element.
+Time complexity for access is O(n) for getting or setting an element by index.
+Example: linkedList.get(index) will take longer if the index is near the end.
+
+Insertion and Deletion:
+ArrayList:
+Inserting or deleting elements (especially in the middle or at the beginning) is slower because it requires shifting elements to make space or fill gaps.
+Time complexity for insertion/deletion is O(n) in the worst case.
+Insertion at the end of the ArrayList is generally O(1), unless the array needs to resize.
+
+LinkedList:
+Inserting or deleting elements is faster in a LinkedList, especially at the beginning or in the middle, because it only requires updating the links (pointers) between nodes.
+Time complexity for insertion/deletion at the beginning or end is O(1).
+Inserting in the middle of the list takes O(n) to traverse but O(1) to modify links.
+
+Resizing:
+ArrayList:
+When the internal array fills up, ArrayList dynamically resizes itself (usually by doubling its size). This involves creating a new array and copying all elements, which takes time.
+
+LinkedList:
+LinkedList does not need resizing because it is not array-based. It just creates new nodes as needed, making it more efficient for frequently growing or shrinking lists.
+
+3. Memory Usage:
+ArrayList:
+ArrayList requires less memory overhead because it only stores the data and an index pointer. However, when it resizes, it may allocate more memory than required (extra space for future elements).
+
+LinkedList:
+LinkedList uses more memory because, in addition to storing the data, it also stores two pointers (references) for each node (next and previous), which increases memory usage.
+
+4. Use Cases:
+ArrayList:
+Best when you need fast access to elements using indexes.
+Suitable for scenarios where elements are primarily added at the end, and random access is required.
+Example: Storing frequently accessed data, like a list of cities where you need to access elements by index.
+
+LinkedList:
+Best when you need frequent insertions or deletions at the beginning or middle of the list.
+Suitable for scenarios where the size of the list changes frequently and you don't need random access.
+Example: Implementing a queue or stack, where elements are added/removed from the front or end frequently.
+
+5. Implementation in Java:
+ArrayList:
+import java.util.ArrayList;
+
+ArrayList<String> arrayList = new ArrayList<>();
+arrayList.add("Apple");
+arrayList.add("Banana");
+System.out.println(arrayList.get(1)); // Accessing element is fast
+
+LinkedList:
+java
+Copy code
+import java.util.LinkedList;
+
+LinkedList<String> linkedList = new LinkedList<>();
+linkedList.add("Apple");
+linkedList.add("Banana");
+linkedList.addFirst("Orange"); // Efficient insertion at the beginning
+System.out.println(linkedList.get(1)); // Accessing element is slower
+
+Map
+=====
+Hashmap implementation,how it function
+
+Concurrenthashmap-its sychronous or asyncronous
+Concurrenthashmapmodificationexception
+
+
+
+
