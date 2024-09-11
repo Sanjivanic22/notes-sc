@@ -668,10 +668,121 @@ Key Features of StringJoiner
 Delimiter: Specifies the character or string to insert between the elements being joined.
 Prefix and Suffix: Optionally add characters or strings before the first element and after the last element.
 Immutability: Once constructed, a StringJoiner object cannot be modified directly, but you can use it to build a string incrementally.
+import java.util.StringJoiner;
+
+public class StringJoinerExample {
+    public static void main(String[] args) {
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+
+        // Add elements to the StringJoiner
+        joiner.add("Alice");
+        joiner.add("Bob");
+        joiner.add("Charlie");
+
+        // Convert to string
+        String result = joiner.toString();
+
+        System.out.println(result); // Output: [Alice, Bob, Charlie]
+    }
+}
 
 lambda expression ,method reference
-stream manipulation
+Lambda expression
+=====================
+It is also known as annonymous function or closures.
+Help us to write our code in functional style.it provides clear and concise way to implement single abstract method by using expression.
+It is very useful in collection library in which it helps to iterate, filter and extract data
+ They are particularly useful for passing behavior as arguments to methods and creating instances of functional interfaces.
 
+In case of lambda expression  we don’t need to define the method for providing  the implementation we just need to write implementation code.
+simple lambada function
+---------------------------
+// Lambda expression to add two numbers
+BinaryOperator<Integer> add = (x, y) -> x + y;
+
+// Using the lambda expression
+
+int result = add.apply(3, 5);
+System.out.println(result);  // Output will be 8
+
+Method referance
+======================
+in Java Method referance are a shorthand notation for calling methods that can be used wherever a functional interface is expected.
+They provide a more concise and readable way to refer to methods compared to using lambda expressions.
+They are particularly useful when the lambda expression simply calls an existing method or constructor, making your code more concise and expressive.
+
+Type of method referance
+Referance of static method
+Referance of instance method
+Referance of constructor by using new keyword
+
+Mapping out the instance,static method or cinstructor by using :: colon operator.
+
+// Lambda expression to convert a string to uppercase
+        Function<String, String> toUpperCaseLambda = s -> s.toUpperCase();
+
+        // Method reference to convert a string to uppercase
+        Function<String, String> toUpperCaseMethodRef = String::toUpperCase;
+//testing 
+System.out.println(toUpperCaseLambda.apply("hello"));
+
+Springboot
+==================
+springboot which version-below 3
+Compatibility Overview
+Spring Boot 1.x: The 1.x versions of Spring Boot support Java 8. For example, Spring Boot 1.2.x and later versions support Java 8.
+
+Spring Boot 2.x: This major version also supports Java 8. Starting from Spring Boot 2.0.x, Java 8 is a supported version, but newer versions of Spring Boot in the 2.x line offer enhanced support and features.
+
+Spring Boot 3.x: Starting with Spring Boot 3.0, Java 17 is required, but Spring Boot 2.x continues to support Java 8.
+
+jdk compatibility
+======================
+which JDK version supported
+scopes
+==========
+
+annotations
+@Bean
+what will compatibity
+@configuration
+
+cruicial diff dependancies
+how will you make final
+
+Rest API
+pathvariable 
+query 
+Finding second highest salary from employees list
+ 
+Reversing list of strings and sorting them in ascending order
+2nd highest salary using SQL query
+
+Asynchronous communication b/w micro services 
+ 
+Dependency injection
+ 
+Constructor vs setter injection which is better approach 
+ 
+How do you handle production defwct
+ Understand production  logs and  also  try to replicate same data in non prod environment to see similar issue was being faced or not
+Exception handling in spring boot
+ 
+Interface vs composition
+ 
+Deployment in cloud server
+ 
+	Asking to write url for get rest api
+Restcontroller vs controller
+RRequestmapping vs get mapping	
+
+They were checking whether we are following standards while creating rest api uri
+
+Scope of bean 
+ 
+How do you check code quality and vulnerabilities in code...are you using any tool
+
+Singleton Class, Create the Singleton Class in 2 ways.(direct and thread safe) 2. Hash Map implementation. 3. Thread related questions, Sync, Life Cycles, States. 4. ways of creating the thread, which do you prefer and why ? 5. Wait vs Sleep 6. Serialization. 7. Comparable vs Comparator 8. Rest API, Service, Annotation, Repository, JPA, Junit
 
 
 
