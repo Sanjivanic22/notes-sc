@@ -376,6 +376,8 @@ linkedList.add("Banana");
 linkedList.addFirst("Orange"); // Efficient insertion at the beginning
 System.out.println(linkedList.get(1)); // Accessing element is slower
 
+
+
 Map
 =====
 Hashmap implementation,how it function
@@ -541,6 +543,53 @@ Systrm.out.println("concurrentModificatiobRxception caugght"+e);
 Sysout("list after modification attempt "+ list);
 
 }
+}
+Thread life cycle
+===================
+1. New state
+Definition: When a thread is created, it is in the new state. It remains in this state until the start() method is called.
+
+Example:
+Thread thread = new Thread(new RunnableTask()); // Thread is in NEW state
+
+2. Runnable
+Definition: When the start() method is called on a thread, it moves to the runnable state. In this state, the thread is eligible to run by the JVM, but it is not running yet. 
+The actual running of the thread depends on the thread scheduler.
+
+Example:
+thread.start(); // Thread moves to RUNNABLE state
+
+3. Blocked
+Definition: A thread enters the blocked state when it is waiting for a monitor lock to enter a synchronized block/method.
+
+Example:
+synchronized (lock) {
+    // Critical section
+}
+If a thread tries to enter this synchronized block and the lock is already held by another thread, it will move to the blocked state.
+
+4. Waiting
+Definition: A thread enters the waiting state when it is waiting indefinitely for another thread to perform a particular action (e.g., waiting on an object's monitor with Object.wait()).
+
+Example:
+synchronized (lock) {
+    lock.wait(); // Thread enters WAITING state
+}
+5. Timed Waiting
+Definition: A thread enters the timed waiting state when it is waiting for another thread to perform a specific action within a stipulated time.
+This can happen with methods like Thread.sleep(), Object.wait(long timeout), Thread.join(long millis), etc.
+
+Example:
+Thread.sleep(1000); // Thread enters TIMED_WAITING state
+6. Terminated
+Definition: A thread enters the terminated state once its run() method completes or when it is explicitly terminated (e.g., by an uncaught exception).
+
+Example:
+class RunnableTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Thread is running");
+    }
 }
 
 what are java 8 features
