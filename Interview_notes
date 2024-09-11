@@ -125,11 +125,64 @@ In this case, the `Car` class inherits the `start` method from the `Vehicle` cla
 ---
 
 ### 3. **Polymorphism**
-Polymorphism allows objects of different classes to be treated as objects of a common superclass. There are two types of polymorphism:
-polymorphism means one action can perform in different ways.
 
-- **Compile-time polymorphism (Method Overloading)**: When multiple methods have the same name but different parameter lists.
+Polymorphism in Java is a concept by which we can perform a single action in different ways.
+
+There are two types of polymorphism in Java: 
+compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
+Overloading
+===============
+Two methods are said to be overloaded if method names are same but argument as different is called oveloading
+ **Compile-time polymorphism (Method Overloading)**: When multiple methods have the same name but different parameter lists.
+public class Calculator {
+    // Overloaded method to add two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Overloaded method to add three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+
+    // Overloaded method to add two double values
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+
+Overriding
+==============
+If method names and arguments must be matched  i.e method signature must be matched is called overriding.
 - **Run-time polymorphism (Method Overriding)**: When a subclass provides a specific implementation of a method that is already defined in its superclass.
+
+class Animal {
+    // Method to be overridden
+    public void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    // Overriding the sound method
+    @Override
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myAnimal = new Animal();  // Animal reference, Animal object
+        Animal myDog = new Dog();        // Animal reference, Dog object
+
+        myAnimal.sound();  // Calls Animal's sound method
+        myDog.sound();     // Calls Dog's sound method (overridden method)
+    }
+}
+
+Polymorphism allows objects of different classes to be treated as objects of a common superclass. There are two types of polymorphism:
+
 
 - **Purpose**: Allows a single interface to be used for a general class of actions, making the system more flexible and scalable.
 
@@ -161,7 +214,8 @@ In this example, the `sound()` method is overridden in the `Dog` class. Although
 ---
 
 ### 4. **Abstraction**
-Abstraction is the concept of hiding the implementation details and exposing only the essential features of an object. It allows you to focus on what an object does rather than how it does it.
+Abstraction is the concept of hiding the implementation details and exposing only the essential features of an object.
+It allows you to focus on what an object does rather than how it does it.
 
 - **Purpose**: Simplifies complex systems by providing only the necessary details to the user.
 - **How**: In Java, abstraction can be achieved using abstract classes or interfaces.
@@ -186,13 +240,3 @@ class Cat implements Animal {
 ```
 
 In this example, both `Dog` and `Cat` implement the `Animal` interface and provide their own implementations of the `sound()` method. The user doesn't need to know how the `sound()` method works, just that it exists.
-
----
-
-### Summary of OOP Concepts:
-1. **Encapsulation**: Bundling data and methods into a single unit (class) and restricting access using access modifiers.
-2. **Inheritance**: A class can inherit fields and methods from another class.
-3. **Polymorphism**: Objects of different classes can be treated as instances of a common superclass.
-4. **Abstraction**: Hides the internal complexity and shows only the essential features.
-
-These principles help to create more modular, reusable, maintainable, and scalable software systems.
