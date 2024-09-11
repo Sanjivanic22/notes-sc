@@ -1,0 +1,166 @@
+OOP concepts
+-=================
+Object-Oriented Programming (OOP)** is a programming based on the concept of objects, which can contain data and methods. 
+The four main principles of OOP are
+**Encapsulation, Inheritance, Polymorphism,** and **Abstraction**. 
+
+### 1. **Encapsulation**
+Encapsulation refers to the bundling of data (fields) and methods (functions) that operate on the data into a single unit, typically a class. 
+It restricts direct access to some of the object's components and can prevent accidental interference or misuse.
+
+- **Purpose**: 
+Protects object integrity by preventing external code from directly modifying fields. 
+It helps in maintaining control over how data is accessed or modified.
+- **How**: By using access modifiers like `private`, `public`, and `protected`.
+
+#### Example:
+```java
+public class Car {
+    private String model;
+    private int year;
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+}
+```
+Getters and setters method
+==============================
+In this example, the `model` and `year` fields are private, meaning they can only be accessed via the public getter and setter methods.
+Getter and Setter methods control access to a class’s fields and provide flexibility, data validation, and encapsulation.
+They ensure that fields are accessed in a controlled manner and can include additional logic such as validation, logging, or synchronization.
+They allow for data hiding, read-only or write-only access, and maintain flexibility if internal data representation needs to change in the future.
+
+what is differance b/w encapsulation and abstraction
+============================================================
+Encapsulation:
+Encapsulation is used to secure the internal state of an object by restricting unauthorized access and modification.
+It allows changes to the internal implementation without affecting external code that uses the class.
+It provides data hiding by making fields private and exposing them through getter and setter methods.
+Abstraction:
+Abstraction is used to simplify complex systems by hiding unnecessary details and exposing only the essential information.
+It allows developers to interact with objects without knowing their underlying implementation, making the system more user-friendly and less complex.
+
+Key Differences:
+Aspect	     Encapsulation	                                                              Abstraction
+Definition	Bundles data and methods into a class and restricts direct access to fields.	Hides implementation details and shows only essential features.
+           Purpose	Protects internal data and controls access.	                          Simplifies complexity by focusing on what an object does.
+           Focus	Securing and controlling access to data.	                               Simplifying interaction by hiding details.
+Implementation	Achieved using private fields and public getters/setters.              	Achieved using abstract classes, interfaces, and abstract methods.
+Visibility	Controlled via access modifiers (private, public, etc.).	                  Hides internal logic; user only sees relevant features.
+
+what is data hiding
+=====================
+Data hiding is a concept in (OOP) where internal details of a class (such as data members or fields) are hidden from external access. 
+This ensures that the internal state of an object cannot be directly accessed or modified by external code. 
+Instead, access is provided through controlled means such as getters and setters or other public methods.
+
+
+### 2. **Inheritance**
+Inheritance allows a class to inherit fields and methods from another class. The class that is inherited from is called the **parent** or **superclass**, 
+and the class that inherits is called the **child** or **subclass**.
+
+- **Purpose**: Promotes code reuse and establishes a natural hierarchy between classes.
+- **How**: Use the `extends` keyword in Java to create a child class that inherits from a parent class.
+
+#### Example:
+```java
+public class Vehicle {
+    public void start() {
+        System.out.println("Vehicle is starting");
+    }
+}
+
+public class Car extends Vehicle {
+    public void honk() {
+        System.out.println("Car is honking");
+    }
+}
+```
+
+In this case, the `Car` class inherits the `start` method from the `Vehicle` class and adds its own method `honk`.
+
+---
+
+### 3. **Polymorphism**
+Polymorphism allows objects of different classes to be treated as objects of a common superclass. There are two types of polymorphism:
+- **Compile-time polymorphism (Method Overloading)**: When multiple methods have the same name but different parameter lists.
+- **Run-time polymorphism (Method Overriding)**: When a subclass provides a specific implementation of a method that is already defined in its superclass.
+
+- **Purpose**: Allows a single interface to be used for a general class of actions, making the system more flexible and scalable.
+
+#### Example (Method Overriding):
+```java
+class Animal {
+    public void sound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal animal = new Dog(); // Polymorphism
+        animal.sound();  // Output: Dog barks
+    }
+}
+```
+
+In this example, the `sound()` method is overridden in the `Dog` class. Although the object is of type `Animal`, the actual method invoked is from the `Dog` class, demonstrating runtime polymorphism.
+
+---
+
+### 4. **Abstraction**
+Abstraction is the concept of hiding the implementation details and exposing only the essential features of an object. It allows you to focus on what an object does rather than how it does it.
+
+- **Purpose**: Simplifies complex systems by providing only the necessary details to the user.
+- **How**: In Java, abstraction can be achieved using abstract classes or interfaces.
+
+#### Example (Interface):
+```java
+interface Animal {
+    void sound();
+}
+
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+class Cat implements Animal {
+    public void sound() {
+        System.out.println("Cat meows");
+    }
+}
+```
+
+In this example, both `Dog` and `Cat` implement the `Animal` interface and provide their own implementations of the `sound()` method. The user doesn't need to know how the `sound()` method works, just that it exists.
+
+---
+
+### Summary of OOP Concepts:
+1. **Encapsulation**: Bundling data and methods into a single unit (class) and restricting access using access modifiers.
+2. **Inheritance**: A class can inherit fields and methods from another class.
+3. **Polymorphism**: Objects of different classes can be treated as instances of a common superclass.
+4. **Abstraction**: Hides the internal complexity and shows only the essential features.
+
+These principles help to create more modular, reusable, maintainable, and scalable software systems.
