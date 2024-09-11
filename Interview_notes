@@ -539,6 +539,105 @@ Sysout("list after modification attempt "+ list);
 
 }
 }
+10) Hashmap & Hashtable?
+===============================
+Key Differences:
+Thread Safety:
+
+HashMap: Not synchronized and not thread-safe. If multiple threads access a HashMap concurrently, and at least one of the threads modifies it structurally,
+it must be externally synchronized.
+Hashtable: Synchronized and thread-safe. Every method in Hashtable is synchronized, making it safe for use by multiple threads.
+
+Null Keys and Values:
+
+HashMap: Allows one null key and multiple null values.
+Hashtable: Does not allow any null key or null value.
+Performance:
+
+HashMap: Generally faster since it is not synchronized and has less overhead.
+Hashtable: Slower due to synchronization overhead.
+Legacy:
+
+HashMap: Part of the Java Collections Framework and introduced in Java 1.2.
+Hashtable: A legacy class from Java 1.0, retrofitted to implement the Map interface.
+Iterators:
+
+HashMap: The iterators are fail-fast, meaning they will throw a ConcurrentModificationException if the map is structurally modified after the iterator is created.
+Hashtable: The enumerators are not fail-fast.
+Initial Capacity and Load Factor:
+
+HashMap: Provides control over initial capacity and load factor.
+Hashtable: Has default initial capacity of 11 and load factor of 0.75, but does not provide as much flexibility as HashMap.
+
+
+12)How we can convert hashmap to a Synchronized,
+
+To convert a HashMap to a synchronized (thread-safe) version in Java, you can use the Collections.synchronizedMap method. 
+This method returns a synchronized (thread-safe) map backed by the specified map.
+
+13)Is Hashmap maintained the order of dada?
+
+No, HashMap does not maintain the order of data. 
+In a HashMap, the order of the entries is not guaranteed. The entries are stored in a hash table, and their order can change as the HashMap is resized or when entries are added or removed.
+
+
+14)diff bw/ treemap and linkedhashmap map?
+TreeMap
+===========
+
+Ordering:
+
+A TreeMap stores entries in a sorted order based on the natural ordering of its keys or according to a specified comparator.
+The keys are sorted either in ascending order by default or in a custom order defined by a Comparator.
+
+Implementation:
+
+TreeMap is implemented using a Red-Black Tree, a type of self-balancing binary search tree.
+
+Performance:
+
+Operations like put, get, remove, and containsKey have a time complexity of O(log n) due to the underlying tree structure.
+
+Null Keys:
+
+TreeMap does not allow null keys, as null cannot be compared to other keys.
+
+Use Case:
+
+Use TreeMap when you need to maintain keys in a sorted order and when the performance of sorted operations is crucial.
+
+LinkedHashMap
+====================
+
+Ordering:
+
+A LinkedHashMap maintains the order of insertion. This means entries are returned in the order in which they were inserted.
+It also has an option for access-order, which can be used to order entries based on their access time.
+
+Implementation:
+
+LinkedHashMap is implemented using a combination of a hash table and a doubly-linked list. Each entry maintains a reference to the previous and next entry, thus maintaining a doubly-linked list.
+
+Performance:
+
+Operations like put, get, remove, and containsKey have a time complexity of O(1) on average due to the underlying hash table structure.
+
+Null Keys and Values:
+
+LinkedHashMap allows one null key and multiple null values.
+
+Use Case:
+
+Use LinkedHashMap when you need to maintain the order of elements based on their insertion or access order and when fast iteration is required.
+GENERiCS
+=============
+Generics is powerful feature that allows you to write flexible, reusable, and type-safe code. By using generics, you can define classes, interfaces, and methods with type parameters,
+enabling them to operate on various data types while providing compile-time type checking.
+
+Why Use Generics?
+Type Safety: Generics allow you to catch type-related errors at compile time, rather than at runtime, reducing the likelihood of ClassCastException.
+Reusability: Generics enable you to create classes, interfaces, and methods that work with different data types, making your code more flexible and reusable.
+Elimination of Type Casting: With generics, you don't need to cast objects when retrieving them from a collection, as the type is already known.
 Thread life cycle
 ===================
 1. New state
@@ -586,6 +685,69 @@ class RunnableTask implements Runnable {
         System.out.println("Thread is running");
     }
 }
+
+Why string is immutable in java
+=================================
+The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
+The reason of making string final is to destroy the immutability and to not allow others to extend it.
+
+The String objects are cached in the String pool, and it makes the String immutable. 
+The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. 
+For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
+
+
+To String
+============
+We can use this method to find string representation of an object.
+
+Hashcode
+==========
+For every object jvm will assign one unique id which is nothing but hashcode.
+Jvm uses hashcode will saving object into hashcode or hashset or hashmap.
+Based on our requirement we can generate hashcode by overriding hashcode method in our class.
+
+Equals()
+---------
+We can use  equals method to check equality of two objects.
+
+Diff b/w ==operator and .equals method
+========================================
+== operator is always meant for referance comparision where as .equls() meant for content comparision.
+
+== operator is applicable for both premitives and object referance
+In case of  object referance == opeartor is always meant for referance comparation i.e
+If two referance pointing to the same object then only ==operator returns true.
+
+.equals()
+It is method applicable for only for object referance but not for primitives
+By default .equals method present in object class I also meant for referance comparasion only
+We cant override .equlas method for content comparation.
+
+Immutable 
+============
+Once we created a string object we cant perform any changes in the existing object ,if are trying to perform any changes with those changes new object will be created.this behaviour is nothing but immutability of the string object.
+
+Mutable
+========
+Once we crrated a string buffer object we can perform any changes in the existing object.this behavoiur is nothing but mutability of stringbuffer object
+
+StringBuffer
+=============
+If the content will changes frequently it is never recommended to go for string beacause for every change compulsory new object will created to
+handle this cumpolsary we should go for stringbuffer where changes will be performed in existing object  only instead of creating new object.
+
+Stringbuilder
+================
+Evry method present in stringbuffer is sychronized.hence at atime only one thread is allowed to access stringbuffer object it incfeases the waiting time of thread  &effects performance of the system.
+To resolve this problem we should go for stringbuilder.
+Stringbuilder is same as stringbuffer but sstringbuffer is synchronized and thread safe and stringbuilder is not synchronized.
+Stringbuffer performance is low and stringbuilder performance is high.
+
+String vs stringbuffer and stringbuilder
+==========================================
+If the content will not change frequently then we should go for String 
+If content will change frequently and thread safety required then go for String buffer
+If content will change frequently and thread safety is not required then go for stringbuilder.
 
 what are java 8 features
 functinonal interface
