@@ -553,6 +553,126 @@ Locking Mechanism	No locking	Locks the entire map	Fine-grained locking on segmen
 Iterator Consistency	Fail-fast	Fail-fast	Weakly consistent
 
 Concurrenthashmapmodificationexception
+concurrentModificationEXaception
+----------------------
+A ConcurrentModificationException in Java is thrown when a collection (e.g., ArrayList, HashMap) is modified while being iterated over 
+using methods like Iterator or enhanced for loop. This exception is typically encountered when you modify the collection directly 
+(e.g., using add, remove, or put methods) during iteration.
+7)concurrentModificatiobRxception
+====================================
+List <Integer> list=new ArrayList<>();
+list.add(1);
+list.add(2);
+list.add(3);
+list.add(4);
+try{
+Iterator <Integer> iterator=new Iterator<>();
+Integer value=iterator.next();
+while(iterator.hashNext){
+if(value%2==0){
+list.remove(list);
+} }
+catch(concurrentModificatiobRxception e){
+Systrm.out.println("concurrentModificatiobRxception caugght"+e);
+Sysout("list after modification attempt "+ list);
+
+}
+}
+
+what are java 8 features
+functinonal interface
+A functional interface in Java is an interface that contains exactly one abstract method. These interfaces are meant to represent a single function or operation,
+which can be implemented or passed around like a function pointer or lambda expression. 
+Functional interfaces are a key component in enabling lambda expressions and method references in Java, starting with Java 8.
+Single Abstract Method (SAM):
+
+A functional interface has exactly one abstract method. This single method defines the interface's functionality.
+The method can be implemented using a lambda expression or a method reference.
+
+@FunctionalInterface Annotation:
+While not mandatory, it's common to annotate functional interfaces with the @FunctionalInterface annotation. This helps the compiler ensure that the interface conforms to the functional interface specification (i.e., it contains only one abstract method).
+If the interface has more than one abstract method, the compiler will throw an error.
+
+Default and Static Methods:
+Functional interfaces can have default and static methods in addition to the single abstract method.
+These do not count as abstract methods and do not affect the functional nature of the interface.
+
+streams(interme)
+IntStream is a specialized stream in Java. It is designed to work specifically with primitive int values, avoiding the overhead of autoboxing that occurs when using the regular Stream<Integer> for integer streams.
+
+The IntStream provides several useful methods for processing sequences of int values in a functional programming style, similar to how the regular 
+Stream works with objects. It supports a variety of operations such as filtering, mapping, reducing, sorting, etc., all tailored to int primitives.
+
+filter and map diff
+Key Differences
+Functionality:
+filter: Selects elements based on a condition. It removes elements that do not meet the criterion.
+map: Transforms elements based on a function. It modifies each element to produce a new form.
+
+Input and Output:
+filter: Takes a Predicate<T> and returns a stream of elements that match the predicate.
+map: Takes a Function<T, R> and returns a stream of elements that are the result of applying the function to each original element.
+
+Usage in a Pipeline:
+You often use filter before map in a stream pipeline to first reduce the number of elements and then transform the remaining elements.
+
+consumer ,supplier
+========================
+Key Differences
+Purpose
+Consumer: Takes an input and performs an action without returning a result. It is used for operations that consume data.
+Supplier: Provides a result without requiring any input. It is used for producing or generating values.
+Method:
+
+Consumer: accept(T t)
+Supplier: get()
+Use Cases:
+Consumer: Typically used in scenarios where an action needs to be performed on an input (e.g., printing or updating values).
+Supplier: Typically used in scenarios where values need to be provided or generated (e.g., factory methods or default values).
+
+Functional Composition:
+Consumer: Can be composed using andThen to perform sequential actions.
+Supplier: Does not have built-in composition but can be combined with other functional interfaces in a broader context.
+
+stream -optional
+Key Characteristics of Optional:
+Purpose:
+To represent a value that might be present or absent, thus reducing the risk of NullPointerException.
+To provide a more expressive way of handling cases where a value might be missing.
+
+Common Methods:
+
+isPresent(): Checks if a value is present.
+ifPresent(Consumer<? super T> action): Executes a given action if the value is present.
+get(): Retrieves the value if present, otherwise throws NoSuchElementException.
+orElse(T other): Returns the value if present, otherwise returns the provided default value.
+
+parallel stream
+==================
+
+In Java, parallel streams provide a way to process collections of data in parallel, leveraging multi-core processors to potentially speed up computations. The Streams API, introduced in Java 8, includes support for parallel streams, allowing for concurrent processing of elements.
+Parallel Streams allow for concurrent processing of data using multiple threads, potentially improving performance for large datasets or computationally intensive tasks.
+parallelStream() creates a parallel stream from a collection, and parallel() can be used to convert a sequential stream to parallel.
+
+Key Concepts of Parallel Streams
+Parallel vs. Sequential Streams:
+sequential Stream: Processes elements one at a time in a single thread.
+Parallel Stream: Processes elements concurrently using multiple threads.
+
+stringjoiner
+===========
+StringJoiner is a utility class introduced in Java 8, part of the java.util package. It provides a flexible way to construct a string with a specified delimiter, optional prefix, and suffix. 
+It's particularly useful for concatenating strings in a controlled manner, such as when joining elements of a collection with a specific format.
+
+Key Features of StringJoiner
+Delimiter: Specifies the character or string to insert between the elements being joined.
+Prefix and Suffix: Optionally add characters or strings before the first element and after the last element.
+Immutability: Once constructed, a StringJoiner object cannot be modified directly, but you can use it to build a string incrementally.
+
+lambda expression ,method reference
+stream manipulation
+
+
 
 
 
