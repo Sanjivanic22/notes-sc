@@ -497,17 +497,6 @@ Among he two ways of defining a thread implements runnable mechanism is recommen
 In the first approach our class always extending thread class& hence there is chance of extending any other class but 
 in the second approach we can extends some other class also while implementing runnable interface hence 2nd approach is recommended to use.
 
-Thread priority
-=================
-• Every thread in java has some priority but the range of thread priority is 1 to 10(1 is least and 10 is highest)
-• Thread.MIN_priority--1
-• Thread.NORM_priority--5
-• Thread.Max_priority--10
-• Thread scheduler use this priority while allocation cpu 
-• The thread which is having highest priority will get chance first.
-• If two threads having same priority then we cant expect exact excution order it depends on thread scheduler
-• Default priority of main  thread is 5
-
 
  How to prevent excecution of thread
 ===========================================
@@ -542,6 +531,7 @@ Syschronized block
 • The main advantages of sychronized block over sychronized method is it reduces the waiting time of thread and improves the performance of the system.
 
 Inter thread communicatiion methods.
+==========================================
 Two thread will communicate with other by using Wait ,Notify ,NitifyAll
 • The thread which requires updation it has to call wait() method.the thread which is responsible to update  it has to call notify methods
 • We can call wait () ,notify and notifyAll() methods only from sychronized area otherwise we will get runtime exception. Saying IllgalMonitorStateException.
