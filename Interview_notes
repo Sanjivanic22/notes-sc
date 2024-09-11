@@ -286,12 +286,7 @@ By implementing seriazable interface we can send object across the n/w and we ca
 By implemeting clonable interface our object will be in position to provide exactly duplicate object
 
 As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
-We can create our own marker interfface but customization of jvm required.
-
-Collection
-Set 
-Hashset
-hashtable
+We can create our own marker interfface but customization of jvm requ
 
 List
 is datastructor in collection whenere we want to represent group of individual object as single entity where duplicates are allowed and
