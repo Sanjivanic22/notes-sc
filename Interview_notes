@@ -747,7 +747,7 @@ annotations
 what will compatibity
 @configuration
 
-cruicial diff dependancies
+
 how will you make final
 
 Rest API
@@ -759,31 +759,374 @@ Reversing list of strings and sorting them in ascending order
 2nd highest salary using SQL query
 
 Asynchronous communication b/w micro services 
- 
-Dependency injection
- 
+ Asynchronous communication between microservices refers to a messaging pattern where services exchange data or requests without waiting for an immediate response. This allows microservices to function independently, improving system scalability, 
+fault tolerance, and responsiveness. Instead of sending a request and blocking the process until a response is received (as is the case in **synchronous communication**), asynchronous communication sends the request and processes the response when it becomes available.
+
+### **Why Asynchronous Communication?**
+In microservices architecture, asynchronous communication is often preferred in situations where:
+- **Loose coupling** is required, meaning services can operate and evolve independently.
+- **Higher scalability** is needed because services don’t block and wait for responses.
+- **Improved fault tolerance** is crucial, allowing services to handle failures and retries gracefully.
+- **Event-driven systems** are in use, where services react to changes or triggers in the system.
+
+### **Ways to Implement Asynchronous Communication Between Microservices:**
+
+1. **Message Brokers (Pub/Sub Model)**:
+   - Message brokers act as intermediaries, facilitating communication between microservices by receiving messages from one service and delivering them to others.
+   - Examples of message brokers include **RabbitMQ**, **Apache Kafka**, **ActiveMQ**, and **Amazon SQS**.
+   
+   #### Workflow:
+   - **Producer service** publishes messages to a **topic** or **queue** on the message broker.
+   - The message broker stores the message temporarily until a **consumer service** reads and processes it.
+   - Consumers subscribe to specific topics or queues, and once a message is published, the broker delivers it to the consumer.
+   - This decouples the producer and consumer, enabling them to operate independently.
+
+   #### Example with RabbitMQ:
+   ```java
+   // Producer sends a message
+   @Autowired
+   private RabbitTemplate rabbitTemplate;
+
+   public void sendMessage(String message) {
+       rabbitTemplate.convertAndSend("my-exchange", "my-routing-key", message);
+   }
+
+   // Consumer receives a message
+   @RabbitListener(queues = "my-queue")
+   public void receiveMessage(String message) {
+       System.out.println("Received message: " + message);
+   }
+   ```
+
+2. **Event-Driven Architecture (EDA)**:
+   - In an event-driven system, microservices communicate through **events**. One service generates an event, which is consumed by other services that are interested in the event.
+   - **Apache Kafka**, **AWS SNS/SQS**, or **Google Pub/Sub** are popular tools for managing events in microservices.
+   
+   #### Workflow:
+   - A service (event producer) emits an **event** when a particular action occurs (e.g., order created, payment processed).
+   - Other services (event consumers) **listen** for these events and perform actions based on the event data.
+   - Events can be broadcasted to multiple services, enabling parallel processing of tasks.
+
+   #### Example with Kafka:
+   ```java
+   // Producer: Publish an event to Kafka
+   @Autowired
+   private KafkaTemplate<String, String> kafkaTemplate;
+
+   public void publishEvent(String message) {
+       kafkaTemplate.send("my-topic", message);
+   }
+
+   // Consumer: Listen to Kafka topic for events
+   @KafkaListener(topics = "my-topic", groupId = "my-group")
+   public void listenToEvent(String message) {
+       System.out.println("Received event: " + message);
+   }
+   ```
+
+3. **Event Sourcing and CQRS**:
+   - **Event Sourcing** involves storing the state of the system as a sequence of events rather than as snapshots of the data.
+   - The **Command Query Responsibility Segregation (CQRS)** pattern separates the read and write operations of a system into different models.
+   - This is often used in systems where maintaining the complete history of changes is important.
+   
+   #### Workflow:
+   - **Event sourcing** stores every change in the system as an event in an event store (e.g., Kafka or a custom event store).
+   - **CQRS** ensures that the commands (writes) and queries (reads) are handled by separate components, making the system more scalable and maintainable.
+
+4. **Callback Mechanism**:
+   - In some cases, a service may send a request to another service and expect a response later (asynchronously) via a callback mechanism.
+   - The service receiving the request processes it and later calls back the original service with the result or status.
+   
+   #### Workflow:
+   - Service A sends a request to Service B but does not block for a response.
+   - Service B processes the request and sends a callback or notification to Service A when it completes the task.
+
+5. **WebSockets and Server-Sent Events (SSE)**:
+   - In cases where real-time bidirectional communication is required, WebSockets or **Server-Sent Events (SSE)** can be used.
+   - WebSockets enable full-duplex communication, where both the client and server can send messages independently of each other.
+   - SSE allows servers to push updates to clients over HTTP.
+   
+   #### Example with SSE:
+   ```java
+   @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+   public Flux<String> streamEvents() {
+       return Flux.interval(Duration.ofSeconds(1))
+                  .map(sequence -> "Event: " + sequence);
+   }
+   ```
+
+### **Advantages of Asynchronous Communication**:
+1. **Loose coupling**: Asynchronous communication allows microservices to be decoupled. Each service can operate independently and evolve without affecting others.
+2. **Scalability**: Non-blocking communication allows services to handle large volumes of requests efficiently.
+3. **Fault tolerance**: If one service fails, the messages are typically stored in a queue and retried once the service becomes available.
+4. **Improved performance**: Services do not need to wait for a response, allowing the system to handle more requests concurrently.
+5. **Resilience**: With message brokers, services can be resilient to temporary network failures or unavailability of other services.
+
+### **Challenges of Asynchronous Communication**:
+1. **Complexity**: Asynchronous systems are harder to design, as the flow of data and control is less straightforward.
+2. **Debugging and monitoring**: Tracing the flow of events and messages across services can be more difficult compared to synchronous calls.
+3. **Consistency**: Managing data consistency can be tricky in an eventual consistency model (common in asynchronous systems).
+4. **Message loss**: If not handled properly, there is a risk of losing messages in case of failures in the message broker or network issues.
+5. **Latency**: While asynchronous communication improves scalability, it can introduce delays in the processing of requests.
+
+### **Best Practices for Asynchronous Communication**:
+- **Idempotency**: Ensure that your services are idempotent so that repeated processing of the same message or event does not result in inconsistent data.
+- **Retry and backoff**: Implement retry mechanisms with exponential backoff to handle transient failures.
+- **Monitoring and tracing**: Use distributed tracing tools (e.g., **Jaeger**, **Zipkin**) to trace messages across services and monitor message flows for easier debugging.
+- **Error handling**: Implement robust error handling and dead-letter queues (DLQs) to capture messages that cannot be processed.
+
+### **Conclusion**:
+Asynchronous communication is essential in microservice architectures for building scalable, resilient, and decoupled systems. By using message brokers, event-driven designs, or even callback mechanisms, services can operate independently while still exchanging necessary data. However, it requires careful design to handle challenges like eventual consistency, message loss, and debugging.
+
 Constructor vs setter injection which is better approach 
- 
-How do you handle production defwct
+===========================================================
+ **Constructor Injection** and **Setter Injection** are two common ways to inject dependencies in **Spring** or other dependency injection (DI) frameworks. Both approaches have their advantages and disadvantages, and the choice depends on various factors such as code clarity, immutability, and design needs.
+### **1. Constructor Injection**
+
+In **Constructor Injection**, dependencies are provided through the class's constructor. This is often considered the more preferred way because it ensures that the object is created in a fully initialized state.
+#### Example:
+
+public class Car {
+    private Engine engine;
+
+    // Constructor Injection
+    public Car(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving...");
+    }
+}
+#### Advantages:
+1. **Immutability**: Once the object is created, the dependencies are fixed, making the object immutable. This makes the code more reliable and less error-prone.
+2. **Mandatory dependencies**: Since the dependency is passed through the constructor, it is guaranteed that the object is fully initialized when created. This makes it impossible to create the object without the necessary dependencies.
+3. **Thread-safety**: Objects created using constructor injection are more likely to be thread-safe because their dependencies are assigned once and cannot be changed.
+4. **Testability**: Constructor injection makes unit testing easier because you can pass mock dependencies directly when creating the object.
+5. **Best for required dependencies**: For dependencies that are essential to the object’s operation, constructor injection ensures that those dependencies are present and cannot be missed.
+
+#### Disadvantages:
+1. **Too many dependencies**: If a class has many dependencies, the constructor can become unwieldy with many parameters, making the code harder to read and maintain.
+2. **No flexibility**: Dependencies cannot be changed after the object is created, which can be a disadvantage if the application requires changing dependencies at runtime (though this is rare).
+
+### **2. Setter Injection**
+
+In **Setter Injection**, dependencies are provided through public setter methods after the object has been created. This method allows you to inject dependencies later in the lifecycle of the object.
+#### Example:
+public class Car {
+    private Engine engine;
+
+    // Setter Injection
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving...");
+    }
+}
+```
+
+#### Advantages:
+1. **Optional dependencies**: If a dependency is optional, setter injection provides flexibility to set it later. The object can still be created even if the dependency is not provided immediately.
+2. **Flexibility**: Dependencies can be changed after the object is created, allowing for more dynamic configurations (e.g., in some cases where dependencies might change during the application's runtime).
+3. **Simpler constructors**: Since dependencies are injected via setters, the constructor remains simple, without requiring multiple parameters.
+
+#### Disadvantages:
+1. **Lack of immutability**: Setter injection can make objects mutable, as dependencies can be modified after the object is created. This can introduce errors, especially in multi-threaded environments.
+2. **Object may be in an inconsistent state**: With setter injection, an object can be created without necessary dependencies, which can lead to runtime errors if the setters are not called before the object is used.
+3. **Harder to enforce dependencies**: It's easier to forget to inject a required dependency, and there is no compile-time guarantee that all necessary dependencies have been provided.
+4. **Not ideal for mandatory dependencies**: If a dependency is essential for the class, relying on setter injection can lead to issues if the setter is never called or is called incorrectly.
+
+### **Comparison: Constructor Injection vs. Setter Injection**
+
+| Feature                            | Constructor Injection                      | Setter Injection                         |
+|------------------------------------|--------------------------------------------|------------------------------------------|
+| **Immutability**                   | Provides immutability once constructed     | Allows mutable objects, changing dependencies later |
+| **Mandatory vs. Optional Dependencies** | Best for mandatory dependencies            | Best for optional dependencies           |
+| **Consistency**                    | Ensures the object is fully initialized    | Risk of using the object in an inconsistent state |
+| **Flexibility**                    | Less flexible (dependencies are fixed)     | More flexible (dependencies can change)  |
+| **Testability**                    | Easily testable with constructor-based injection | Testable, but requires more setup        |
+| **Thread-safety**                  | More thread-safe, since dependencies are final | Less thread-safe, dependencies can change at runtime |
+| **Complexity in Constructor**      | Can result in long constructors if there are many dependencies | Keeps constructors simple                |
+| **Dependency Enforcement**         | Compile-time guarantee for required dependencies | No compile-time enforcement, setters must be manually invoked |
+| **Best Use Case**                  | Use for required, non-optional dependencies | Use for optional or runtime-configurable dependencies |
+
+### **Which Is Better?**
+
+#### **Constructor Injection is generally better when:**
+- Dependencies are mandatory and should not change after object creation.
+- You want to ensure that the object is fully initialized in a valid state.
+- You are following the principle of **immutability**.
+- You need better testability and thread safety.
+
+#### **Setter Injection is better when:**
+- You have optional dependencies.
+- You need to inject dependencies later in the object’s lifecycle or change them dynamically.
+- You want a more flexible, configurable object where dependencies can be altered after creation.
+
+### **Conclusion:**
+- **Use constructor injection for required dependencies** to enforce consistency and immutability.
+- **Use setter injection for optional dependencies** or when you need more flexibility in modifying dependencies after object creation.
+
+In general, **constructor injection** is considered the best practice, particularly in frameworks like **Spring**, because it ensures that an object is fully initialized in a valid state. However, **setter injection** has its place when flexibility is needed.
+How do you handle production defect
+===========================================
  Understand production  logs and  also  try to replicate same data in non prod environment to see similar issue was being faced or not
+
 Exception handling in spring boot
  
 Interface vs composition
- 
+=============================
+ 2. Composition
+Composition refers to a design principle in which one object contains another object and delegates responsibilities to the contained object. Instead of inheriting from a parent class, an object gets the functionality by using instances of other classes. This is often expressed as a "has-a" relationship.
+
+Key Features:
+Reuse of code: Allows a class to achieve functionality by using (or containing) instances of other classes.
+Delegation: The composed objects can delegate certain responsibilities to other objects, leading to more flexible and maintainable code.
+Dynamic behavior: Objects can be composed of different components at runtime, making the behavior more flexible compared to inheritance.
+Favors composition over inheritance: The idea behind composition is to avoid the limitations of inheritance (tight coupling, inflexibility, etc.).
+
 Deployment in cloud server
- 
-	Asking to write url for get rest api
+=================================
+Summary of Steps for Cloud Deployment:
+Choose your cloud provider (AWS, Azure, GCP).
+Set up the infrastructure (VMs, App Services, Functions, etc.).
+Package and upload your application.
+Deploy using appropriate tools (CLI, SDK, or Portal).
+Configure networking, security, and scaling options.
+Automate deployment using CI/CD pipelines.
+Monitor and scale your application as necessary.
+
+Asking to write url for get rest api
+======================================
+GET	/api/v1/users
 Restcontroller vs controller
-RRequestmapping vs get mapping	
+
+Requestmapping vs get mapping	
 
 They were checking whether we are following standards while creating rest api uri
+structure the URIs:
+==========================
 
-Scope of bean 
- 
+HTTP Method	URI	Action
+GET	/api/v1/users	Retrieve all users
+GET	/api/v1/users/{userId}	Retrieve a specific user
+POST	/api/v1/users	Create a new user
+PUT	/api/v1/users/{userId}	Update an existing user
+DELETE	/api/v1/users/{userId}	Delete a user
+GET	/api/v1/users/{userId}/posts	Retrieve all posts for a specific user
+POST	/api/v1/users/{userId}/posts	Create a new post for a specific user
+GET	/api/v1/posts	Retrieve all posts
+GET	/api/v1/posts/{postId}	Retrieve a specific post
+PUT	/api/v1/posts/{postId}	Update a specific post
+DELETE	/api/v1/posts/{postId}	Delete a specific post
+
+Scope of bean
+====================
+ In Spring Framework, the scope of a bean defines the lifecycle and visibility of the bean within the Spring container.
+Understanding bean scopes is crucial for managing how beans are created, shared, and destroyed. 
+
+### 1. **Singleton**
+
+- **Description**: The default scope in Spring. Only one instance of the bean is created per Spring IoC container. This instance is shared across the entire application.
+- **Lifecycle**: Created once and cached. The same instance is returned every time the bean is requested.
+- **Usage**: Use when you need a single, shared instance of a bean, such as for service classes or data access objects.
+
+```java
+@Component
+@Scope("singleton")
+public class SingletonBean {
+    // Bean code here
+}
+```
+### 2. **Prototype**
+
+- **Description**: A new instance of the bean is created each time it is requested from the Spring container.
+- **Lifecycle**: The bean is created and initialized every time it is requested. The container does not manage its complete lifecycle.
+- **Usage**: Use when you need multiple instances of a bean with different states, such as for user sessions or unique data objects.
+
+@Component
+@Scope("prototype")
+public class PrototypeBean {
+    // Bean code here
+}
+
+### 3. **Request**
+
+- **Description**: A new instance of the bean is created for each HTTP request. The bean is scoped to a single HTTP request and is destroyed when the request is completed.
+- **Lifecycle**: The bean instance is created for each HTTP request and is destroyed at the end of the request.
+- **Usage**: Use in web applications when you need a bean that should be unique to a single HTTP request, such as a form backing object or request-specific data.
+
+```java
+@Component
+@Scope("request")
+public class RequestScopedBean {
+    // Bean code here
+}
+### 4. **Session**
+
+- **Description**: A new instance of the bean is created for each HTTP session. The bean is scoped to a single HTTP session and is destroyed when the session expires.
+- **Lifecycle**: The bean instance is created for each HTTP session and is destroyed when the session ends.
+- **Usage**: Use when you need a bean to be tied to a user session, such as session attributes or user-specific settings.
+
+@Component
+@Scope("session")
+public class SessionScopedBean {
+    // Bean code here
+}
+
+### 5. **Application**
+
+- **Description**: A new instance of the bean is created for the entire lifecycle of a ServletContext. This scope is typically used in a web application and is equivalent to the singleton scope in a web environment.
+- **Lifecycle**: The bean is created once for the entire application context and shared across all requests and sessions.
+- **Usage**: Use when you need a bean to be shared across the entire application context, such as for application-wide settings.
+
+```java
+@Component
+@Scope("application")
+public class ApplicationScopedBean {
+    // Bean code here
+}
+```
+
+### 6. **Websocket**
+
+- **Description**: A new instance of the bean is created for each WebSocket session. This scope is used specifically in WebSocket applications.
+- **Lifecycle**: The bean instance is created for each WebSocket session and is destroyed when the session ends.
+- **Usage**: Use when you need a bean to be tied to a WebSocket session, such as for maintaining WebSocket-specific state.
+
+```java
+@Component
+@Scope("websocket")
+public class WebSocketScopedBean {
+    // Bean code here
+}
+```
+
+You can specify the scope using the `@Scope` annotation or configure it in the Spring XML configuration.
+
+### Example in XML Configuration
+
+```xml
+<bean id="myBean" class="com.example.MyBean" scope="singleton"/>
+<bean id="myPrototypeBean" class="com.example.MyPrototypeBean" scope="prototype"/>
+<bean id="myRequestBean" class="com.example.MyRequestBean" scope="request"/>
+<bean id="mySessionBean" class="com.example.MySessionBean" scope="session"/>
+<bean id="myApplicationBean" class="com.example.MyApplicationBean" scope="application"/>
+```
+
+Choosing the appropriate bean scope helps manage bean lifecycle and resource usage effectively in your Spring applications.
 How do you check code quality and vulnerabilities in code...are you using any tool
+=============================================================================
+there are many tools but we have used in our project is sonarQUbe
+SonarQube: Provides comprehensive code quality analysis, including code smells, bugs, vulnerabilities, and code coverage. 
+Supports multiple languages and integrates with various CI/CD pipelines.
 
 Singleton Class, Create the Singleton Class in 2 ways.(direct and thread safe) 2. Hash Map implementation. 3. Thread related questions, Sync, Life Cycles, States. 4. ways of creating the thread, which do you prefer and why ? 5. Wait vs Sleep 6. Serialization. 7. Comparable vs Comparator 8. Rest API, Service, Annotation, Repository, JPA, Junit
-
+check in CGP notes
 
 
 
