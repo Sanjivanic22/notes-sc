@@ -1092,6 +1092,147 @@ Supports multiple languages and integrates with various CI/CD pipelines.
 Singleton Class, Create the Singleton Class in 2 ways.(direct and thread safe) 2. Hash Map implementation. 3. Thread related questions, Sync, Life Cycles, States. 4. ways of creating the thread, which do you prefer and why ? 5. Wait vs Sleep 6. Serialization. 7. Comparable vs Comparator 8. Rest API, Service, Annotation, Repository, JPA, Junit
 check in CGP notes
 
+concurrency 
+=================
+Concurrency in Java refers to the ability of the system to execute multiple threads simultaneously, enabling multitasking and parallelism in applications. 
 
+Volatile Keyword:
+
+The volatile keyword ensures that changes to a variable are visible to all threads. It prevents the JVM from caching the variable in registers, ensuring that every thread reads the latest value.
+
+Race Condition:
+
+A race condition occurs when multiple threads access a shared resource simultaneously, leading to unpredictable results.
+Synchronization, atomic variables, and other thread safety mechanisms help prevent race conditions.
+
+Atomic Variables:
+
+Java provides atomic classes (AtomicInteger, AtomicBoolean, etc.) in the java.util.concurrent.atomic package, which support lock-free thread-safe operations on single variables.
+AtomicInteger count = new AtomicInteger(0);
+count.incrementAndGet();
+
+
+Parallelism vs. Concurrency:
+
+Concurrency: Refers to executing multiple tasks (or threads) in overlapping time periods.
+
+Parallelism: Refers to executing multiple tasks simultaneously, typically in a multi-core processor.
+
+Concurrency in Java allows programs to perform multiple tasks simultaneously, improving efficiency and responsiveness. However, it introduces complexity due to the potential for issues like race conditions, deadlocks, and inconsistent state. Proper use of synchronization, thread safety mechanisms, and Java's concurrency utilities can help manage this complexity and build robust concurrent applications.
+
+
+copy on arraylist
+
+CopyOnWriteArrayList is a thread-safe variant of ArrayList provided in Java's java.util.concurrent package. Unlike ArrayList, which is not thread-safe, CopyOnWriteArrayList allows safe iteration and modification by multiple threads without the need for explicit synchronization.
+
+How CopyOnWriteArrayList Works:
+Copy-on-Write Mechanism:
+
+When a thread modifies the list (e.g., by adding or removing elements), CopyOnWriteArrayList creates a new copy of the underlying array, applies the modification, and then replaces the old array with the new one.
+This approach ensures that any iteration or read operation occurring concurrently with a write operation will see a consistent snapshot of the array before the modification. The read operations use the array that was in place at the time the iteration started.
+
+Thread Safety:
+
+Since each modification results in a new array being created, CopyOnWriteArrayList is inherently thread-safe for read and write operations. Multiple threads can safely read from the list while another thread modifies it.
+
+Efficiency Considerations:
+
+Read-heavy scenarios: CopyOnWriteArrayList is highly efficient for scenarios where the list is read frequently and modified infrequently because the reads are lock-free and don't incur synchronization overhead.
+
+Write-heavy scenarios: It is less efficient in write-heavy scenarios because every write operation involves copying the entire array, which can be costly in terms of memory and performance.
+
+Use Cases:
+Event Listener Lists: A common use case is maintaining a list of event listeners, where the list is frequently iterated over (to notify listeners) but rarely modified.
+Caching: Where data is read often and updated rarely.
+
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class CopyOnWriteArrayListExample {
+    public static void main(String[] args) {
+        List<String> list = new CopyOnWriteArrayList<>();
+
+        // Adding elements
+        list.add("Element1");
+        list.add("Element2");
+        list.add("Element3");
+
+        // Iterating over the list
+        for (String element : list) {
+            System.out.println(element);
+            // Modifying the list during iteration
+            list.add("Element4"); // This won't cause ConcurrentModificationException
+        }
+
+        System.out.println("After iteration: " + list);
+    }
+}
+
+Pros and Cons:
+Pros:
+
+Thread Safety: No need for explicit synchronization, making it easier to use in multi-threaded environments.
+Consistency: Iterators over the list always see a consistent view of the list at the time the iteration started.
+Cons:
+
+Memory Overhead: Every modification results in a new array being created, which can be memory-intensive, especially for large lists.
+Performance: Copying the array for every write operation can be costly in terms of time and resources, making it unsuitable for scenarios with frequent modifications.
+
+Database
+
+spring 
+bean scope
+dependency injection
+@validated
+The @Validated annotation in Spring Framework is used to trigger the validation of method parameters or bean properties, typically in the context of a Spring-managed bean. 
+It works in conjunction with the @Valid annotation, which is used to validate individual method arguments, and can be used in controller classes or service layers to ensure that input data meets certain validation criteria.
+@valid
+
+Difference Between @Validated and @Valid:
+@Valid:
+
+Triggers validation on a single object or method parameter.
+Typically used on method parameters, particularly in Spring MVC controllers or service methods.
+
+@Validated:
+
+Can be applied at the class level or method level.
+Supports validation groups, allowing for more granular control over which constraints are applied.
+
+Conclusion:
+The @Validated annotation in Spring is a powerful tool for ensuring that your application's inputs are validated according to specific rules, improving data integrity and reducing errors. It works well in conjunction with other validation annotations and is particularly useful when different validation rules are required for different contexts.
+
+Usage of @Validated in Spring:
+At the Class Level:
+
+When applied at the class level, @Validated enables the validation of method parameters within that class. It allows for group validation, meaning you can specify which validation group should be applied.
+@Validated
+public class MyService {
+
+    public void createUser(@Valid @NotNull @Size(min = 5) String username) {
+        // Service logic here
+    }
+}
+
+In Spring Controllers:
+
+In a Spring MVC controller, @Validated is often used in conjunction with @RequestBody, @ModelAttribute, or other method parameters to validate incoming data.
+
+@RestController
+@RequestMapping("/users")
+@Validated
+public class UserController {
+
+    @PostMapping
+    public ResponseEntity<String> createUser(@Valid @RequestBody UserDTO user) {
+        // Controller logic here
+        return ResponseEntity.ok("User created successfully");
+    }
+}
+In this example, UserDTO would be validated according to the constraints defined in its class.
+
+Validation Groups:
+
+@Validated can be used to specify validation groups, allowing for conditional validation based on the context.
 
 
