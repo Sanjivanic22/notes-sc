@@ -336,23 +336,6 @@ Java LinkedList class uses a doubly linked list to store the elements. It provid
 •  if our frequesnt operation operation is inserstion or deletion in the middle then the best datastructure is linkedlist .
 • if our frequesnt operation  is retrivval operation then linkedlist is not good choice.
 
-Vector
-=========
-Vector is like the dynamic array which can grow or shrink its size
-
-It is recommended to use the Vector class in the thread-safe implementation only.
-
-• Vector is synchronized.
-
-
-Stack
-=========
-The stack is a linear data structure that is used to store the collection of objects. It is based on Last-In-First-Out (LIFO).
- It also implements interfaces List, Collection, Iterable, Cloneable, Serializable.
-
-the Stack class, we must import the java.util package.
-
-
 Set
 =====
 If we want to represent group of ndividual object where duplicates are not allowed.
