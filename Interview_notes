@@ -415,8 +415,143 @@ System.out.println(linkedList.get(1)); // Accessing element is slower
 Map
 =====
 Hashmap implementation,how it function
+Intenal working of hashmap and implementation
+---------------------------------------------------
+### Internal Working of a HashMap in Java
 
+A **HashMap** in Java is a part of the `java.util` package and is one of the most commonly used data structures. It allows storing key-value pairs, where each key is unique.
+The key is used to retrieve the value stored in the map. The main concept behind a HashMap is the use of a hash table, which allows for fast access to the data.
+
+1. Hash Function
+   - When a key-value pair is inserted into the HashMap, the key is passed through a hash function. The hash function generates an integer (hash code) that represents the key.
+   - The hash code is then used to determine the index in the array (bucket) where the entry should be stored.
+
+2. **Index Calculation**
+   - The hash code is transformed into an index     
+ 3. **Collision Handling**
+   - A collision occurs when two different keys produce the same index. 
+HashMap handles collisions using a technique called **Separate Chaining
+   - **Separate Chaining:** Each bucket in the array points to a linked list of entries that share the same index. 
+When a collision occurs, the new entry is added to the linked list.
+
+4. **Rehashing**
+   - When the load factor (ratio of number of elements to the array size) exceeds a threshold (usually 0.75), the HashMap increases its array size (doubles it) and rehashes all entries.
+   - Rehashing involves recalculating the index for each entry and moving it to the new array.
+5. **Retrieving Values**
+   - To retrieve a value, the key is passed through the same hash function to find the index.
+   - The HashMap then traverses the linked list at that index to find the entry with the matching key.
+
+
+Java Implementation of a Simple HashMap
+
+public class HashMapImplementation<K, V> {
+    private static final int INITIAL_CAPACITY = 16;
+    private static final float LOAD_FACTOR = 0.75f;
+ 
+    private Node<K, V>[] table;
+    private int size = 0;
+ 
+    public HashMapImplementation() {
+        table = new Node[INITIAL_CAPACITY];
+    }
+ 
+    static class Node<K, V> {
+        final K key;
+        V value;
+        Node<K, V> next;
+ 
+        Node(K key, V value, Node<K, V> next) {
+            this.key = key;
+            this.value = value;
+            this.next = next;
+        }
+    }
+ 
+    public void put(K key, V value) {
+        int index = indexFor(key.hashCode(), table.length);
+        Node<K, V> current = table[index];
+        for (Node<K, V> node = current; node != null; node = node.next) {
+            if (node.key.equals(key)) {
+                node.value = value;
+                return;
+            }
+        }
+        table[index] = new Node<>(key, value, current);
+        size++;
+        if (size > table.length * LOAD_FACTOR) {
+            resize(2 * table.length);
+        }
+    }
+ 
+    public V get(K key) {
+        int index = indexFor(key.hashCode(), table.length);
+        Node<K, V> node = table[index];
+        while (node != null) {
+            if (node.key.equals(key)) {
+                return node.value;
+            }
+            node = node.next;
+        }
+        return null;
+    }
+ 
+    private int indexFor(int hashCode, int length) {
+        return hashCode & (length - 1);
+    }
+ 
+    private void resize(int newCapacity) {
+        Node<K, V>[] oldTable = table;
+        table = new Node[newCapacity];
+        size = 0;
+        for (Node<K, V> head : oldTable) {
+            while (head != null) {
+                put(head.key, head.value);
+                head = head.next;
+            }
+        }
+    }
+}
 Concurrenthashmap-its sychronous or asyncronous
+ConcurrentHashMap is a class in Java from the java.util.concurrent package that provides a thread-safe and high-performance implementation of a hash table. It is designed to allow concurrent access to multiple threads without requiring the use of external synchronization mechanisms like manually locking the entire map. This makes it ideal for use in multithreaded environments where read and write operations are performed frequently by different threads.
+
+Key Features of ConcurrentHashMap:
+Thread-Safety:
+
+ConcurrentHashMap allows concurrent read and write operations by dividing the map into segments (or buckets). Multiple threads can read and write to different segments concurrently without locking the entire map.
+It avoids performance bottlenecks typically associated with fully synchronized collections like Hashtable or Collections.synchronizedMap().
+No Null Keys or Values:
+
+Unlike HashMap, ConcurrentHashMap does not allow null keys or values. If you try to insert a null key or value, it throws a NullPointerException.
+Segmented Locking (Optimized Locking Mechanism):
+
+Internally, ConcurrentHashMap uses a technique called segment locking (or bucket locking). Instead of locking the entire map, it only locks specific segments (or buckets) when modifying them, allowing higher concurrency.
+Multiple threads can update the map simultaneously as long as they operate on different segments.
+High Performance:
+
+The map supports a high degree of concurrency, making it much faster than Hashtable or synchronizedMap when dealing with large data sets or frequent updates.
+Read operations are generally non-blocking, which improves performance in read-heavy scenarios.
+Atomic Operations:
+
+ConcurrentHashMap provides methods for atomic operations like putIfAbsent(), remove(), replace(), which allow certain operations to be done in a thread-safe manner without needing explicit locks.
+Weak Consistency:
+
+Iterators returned by ConcurrentHashMap are weakly consistent. This means that they do not throw ConcurrentModificationException if the map is modified during iteration. Instead, they reflect the state of the map at the time they were created and may reflect some updates made after their creation.
+However, they do not guarantee to show all updates made after the iterator was created.
+
+When to Use ConcurrentHashMap:
+When you need a thread-safe map and want to avoid performance bottlenecks caused by full synchronization in a multi-threaded environment.
+When you need a map for read-heavy workloads, but occasional updates are necessary.
+When you need fine-grained locking for frequent updates without affecting the performance of other operations.
+
+Key Differences Between HashMap, Hashtable, and ConcurrentHashMap:
+======================================================================
+Feature	HashMap	             Hashtable	                                     ConcurrentHashMap
+Thread-Safety	Not thread-safe	Thread-safe (synchronized)	Thread-safe with high concurrency
+Null Keys/Values	Allows null keys/values	Does not allow null keys/values	Does not allow null keys/values
+Performance	Fast, but not safe for concurrency	Slower due to full synchronization	Better performance in multithreaded scenarios
+Locking Mechanism	No locking	Locks the entire map	Fine-grained locking on segments/buckets
+Iterator Consistency	Fail-fast	Fail-fast	Weakly consistent
+
 Concurrenthashmapmodificationexception
 
 
