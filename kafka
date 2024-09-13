@@ -1,0 +1,272 @@
+Kafka
+------------
+What is Kafka?
+ Kafka is a distributed publish-subscribe messaging system. It allows applications to produce and consume streams of records, or messages, in a fault-tolerant and durable way. Kafka can handle large volumes of data in real-time and is commonly used for integrating and processing data between various systems.
+
+Key Concepts in Kafka
+Producer: The client or service that publishes messages to Kafka topics.
+Consumer: The client or service that subscribes to topics and processes messages from Kafka.
+Topic: A logical channel or category where producers send messages, and consumers read them. Messages are written to topics by producers.
+
+Partition: Kafka topics are split into partitions, which allow Kafka to scale horizontally. Each partition is ordered, and messages within a partition are assigned unique offsets.
+
+Broker: A Kafka server that stores and serves messages to consumers. Kafka clusters consist of multiple brokers.
+
+Consumer Group: A group of consumers that share the workload of consuming messages from topics. Kafka distributes the partitions among consumers in the group.
+
+How Kafka Works
+====================
+Kafka works by using a publish-subscribe model where:
+
+Producers send messages to a topic.
+Kafka brokers store these messages in partitions within the topic.
+Consumers read the messages from the topic by subscribing to it.
+
+
+kafkaTemplate
+=====================
+
+KafkaTemplate is a key component provided by Spring for Apache Kafka to simplify the process of producing messages to Kafka topics. It acts as a wrapper for the Kafka producer and provides methods for sending messages to Kafka in a synchronous or asynchronous manner.
+
+Key Features of KafkaTemplate:
+Sends messages to a specified Kafka topic.
+Handles serialization of keys and values.
+Supports sending messages synchronously or asynchronously.
+Supports transactional message sending if required.
+
+We are using KafkaTemplate<String, String>, where String refers to the key and value types (you can change them based on your requirements).
+kafkaTemplate.send(topic, message) sends the message to the specified Kafka topic.
+
+2. Sending Messages with a Key
+If you want to send a message with a specific key (so that all messages with the same key go to the same partition):
+
+public void sendMessageWithKey(String topic, String key, String message) {
+    kafkaTemplate.send(topic, key, message);
+}
+In this case, KafkaTemplate.send takes the key along with the message, ensuring that messages with the same key are routed to the same partition.
+
+3. Synchronous Message Sending
+If you need to wait for the result of the send operation, you can use the get() method to block the thread until the send completes:
+
+public void sendMessageSync(String topic, String message) {
+    try {
+        kafkaTemplate.send(topic, message).get();  // Waits for the send to complete
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+4. Asynchronous Message Sending with Callbacks
+=====================================================
+
+To handle results asynchronously, you can provide a callback:
+
+public void sendMessageAsync(String topic, String message) {
+    kafkaTemplate.send(topic, message).addCallback(
+        success -> {
+            if (success != null) {
+                System.out.println("Message sent successfully to topic: " + success.getRecordMetadata().topic());
+            }
+        },
+        failure -> {
+            System.err.println("Message failed to send: " + failure.getMessage());
+        }
+    );
+}
+
+The `@KafkaListener` annotation is used in **Spring for Apache Kafka** to enable **Kafka Consumers**. It allows you to create a method that listens to a specific Kafka topic and handles the messages asynchronously as they arrive. The messages are passed to the method as arguments, making it simple to process data.
+
+### **Basic Usage of `@KafkaListener`**
+
+The `@KafkaListener` annotation is applied on a method that acts as the Kafka message consumer. You can configure it with various parameters, including the Kafka topic to listen to, the consumer group ID, concurrency, etc.
+
+### **Example Usage**
+
+Here’s an example of a consumer using `@KafkaListener`:
+
+#### 1. **Kafka Consumer Service**
+
+```java
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+@Service
+public class KafkaConsumerService {
+
+    // This method will be invoked whenever a message is received on the 'message-queue-topic'
+    @KafkaListener(topics = "message-queue-topic", groupId = "my-group")
+    public void listen(String message) {
+        System.out.println("Received Message: " + message);
+    }
+}
+```
+
+Real-World Use Cases of Kafka
+==================================
+LinkedIn: Kafka was initially developed by LinkedIn for collecting and aggregating large amounts of activity and operational data from their platform, to deliver it in real time to their analytics system.
+
+Uber: Uses Kafka for real-time tracking and analysis of ride data, ensuring efficient routing and pricing.
+
+Netflix: Kafka is used to collect and analyze logs from their microservices-based architecture to improve service reliability and optimize streaming performance.
+
+Walmart: Kafka is used to process and analyze data from thousands of retail outlets, generating insights in real-time to improve inventory management.
+
+Advantages of Kafka
+High throughput: Kafka is capable of handling millions of messages per second with low latency.
+Scalability: Kafka can scale horizontally by adding more partitions and brokers.
+Durability: Kafka stores data on disk and can replicate data across multiple brokers.
+Fault tolerance: Even if brokers go down, data is replicated and safe.
+Decoupling: Kafka allows producers and consumers to be independent, enabling loose coupling in distributed systems.
+
+In this example:
+- The `@KafkaListener` annotation is applied to the `listen` method.
+- The `topics` attribute specifies the Kafka topic (`message-queue-topic`) to listen to.
+- The `groupId` attribute assigns the consumer to a consumer group (`my-group`). Kafka ensures that messages are evenly distributed among consumers within the same group.
+
+#### 2. **Multiple Topics**
+
+You can configure the `@KafkaListener` to listen to multiple Kafka topics by providing an array of topic names:
+
+```java
+@KafkaListener(topics = {"topic1", "topic2"}, groupId = "my-group")
+public void listenMultipleTopics(String message) {
+    System.out.println("Received message from multiple topics: " + message);
+}
+```
+
+#### 3. **Handling Messages with Keys**
+
+If you want to consume both the key and the value of a Kafka message, you can modify the method signature to accept both:
+
+``@KafkaListener(topics = "message-queue-topic", groupId = "my-group")
+public void listenWithKey(String key, String message) {
+    System.out.println("Received Message with Key: " + key + ", Value: " + message);
+}
+```
+
+#### 4. **Message Consumption from Specific Partitions**
+
+If you need to listen to specific partitions within a Kafka topic, you can use the `partition` parameter:
+
+@KafkaListener(topicPartitions = @TopicPartition(topic = "message-queue-topic", partitions = { "0", "1" }), groupId = "my-group")
+public void listenToSpecificPartition(String message) {
+    System.out.println("Received Message from specific partition: " + message);
+}
+```
+
+In this case, the listener will only consume messages from partitions 0 and 1 of the topic `message-queue-topic`.
+
+#### 5. **Concurrency (Multiple Listeners)**
+
+You can configure concurrency to run multiple Kafka listeners for the same topic, which can help in processing high volumes of messages:
+
+@KafkaListener(topics = "message-queue-topic", groupId = "my-group", concurrency = "3")
+public void listenWithConcurrency(String message) {
+    System.out.println("Received message in concurrent listener: " + message);
+}
+```
+
+Setting `concurrency = "3"` means that 3 consumers will run in parallel to process messages from the `message-queue-topic`.
+
+#### 6. **Manual Acknowledgment**
+
+If you want more control over when the message is considered consumed (acknowledged), you can use manual acknowledgment:
+
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+@Service
+public class KafkaConsumerWithAck {
+
+    @KafkaListener(topics = "message-queue-topic", groupId = "my-group")
+    public void listenWithAcknowledgment(ConsumerRecord<String, String> record, Acknowledgment acknowledgment) {
+        System.out.println("Received message: " + record.value());
+        
+        // Manually acknowledge the message
+        acknowledgment.acknowledge();
+    }
+}
+```
+
+In this case:
+- The `ConsumerRecord` provides details about the record (e.g., topic, partition, offset, key, value).
+- The `Acknowledgment` object allows you to manually acknowledge the message after processing it.
+
+#### 7. **Error Handling with `@KafkaListener`**
+
+You can handle errors when consuming messages using Spring's built-in error handling. If an exception is thrown, Spring can retry or route the message to an error handler.
+
+Here’s how you can configure a global error handler:
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.ErrorHandler;
+import org.springframework.kafka.listener.ListenerExecutionFailedException;
+import org.springframework.kafka.listener.MessageListenerContainer;
+import org.springframework.stereotype.Component;
+
+@Component
+public class KafkaErrorHandler implements ErrorHandler {
+
+    @Override
+    public void handle(Exception thrownException, ConsumerRecord<?, ?> data) {
+        System.out.println("Error while consuming message: " + data.value());
+        thrownException.printStackTrace();
+    }
+}
+```
+
+Then, register this error handler in the `@KafkaListener`:
+
+@KafkaListener(topics = "message-queue-topic", groupId = "my-group", errorHandler = "kafkaErrorHandler")
+public void listenWithErrorHandling(String message) {
+    System.out.println("Received message: " + message);
+}
+```
+
+### **Example: Full Consumer with `@KafkaListener`**
+
+Here’s a complete example where a Spring Boot Kafka consumer listens to a topic and processes the messages:
+
+#### **KafkaConsumerService.java**
+
+```java
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+@Service
+public class KafkaConsumerService {
+
+    @KafkaListener(topics = "message-queue-topic", groupId = "my-group")
+    public void consume(String message) {
+        System.out.println("Received message: " + message);
+    }
+}
+```
+
+### **Kafka Configuration in `application.properties`**
+
+```properties
+# Kafka broker address
+spring.kafka.bootstrap-servers=localhost:9092
+
+# Consumer group
+spring.kafka.consumer.group-id=my-group
+
+# Deserializer classes
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
+# Auto offset reset to start consuming from earliest or latest
+spring.kafka.consumer.auto-offset-reset=earliest
+```
+
+### Conclusion
+
+- The `@KafkaListener` annotation provides a powerful and easy way to consume Kafka messages in Spring Boot applications.
+- It offers various customization options such as consuming from multiple topics, specific partitions, and error handling.
+- You can also process messages concurrently and control acknowledgments manually.
+
+By using `@KafkaListener`, you can build highly efficient Kafka consumers integrated with the Spring ecosystem.
+
