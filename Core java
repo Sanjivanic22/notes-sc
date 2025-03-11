@@ -154,7 +154,7 @@ Polymorphism in Java is a concept by which we can perform a single action in dif
  So polymorphism means many forms.
 There are two types of polymorphism in Java: 
 compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
-Overloading
+Overloading (COMPILE TIME POLYMORPHISM)
 ===============
 Two methods are said to be overloaded if method names are same but argument as different is called oveloading
 public class Calculator {
@@ -174,9 +174,12 @@ public class Calculator {
     }
 }
 
-Overriding
+Overriding(RUNTIME POLYMORPHISM)
 ==============
 If methdo names and arhuments must be matched  i.e method signature must be matched is called overriding.
+2. Runtime Polymorphism (Method Overriding)
+Runtime polymorphism is achieved through method overriding. This occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. 
+The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
 class Animal {
     // Method to be overridden
     public void sound() {
@@ -338,6 +341,29 @@ Java LinkedList class uses a doubly linked list to store the elements. It provid
 • In Java LinkedList class, manipulation is fast because no shifting needs to occur.
 •  if our frequesnt operation operation is inserstion or deletion in the middle then the best datastructure is linkedlist .
 • if our frequesnt operation  is retrivval operation then linkedlist is not good choice.
+ Time complexity 
+--------------------
+ArrayList
+Underlying Data Structure: Dynamic array.
+Access (get): O(1) - Direct access to elements by index.
+Search (contains): O(n) - Linear search through the array.
+Insertion (add):
+At the end: Amortized O(1) - Usually constant time, but can be O(n) if the array needs to be resized.
+At a specific index: O(n) - Requires shifting elements.
+Deletion (remove):
+From the end: O(1) - Direct removal.
+From a specific index: O(n) - Requires shifting elements.
+
+LinkedList
+Underlying Data Structure: Doubly linked list.
+Access (get): O(n) - Linear traversal to reach the element.
+Search (contains): O(n) - Linear search through the list.
+Insertion (add):
+At the end: O(1) - Direct insertion.
+At a specific index: O(n) - Requires traversal to the index.
+Deletion (remove):
+From the end: O(1) - Direct removal.
+From a specific index: O(n) - Requires traversal to the index.
 
 Set
 =====
