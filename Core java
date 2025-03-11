@@ -7,27 +7,30 @@ using methods like Iterator or enhanced for loop. This exception is typically en
 (e.g., using add, remove, or put methods) during iteration.
 7)concurrentModificatiobRxception
 ====================================
-List <Integer> list=new ArrayList<>();
-list.add(1);
-list.add(2);
-list.add(3);
-list.add(4);
-try{
-Iterator <Integer> iterator=new Iterator<>();
-Integer value=iterator.next();
-while(iterator.hashNext){
-if(value%2==0){
-list.remove(list);
-} }
-catch(concurrentModificatiobRxception e){
-Systrm.out.println("concurrentModificatiobRxception caugght"+e);
-Sysout("list after modification attempt "+ list);
+package com.nt.list;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class ConcurrentModificationException {
+	public static void main(String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("Apple");
+        list.add("Banana");
+        list.add("Cherry");
+
+        // Using an iterator to iterate over the list
+        Iterator<String> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            String fruit = iterator.next();
+            if (fruit.equals("Banana")) {
+                // Modifying the list while iterating
+                list.remove(fruit); // This will cause ConcurrentModificationException
+            }
+        }
+    }
 }
-
-}
-
-
 Java is Pass by Value or call by referance?
 ----------------------------------------------
 Java is strictly "pass-by-value." When passing primitives, the actual value is copied. 
