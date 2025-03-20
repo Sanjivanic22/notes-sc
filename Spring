@@ -318,28 +318,6 @@ Spring AOP
 AOP is methodology of programming  to solve the problems related OOP style programming,but it is bult on the top of of oops style programming.In AOP code is not clumzy,becoz the primary and secondary logics are saperated
 Improves the redability  and modularity of the code.
 
-AOP principle/terminology
---------------------------
-A) Aspect(what you want apply)
-It is class that represent secondary logic.this is called as middleware service or cross cutting concern
-
-B)Advice(how u want to apply)
-The action taken place by aspect is called Advice.for Aspect if specify how it should be excuted/behaved then it is called Advice.
-
-jointPoint(where we can apply)
-The possible places in target class where aspect can be adviced.These can be fields,constructor,methods.As of now spring supports only methods as join points.
-
-Pointcut(where we have applied or we want to apply)
-Collection of join points where the aspect are adviced i.e pointcut holds set of b.method/target method names belonging target class to apply aspect /advices
-Target class
-The class that contains b.method/target methods having primary logics nothig but class with joinpoints
-
- Weaving
-The process of applying or mixups secondary logics with primary logics and generating in memory proxy class is called weaving process.Aop enabled softwares will perform this weaving process.
-
-Proxy class
-The output /outcome f weaving process done spring Aop enabled framework or software is called proxy class.
-
 the key differences between SOAP and REST:
 =================================================================================
 
