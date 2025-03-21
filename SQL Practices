@@ -1,5 +1,6 @@
 'INDEX
-In SQL databases, an index is a database object that improves the speed of data retrieval operations on a table. Indexes are created on one or more columns of a table and function similarly to the index of a book, allowing the database to find rows more quickly and efficiently.
+In SQL databases, an index is a database object that improves the speed of data retrieval operations on a table.
+Indexes are created on one or more columns of a table and function similarly to the index of a book, allowing the database to find rows more quickly and efficiently.
 
 Types of Indexes
 Primary Index: Automatically created when a primary key is defined. Ensures that data in the indexed columns is unique and helps quickly locate rows.
@@ -25,7 +26,8 @@ SQL joins are used to combine rows from two or more tables based on a related co
 INNER JOIN
 ===========
 An INNER JOIN returns rows that have matching values in both tables. It only includes rows where the join condition is true.
-If no matching rows are found when performing an INNER JOIN, the query will return an empty result set. This means that none of the rows from either of the tables meet the join condition specified in the ON clause.
+If no matching rows are found when performing an INNER JOIN, the query will return an empty result set. 
+This means that none of the rows from either of the tables meet the join condition specified in the ON clause.
 
 SELECT employees.name, departments.department_name
 FROM employees
