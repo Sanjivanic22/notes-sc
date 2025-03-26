@@ -318,27 +318,22 @@ Spring AOP
 AOP is methodology of programming  to solve the problems related OOP style programming,but it is bult on the top of of oops style programming.In AOP code is not clumzy,becoz the primary and secondary logics are saperated
 Improves the redability  and modularity of the code.
 
-the key differences between SOAP and REST:
-=================================================================================
-
-| Aspect                   | SOAP (Simple Object Access Protocol)              | REST (Representational State Transfer)             |
-|--------------------------|---------------------------------------------------|---------------------------------------------------|
-| **Protocol/Architecture**| Protocol                                          | Architectural Style                               |
-| **Communication Style**  | XML-based messaging                               | Standard HTTP methods (GET, POST, PUT, DELETE)    |
-| **Transport**            | Primarily HTTP, also supports SMTP, TCP, etc.     | Primarily HTTP/HTTPS                              |
-| **Message Format**       | Strictly XML with envelope, header, and body      | Flexible formats: JSON, XML, HTML, plain text     |
-| **Statefulness**         | Generally stateful                                | Stateless                                         |
-| **Resource Focus**       | Focus on actions and operations                   | Focus on resources (identified by URIs)           |
-| **Contract**             | Strongly typed, formal contract via WSDL          | No formal contract, URI endpoints and HTTP methods|
-| **Security**             | Built-in WS-Security for end-to-end security      | Relies on HTTPS, OAuth, JWT for security          |
-| **Performance**          | Heavier due to XML and additional overhead        | Lighter, generally faster due to JSON             |
-| **Scalability**          | Complex to scale due to overhead                  | Easier to scale horizontally due to statelessness |
-| **Error Handling**       | Standardized fault elements in message body       | HTTP status codes (e.g., 200, 404, 500)           |
-| **Use Cases**            | Enterprise applications, complex transactions     | Web/mobile applications, microservices            |
-| **Examples**             | Banking services, payment gateways                | Social media platforms, e-commerce websites       |
 
 
 
+@Component: Indicates that a class is a Spring-managed component.
+@Service: Specialization of @Component for service-layer classes.
+@Repository: Specialization of @Component for DAO (Data Access Object) classes.
+@Controller: Specialization of @Component for Spring MVC controllers.
+@RestController: Combines @Controller and @ResponseBody to simplify the creation of RESTful web services.
+@Autowired: Used for automatic dependency injection.
+@Qualifier: Specifies which bean to inject when there are multiple beans of the same type.
+@Primary: Indicates that a bean should be given preference when multiple beans qualify for autowiring.
+@Configuration: Indicates that a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions and service requests.
+@Bean: Indicates that a method produces a bean to be managed by the Spring container.
+@Value: Used to inject property values into beans.
+@PropertySource: Provides a convenient and declarative mechanism for adding a PropertySource to Spring's Environment.
+@Transactional: Indicates that a method or class should be wrapped in a database transaction.
 
 
 
