@@ -1,1 +1,330 @@
 
+core java questions and ans
+==============================
+1)Difference between final,finalize and finally
+Can you explain the memory management in java and changes in java 8
+JVm automatically manages the memory and its devided into into multiple
+heap menmory,stack memory,method area and native memory
+
+3)what are the oops principle 
+Encapsulation 
+abstraction 
+diff b/w them
+
+what is diff b/w encapsulation and abstractions
+Aspect	     Encapsulation	                                                              Abstraction
+Definition	Bundles data and methods into a class and restricts direct access to fields.	Hides implementation details and shows only essential features.
+ Purpose	Protects internal data and controls access.	                          Simplifies complexity by focusing on what an object does.
+  Focus         	Securing and controlling access to data.	                               Simplifying interaction by hiding details.
+Implementation	Achieved using private fields and public getters/setters.              	Achieved using abstract classes, interfaces, and abstract methods.
+Visibility	   Controlled via access modifiers (private, public, etc.).	                  Hides internal logic; user only sees relevant features.
+
+Polymorphism 
+Inheritance
+
+what is diff b/w abstract and interface
+Abstract Class
+27. Definition: An abstract class is a class that cannot be instantiated and may contain abstract methods (methods without a body) as well as concrete methods (methods with a body).
+28. Usage: Used to share common code among related classes.
+29. Inheritance: A class can extend only one abstract class (single inheritance).
+30. Members: Can have fields, constructors, and methods (both abstract and concrete).
+31. Access Modifiers: Can use all access modifiers (public, protected, private).
+nterface
+32. Definition: An interface is a reference type that can contain only abstract methods (until Java 8, when default and static methods were introduced) and constants.
+33. Usage: Used to define a contract that classes must follow.
+34. Inheritance: A class can implement multiple interfaces (multiple inheritance).
+35. Members: Can have abstract methods, default methods, static methods, and constants.
+36. Access Modifiers: Methods are implicitly public and abstract; fields are implicitly public, static, and final.
+
+Solid principle
+
+can we overload static method?
+Stringbuilder vs Stringbuffer
+how we can handle concurrentmodificationException.
+oncurrentModificationException occurs when a collection is modified while iterating over it using iterators, enhanced for-loops, or other methods 
+that are not designed for concurrent modification. Here are some ways to handle or avoid this exception:
+1. Using Iterator's remove Method
+Instead of modifying the collection directly, use the remove method of the Iterator:
+2. Using CopyOnWriteArrayList
+For concurrent modifications, use thread-safe collections like CopyOnWriteArrayList:
+Absolutely! CopyOnWriteArrayList is a thread-safe variant of ArrayList provided in the java.util.concurrent package. 
+It is designed for use in concurrent environments where read operations 
+are more frequent than write operations. Here are some key points about CopyOnWriteArrayList:
+
+3. Using synchronized Block
+Synchronize the block of code that modifies the collection:
+4. Using Stream API
+Use the Stream API to filter out elements and collect the result into a new list:
+
+diff between Collection and stream.
+Collections are used for storing and managing groups of elements.
+Streams are used for processing sequences of elements in a functional style.
+
+comparable vs comparator
+Comparable:
+
+Defines natural ordering within the class itself.
+Only one compareTo method can be implemented per class.
+Used when a single default sorting order is needed.
+Comparator:
+
+Defines custom ordering outside the class.
+Multiple Comparator implementations can be created for different sorting criteria.
+Used when multiple sorting orders are needed or when you cannot modify the class.
+when we override equal method and hashcode
+Custom Equality Logic: When you need to define custom logic for comparing objects based on specific attributes rather than their memory addresses.
+Hash-Based Collections: When you plan to use your objects in hash-based collections, ensuring that objects considered equal have the same hash code.
+
+why we use throw if exception can be handle usig try catch
+Reasons to Use throw:
+Propagating Exceptions: Sometimes, you might want to propagate an exception to a higher level in the call stack rather than handling it immediately. 
+This allows the calling method to handle the exception or propagate it further.
+Custom Exceptions: You can create and throw custom exceptions to signal specific error conditions in your application. 
+This makes your code more readable and maintainable.
+Separation of Concerns: By throwing exceptions, you can separate the logic of detecting errors from the logic of handling them. 
+This can make your code cleaner and easier to understand.
+Fail-Fast Principle: Throwing exceptions immediately when an error condition is detected can help you identify and fix issues early in the development process.
+
+
+Collections
+==============
+1)what are the collections you used in your project 
+List Set map
+what is diff b/w araylist and linkedlist
+internal working of Hashmap
+Concurrent hashmap
+what is diferance b/w hashmap and concurrent hashmap
+how to handle Concurrecy in java
+Handling concurrency in Java involves managing multiple threads to ensure that they operate correctly and efficiently without causing data inconsistencies
+ or other issues. Here are some key concepts and tools for handling concurrency in Java:
+
+1. Synchronized Methods and Blocks
+Use the synchronized keyword to control access to critical sections of code, ensuring that only one thread can execute them at a time.
+
+2. Locks
+Java provides more flexible locking mechanisms through the java.util.concurrent.locks package, such as ReentrantLock.
+3. Atomic Variables
+Use atomic variables from the java.util.concurrent.atomic package for lock-free thread-safe operations on single variables.
+4. Concurrent Collections
+Java provides thread-safe collections in the java.util.concurrent package, such as ConcurrentHashMap, CopyOnWriteArrayList, and BlockingQueue.
+5. Executors and Thread Pools
+Use the ExecutorService framework to manage a pool of threads, simplifying the process of managing thread lifecycles.
+
+Multithreading 
+================
+how to implement Multthreading
+Summary:
+Extending Thread Class: Create a new thread by extending Thread and overriding run.
+Implementing Runnable Interface: Implement Runnable and pass it to a Thread object.
+Using ExecutorService: Manage a pool of threads with ExecutorService.
+Synchronization: Use synchronization to avoid race conditions and ensure thread safety.
+
+what is deadlock and Race constion and how to overcome?
+A Deadlock is situation where two or more more threads are unbale to proceed because each is waiting for other to release resource.
+*Example of Deadlock*
+Suppose we have two threads, T1 and T2, and two resources, R1 and R2.
+ 
+1. T1 locks R1 and waits for R2.
+2. T2 locks R2 and waits for R1.
+ 
+In this situation, both threads are waiting for each other to release resources, resulting in a deadlock.
+# Race Condition
+A race condition is a situation where the behavior of a program depends on the relative timing of threads.
+ 
+*Example of Race Condition*
+Suppose we have two threads, T1 and T2, that are incrementing a shared variable, x.
+ 
+1. T1 reads the value of x (x = 0).
+2. T2 reads the value of x (x = 0).
+3. T1 increments the value of x (x = 1).
+4. T2 increments the value of x (x = 1).
+# Prevention Techniques
+*Deadlock Prevention*
+1. Avoid nested locks.
+2. Use lock timeouts.
+3. Establish a lock ordering mechanism.
+ 
+*Race Condition Prevention*
+1. Use synchronization mechanisms (e.g., locks, semaphores).
+2. Use atomic operations.
+3. Avoid shared variables.
+
+1) What is submit and execute command do
+	Submit Command:
+	• Purpose: The submit method is used to submit a task for execution and returns a Future object. This Future can be used to retrieve the result of the computation, handle exceptions, and monitor the status of the task.
+	
+• Key Point: The submit method is useful when you need to get the result of the task or manage its execution
+
+.
+1. Execute Command:
+• Purpose: The execute method is used to execute a task but does not return a Future. It is typically used for tasks that do not need to return a result or be monitored.
+
+Key Point: The execute method is simpler and is used for tasks where you do not need to track the outcome
+Which is better between Thread and Runnable and why
+What is Reentrant Lock
+Syncronization and class level lock and which method release the lock
+
+java 8 features
+=====================
+wht are the features
+what is lambda expression
+syntax for Lambda expression
+what is functional interface and examples 
+what is the diff b/w Runnable and Callable
+why default method allowed in function interface.
+how we can achieve muliple inheritance in java 8.
+what are the predefined functional interface
+what is Intermediate and terminal opeartions and examples
+Programs
+stream api find maximum salary of employee.
+java 8 changes in date and time.-done
+what is optional in java 8.-done
+can we replace @service with @component and vise versa?
+	Spring:
+===============
+	- What’s Spring framework & advantages-done
+	
+	- What’s IOC(Inversion of Control)-done
+	
+	- Different ways of Dependency Injections-done
+	- Difference between Constructor & Setter Injection -done
+	
+	- Difference between independent Singleton object & Spring Singleton Bean
+	
+	- What’s are different scopes of Spring Beans.-done
+	- What’s autowiring & different modes-done
+	- What's limitations of autowiring
+What is Spring Bean life cycle and steps also
+can we use @compoenet in repository class and can we use @repository in component 
+Setter Injection vs Constructor Injection
+
+ springboot
+=======================
+how to secure end point from URL using spring restful services
+1)how can we use security
+2)WHAT IS jwt HOW TO IMPLEMENT AND VALIDATE
+6) What are the issues you faced in production and how you handled
+8) caching, qualifiers, circular reference, annotations , REST APIs 
+	what if build stucked when PR creating.
+	what key mecanism will be used to secure external API server.
+What’s repository in Spring Data JPA
+
+How we can use multiple database in the project
+What is AOP
+Singleton, Factory and Abstract Factory Design pattern and where this Design pattern used in your project
+What is strong reference, Soft Reference., Weak Reference and Phantom Reference
+How you can implement second level cache in your project
+
+@GeneratedValue used for
+ which HTTP method will be used for create and update at same time.
+	@bean used for?
+
+	how we can get value from properties file in springboot.
+	hoe we can find out that code is 80% coverge in sonarcube.
+	what is the best authentication can be used to handle security in payment method based application.
+how we can hit external url from application.
+
+	if there is multiple restcontroller in one application then how system will address that which controller needs to be called.
+What is spring boot & its architecture -done
+	
+	- What are the advantages of spring boot-done
+	- What’s the disadvantage of Spring boot-done
+	- What’s the important configuration file in Spring boot
+	
+	- What is Spring Boot and What Are Its Main Features?-done
+	- What Are the Differences Between Spring and Spring Boot?-done
+What is Spring Initializr?
+How to Disable a Specific Auto-Configuration?
+What’s Actuator
+ How to migrate existing project to Springboot?
+
+	REST API:
+==================
+	- What is REST web services
+	- What are HTTP methods supported by REST
+	- What’s JAX-RS
+	- What’s @RestController
+	- Difference between SOAP & REST Webservices
+	- What different output types supported by REST
+	- How request payload from Client request gets mapped to @RequestBody object – Jackson library
+	- Best practices for creating REST URI.
+	- What’s @PathParameter
+	- What’s are Idempotent methods
+	- How to create/implement REST API
+	- How to expose Restful webservice
+	how to convert xml data into json
+
+
+Annotations
+============
+
+database
+=========
+what is the diff b/w primary key,unique key and foreign key
+whta is index how it works
+what is diff b.w delet and truncate
+
+Microservices
+================
+what is microservices
+what is diff b/w monolithic and microservices
+what is API gateway
+hw to implement gatway API
+Circuit breaker design pattern
+what eureka server 
+service dscovery 
+service registry
+load balancer
+synchronous and asynchronous communication
+hystrix
+how we can handle exception in microservice if any service got fail .
+saga design pattern
+webclient 
+feign client
+admin server
+Zipkin server
+config server
+security(JWT) 
+redis
+CI/CD jenkin
+
+ Tools
+========
+Kafka 
+Swagger
+
+Git commands
+
+Testing
+=========
+Junit 
+Annotations
+
+
+Mokito
+======
+What is Mokito 
+wht is diff b/w Mock and Spay and injectWork
+Annotations
+
+
+Coding 
+========
+java 8 featurs coding and syntaxes of all
+java 8 based coding
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
