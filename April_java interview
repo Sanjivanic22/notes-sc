@@ -817,43 +817,429 @@ what is diff b.w delet and truncate
 
 Microservices
 ================
-what is microservices
-what is diff b/w monolithic and microservices
-what is API gateway
-hw to implement gatway API
-Circuit breaker design pattern
-what eureka server 
-service dscovery 
-service registry
-load balancer
-synchronous and asynchronous communication
-hystrix
-how we can handle exception in microservice if any service got fail .
-saga design pattern
-webclient 
-feign client
-admin server
-Zipkin server
-config server
-security(JWT) 
-redis
-CI/CD jenkin
+Microservices
+## what is microservice architecture
+-----------------------------------------
+Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
+loosely coupled servicesthat communicate with other over well defined API'S.  In this approach, an application is divided into a set of services, 
+each representing a specific business capability and running as a separate process or container.
 
- Tools
-========
-Kafka 
+## what is diferance b/w Microservice and Monolithic architecture.
+--------------------------------------------------------------------
+Microservices                                                             
+1)are small and focused on bussiness capabilities.
+2)Microservices can developed,deployed and scaled independatly.allowing  for agility and flexibility.
+3)microservices are allow to use of diffenert tecnology,programming language for each service depending on the specific requirement
+
+ Monolithic
+--------------
+1)Monolthic are larger and contains all functionality in signle unit
+2)monolithic requirs the entire application to be delpoyed and scale.d as whole
+3) entire application is developed in single technology stack.
+
+how microservice will communicate with each other
+Microservices can communicate with each other using various methods, each with its own benefits and trade-offs.  
+
+1. HTTP/REST
+Description: Microservices communicate over HTTP using RESTful APIs. Each service exposes endpoints that other services can call.
+Example: Service A makes an HTTP GET request to Service B to retrieve some data.
+
+2. Messaging (Asynchronous Communication)
+Description: Microservices communicate by sending messages to each other via a message broker (e.g., RabbitMQ, Kafka).
+Example: Service A publishes a message to a queue, and Service B consumes the message and processes it.
+.
+3. gRPC
+Description: gRPC is a high-performance, open-source RPC framework that uses HTTP/2 for transport and Protocol Buffers for serialization.
+Example: Service A calls a method on Service B using gRPC.
+
+4. Event-Driven Architecture
+Description: Microservices communicate by emitting and listening to events. An event bus or event streaming platform (e.g., Kafka) is used to publish and
+ subscribe to events.
+Example: Service A emits an event when a user is created, and Service B listens for this event to perform additional actions.
+
+5. Service Mesh
+Description: A service mesh (e.g., Istio) provides a dedicated infrastructure layer for handling service-to-service communication.
+Example: Service A communicates with Service B through the service mesh, which handles load balancing, retries, and security.
+
+What is Api gateways?
+-----------------------
+In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access the 
+underlaying microservices.
+it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
+API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
+it can handle the authentication and authorzation validate caces token.
+
+we use AWS API Gateway, a fully managed service provided by Amazon Web Services that makes it easy to create, publish, maintain, monitor, and secure APIs 
+at any scale.'"
+
+What is cicuit braking and wh to y it is so important?
+-------------------------------------------------------------
+circuit breaking is mechanism use in microservice to improve the resillience and functinonality of the system.
+it helps to prevent failure in once service from cascading and affecting the overall system to improve the system resilience
+it enables services and client application to handle n/w and service disruption more effectively leading to more robust and reliable MS.
+
+WHat is Eureka server?
+=-----------------------
+Eureka server is compoent of netflix,service discovery and resistration tool for building microservice based application.
+eureka server acts as centralized registry where MS can register themselves and discover service within the system.
+eureka servver server provides diffenet kind of functionality.
+service registration
+service discovery
+load balancing
+failover and fault tolarance
+
+what is service descovery?
+-----------------------------
+in microservices Service discovery  enables the automatic detection of services within a microservice architecture. 
+This process allows services to find and communicate with each other without hard-coding their network locations. 
+Service discovery addresses the dynamic nature of microservices, where instances of services can scale up or down, move across different hosts, 
+or restart at different network addresses.
+
+Service Registry:
+A central repository that maintains the list of service instances and their network locations (IP addresses and ports).
+The service registry is updated dynamically as services start and stop.
+
+What is load balanncer
+----------------------------
+A load balancer  is a component that distributes incoming network traffic across multiple service instances to ensure no single instance becomes a
+ bottleneck. 
+Load balancing enhances the reliability, availability, and scalability of microservices by managing the distribution of workloads and ensuring optimal 
+resource utilization.
+
+hystrix
+===========
+It helps to control the interactions between distributed services by adding fault tolerance logic, thereby ensuring that failures in one service
+do not cascade and cause system-wide outages.
+Hystrix helps in preventing cascading failures in a microservice architecture. 
+If one service fails, it ensures that the failure does not propagate to other services by isolating the faulty service.
+
+admin server
+In a microservices architecture, an admin server is used to manage and monitor the various microservices. 
+One popular tool for this purpose is Spring Boot Admin, which provides a web UI to visualize the metrics and health of multiple Spring Boot applications.
+<artifactId>spring-boot-admin-starter-server</artifactId> this dependancy need to add in pom.xml
+
+Zipkin server
+
+Zipkin is a distributed tracing system that helps troubleshoot latency problems in service architectures by collecting and querying trace data. 
+Setting up a Zipkin server allows you to visualize and analyze the performance of your microservices.
+You can set up a Zipkin server using various methods, including Docker, Java, and Homebrew.
+ 
+config server
+A Config Server in a microservices architecture provides a centralized way to manage external configuration properties for applications across all environments. 
+Spring Cloud Config Server is a popular choice for this purpose. 
+spring-cloud-config-server dependencies.
+
+feign client
+Feign is a declarative web service client that simplifies the process of making HTTP requests in a microservices architecture. It allows you 
+to define an interface for your REST client and automatically generates the implementation, making it easier to communicate between microservices.
+ 
+security(JWT)
+implementing JWT (JSON Web Token) security in a microservices architecture is a common approach to ensure secure communication and authentication \
+between services.
+
+1. Setting Up the Authentication Service
+The Authentication Service is responsible for authenticating users and issuing JWT tokens.
+
+Dependencies: Add the necessary dependencies to your pom.xml or build.gradle.
+<dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt</artifactId>
+    <version>0.9.1</version> 
+Authentication Service: Handles user authentication and issues JWT tokens.
+Other Microservices: Validate JWT tokens for each request using a filter.
+
+kafka
+=======
+Apache Kafka
+Apache Kafka is an open-source distributed event streaming platform used for building real-time data pipelines and streaming applications. 
+
+Key Features of Kafka
+High Throughput: Kafka can handle large volumes of data with low latency.
+Scalability: It can scale horizontally by adding more brokers to the cluster.
+Durability: Kafka stores data in a distributed, fault-tolerant manner.
+Stream Processing: Kafka Streams API allows for real-time processing of data streams.
+Integration: Kafka Connect API provides connectors to integrate with various data sources and sinks.
+
+Core Concepts
+Producer: An application that sends messages to Kafka.
+Consumer: An application that reads messages from Kafka.
+Broker: A Kafka server that stores and serves data.
+Topic: A category or feed name to which records are sent.
+Partition: A division of a topic's data, allowing for parallel processing.
+Offset: A unique identifier for each record within a partition.
+
+
+How Kafka Works
+Producers send records to a specific topic.
+Brokers store these records in partitions.
+Consumers subscribe to topics and read records from partitions.
+Kafka Streams processes the data in real-time.
+
+Example Use Cases
+Log Aggregation: Collecting and aggregating log data from various sources.
+Real-Time Analytics: Processing and analyzing data in real-time.
+Event Sourcing: Storing state changes as a sequence of events.
+Data Integration: Connecting different data systems for seamless data flow.
+
+
+RabbitMQ is an open-source message broker software that facilitates the exchange of messages between different systems or applications.
+ It is widely used for building scalable and reliable distributed systems.
+
+Key Features of RabbitMQ
+Reliability: RabbitMQ ensures message delivery through acknowledgments, persistent messages, and clustering.
+Flexibility: It supports multiple messaging protocols, including AMQP, MQTT, and STOMP.
+Scalability: RabbitMQ can be deployed in distributed and federated configurations to handle high loads.
+Management: It offers a user-friendly management interface and CLI tools for monitoring and managing the broker.
+Extensibility: RabbitMQ supports plugins to extend its functionality.
+
+Core Concepts
+Producer: An application that sends messages to RabbitMQ.
+Consumer: An application that receives messages from RabbitMQ.
+Queue: A buffer that stores messages until they are consumed.
+Exchange: Routes messages to queues based on routing rules.
+Binding: A link between an exchange and a queue that defines how messages are routed.
+
+How RabbitMQ Works
+Producers send messages to an exchange.
+Exchanges route messages to one or more queues based on routing keys and binding rules.
+Consumers subscribe to queues and process the messages.
+Example Use Cases
+Task Queues: Distributing tasks among multiple workers.
+Message Broadcasting: Sending messages to multiple consumers.
+Request/Reply: Implementing RPC (Remote Procedure Call) patterns.
+
+A **ReentrantLock** is a type of lock provided by the `java.util.concurrent.locks` package in Java 
+that allows threads to enter a lock they already hold. This means that if a thread has acquired the lock, it can re-enter the lock without being blocked,
+ which is useful for implementing synchronized methods or blocks.
+
+### Key Features of ReentrantLock
+
+1. **Reentrancy**: A thread can acquire the lock multiple times without blocking itself.
+2. **Fairness**: You can create a fair lock that grants access to threads in the order they requested it.
+3. **Lock Methods**: Provides methods for locking, unlocking, and checking the lock status.
+
+CACHING
+Caching is a technique used to store frequently accessed data in a high-speed storage layer,
+ so that future requests for that data can be served faster than accessing the primary storage location. This improves performance and reduces latency.
+
+Redis is a powerful in-memory data structure store, often used as a cache to improve the performance and scalability of applications.
+
+Key Features of Redis Cache
+In-Memory Storage: Redis stores data in memory, providing extremely fast read and write operations.
+Data Structures: Supports various data structures like strings, hashes, lists, sets, sorted sets, bitmaps, hyperloglogs, and geospatial indexes.
+Persistence: Offers options for persistence, allowing data to be saved to disk.
+Replication: Supports master-slave replication for high availability.
+Transactions: Provides support for transactions.
+Pub/Sub: Includes publish/subscribe capabilities for messaging.
+Lua Scripting: Allows execution of Lua scripts for complex operations.
+
+Common Caching Patterns
+Cache-Aside: The application first checks the cache for data. If the data is not found (cache miss), it retrieves the data from the database and stores it in the cache for future requests1.
+Write-Through: Data is written to the cache and the database simultaneously. This ensures that the cache is always up-to-date1.
+Write-Behind: Data is written to the cache first and asynchronously updated in the database. This improves write performance1.
+Query Caching: Caches the results of database queries to speed up repeated querie 
+
+CI/CD
+==========
+A CI/CD pipeline is an automated workflow that streamlines the software delivery process, integrating code changes, running tests, and 
+deploying applications.
+Key Components of a CI/CD Pipeline
+Source Code Management
+Version Control: Tools like Git are used to manage code changes and maintain a single source of truth1.
+Build Automation
+Build Tools: Tools like Maven or Gradle compile the code, package it, and prepare it for deployment2.
+
+Automated Testing
+Unit Tests: Verify individual components of the code.
+Integration Tests: Ensure that different components work together.
+End-to-End Tests: Simulate user scenarios to validate the entire application2.
+
+Deployment Automation
+Continuous Delivery: Automatically prepares code changes for release to production.
+Continuous Deployment: Automatically deploys every change that passes automated tests to production1.
+CI/CD Pipeline Stages
+Commit Stage
+Developers commit code changes to the version control system.
+Automated tests run to validate the changes2.
+Build Stage
+The code is compiled and packaged.
+Additional tests may be run to ensure the build is successful2.
+Test Stage
+Comprehensive testing is performed, including unit, integration, and end-to-end tests2.
+Deploy Stage
+The application is deployed to staging or production environments.
+Automated deployment tools ensure consistent and reliable releases1.
+Benefits of CI/CD Pipelines
+Early Error Detection: Automated tests catch errors early in the development process2.
+Faster Releases: Shorter release cycles enable quicker delivery of new features and bug fixes1.
+Consistent Deployments: Automated processes reduce the risk of human error during deployment2.
+Improved Collaboration: Teams can work simultaneously on different parts of the application, integrating changes frequently1.
+
+Tools for CI/CD Pipelines
+Jenkins: An open-source automation server that supports building, deploying, and automating projects1.
+GitLab CI: Integrated CI/CD capabilities within GitLab1.
+CircleCI: A cloud-based CI/CD tool that automates the build, test, and deployment process2.
+Travis CI: A CI/CD service used to build and test projects hosted on GitHub
+
+jenkin
+=======
+Jenkins is a popular open-source automation server used to automate various aspects of software development, including building, testing, and
+deploying applications. Here are some key points about Jenkins:
+
+Key Features of Jenkins
+Extensibility: Jenkins supports hundreds of plugins that integrate with various tools in the CI/CD toolchain, making it highly extensible1.
+Easy Installation: Jenkins is a self-contained Java-based program that can be easily installed on various operating systems, including Windows, Linux, and macOS1.
+Web Interface: Jenkins provides a user-friendly web interface for configuration and management, including on-the-fly error checks and built-in help1.
+Distributed Builds: Jenkins can distribute build and test loads across multiple machines, speeding up the CI/CD process1.
+Pipeline as Code: Jenkins supports defining build pipelines as code using the Jenkinsfile, which allows for versioning and better management of the CI/CD pipelin
+Basic Concepts
+
+Jobs/Projects: The fundamental unit of work in Jenkins, which can be configured to perform various tasks like building code, running tests, and deploying applications.
+Build Triggers: Mechanisms to start jobs, such as SCM changes, scheduled times, or manual triggers.
+Nodes/Agents: Machines that Jenkins uses to execute jobs. The main Jenkins server is called the master, and additional machines are called agents.
+Plugins: Extensions that add functionality to Jenkins, such as integration with version control systems, build tools, and deployment platforms.
+
 Swagger
+==========
+
+hw to implement gatway API
+synchronous and asynchronous communication
+**Synchronous** and **asynchronous** communication are two fundamental approaches to interaction in computing and networking.
+
+### Synchronous Communication
+
+**Synchronous communication** occurs when the sender and receiver are synchronized in time. 
+This means that both parties are actively engaged in the communication process at the same time.
+
+#### Characteristics:
+- **Immediate Response**: The sender waits for the receiver to process the request and respond immediately.
+- **Blocking**: The sender is blocked until the receiver completes the operation.
+- **Examples**: 
+  - **HTTP Requests**: Traditional web requests where the client waits for the server to respond.
+  - **Function Calls**: In programming, a function call where the caller waits for the function to return a result.
+
+#### Pros and Cons:
+- **Pros**: Easier to understand and debug, suitable for real-time applications.
+- **Cons**: Can lead to inefficiencies and delays if the receiver is slow or unavailable.
+
+### Asynchronous Communication
+
+**Asynchronous communication** occurs when the sender and receiver do not need to be synchronized in time. 
+The sender can continue processing other tasks while waiting for the receiver to respond.
+
+#### Characteristics:
+- **Non-blocking**: The sender does not wait for the receiver to complete the operation and can continue with other tasks.
+- **Deferred Response**: The response can be processed at a later time.
+- **Examples**: 
+  - **Message Queues**: Systems like RabbitMQ or Kafka where messages are sent and processed independently.
+  - **Promises/Futures**: In programming, constructs that allow operations to be performed asynchronously.
+
+#### Pros and Cons:
+- **Pros**: More efficient use of resources, better scalability, suitable for distributed systems.
+- **Cons**: More complex to implement and debug, requires careful handling of concurrency and state.
+
+how we can handle exception in microservice if any service got fail .
+
+saga design pattern
+=====================
+In a microservices architecture, each service is responsible for its own domain logic and data. When a business process involves multiple services, it can be challenging to ensure data consistency and integrity across all services.
+ 
+# Solution
+The Saga pattern solves this problem by introducing a central orchestrator, called the Saga, which coordinates the execution of local transactions across multiple services.
+ 
+*Key Components*
+1. *Saga*: The central orchestrator that coordinates the execution of local transactions.
+2. *Local Transactions*: Each service executes a local transaction, which can either succeed or fail.
+3. *Compensating Actions*: If a local transaction fails, the Saga executes a compensating action to undo the effects of the failed transaction.
+ 
+*How it Works*
+1. The Saga receives a request to execute a business process.
+2. The Saga breaks down the business process into a series of local transactions.
+3. Each local transaction is executed by a corresponding service.
+4. If a local transaction succeeds, the Saga proceeds to the next transaction.
+5. If a local transaction fails, the Saga executes a compensating action to undo the effects of the failed transaction.
+6. The Saga continues to execute local transactions and compensating actions until the business process is complete.
+ 
+*Benefits*
+1. *Improved Data Consistency*: The Saga pattern ensures that data is consistent across all services involved in the business process.
+2. *Fault Tolerance*: The Saga pattern provides fault tolerance by executing compensating actions to undo the effects of failed transactions.
+3. *Scalability*: The Saga pattern allows for scalability by distributing the execution of local transactions across multiple services.
+ 
+*Example*
+Suppose we have an e-commerce application that involves multiple services:
+ 
+1. *Order Service*: Responsible for creating and managing orders.
+2. *Inventory Service*: Responsible for managing inventory levels.
+3. *Payment Service*: Responsible for processing payments.
+ 
+When a customer places an order, the Saga pattern can be used to coordinate the execution of local transactions across these services:
+ 
+1. The Saga receives a request to create a new order.
+2. The Saga breaks down the business process into a series of local transactions:
+    - Create a new order (Order Service).
+    - Reserve inventory (Inventory Service).
+    - Process payment (Payment Service).
+3. Each local transaction is executed by the corresponding service.
+4. If any local transaction fails, the Saga executes a compensating action to undo the effects of the failed transaction.
+ 
+By using the Saga pattern, we can ensure that the business process is executed consistently and reliably, even in the presence of failures.
 
 Git commands
 
 Testing
 =========
 Junit 
+1. Annotations:
+• @Test: Marks a method as a test method.
+• @BeforeEach: Runs before each test method to set up test data.
+• @AfterEach: Runs after each test method to clean up test data.
+• @BeforeAll: Runs once before all test methods in the class.
+• @AfterAll: Runs once after all test methods in the class.
+• @Disabled: Disables a test method.
+2. Assertions:
+• assertEquals(expected, actual): Checks if two values are equal.
+• assertTrue(condition): Checks if a condition is true.
+• assertFalse(condition): Checks if a condition is false.
+• assertNotNull(object): Checks if an object is not null.
+assertThrows(exceptionClass, executable): Checks if an exception is thrown.
 Annotations
 
 
 Mokito
 ======
+	Mockito is a popular mocking framework for unit tests in Java. It allows you to create mock objects and define their behavior, making it easier to test your code in isolation. Here are some key features and concepts:
+	Key Features
+	1. Mock Creation: Create mock objects for interfaces and classes.
+	2. Stubbing: Define the behavior of mock methods.
+	3. Verification: Verify that certain methods were called on the mock objects.
+	4. Annotations: Use annotations like @Mock, @Spy, @Captor, and @InjectMocks to simplify mock creation and injection.
+	
+	
+	@Mock
+	• Purpose: Creates a mock object for the specified class or interface.
+	• Usage: Used to mock dependencies in your test class.
+	• Example:
+@Mock
+private MyService myService;
+	@Spy
+	• Purpose: Creates a spy object, which is a partial mock. It allows you to call real methods while still being able to stub and verify interactions.
+	• Usage: Used when you want to test real methods but also need to mock some behavior.
+	• Example:
+@Spy
+private MyService myService = new MyService();
+	@Captor
+	• Purpose: Creates an ArgumentCaptor to capture arguments passed to mock methods.
+	• Usage: Used to capture and verify the arguments passed to a method.
+	• Example:
+@Captor
+private ArgumentCaptor<String> captor;
+	@InjectMocks
+	• Purpose: Injects mock objects into the tested object automatically.
+	• Usage: Used to inject mocks into the object under test.
+	• Example:
+@InjectMocks
+private MyController myController;
+
 What is Mokito 
 wht is diff b/w Mock and Spay and injectWork
 Annotations
