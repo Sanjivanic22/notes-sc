@@ -566,49 +566,227 @@ SpringApplication.run(YourApplication.class, args);
 	
 	- Difference between independent Singleton object & Spring Singleton Bean
 	
+Independent Singleton Object:
+Definition: A Singleton object is a design pattern that ensures a class has only one instance and provides a global point of access to that instance.
+Implementation: Typically implemented using a private constructor, a static instance variable, and a public static method to return the instance.
+Lifecycle: The lifecycle of the Singleton object is managed manually by the developer. The instance is created when first accessed and remains in memory for the duration of the application.
+Scope: The Singleton object is application-wide, meaning it is shared across the entire application.
 
+Spring Singleton Bean:
+Definition: A Spring Singleton Bean is a bean managed by the Spring container that is defined with a singleton scope. This means that only one instance of the bean is created and shared within the Spring container.
+Implementation: Configured using Spring's XML configuration or annotations (@Bean, @Scope("singleton")).
+Lifecycle: The lifecycle of the Singleton Bean is managed by the Spring container. The instance is created when the container is initialized and remains in memory for the duration of the container's lifecycle.
+Scope: The Singleton Bean is container-wide, meaning it is shared within the Spring container but not necessarily across the entire application if multiple containers are used.
 	- What's limitations of autowiring
 
 can we use @compoenet in repository class and can we use @repository in component 
+Yes, you can use @Component in a repository class and @Repository in a component class, but there are specific reasons and best practices for using each annotation.
 
- springboot
+@Component:
+Generic Annotation: @Component is a generic stereotype annotation indicating that the class is a Spring-managed component.
+Usage: It can be used on any Spring-managed bean, including service, repository, and controller classes.
+@Repository:
+Specialized Annotation: @Repository is a specialized stereotype annotation indicating that the class is a Data Access Object (DAO). 
+It provides additional features such as exception translation.
+Usage: It is typically used on classes that interact with the database, such as repository classes.
+ 
+springboot
 =======================
 how to secure end point from URL using spring restful services
-1)how can we use security
+Securing endpoints in Spring RESTful services is crucial to protect your application from unauthorized access and potential security threats.
+1. Use HTTPS
+Ensure that your application uses HTTPS to encrypt communication between the client and server. This prevents data from being intercepted during transmission.
+
+2. Spring Security Configuration
+Extend the WebSecurityConfigurerAdapter class and override its methods to configure security settings.
+3. Role-Based Access Control
+Use role-based access control to limit access to sensitive resources based on user roles.
+4. **JWT stateless authentication. This involves generating a token upon successful login and validating it for subsequent requests.
+
 2)WHAT IS jwt HOW TO IMPLEMENT AND VALIDATE
+What is JWT?
+JSON Web Token (JWT) is an open standard (RFC 7519) for securely transmitting information between parties as a JSON object. 
+It is commonly used for authentication and authorization in web applications. JWTs are compact, self-contained, and can be signed and optionally encrypted to ensure the integrity and confidentiality of the information they contain12.
+
+Structure of JWT
+A JWT consists of three parts:
+Header: Contains metadata about the token, such as the type of token and the algorithm used for signing.
+Payload: Contains the claims, which are statements about an entity (typically the user) and additional data.
+Signature: Ensures the token hasn't been altered. It is created using the header, payload, and a secret key.
+
+Implementing JWT
+To implement JWT in a Spring Boot application, follow these steps:
+
+1. Add Dependencies
+Add the necessary dependencies to your pom.xml file:
+<artifactId>jjwt</artifactId>
+    <version>0.9.1</version>
+2. Create JWT Utility Class
+Create a utility class to generate and validate JWT tokens:
+3. Configure Spring Security
+Configure Spring Security to use JWT for authentication:
+4. Create Authentication Filter
+Create a filter to validate JWT tokens:
+Validating JWT
+To validate a JWT, you need to:
+
+Extract Claims: Parse the token and extract the claims.
+Verify Signature: Ensure the token's signature matches the expected signature using the secret key.
+Check Expiration: Verify that the token has not expired.
+
 6) What are the issues you faced in production and how you handled
 8) caching, qualifiers, circular reference, annotations , REST APIs 
 	what if build stucked when PR creating.
 	what key mecanism will be used to secure external API server.
+
 What’s repository in Spring Data JPA
+In Spring Data JPA, a repository is a central interface that provides a way to perform CRUD (Create, Read, Update, Delete) operations on entities without the need to write boilerplate code. It abstracts the data access layer and allows you to interact with the database in a more convenient and consistent manner.
+
+Key Points:
+Interface-Based: Repositories are defined as interfaces, and Spring Data JPA provides the implementation at runtime.
+CRUD Operations: They provide methods for basic CRUD operations and can be extended to include custom queries.
+Query Methods: You can define query methods by simply declaring method signatures that follow a specific naming convention.
+Common Repository Interfaces:
+CrudRepository: Provides CRUD functionality.
+Purpose: Provides basic CRUD (Create, Read, Update, Delete) operations.
+Methods:
+save(S entity): Saves a given entity.
+findOne(ID id): Retrieves an entity by its ID.
+findAll(): Returns all entities.
+count(): Returns the count of entities.
+delete(T entity): Deletes a given entity.
+exists(ID id): Checks if an entity exists by its ID.
+JpaRepository: Extends CrudRepository and PagingAndSortingRepository to provide additional JPA-specific methods.
+flush(): Flushes all pending changes to the database.
+saveAndFlush(S entity): Saves an entity and flushes changes immediately.
+deleteInBatch(Iterable<T> entities): Deletes the given entities in a batch.
+
+PagingAndSortingRepository: Adds methods for pagination and sorting.
+findAll(): Returns all entities.
+findAll(Sort sort): Returns all entities sorted by the given options.
+findAll(Pageable pageable): Returns a paginated list of entities.
 
 How we can use multiple database in the project
+=====================================================
+Using multiple databases in a Spring Boot project involves configuring multiple DataSource beans and setting up separate EntityManagerFactory 
+and TransactionManager beans for each database. Here's a step-by-step guide to achieve this:
+
+1. Add Dependencies
+Ensure you have the necessary dependencies in your pom.xml file:
+2. Configure DataSources
+Define the configurations for each database in your application.properties or application.yml file.
+3. Create Configuration Classes
+Create separate configuration classes for each DataSource, EntityManagerFactory, and TransactionManager.
+follow same process for secondary DB
+4. Define Entity Classes and Repositories
+Create entity classes and repositories for each database, ensuring they are in the correct packages.
+
 What is AOP
+
 Singleton, Factory and Abstract Factory Design pattern and where this Design pattern used in your project
+==========================================================================================================
+
 What is strong reference, Soft Reference., Weak Reference and Phantom Reference
 How you can implement second level cache in your project
 
 @GeneratedValue used for
+The @GeneratedValue annotation in Java is used to specify how the primary key value should be generated for an entity. It is typically used in conjunction
+with the @Id annotation in JPA (Java Persistence API) to mark a field as the primary key and to define the strategy for generating unique values for that key.
+Key Points:
+Purpose: Automatically generate unique primary key values for entity instances.
+Strategies: Several strategies can be specified using the strategy attribute of the @GeneratedValue annotation.
+Strategies:
+AUTO: The persistence provider chooses the appropriate strategy for the database.
+IDENTITY: The database generates the primary key value, typically using an auto-increment column.
+SEQUENCE: Uses a database sequence to generate primary key values.
+TABLE: Uses a table to generate primary key values.
+
  which HTTP method will be used for create and update at same time.
+========================================================================
+PUT: Used for both creating and updating a resource. It is idempotent and typically replaces the entire resource at the specified URI.
+
 	@bean used for?
+The @Bean annotation in Spring is used to indicate that a method produces a bean to be managed by the Spring container.
+It is typically used in configuration classes to define beans that are created and managed by Spring's Inversion of Control (IoC) container.
+
+Key Points:
+Bean Definition: Methods annotated with @Bean define beans that are registered with the Spring container.
+Configuration Classes: Commonly used within classes annotated with @Configuration.
+Customization: Allows for the customization of bean creation and initialization.
 
 	how we can get value from properties file in springboot.
-	hoe we can find out that code is 80% coverge in sonarcube.
-	what is the best authentication can be used to handle security in payment method based application.
-how we can hit external url from application.
+=========================================================
+using @Value 
+using @cnfiguration propertis 
+using environment object
+hoe we can find out that code is 80% coverge in sonarcube.
+what is the best authentication can be used to handle security in payment method based application.
+=====================================================================================================
+1. Multi-Factor Authentication (MFA)
+MFA involves verifying the user's identity using two or more independent factors:
 
-	if there is multiple restcontroller in one application then how system will address that which controller needs to be called.
+Knowledge: Something the user knows (e.g., password, PIN).
+Possession: Something the user has (e.g., smartphone, hardware token).
+Inherence: Something the user is (e.g., biometric data like fingerprints or facial recognition).
+2. Biometric Authentication
+Biometric authentication uses unique biological traits to verify identity. Common methods include:
+
+Fingerprint Scanning
+Facial Recognition
+Iris Scanning
+Biometric authentication is highly secure and user-friendly1.
+
+3. Token-Based Authentication
+Token-based authentication involves generating a unique token for each session. This token is used to verify the user's identity and can be implemented using:
+
+Hardware Tokens: Physical devices that generate one-time passwords.
+Software Tokens: Applications that generate one-time passwords.
+4. SMS OTP (One-Time Password)
+SMS OTP sends a one-time password to the user's mobile device via text message. While convenient, it is vulnerable to SIM interception and phishing attacks2.
+
+5. Strong Customer Authentication (SCA)
+SCA, mandated by the PSD2 regulation, requires at least two authentication factors from the categories mentioned above. It provides an additional layer of security for online payments1.
+
+6. Encryption and Tokenization
+Encrypting sensitive data and using tokenization to replace sensitive information with non-sensitive tokens can significantly enhance security3.
+
+how we can hit external url from application.
+=================================================
+To hit an external URL from a Spring Boot application, you can use the RestTemplate or WebClient classes provided by Spring
+Using RestTemplate
+RestTemplate is a synchronous client to perform HTTP requests. It's simple to use but is being phased out in favor of WebClient.
+Using WebClient
+WebClient is part of the Spring WebFlux module and supports both synchronous and asynchronous operations. 
+It's the recommended way to perform HTTP requests in Spring Boot applications.
+
+if there is multiple restcontroller in one application then how system will address that which controller needs to be called.
+================================================================================================================================
+In a Spring Boot application with multiple @RestController classes, the system determines which controller to call based on the URL mapping defined in each
+controller. 
+Each @RestController class defines one or more request mappings using annotations like @RequestMapping, @GetMapping, @PostMapping, etc. These annotations 
+specify the URL patterns that the controller methods handle.
+URL Mapping: Each controller defines URL patterns using annotations.
+Routing: The system routes requests to the appropriate controller based on the URL.
+Path Variables and Request Parameters: Controllers can handle specific requests using path variables and request parameters.
+
 What is spring boot & its architecture -done
 	
 	- What are the advantages of spring boot-done
 	- What’s the disadvantage of Spring boot-done
+
 	- What’s the important configuration file in Spring boot
-	
+	application.properties file or application.yml file
+
 	- What is Spring Boot and What Are Its Main Features?-done
+
 	- What Are the Differences Between Spring and Spring Boot?-done
+
 What is Spring Initializr?
+
 How to Disable a Specific Auto-Configuration?
+
 What’s Actuator
+
  How to migrate existing project to Springboot?
 
 	REST API:
