@@ -39,8 +39,11 @@ nterface
 Solid principle
 
 can we overload static method?
+yes
 Stringbuilder vs Stringbuffer
+
 how we can handle concurrentmodificationException.
+==================================================
 oncurrentModificationException occurs when a collection is modified while iterating over it using iterators, enhanced for-loops, or other methods 
 that are not designed for concurrent modification. Here are some ways to handle or avoid this exception:
 1. Using Iterator's remove Method
@@ -151,7 +154,8 @@ Suppose we have two threads, T1 and T2, that are incrementing a shared variable,
 
 1) What is submit and execute command do
 	Submit Command:
-	• Purpose: The submit method is used to submit a task for execution and returns a Future object. This Future can be used to retrieve the result of the computation, handle exceptions, and monitor the status of the task.
+	• Purpose: The submit method is used to submit a task for execution and returns a Future object. 
+This Future can be used to retrieve the result of the computation, handle exceptions, and monitor the status of the task.
 	
 • Key Point: The submit method is useful when you need to get the result of the task or manage its execution
 
@@ -160,8 +164,21 @@ Suppose we have two threads, T1 and T2, that are incrementing a shared variable,
 • Purpose: The execute method is used to execute a task but does not return a Future. It is typically used for tasks that do not need to return a result or be monitored.
 
 Key Point: The execute method is simpler and is used for tasks where you do not need to track the outcome
+
 Which is better between Thread and Runnable and why
+
 What is Reentrant Lock
+=============================
+A **ReentrantLock** is a type of lock provided by the `java.util.concurrent.locks` package in Java 
+that allows threads to enter a lock they already hold. This means that if a thread has acquired the lock, it can re-enter the lock without being blocked,
+ which is useful for implementing synchronized methods or blocks.
+
+### Key Features of ReentrantLock
+
+1. **Reentrancy**: A thread can acquire the lock multiple times without blocking itself.
+2. **Fairness**: You can create a fair lock that grants access to threads in the order they requested it.
+3. **Lock Methods**: Provides methods for locking, unlocking, and checking the lock status.
+
 Syncronization and class level lock and which method release the lock
 
 java 8 features
@@ -176,7 +193,6 @@ Intermediate operations return a new stream and are used to transform or filter 
 Intermediate operations can be chained together to form a pipeline.
 
 Common intermediate operations include:
-
 filter: Filters elements based on a predicate.
 map: Transforms each element using a function.
 flatMap: Transforms each element into a stream and flattens the result.
@@ -405,8 +421,6 @@ Resource resource=new ClassPathResource("applicationContext.xml");
 BeanFactory factory=new XmlBeanFactory(resource); 
  
 The constructor of XmlBeanFactory class receives the Resource object so we need to pass the resource object to create the object of BeanFactory.
-
-
 Using ApplicationContext
 =============================
 the ApplicationContext interface is built on top of the BeanFactory interface. 
@@ -438,12 +452,6 @@ Spring bean life cycle is maintained by IOC Container
 4. Dependencies is injected
 
 5. Destroyed when container closed.
-Dependancy lookup
-==================
-in Dependancy lookup we will  get the resource after demand.
-
-i) dependency lookup makes the code tightly coupled. If resource is changed, we need to perform a lot of modification in the code.
-ii)Not easy for testing This approach creates a lot of problems while testing the application especially in black box testing.
 
 Dependancy injection
 ======================
@@ -467,10 +475,18 @@ Settter injection
 ===========================
 Here IOC container calls the setter of target class to assign dependant class object to target class object.
 <property>tag used for setter injection
-We can inject the 
-Primitive an string -based values
-Dependant object
-Collection values
+
+Key Differences
+Setter Injection:
+
+More flexible as dependencies can be changed after the object is created.
+Allows for partial injection.
+Easier to manage circular dependencies.
+Constructor Injection:
+
+Ensures that all required dependencies are provided at the time of object creation.
+Makes the object immutable after creation.
+Better for mandatory dependencies.
 
 If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
 
@@ -505,11 +521,8 @@ Global session
 
 Autowring
 =============
-Autowiring enable you to inject the object depndancy .it internally uses setter or constructor injection.
-Autowiring work with object dependancy.
-
-In object dependancy we need to call referance of another class from dependancy class manualy
-But if we use the wiring concept then we need not to call the refernace maually from the dependant class.
+Autowiring is a feature in Spring Framework that allows Spring to automatically inject dependencies into a bean. 
+This helps to reduce the need for explicit configuration and makes the code cleaner and easier to manage..
 Modes of autowiring
 No
 Default autowiring mode,its mean no autowiring by default.
@@ -539,11 +552,6 @@ there is one more way that is declarative way where we write template in xml
 whenever the is runtime exception the spring will automatically rollback the transaction and if there no exception then spring will commit the transaction.
 Spring ORM
 ============
-It is spring module providing abstraction on multiple ORM framework like hiberanate like 
-O-r mapping 
-The process of Linking Db tables with java classes and Db table cols with the properties of classes and having  Synchronization b/w them is called o-r mapping.
-
-Spring ORM
 It is a spring module providing abstraction on multiple ORM frameworks like hiberante,iBatis and etc to simplify Object based O-R mapping persistance logic.
 
 It supplies mutiple templates classes like hibernate template 
@@ -555,17 +563,8 @@ along with the exclude attribute. This allows you to exclude specific auto- conf
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MultipartAutoConfiguration.class}}
 
-public class YourApplication {
-
-public static void main(String[] args) {
-
-SpringApplication.run(YourApplication.class, args);
-
-}
-	
-	
-	- Difference between independent Singleton object & Spring Singleton Bean
-	
+- Difference between independent Singleton object & Spring Singleton Bean
+===========================================================================	
 Independent Singleton Object:
 Definition: A Singleton object is a design pattern that ensures a class has only one instance and provides a global point of access to that instance.
 Implementation: Typically implemented using a private constructor, a static instance variable, and a public static method to return the instance.
@@ -580,8 +579,8 @@ Scope: The Singleton Bean is container-wide, meaning it is shared within the Spr
 	- What's limitations of autowiring
 
 can we use @compoenet in repository class and can we use @repository in component 
+==================================================================================
 Yes, you can use @Component in a repository class and @Repository in a component class, but there are specific reasons and best practices for using each annotation.
-
 @Component:
 Generic Annotation: @Component is a generic stereotype annotation indicating that the class is a Spring-managed component.
 Usage: It can be used on any Spring-managed bean, including service, repository, and controller classes.
@@ -595,7 +594,8 @@ springboot
 how to secure end point from URL using spring restful services
 Securing endpoints in Spring RESTful services is crucial to protect your application from unauthorized access and potential security threats.
 1. Use HTTPS
-Ensure that your application uses HTTPS to encrypt communication between the client and server. This prevents data from being intercepted during transmission.
+Ensure that your application uses HTTPS to encrypt communication between the client and server.
+This prevents data from being intercepted during transmission.
 
 2. Spring Security Configuration
 Extend the WebSecurityConfigurerAdapter class and override its methods to configure security settings.
@@ -604,9 +604,11 @@ Use role-based access control to limit access to sensitive resources based on us
 4. **JWT stateless authentication. This involves generating a token upon successful login and validating it for subsequent requests.
 
 2)WHAT IS jwt HOW TO IMPLEMENT AND VALIDATE
+===========================================
 What is JWT?
 JSON Web Token (JWT) is an open standard (RFC 7519) for securely transmitting information between parties as a JSON object. 
-It is commonly used for authentication and authorization in web applications. JWTs are compact, self-contained, and can be signed and optionally encrypted to ensure the integrity and confidentiality of the information they contain12.
+It is commonly used for authentication and authorization in web applications. JWTs are compact, self-contained,
+and can be signed and optionally encrypted to ensure the integrity and confidentiality of the information they contain12.
 
 Structure of JWT
 A JWT consists of three parts:
@@ -642,10 +644,7 @@ Check Expiration: Verify that the token has not expired.
 What’s repository in Spring Data JPA
 In Spring Data JPA, a repository is a central interface that provides a way to perform CRUD (Create, Read, Update, Delete) operations on entities without the need to write boilerplate code. It abstracts the data access layer and allows you to interact with the database in a more convenient and consistent manner.
 
-Key Points:
-Interface-Based: Repositories are defined as interfaces, and Spring Data JPA provides the implementation at runtime.
-CRUD Operations: They provide methods for basic CRUD operations and can be extended to include custom queries.
-Query Methods: You can define query methods by simply declaring method signatures that follow a specific naming convention.
+Key
 Common Repository Interfaces:
 CrudRepository: Provides CRUD functionality.
 Purpose: Provides basic CRUD (Create, Read, Update, Delete) operations.
@@ -656,6 +655,7 @@ findAll(): Returns all entities.
 count(): Returns the count of entities.
 delete(T entity): Deletes a given entity.
 exists(ID id): Checks if an entity exists by its ID.
+
 JpaRepository: Extends CrudRepository and PagingAndSortingRepository to provide additional JPA-specific methods.
 flush(): Flushes all pending changes to the database.
 saveAndFlush(S entity): Saves an entity and flushes changes immediately.
@@ -685,7 +685,8 @@ What is AOP
 
 Singleton, Factory and Abstract Factory Design pattern and where this Design pattern used in your project
 ==========================================================================================================
-he Singleton design pattern is a creational design pattern that restricts a class from instantiating multiple objects. It creates a single instance of a class and provides a global point of access to that instance.
+he Singleton design pattern is a creational design pattern that restricts a class from instantiating multiple objects. 
+It creates a single instance of a class and provides a global point of access to that instance.
  
 # Key Elements of Singleton Pattern
 1. *Private Constructor*: The class has a private constructor to prevent instantiation from outside.
@@ -704,11 +705,13 @@ What is strong reference, Soft Reference., Weak Reference and Phantom Reference
 How you can implement second level cache in your project
 
 @GeneratedValue used for
-The @GeneratedValue annotation in Java is used to specify how the primary key value should be generated for an entity. It is typically used in conjunction
-with the @Id annotation in JPA (Java Persistence API) to mark a field as the primary key and to define the strategy for generating unique values for that key.
+=============================
+The @GeneratedValue annotation in Java is used to specify how the primary key value should be generated for an entity.
+It is typically used in conjunction with the @Id annotation in JPA (Java Persistence API) to mark a field as the primary key 
+and to define the strategy for generating unique values for that key.
+
 Key Points:
 Purpose: Automatically generate unique primary key values for entity instances.
-Strategies: Several strategies can be specified using the strategy attribute of the @GeneratedValue annotation.
 Strategies:
 AUTO: The persistence provider chooses the appropriate strategy for the database.
 IDENTITY: The database generates the primary key value, typically using an auto-increment column.
@@ -719,7 +722,7 @@ TABLE: Uses a table to generate primary key values.
 ========================================================================
 PUT: Used for both creating and updating a resource. It is idempotent and typically replaces the entire resource at the specified URI.
 
-	@bean used for?
+@bean used for?
 The @Bean annotation in Spring is used to indicate that a method produces a bean to be managed by the Spring container.
 It is typically used in configuration classes to define beans that are created and managed by Spring's Inversion of Control (IoC) container.
 
@@ -731,8 +734,10 @@ Customization: Allows for the customization of bean creation and initialization.
 	how we can get value from properties file in springboot.
 =========================================================
 using @Value 
-using @cnfiguration propertis 
+using @cnfiguration propertis
+using =\ with list
 using environment object
+
 hoe we can find out that code is 80% coverge in sonarcube.
 what is the best authentication can be used to handle security in payment method based application.
 =====================================================================================================
@@ -797,15 +802,16 @@ What is spring boot & its architecture -done
 
 What is Spring Initializr?
 
-How to Disable a Specific Auto-Configuration?
-
 What’s Actuator
-
+Spring Boot Actuator is a powerful tool that provides production-ready features to help you monitor and manage your Spring Boot application. 
+It exposes various endpoints that allow you to interact with your application and gather important metrics and information
  How to migrate existing project to Springboot?
 
 	REST API:
 ==================
-	- What is REST web services
+	- What is REST API
+A REST API (Representational State Transfer Application Programming Interface) is a set of rules and conventions for building and interacting with web services.
+It allows different systems to communicate over HTTP by following a set of principles and using standard HTTP methods.
 	- What are HTTP methods supported by REST
 	- What’s JAX-RS
 	- What’s @RestController
@@ -818,6 +824,17 @@ What’s Actuator
 	- How to create/implement REST API
 	- How to expose Restful webservice
 	how to convert xml data into json
+HTTP (HyperText Transfer Protocol)
+• Purpose: Used for transmitting hypertext (web pages) over the internet.
+• Security: Data is sent in plain text, making it vulnerable to interception and attacks.
+• Port: Typically uses port 80.
+• URL Prefix: URLs start with http://.
+HTTPS (HyperText Transfer Protocol Secure)
+• Purpose: Same as HTTP, but with added security.
+• Security: Encrypts data using SSL/TLS, ensuring data integrity and confidentiality.
+• Port: Typically uses port 443.
+• URL Prefix: URLs start with https://.
+In summary, HTTPS is the secure version of HTTP, providing encryption to protect data during transmission. This makes HTTPS essential for sensitive transactions, such as online banking and shopping.
 
 
 Annotations
@@ -826,12 +843,44 @@ Annotations
 database
 =========
 what is the diff b/w primary key,unique key and foreign key
+
+Primary Key
+• Purpose: Uniquely identifies each record in a table.
+• Uniqueness: Must be unique for each record.
+• Null Values: Cannot contain NULL values.
+• Example: In a students table, student_id can be a primary key.
+Unique Key
+• Purpose: Ensures all values in a column are unique.
+• Uniqueness: Must be unique for each record.
+• Null Values: Can contain a single NULL value (depending on the database system).
+• Example: In a users table, email can be a unique key.
+Foreign Key
+• Purpose: Establishes a link between records in two tables.
+• Uniqueness: Can have duplicate values.
+• Null Values: Can contain NULL values.
+• Example: In an orders table, customer_id can be a foreign key referencing customer_id in a customers table.
+
 whta is index how it works
+===================================
+An index is a data structure that improves the speed of data retrieval operations on a database table. 
+It works similarly to an index in a book, allowing you to quickly find the information you need without scanning every page.
 what is diff b.w delet and truncate
+=====================================
+DELETE
+Purpose: Removes specific rows from a table based on a condition.
+Usage: Can be used with a WHERE clause to specify which rows to delete.
+Transaction: Each row deletion is logged, making it slower but allowing for rollback if needed.
+Example:
+DELETE FROM employees WHERE department = 'Sales';
+Triggers: Activates triggers associated with the table.
+Constraints: Checks constraints and foreign key relationships.
+TRUNCATE
+Purpose: Removes all rows from a table, effectively resetting it.
+Usage: Cannot be used with a WHERE clause; it always removes all rows.
+Transaction: Minimal logging, making it faster but not allowing for rollback.
 
 Microservices
 ================
-Microservices
 ## what is microservice architecture
 -----------------------------------------
 Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
@@ -852,6 +901,8 @@ Microservices
 3) entire application is developed in single technology stack.
 
 how microservice will communicate with each other
+======================================================
+
 Microservices can communicate with each other using various methods, each with its own benefits and trade-offs.  
 
 1. HTTP/REST
@@ -879,7 +930,6 @@ What is Api gateways?
 -----------------------
 In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access the 
 underlaying microservices.
-it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
 API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
 it can handle the authentication and authorzation validate caces token.
 
@@ -906,8 +956,6 @@ what is service descovery?
 -----------------------------
 in microservices Service discovery  enables the automatic detection of services within a microservice architecture. 
 This process allows services to find and communicate with each other without hard-coding their network locations. 
-Service discovery addresses the dynamic nature of microservices, where instances of services can scale up or down, move across different hosts, 
-or restart at different network addresses.
 
 Service Registry:
 A central repository that maintains the list of service instances and their network locations (IP addresses and ports).
@@ -928,17 +976,19 @@ Hystrix helps in preventing cascading failures in a microservice architecture.
 If one service fails, it ensures that the failure does not propagate to other services by isolating the faulty service.
 
 admin server
+=================
 In a microservices architecture, an admin server is used to manage and monitor the various microservices. 
 One popular tool for this purpose is Spring Boot Admin, which provides a web UI to visualize the metrics and health of multiple Spring Boot applications.
 <artifactId>spring-boot-admin-starter-server</artifactId> this dependancy need to add in pom.xml
 
 Zipkin server
-
+===============
 Zipkin is a distributed tracing system that helps troubleshoot latency problems in service architectures by collecting and querying trace data. 
 Setting up a Zipkin server allows you to visualize and analyze the performance of your microservices.
 You can set up a Zipkin server using various methods, including Docker, Java, and Homebrew.
  
 config server
+================
 A Config Server in a microservices architecture provides a centralized way to manage external configuration properties for applications across all environments. 
 Spring Cloud Config Server is a popular choice for this purpose. 
 spring-cloud-config-server dependencies.
@@ -1022,15 +1072,7 @@ Task Queues: Distributing tasks among multiple workers.
 Message Broadcasting: Sending messages to multiple consumers.
 Request/Reply: Implementing RPC (Remote Procedure Call) patterns.
 
-A **ReentrantLock** is a type of lock provided by the `java.util.concurrent.locks` package in Java 
-that allows threads to enter a lock they already hold. This means that if a thread has acquired the lock, it can re-enter the lock without being blocked,
- which is useful for implementing synchronized methods or blocks.
 
-### Key Features of ReentrantLock
-
-1. **Reentrancy**: A thread can acquire the lock multiple times without blocking itself.
-2. **Fairness**: You can create a fair lock that grants access to threads in the order they requested it.
-3. **Lock Methods**: Provides methods for locking, unlocking, and checking the lock status.
 
 CACHING
 Caching is a technique used to store frequently accessed data in a high-speed storage layer,
@@ -1156,10 +1198,12 @@ how we can handle exception in microservice if any service got fail .
 
 saga design pattern
 =====================
-In a microservices architecture, each service is responsible for its own domain logic and data. When a business process involves multiple services, it can be challenging to ensure data consistency and integrity across all services.
+In a microservices architecture, each service is responsible for its own domain logic and data.
+When a business process involves multiple services, it can be challenging to ensure data consistency and integrity across all services.
  
 # Solution
-The Saga pattern solves this problem by introducing a central orchestrator, called the Saga, which coordinates the execution of local transactions across multiple services.
+The Saga pattern solves this problem by introducing a central orchestrator, called the Saga,
+which coordinates the execution of local transactions across multiple services.
  
 *Key Components*
 1. *Saga*: The central orchestrator that coordinates the execution of local transactions.
