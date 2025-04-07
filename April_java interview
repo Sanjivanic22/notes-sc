@@ -352,18 +352,222 @@ Yes
 	Spring:
 ===============
 	- What’s Spring framework & advantages-done
+	## Spring 
+-=================
+Spring is opensource lightweight framework 
+Which is used to develop any kind of application
+It is like framework of framework because it support vrious framework like struts and hibernate.
+Spring framework comprise several modules such as IOC,AOP,springn core,spring mvc
+
+Advantages
+==========
+Spring framework provides predefined libraries and templates
+Spring framework privide loos coupling
+Manages the dependancies injection and IOC automatically
+Spring framwork very easy to  testing
+Spring web framework is well design mvc framework which provide the greate alteranative to another ````framework like struts.
+
+Spring container
+===================
+Spring container is at the core of the spring framework.
+The container will creates the object,wire them together,configure them and manage their complete life cycle from creation till destruction.
+the spring container uses DI to manage the componenets that make up an application.
+
+
+IOC container and types
+=========================
+IOC container
+======================
+The IOC container is INVERSION of control which is responsible to instantiate, configure and assemble the objects. 
+The IoC container gets informations from the XML file and works accordingly. 
+The main tasks performed by IoC container are:
+=>to instantiate the application class
+=>to configure the object
+=>to assemble the dependencies between the objects
+
+There are two types of IoC containers. They are:
+==================================================
+1)BeanFactory
+2)ApplicationContext
+
+In the spring both BeanFactory and ApplicationContext are interfaces used for managing beans. 
+
+Difference between BeanFactory and the ApplicationContext
+==================================================================
+
+Using BeanFactory
+=====================
+
+Xml beanfactory is implementation class to use the bean factory for that we need to create the instance of xmlbeanfactory.
+ To use the BeanFactory, we need to create the instance of XmlBeanFactory class as given below:
+
+Resource resource=new ClassPathResource("applicationContext.xml");  
+BeanFactory factory=new XmlBeanFactory(resource); 
+ 
+The constructor of XmlBeanFactory class receives the Resource object so we need to pass the resource object to create the object of BeanFactory.
+
+
+Using ApplicationContext
+=============================
+the ApplicationContext interface is built on top of the BeanFactory interface. 
+It adds some extra functionality than BeanFactory such as simple integration with Spring's AOP, message resource handling (for I18N), event propagation, application layer specific context (e.g. WebApplicationContext) for web application.
+ So it is better to use ApplicationContext than BeanFactory.
+The ClassPathXmlApplicationContext class is the implementation class of ApplicationContext interface.
+ 
+We need to instantiate the ClassPathXmlApplicationContext class to use the ApplicationContext as given below:
+
+ApplicationContext context =   
+    new ClassPathXmlApplicationContext("applicationContext.xml"); 
+
+The constructor of ClassPathXmlApplicationContext class receives string, so we can pass the name of the xml file to create the instance of ApplicationContext.
+
+spring bean life cycle
+==========================
+spring bean life will start from the bean creation and end with bean destruction
+init and destry methods are impiratant in spring bean life cycle which can configure in xml file with init-initailization and 
+init-destruction .or programatically we can do with @ initailization and @disposable method
+
+Spring bean life cycle is maintained by IOC Container
+
+1. Container gets started.
+
+2. Container creates the object of bean as per request.
+
+3. Dependencies is created
+
+4. Dependencies is injected
+
+5. Destroyed when container closed.
+Dependancy lookup
+==================
+in Dependancy lookup we will  get the resource after demand.
+
+i) dependency lookup makes the code tightly coupled. If resource is changed, we need to perform a lot of modification in the code.
+ii)Not easy for testing This approach creates a lot of problems while testing the application especially in black box testing.
+
+Dependancy injection
+======================
+Depenancy injection is design pattern thet removes the dependancies  from the programming code so that it can be easy to test and manage the application.
+Dependancy injection makes our code loosely coupled.
+
+Constructor injection
+=======================
+Here Our Ioc container uses parameterised constructor to create the target bean class object.
+In that process we inject the dependant class object to target class object.
+
+The <constructor-args> tag is used for constructor injection.
+Here we inject the 
+Primitive and string based value
+Dependant object
+Collection values
+If all properties of spring bean class are mandatory to participate in the injection then we 
+Should go for constructor injection.
+
+Settter injection
+===========================
+Here IOC container calls the setter of target class to assign dependant class object to target class object.
+<property>tag used for setter injection
+We can inject the 
+Primitive an string -based values
+Dependant object
+Collection values
+
+If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
+
+
+Spring bean scope
+===================
+In Spring, "scope" refers to the lifecycle of a bean, defining how long a bean instance should live and how it should be created and shared within 
+the application context.
+Spring provides several scopes to manage the lifecycle and visibility of beans. Here are the common bean scopes available in Spring:
+
+Singletone
+===========
+If scope is set to singletone scope ,the spring IOC container creates exactly one instance of the object defined by that bean defination.
+It is default scope if no scope is specified
+IOC container creates only one oject for spring bean class nad reuses that object.
+
+Prototype
+=============
+If scope is set to prototype ,the spring IOC container creates a new instance of the object.
+ every time a resquest for that specific bean is mode as rule 
+use the prototype scope for all state-full beans and singletom scope for stateless beans.
+To define prototype ,you can set the  scope property to prototype in the bean configuration file.
+
+Scope=Request (for http protocol)
+================================
+bean instance will created per http request
+Scope="session"
+Ioc container keeps spring bean class object as session attribute of web app env.
+bean instance will be created per http session
+
+Global session
+
+Autowring
+=============
+Autowiring enable you to inject the object depndancy .it internally uses setter or constructor injection.
+Autowiring work with object dependancy.
+
+In object dependancy we need to call referance of another class from dependancy class manualy
+But if we use the wiring concept then we need not to call the refernace maually from the dependant class.
+Modes of autowiring
+No
+Default autowiring mode,its mean no autowiring by default.
+
+Byname
+--------
+Inject the onject dependancy.according to proptery name and bean name.
+In this case proptery name bean name must be same internally call setter method .
+
+Bytype
+---------
+Inject the object dependancy according to type property name and bean name can be different.
+Internally call setter method.
+
+Constructor
+------------
+Inject by calling constructor of class calls constructor having the large no of parameter.
+Autodected-deprecated.
+
+Spring Transaction in spring
+=============================
+In spring transaction can be handle in two ways.
+i.e Programatically and declaratively
+1) in programatic we have to write series of code  to commit your transaction and rollback transaction.
+that means we need to write for commit or rollback transaction
+there is one more way that is declarative way where we write template in xml
+whenever the is runtime exception the spring will automatically rollback the transaction and if there no exception then spring will commit the transaction.
+Spring ORM
+============
+It is spring module providing abstraction on multiple ORM framework like hiberanate like 
+O-r mapping 
+The process of Linking Db tables with java classes and Db table cols with the properties of classes and having  Synchronization b/w them is called o-r mapping.
+
+Spring ORM
+It is a spring module providing abstraction on multiple ORM frameworks like hiberante,iBatis and etc to simplify Object based O-R mapping persistance logic.
+
+It supplies mutiple templates classes like hibernate template 
+
+How can we disable configuration in spring?
+============================================
+To disable auto-configuration for a specific class or feature in a Spring Boot application, you can use the @EnableAutoConfiguration annotation 
+along with the exclude attribute. This allows you to exclude specific auto- configuration classes from being applied.
+
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, MultipartAutoConfiguration.class}}
+
+public class YourApplication {
+
+public static void main(String[] args) {
+
+SpringApplication.run(YourApplication.class, args);
+
+}
 	
-	- What’s IOC(Inversion of Control)-done
-	
-	- Different ways of Dependency Injections-done
-	- Difference between Constructor & Setter Injection -done
 	
 	- Difference between independent Singleton object & Spring Singleton Bean
 	
-	- What’s are different scopes of Spring Beans.-done
-	- What’s autowiring & different modes-done
+
 	- What's limitations of autowiring
-What is Spring Bean life cycle and steps also
 
 can we use @compoenet in repository class and can we use @repository in component 
 
