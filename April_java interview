@@ -167,19 +167,188 @@ Syncronization and class level lock and which method release the lock
 java 8 features
 =====================
 wht are the features
-what is lambda expression
-syntax for Lambda expression
+Lambda Expressions: These allow you to write more concise and readable code by enabling functional programming.
+Stream API: This provides a powerful way to process sequences of elements, making it easier to perform operations like filtering, mapping, and reducing.
+Intermediate Operations
+=============================
+Intermediate operations return a new stream and are used to transform or filter the elements of the stream.
+ These operations are lazy, meaning they do not process the elements until a terminal operation is invoked. 
+Intermediate operations can be chained together to form a pipeline.
+
+Common intermediate operations include:
+
+filter: Filters elements based on a predicate.
+map: Transforms each element using a function.
+flatMap: Transforms each element into a stream and flattens the result.
+distinct: Removes duplicate elements.
+sorted: Sorts the elements.
+peek: Performs an action on each element without modifying the stream.
+Example:
+
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+List<String> filteredNames = names.stream()
+    .filter(name -> name.startsWith("A"))
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+
+Terminal Operations
+
+Terminal operations produce a result or a side-effect and mark the end of the stream pipeline. 
+Once a terminal operation is invoked, the stream is considered consumed and cannot be reused.
+
+Common terminal operations include:
+
+collect: Converts the stream into a collection or another data structure.
+forEach: Performs an action for each element.
+reduce: Combines elements to produce a single result.
+count: Returns the number of elements in the stream.
+anyMatch: Returns true if any element matches the given predicate.
+allMatch: Returns true if all elements match the given predicate.
+noneMatch: Returns true if no elements match the given predicate.
+findFirst: Returns the first element in the stream.
+findAny: Returns any element in the stream.
+Example:
+
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie", "David");
+long count = names.stream()
+    .filter(name -> name.length() > 3)
+    .count();
+
+}
+In this example, filter is an intermediate operation, and count is a terminal operation.
+ The stream pipeline processes the elements only when the terminal operation count is invoked.
+
+Default Methods: 
+=================
+Default methods are defined in interfaces using the default keyword.
+They provide a default implementation that can be overridden by implementing classes.
+Interfaces can now have default methods with implementations, allowing for more flexible and backward-compatible code.
+
+Optional Class: This helps in handling null values more gracefully, reducing the risk of NullPointerException.
+
+New Date and Time API: A comprehensive and modern API for date and time manipulation, replacing the old java.util.Date and java.util.Calendar.
+Immutability: The new date and time classes are immutable and thread-safe.
+Fluent API: Provides a fluent API for constructing and manipulating date and time objects.
+Better Time Zone Support: Improved support for time zones and offsets.
+Date and Time Arithmetic: Simplified date and time arithmetic operations.
+
+Nashorn JavaScript Engine: A new engine for executing JavaScript code within Java applications.
+
+Method References: These provide a way to refer to methods without invoking them, making code more readable and concise.
+Type Annotations: These allow annotations to be used in more places, such as on generic types.
+
 what is functional interface and examples 
+A functional interface in Java is an interface that has exactly one abstract method. These interfaces are used primarily for lambda expressions and method references, 
+enabling a more functional programming style in Java. Functional interfaces can have multiple default or static methods, but only one abstract method.
+Key Points:
+Single Abstract Method: A functional interface has exactly one abstract method.
+Lambda Expressions: Functional interfaces are the target types for lambda expressions.
+Annotation: The @FunctionalInterface annotation can be used to indicate that an interface is intended to be a functional interface, although it's not mandatory
+Ex.Runnable ,callable and comparable 
+1. Runnable Interface
+The Runnable interface is a functional interface with a single abstract method run.
+@FunctionalInterface
+public interface Runnable {
+    void run();
+}
+Example Usage:
+Runnable runnable = () -> System.out.println("Running in a thread");
+new Thread(runnable).start();
+
+2. Comparator Interface
+The Comparator interface is a functional interface with a single abstract method compare.
+
+@FunctionalInterface
+public interface Comparator<T> {
+    int compare(T o1, T o2);
+}
+Example Usage:
+Comparator<String> comparator = (s1, s2) -> s1.compareTo(s2);
+int result = comparator.compare("apple", "banana");
+System.out.println("Comparison result: " + result);
+
+Predefined functional interface
+==================================
+Java 8 introduced several predefined functional interfaces in the java.util.function package. These interfaces are designed to support functional programming and can be used with lambda expressions and method references.
+1 .Predicate
+1. Predicate
+Represents a boolean-valued function of one argument.
+Example:
+import java.util.function.Predicate;
+public class PredicateExample {
+    public static void main(String[] args) {
+        Predicate<String> isLongerThan5 = str -> str.length() > 5;
+        System.out.println(isLongerThan5.test("Hello")); // Output: false
+        System.out.println(isLongerThan5.test("Hello, world!")); // Output: true
+    }
+
+2. Function<T, R>
+Represents a function that accepts one argument and produces a result.
+Example:
+import java.util.function.Function;
+public class FunctionExample {
+    public static void main(String[] args) {
+        Function<String, Integer> stringLength = str -> str.length();
+        System.out.println(stringLength.apply("Hello")); // Output: 5
+    }
+}
+3. Consumer
+Represents an operation that accepts a single input argument and returns no result.
+Example:
+import java.util.function.Consumer;
+public class ConsumerExample {
+    public static void main(String[] args) {
+        Consumer<String> print = str -> System.out.println(str);
+        print.accept("Hello, world!"); // Output: Hello, world!
+    }
+}
+4. Supplier
+Represents a supplier of results.
+Example:
+import java.util.function.Supplier;
+public class SupplierExample {
+    public static void main(String[] args) {
+        Supplier<String> supplier = () -> "Hello, world!";
+        System.out.println(supplier.get()); // Output: Hello, world!
+    }
+}
+5. UnaryOperator
+Represents an operation on a single operand that produces a result of the same type as its operand.
+Example:
+import java.util.function.UnaryOperator;
+public class UnaryOperatorExample {
+    public static void main(String[] args) {
+        UnaryOperator<Integer> square = x -> x * x;
+        System.out.println(square.apply(5)); // Output: 25
+    }
+}
+6. BinaryOperator
+Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
+Example:
+import java.util.function.BinaryOperator;
+public class BinaryOperatorExample {
+    public static void main(String[] args) {
+        BinaryOperator<Integer> add = (a, b) -> a + b;
+        System.out.println(add.apply(5, 3)); // Output: 8
+    }
+}
+
 what is the diff b/w Runnable and Callable
+Runnable: Used for tasks that do not need to return a result or handle checked exceptions.
+Callable: Used for tasks that need to return a result or handle checked exceptions.
+Runnable: Cannot throw checked exceptions.
+Callable: Can throw checked exceptions.
+
 why default method allowed in function interface.
+Default methods in functional interfaces allow for backward compatibility, enhanced functionality, and flexibility in API design. 
+They enable interfaces to evolve without breaking existing implementations and provide additional utility methods that can be used by all implementing classes.
+
 how we can achieve muliple inheritance in java 8.
-what are the predefined functional interface
-what is Intermediate and terminal opeartions and examples
-Programs
 stream api find maximum salary of employee.
-java 8 changes in date and time.-done
-what is optional in java 8.-done
+
+
 can we replace @service with @component and vise versa?
+Yes 
 	Spring:
 ===============
 	- What’s Spring framework & advantages-done
