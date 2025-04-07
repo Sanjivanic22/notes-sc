@@ -364,8 +364,8 @@ Yes
 	- What’s autowiring & different modes-done
 	- What's limitations of autowiring
 What is Spring Bean life cycle and steps also
+
 can we use @compoenet in repository class and can we use @repository in component 
-Setter Injection vs Constructor Injection
 
  springboot
 =======================
