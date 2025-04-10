@@ -5,7 +5,19 @@ core java questions and ans
 Can you explain the memory management in java and changes in java 8
 JVm automatically manages the memory and its devided into into multiple
 heap menmory,stack memory,method area and native memory
+Heap memory -the heap is runtime data where where objects are stored
+stack memory -the stack stores premitive types,method calls and local variable
+method area-stores class metadata such as class names,fileds and methods
 
+native memory-used yo store native code such as ccode and is not directly managed by JVM
+Garbage collection 
+jVM uses garbage collection to aumatically reclaimmemory occupied by object that are no longer reachable
+G1 garbage collector which is designed to reduce pause time
+In java 8 several changes done
+Removal of permGen
+metaspace 
+natve memory tracking 
+imprkoved garbage collector
 3)what are the oops principle 
 Encapsulation 
 abstraction 
@@ -23,6 +35,7 @@ Polymorphism
 Inheritance
 
 what is diff b/w abstract and interface
+=========================================
 Abstract Class
 27. Definition: An abstract class is a class that cannot be instantiated and may contain abstract methods (methods without a body) as well as concrete methods (methods with a body).
 28. Usage: Used to share common code among related classes.
@@ -41,6 +54,15 @@ Solid principle
 can we overload static method?
 yes
 Stringbuilder vs Stringbuffer
+===============================
+StringBuffer
+Thread-Safe: StringBuffer is synchronized, meaning it is thread-safe. Multiple threads can access it without causing data inconsistency.
+Performance: Due to synchronization, StringBuffer is slower than StringBuilder when used in a single-threaded environment.
+Usage: It is suitable for use in multi-threaded environments where thread safety is a concern.
+StringBuilder
+Not Thread-Safe: StringBuilder is not synchronized, meaning it is not thread-safe. It should not be used in multi-threaded environments without external synchronization.
+Performance: StringBuilder is faster than StringBuffer because it does not have the overhead of synchronization.
+Usage: It is suitable for use in single-threaded environments where performance is critical.
 
 how we can handle concurrentmodificationException.
 ==================================================
@@ -60,16 +82,18 @@ Synchronize the block of code that modifies the collection:
 Use the Stream API to filter out elements and collect the result into a new list:
 
 diff between Collection and stream.
+======================================
 Collections are used for storing and managing groups of elements.
 Streams are used for processing sequences of elements in a functional style.
 
 comparable vs comparator
+==========================
 Comparable:
 
 Defines natural ordering within the class itself.
 Only one compareTo method can be implemented per class.
 Used when a single default sorting order is needed.
-Comparator:
+Comparator
 
 Defines custom ordering outside the class.
 Multiple Comparator implementations can be created for different sorting criteria.
@@ -79,6 +103,7 @@ Custom Equality Logic: When you need to define custom logic for comparing object
 Hash-Based Collections: When you plan to use your objects in hash-based collections, ensuring that objects considered equal have the same hash code.
 
 why we use throw if exception can be handle usig try catch
+=============================================================
 Reasons to Use throw:
 Propagating Exceptions: Sometimes, you might want to propagate an exception to a higher level in the call stack rather than handling it immediately. 
 This allows the calling method to handle the exception or propagate it further.
@@ -94,7 +119,67 @@ Collections
 1)what are the collections you used in your project 
 List Set map
 what is diff b/w araylist and linkedlist
+Explain the differences between ArrayList and LinkedList.
+==========================================================
+ArrayList
+Internal Structure:
+
+ArrayList is backed by a dynamic array.
+Elements are stored in contiguous memory locations.
+Performance Characteristics:
+
+Access Time: Fast (O(1) complexity) for accessing elements by index because it uses direct array indexing.
+Insertion and Deletion: Slower (O(n) complexity) for inserting or deleting elements, especially in the middle of the list, because elements need to be shifted.
+Memory Usage: May use more memory than necessary due to capacity resizing. When the array reaches its capacity, it is resized by creating a new array and copying the elements.
+Use Cases:
+
+Suitable for scenarios where frequent access to elements by index is required.
+Ideal for read-heavy operations.
+
+LinkedList
+Internal Structure:
+
+LinkedList is backed by a doubly-linked list.
+Each element (node) contains a reference to the previous and next node.
+Performance Characteristics:
+
+Access Time: Slower (O(n) complexity) for accessing elements by index because it requires traversal from the beginning or end of the list.
+Insertion and Deletion: Faster (O(1) complexity) for inserting or deleting elements at the beginning or end of the list, and generally faster
+ for operations in the middle of the list because it only involves updating node references.
+Memory Usage: Uses more memory per element due to the storage of additional references (previous and next nodes).
+Use Cases:
+
+Suitable for scenarios where frequent insertions and deletions are required.
+Ideal for write-heavy operations.
+
 internal working of Hashmap
+===========================
+A `HashMap` in Java works internally using an array of buckets to store key-value pairs. Here’s a brief overview of its internal workings:
+
+### 1. **Hashing**
+When you add a key-value pair to a `HashMap`, the key is hashed using the `hashCode()` method. This hash code is then used to determine 
+the bucket index where the entry should be stored.
+
+### 2. **Buckets**
+The `HashMap` uses an array of buckets. Each bucket can hold multiple entries, which are stored as linked lists. 
+This is necessary to handle hash collisions (when multiple keys hash to the same bucket).
+
+### 3. **Entry Storage**
+Each entry in the `HashMap` is stored as an instance of the `Node` class, which contains the key, value, hash code, and a reference to the next node
+(for handling collisions).
+
+### 4. **Collision Handling**
+When a collision occurs (i.e., multiple keys hash to the same bucket), the entries are stored in a linked list within that bucket. 
+If the linked list becomes too long, it may be converted to a balanced tree (red-black tree) to improve performance.
+
+### 5. **Retrieval**
+To retrieve a value, the `HashMap` hashes the key to find the appropriate bucket. It then traverses the linked list (or tree) in that bucket to find the matching key and return the associated value.
+
+### 6. **Rehashing**
+When the `HashMap` exceeds a certain load factor (default is 0.75), it automatically resizes itself by doubling the number of buckets and rehashing all existing entries to distribute them across the new array.
+
+
+
 Concurrent hashmap
 what is diferance b/w hashmap and concurrent hashmap
 how to handle Concurrecy in java
