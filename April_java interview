@@ -826,33 +826,32 @@ using environment object
 hoe we can find out that code is 80% coverge in sonarcube.
 what is the best authentication can be used to handle security in payment method based application.
 =====================================================================================================
-1. Multi-Factor Authentication (MFA)
-MFA involves verifying the user's identity using two or more independent factors:
+When handling security in a payment method-based application using Spring Boot, it's crucial to implement robust authentication mechanisms. Here are some of the best practices and technologies you can use:
 
-Knowledge: Something the user knows (e.g., password, PIN).
-Possession: Something the user has (e.g., smartphone, hardware token).
-Inherence: Something the user is (e.g., biometric data like fingerprints or facial recognition).
-2. Biometric Authentication
-Biometric authentication uses unique biological traits to verify identity. Common methods include:
+1. OAuth2 and OpenID Connect
+OAuth2 is a widely used framework for authorization, and OpenID Connect is an authentication layer built on top of OAuth2. Together, they provide a secure way to handle authentication and authorization.
 
-Fingerprint Scanning
-Facial Recognition
-Iris Scanning
-Biometric authentication is highly secure and user-friendly1.
+OAuth2: Allows third-party applications to access user data without exposing user credentials.
+OpenID Connect: Adds an identity layer to OAuth2, enabling secure user authentication.
+2. JWT (JSON Web Tokens)
+JWTs are commonly used for securely transmitting information between parties as a JSON object. They are signed using a secret key or a public/private key pair.
 
-3. Token-Based Authentication
-Token-based authentication involves generating a unique token for each session. This token is used to verify the user's identity and can be implemented using:
+Advantages:
+Stateless: No need to store session information on the server.
+Scalability: Easily scalable across multiple servers.
+Security: Can be signed and encrypted.
+3. Spring Security
+Spring Security is a powerful and customizable authentication and access-control framework for Java applications. It integrates seamlessly with Spring Boot.
 
-Hardware Tokens: Physical devices that generate one-time passwords.
-Software Tokens: Applications that generate one-time passwords.
-4. SMS OTP (One-Time Password)
-SMS OTP sends a one-time password to the user's mobile device via text message. While convenient, it is vulnerable to SIM interception and phishing attacks2.
+Features:
+Comprehensive support for authentication and authorization.
+Integration with OAuth2 and JWT.
+Configurable security policies.
+4. Multi-Factor Authentication (MFA)
+Adding an extra layer of security by requiring multiple forms of verification (e.g., password + SMS code).
 
-5. Strong Customer Authentication (SCA)
-SCA, mandated by the PSD2 regulation, requires at least two authentication factors from the categories mentioned above. It provides an additional layer of security for online payments1.
-
-6. Encryption and Tokenization
-Encrypting sensitive data and using tokenization to replace sensitive information with non-sensitive tokens can significantly enhance security3.
+5. Secure Storage of Credentials
+Ensure that sensitive information, such as passwords and API keys, is stored securely using encryption.
 
 how we can hit external url from application.
 =================================================
