@@ -156,7 +156,7 @@ There are two types of polymorphism in Java:
 compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
 Overloading (COMPILE TIME POLYMORPHISM)
 ===============
-Two methods are said to be overloaded if method names are same but argument as different is called oveloading
+Method overloading is a form of compile-time polymorphism where multiple methods share the same name but differ in parameters (type, number, or order).ading
 public class Calculator {
     // Overloaded method to add two integers
     public int add(int a, int b) {
@@ -167,10 +167,31 @@ public class Calculator {
     public int add(int a, int b, int c) {
         return a + b + c;
     }
+class PaymentService {
 
-    // Overloaded method to add two double values
-    public double add(double a, double b) {
-        return a + b;
+    // Method 1: Pay using cash
+    void makePayment(double amount) {
+        System.out.println("Paid " + amount + " using cash.");
+    }
+
+    // Method 2: Pay using credit card
+    void makePayment(double amount, String cardNumber) {
+        System.out.println("Paid " + amount + " using card: " + cardNumber);
+    }
+
+    // Method 3: Pay using UPI
+    void makePayment(String upiId, double amount) {
+        System.out.println("Paid " + amount + " using UPI ID: " + upiId);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PaymentService payment = new PaymentService();
+
+        payment.makePayment(500.0);                        // cash
+        payment.makePayment(1200.0, "1234-XXXX-5678");     // card
+        payment.makePayment("user@upi", 300.0);            // UPI
     }
 }
 
@@ -180,28 +201,35 @@ If methdo names and arhuments must be matched  i.e method signature must be matc
 2. Runtime Polymorphism (Method Overriding)
 Runtime polymorphism is achieved through method overriding. This occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. 
 The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
-class Animal {
-    // Method to be overridden
-    public void sound() {
-        System.out.println("Animal makes a sound");
+class BankAccount {
+    void calculateInterest() {
+        System.out.println("Calculating general bank account interest");
     }
 }
 
-class Dog extends Animal {
-    // Overriding the sound method
+class SavingsAccount extends BankAccount {
     @Override
-    public void sound() {
-        System.out.println("Dog barks");
+    void calculateInterest() {
+        System.out.println("Calculating savings account interest at 4%");
+    }
+}
+
+class CurrentAccount extends BankAccount {
+    @Override
+    void calculateInterest() {
+        System.out.println("Current account has no interest");
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Animal myAnimal = new Animal();  // Animal reference, Animal object
-        Animal myDog = new Dog();        // Animal reference, Dog object
+        BankAccount acc;
 
-        myAnimal.sound();  // Calls Animal's sound method
-        myDog.sound();     // Calls Dog's sound method (overridden method)
+        acc = new SavingsAccount();
+        acc.calculateInterest();  
+
+        acc = new CurrentAccount();
+        acc.calculateInterest();  
     }
 }
 
