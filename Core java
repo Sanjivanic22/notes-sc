@@ -339,6 +339,15 @@ The encapsulate class is easy to test. So, it is better for unit testing.
 
 Ex.in world java the class is unit where instance variable and instance methods declared or wrapping in single unit as class which is nothing but encapsulation.
 
+what is diff b/w encapsulation and abstractions
+Aspect	     Encapsulation	                                                              Abstraction
+Definition	Bundles data and methods into a class and restricts direct access to fields.	Hides implementation details and shows only essential features.
+ Purpose	Protects internal data and controls access.	                          Simplifies complexity by focusing on what an object does.
+  Focus         	Securing and controlling access to data.	                               Simplifying interaction by hiding details.
+Implementation	Achieved using private fields and public getters/setters.              	Achieved using abstract classes, interfaces, and abstract methods.
+Visibility	   Controlled via access modifiers (private, public, etc.).	                  Hides internal logic; user only sees relevant features.
+
+
 Fail-Fast and FailSafe
 ============================
 Fail-Fast systems abort operation as-fast-as-possible exposing failures immediately and stopping the whole operation. 
