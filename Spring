@@ -1,9 +1,9 @@
 ## Spring 
 -=================
-Spring is opensource lightweight framework 
-Which is used to develop any kind of application
-It is like framework of framework because it support vrious framework like struts and hibernate.
+The Spring Framework is a powerful Java-based framework used to build enterprise-level, scalable, and maintainable applications.
+It simplifies development by providing tools for dependency management, web apps, security, data access, and more.
 Spring framework comprise several modules such as IOC,AOP,springn core,spring mvc
+
 
 Advantages
 ==========
@@ -15,7 +15,6 @@ Spring web framework is well design mvc framework which provide the greate alter
 
 Spring container
 ===================
-Spring container is at the core of the spring framework.
 The container will creates the object,wire them together,configure them and manage their complete life cycle from creation till destruction.
 the spring container uses DI to manage the componenets that make up an application.
 
@@ -65,7 +64,7 @@ We need to instantiate the ClassPathXmlApplicationContext class to use the Appli
 ApplicationContext context =   
     new ClassPathXmlApplicationContext("applicationContext.xml"); 
 
-The constructor of ClassPathXmlApplicationContext class receives string, so we can pass the name of the xml file to create the instance of ApplicationContext.
+The constructor of ClassPathXmlApplicationContexb vnbmt class receives string, so we can pass the name of the xml file to create the instance of ApplicationContext.
 
 spring bean life cycle
 ==========================
