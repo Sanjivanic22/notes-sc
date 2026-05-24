@@ -257,3 +257,24 @@ they are never unloaded in parmanant geneation.
 from java 8 the concept metaspace which can load classess and if you think you have not loaded some classess then you can unload those classess 
 i.e concept of metaspace.
 
+Inbuilt functions
+===================
+. Consumer Interface
+Represents an operation that takes input but returns nothing.
+It “consumes” data.
+void accept(T t);
+
+import java.util.*;
+import java.util.function.Consumer;
+
+public class ConsumerListExample {
+    public static void main(String[] args) {
+        
+        List<String> names = Arrays.asList("Java", "Python", "C++");
+
+        Consumer<String> print = n -> System.out.println(n);
+
+        names.forEach(print);
+    }
+}
+
