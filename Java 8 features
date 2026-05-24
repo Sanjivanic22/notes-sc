@@ -277,4 +277,19 @@ public class ConsumerListExample {
         names.forEach(print);
     }
 }
+2. Supplier Interface
 
+Represents a function that takes no input but returns a value.
+It “supplies” data.
+T get();
+
+import java.util.function.Supplier;
+
+public class SupplierUserExample {
+    public static void main(String[] args) {
+        
+        Supplier<String> user = () -> "Default User";
+
+        System.out.println(user.get());
+    }
+}
