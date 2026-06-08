@@ -111,3 +111,61 @@ Build complex objects step by step.
 Immutable objects
 DTOs (Data Transfer Objects)
 
+package com.nt.DesignPattern;
+
+public class User {
+	private String name;
+	private int age;
+	
+	private User(Builder builder) {
+		this.name=builder.name;
+		this.age=builder.age;
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", age=" + age + "]";
+	}
+	static class Builder{
+		private String name;
+		private int age;
+
+		Builder  setName(String name) {
+			this.name = name;
+			return this;
+		}
+		Builder setAge(int age) {
+			this.age = age;
+			return this;
+		}
+
+		User build() {
+			return new User(this);
+		}
+	}
+}
+package com.nt.DesignPattern;
+
+public class BuilderTest {
+public static void main(String[] args) {
+	User user=new User.Builder()
+			.setName("Sanivani")
+			.setAge(25)
+	         .build();
+	System.out.println(user);
+}
+
+
+}
