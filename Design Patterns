@@ -4,8 +4,13 @@ programming language but rather describe general approaches to solving problems 
 
 
 #Important design patterns
-##Singletone design pattern
-
+1. Singleton Pattern (Very Common)
+📌 Purpose:
+Ensure only one instance of a class exists.
+✅ Where used:
+Logger
+Configuration classes
+Database connection pools
 The class that allows us to create only one object in any situation is called singletone class
 To develop singletone min standard required.
 
@@ -57,11 +62,31 @@ public class Test {
 
 
 
+✅ 2. Factory Pattern
+📌 Purpose:
+Create objects without exposing creation logic.
+✅ Where used:
+Spring BeanFactory
+Object creation based on input
+Provides abstraction on creating one of several related classes object based on the data h
+That is supplied.
 
+interface Shape {
+    void draw();
+}
+
+class Circle implements Shape {
+    public void draw() { System.out.println("Circle"); }
+}
+
+class ShapeFactory {
+    public static Shape getShape(String type) {
+        if (type.equals("circle")) return new Circle();
+        return null;
+    }
+}
 
 Factory method design pattern
 Factory method design pattern defines set of rules and guidelines for creating object of same family classess when multiple features are creating those object
 
-Factory Design pattern
-Provides abstraction on creating one of several related classes object based on the data h
-That is supplied.
+
