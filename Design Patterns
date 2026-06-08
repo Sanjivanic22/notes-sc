@@ -85,6 +85,31 @@ class ShapeFactory {
         return null;
     }
 }
+package com.nt.DesignPattern;
+
+import com.nt.DesignPattern.Circle.ShapeFactory;
+
+public class Factory {
+
+	public static void main(String[] args) {
+		
+	Shape shape=ShapeFactory.getShape("circle");
+	if(shape!=null) {
+		shape.draw();
+	}
+	else {
+		System.out.println("Invalid shape");
+	}
+	
+	}
+
+}
+3. Builder Pattern
+📌 Purpose:
+Build complex objects step by step.
+✅ Where used:
+Immutable objects
+DTOs (Data Transfer Objects)
 
 Factory method design pattern
 Factory method design pattern defines set of rules and guidelines for creating object of same family classess when multiple features are creating those object
