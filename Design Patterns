@@ -111,7 +111,3 @@ Build complex objects step by step.
 Immutable objects
 DTOs (Data Transfer Objects)
 
-Factory method design pattern
-Factory method design pattern defines set of rules and guidelines for creating object of same family classess when multiple features are creating those object
-
-
