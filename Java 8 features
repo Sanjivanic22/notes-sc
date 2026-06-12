@@ -1,4 +1,52 @@
 #Java 8 features
+Java 8
+ Optional classes in java 8
+7. List convert it to map using java 8
+. java 8 features, default and static method which scenario we will use what
+.counting character by using java8
+ What changes came after java 8 in hash map
+
+Print the Palindrome and Even number by using the java8.
+What is the Java8 feature
+What is Funtional Interface, if we extends another interface what will happend.
+What is the method reference why we use.
+What is Collectors in Java8
+what is intermidiate and terminal operation in java
+how to print Random number print in java8
+
+why Streams api is faster than traditional approach
+“Streams API improves readability and scalability, and can be faster for large or parallel workloads, but traditional loops may outperform it in simple or small-scale scenarios.”
+
+Why Functional Interface was introduce
+“Functional Interfaces were introduced to bring functional programming capabilities to Java, mainly to support lambda expressions and make code more concise, readable, and flexible.”
+
+Stream api / SQL question - Employee(name, sal, department) find the avg of sal of all the employees in each department & give the highest avg sal department 
+what is fuctional interface and advantage? 
+A functional interface in Java is an interface that contains exactly one abstract method. It can have multiple default or static methods, but only one abstract method.
+
+Supports Lambda Expressions
+	• Makes code shorter and cleaner
+	• Reduces boilerplate code
+Functional Interface	Real-world Use
+Runnable	Multithreading
+Comparator	Sorting
+Predicate	Filtering
+Consumer	Processing data
+Function	Data transformation
+Supplier	Data generation
+
+what is lambda expression internal working?
+"Lambda expressions internally use invokedynamic and LambdaMetafactory to create instances at runtime instead of generating separate class files like anonymous classes."
+
+Stream api intermediate and tearminal opration and it's background?
+@@if terminal opration not applied then what is output stream?
+Nothing happens. No output. No processing.
+
+scenario : want to fine average higest salary of employee for department?
+If you want secutity in spring boot in which layer? 
+"Security in Spring Boot should primarily be implemented at the web layer using Spring Security filters for authentication and authorization, and additionally enforced at the service layer using method-level security like @PreAuthorize to protect business logic."
+
+
 
 Lambda expression
 It is also known as annonymous function or closures.
