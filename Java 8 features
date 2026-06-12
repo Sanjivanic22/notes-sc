@@ -1,4 +1,14 @@
 #Java 8 features
+Lambda Expressions
+Functional Interfaces
+Stream API
+Default & Static Methods in Interface
+Optional Class
+Method References
+Date & Time API (java.time)
+Nashorn JS Engine
+Collection API enhancements
+Parallel Streams
 java 8 features
 =====================
 wht are the features
