@@ -330,6 +330,206 @@ if we dont want to run our application on tomcat server is there any way.
 yes we cange enbedded server from to mcat server to jetty .thrre is way you jetty configured this also done using application.properties 
 but you have to make sure thatt jetty dependancy should be add in pom.xml file.
 
+JWT (JSON Web Token) is a compact, URL-safe means of representing claims to be transferred between two parties. 
+The claims in a JWT are encoded as a JSON object that is used as the payload of a JSON Web Signature (JWS) structure or as the plaintext of a JSON Web Encryption (JWE) structure, enabling the claims to be digitally signed or integrity protected with a Message Authentication Code (MAC) and/or encrypted.
+
+Structure of JWT
+A JWT typically consists of three parts:
+
+Header: Contains metadata about the token, such as the type of token (JWT) and the signing algorithm (e.g., HMAC SHA256 or RSA).
+Payload: Contains the claims. This is the part of the token that carries the information, such as user details or permissions.
+Signature: Created by taking the encoded header and payload, and signing it using a secret key or a private key.
+Example of a JWT
+eyJhbGciOiJIU,zI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+Validating a JWT
+To validate a JWT, follow these steps:
+
+Check the Structure: Ensure the JWT has three parts separated by dots (header, payload, signature).
+Decode the JWT: Decode the Base64Url encoded header and payload to read the claims.
+Verify the Signature: Use the algorithm specified in the header to verify the signature. This involves using the secret key or public key to ensure the token hasn't been tampered with.
+Check the Claims: Validate the claims in the payload, such as expiration (exp), issuer (iss), and audience (aud).
+
+
+
+CACHING
+Caching is a technique used to store frequently accessed data in a high-speed storage layer,
+ so that future requests for that data can be served faster than accessing the primary storage location. This improves performance and reduces latency.
+
+How Caching Works
+Storage Layer: Caches are typically stored in fast-access hardware like RAM or in-memory engines.
+Data Retrieval: When a request is made, the system first checks  the cache. If the data is found (cache hit), it is returned quickly. If not (cache miss), the data is retrieved from the primary storage, stored in the cache, and then returned.
+Eviction Policies: Caches have limited size, so they use eviction policies like Least Recently Used (LRU) or First In, First Out (FIFO) to remove old or less frequently accessed data.
+Types of Caching
+Browser Cache: Stores web resources like HTML, CSS, and JavaScript files to speed up page load times.
+Application Cache: Used by applications to store frequently accessed data, such as database query results.
+Content Delivery Network (CDN) Cache: Distributes cached content across multiple locations to reduce latency for users.
+Database Cache: Stores query results to reduce database load and improve response times.
+Implementing Caching
+Example in Spring Boot with Redis
+Add Dependencies:
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+Configure Redis:
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+Enable Caching:
+
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@EnableCaching
+public class CacheConfig {
+}
+Use Caching in Service:
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyService {
+
+    @Cacheable("items")
+    public Item getItemById(Long id) {
+        // Simulate a slow service call
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return new Item(id, "ItemName");
+    }
+}
+Benefits of Caching
+Improved Performance: Reduces data retrieval time.
+Reduced Load: Decreases the load on primary storage or databases.
+Cost Efficiency: Saves resources by reducing the need for repeated data processing.
+
+
+Using multiple databases in a project can be beneficial for various reasons, such as separating different types of data,
+ improving performance, or integrating with legacy systems. Here’s a guide on how to implement multiple databases in a project, 
+specifically focusing on Spring Boot:
+
+Step-by-Step Implementation in Spring Boot
+1. Add Dependencies
+Add the necessary dependencies for the databases you plan to use in your pom.xml:
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+<!-- Add other database dependencies as needed -->
+2. Configure Data Sources
+Define multiple data sources in your application.properties or application.yml file:
+
+spring:
+  datasource:
+    primary:
+      url: jdbc:mysql://localhost:3306/primarydb
+      username: user
+      password: pass
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    secondary:
+      url: jdbc:postgresql://localhost:5432/secondarydb
+      username: user
+      password: pass
+      driver-class-name: org.postgresql.Driver
+3. Create Data Source Configuration Classes
+Create configuration classes for each data source:
+
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(
+    basePackages = "com.example.primary",
+    entityManagerFactoryRef = "primaryEntityManagerFactory",
+    transactionManagerRef = "primaryTransactionManager"
+)
+public class PrimaryDataSourceConfig {
+
+    @Primary
+    @Bean(name = "primaryDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.primary")
+    public DataSource primaryDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    @Primary
+    @Bean(name = "primaryEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("primaryDataSource") DataSource dataSource) {
+        return builder
+                .dataSource(dataSource)
+                .packages("com.example.primary")
+                .persistenceUnit("primary")
+                .build();
+    }
+
+    @Primary
+    @Bean(name = "primaryTransactionManager")
+    public PlatformTransactionManager primaryTransactionManager(
+            @Qualifier("primaryEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
+}
+Repeat similar steps for the secondary data source:
+
+@Configuration
+@EnableTransactionManagement
+@EnableJpaRepositories(
+    basePackages = "com.example.secondary",
+    entityManagerFactoryRef = "secondaryEntityManagerFactory",
+    transactionManagerRef = "secondaryTransactionManager"
+)
+public class SecondaryDataSourceConfig {
+
+    @Bean(name = "secondaryDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.secondary")
+    public DataSource secondaryDataSource() {
+        return DataSourceBuilder.create().build();
+    }
+
+    @Bean(name = "secondaryEntityManagerFactory")
+    public LocalContainerEntityManagerFactoryBean secondaryEntityManagerFactory(
+            EntityManagerFactoryBuilder builder,
+            @Qualifier("secondaryDataSource") DataSource dataSource) {
+        return builder
+                .dataSource(dataSource)
+                .packages("com.example.secondary")
+                .persistenceUnit("secondary")
+                .build();
+    }
+
+    @Bean(name = "secondaryTransactionManager")
+    public PlatformTransactionManager secondaryTransactionManager(
+            @Qualifier("secondaryEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);
+    }
+}
+Best Practices
+Separation of Concerns: Use different databases for different types of data (e.g., transactional vs. analytical).
+Performance Optimization: Distribute load across multiple databases to improve performance.
+Data Integrity: Ensure data consistency and integrity across databases, especially if they interact.
+
+
+
+
+
+
+
+
+
+
 
 
 
