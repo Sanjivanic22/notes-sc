@@ -1109,3 +1109,133 @@ Type Safety: Generics allow you to catch type-related errors at compile time, ra
 Reusability: Generics enable you to create classes, interfaces, and methods that work with different data types, making your code more flexible and reusable.
 Elimination of Type Casting: With generics, you don't need to cast objects when retrieving them from a collection, as the type is already known.
 
+Memory Management in Java
+Java's memory management is handled by the Java Virtual Machine (JVM), which divides memory into several regions to optimize performance and manage resources efficiently. Here are the key components:
+
+JVM Memory Model
+Heap Memory:
+
+Young Generation: Where new objects are allocated. It includes:
+Eden Space: Most new objects are created here.
+Survivor Spaces: Objects that survive garbage collection in Eden are moved here.
+Old Generation: Contains long-lived objects that have survived multiple garbage collections in the Young Generation.
+Stack Memory: Stores method-specific local variables and references. Each thread has its own stack.
+
+Permanent Generation (PermGen): Stores metadata about classes and methods. This includes static methods, primitive variables, and references to static objects1.
+
+Garbage Collection
+Garbage collection is the process of identifying and discarding objects that are no longer needed to free up memory. There are two main types:
+
+Minor GC: Occurs in the Young Generation and is typically fast.
+Major GC: Occurs in the Old Generation and can be more time-consuming1.
+Changes in Java 8
+Java 8 introduced significant changes to memory management, particularly with the replacement of the PermGen space with Metaspace23.
+
+PermGen vs. Metaspace
+PermGen:
+
+Fixed-size memory space for class metadata.
+Prone to OutOfMemoryError if the space is exhausted.
+
+A **ReentrantLock** is a type of lock provided by the `java.util.concurrent.locks` package in Java 
+that allows threads to enter a lock they already hold. This means that if a thread has acquired the lock, it can re-enter the lock without being blocked,
+ which is useful for implementing synchronized methods or blocks.
+
+### Key Features of ReentrantLock
+
+1. **Reentrancy**: A thread can acquire the lock multiple times without blocking itself.
+2. **Fairness**: You can create a fair lock that grants access to threads in the order they requested it.
+3. **Lock Methods**: Provides methods for locking, unlocking, and checking the lock status.
+
+### Basic Usage
+
+Here's an example of how to use `ReentrantLock`:
+
+#### Import the necessary classes:
+```java
+import java.util.concurrent.locks.ReentrantLock;
+```
+
+#### Create a ReentrantLock instance:
+```java
+private final ReentrantLock lock = new ReentrantLock();
+```
+
+#### Use the lock in a method:
+```java
+public void performTask() {
+    lock.lock(); // Acquire the lock
+    try {
+        // Critical section
+        System.out.println("Task performed by " + Thread.currentThread().getName());
+    } finally {
+        lock.unlock(); // Release the lock
+    }
+}
+```
+
+### Fairness Policy
+
+You can create a fair lock by passing `true` to the constructor:
+```java
+private final ReentrantLock fairLock = new ReentrantLock(true);
+```
+
+### Advanced Features
+
+1. **Try Lock**: Attempt to acquire the lock without blocking.
+   ```java
+   if (lock.tryLock()) {
+       try {
+           // Critical section
+       } finally {
+           lock.unlock();
+       }
+   } else {
+       // Handle the case where the lock is not acquired
+   }
+   ```
+
+2. **Condition Variables**: Use `Condition` objects for more advanced synchronization.
+   ```java
+   private final Condition condition = lock.newCondition();
+
+   public void awaitCondition() throws InterruptedException {
+       lock.lock();
+       try {
+           condition.await(); // Wait for the condition
+       } finally {
+           lock.unlock();
+       }
+   }
+
+   public void signalCondition() {
+       lock.lock();
+       try {
+           condition.signal(); // Signal the condition
+       } finally {
+           lock.unlock();
+       }
+   }
+   ```
+
+### Benefits of ReentrantLock
+
+- **Flexibility**: More flexible than synchronized blocks, offering additional features like fairness and try-lock.
+- **Condition Variables**: Allows for more complex synchronization scenarios.
+- **Performance**: Can be more performant in certain scenarios compared to synchronized blocks.
+
+Would you like more details on using `ReentrantLock` in a specific context or with additional examples?
+Configurable with -XX:PermSize and -XX:MaxPermSize JVM options2.
+Metaspace:
+
+Dynamic memory space that grows automatically as needed.
+Reduces the likelihood of OutOfMemoryError related to class metadata.
+Configurable with -XX:MetaspaceSize and -XX:MaxMetaspaceSize JVM options23.
+Benefits of Metaspace
+Automatic Growth: Metaspace can expand dynamically, reducing the need for manual tuning.
+Improved Garbage Collection: The garbage collector can clean up dead classes more efficiently, improving overall performance24.
+Best Practices
+Monitor Memory Usage: Use tools like VisualVM or JConsole to monitor and analyze memory usage.
+Tune Garbage Collection: Adjust JVM options to optimize garbage collection based on your application's needs.
+Avoid Memory Leaks: Ensure proper handling of object references to prevent memory leaks.
