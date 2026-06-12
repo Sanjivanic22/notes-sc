@@ -1,4 +1,19 @@
 #Java 8 features
+java 8 features
+=====================
+wht are the features
+what is lambda expression
+syntax for Lambda expression
+what is functional interface and examples 
+what is the diff b/w Runnable and Callable
+why default method allowed in function interface.
+how we can achieve muliple inheritance in java 8.
+what are the predefined functional interface
+what is Intermediate and terminal opeartions and examples
+Programs
+stream api find maximum salary of employee.
+java 8 changes in date and time.-done
+what is optional in java 8.-done
 Java 8
  Optional classes in java 8
 7. List convert it to map using java 8
