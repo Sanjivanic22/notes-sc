@@ -1,4 +1,5 @@
 ✅ Java 8 Interview Question List
+=====================================
 🔹 Basic Features
 1.	What are the features of Java 8?
 1.	• Lambda Expressions 
@@ -9,7 +10,7 @@
 6.	• Method references 
 7.	• New Date-Time API 
 8.	•  Nashorn engine
-9.	
+
 2.	What is a lambda expression?
 A lambda expression is a short, anonymous function—a function defined without a name. 
 It is typically used for small, simple operations and can be passed as an argument to other functions.
@@ -21,19 +22,21 @@ It is very useful in collection library in which it helps to iterate, filter and
 4.	(parameters) -> expression
 OR
 5.	(parameters) -> { statements; }
-6.	
-7.	How do lambda expressions work internally?
-8.	Internally, lambda expressions are implemented using the invokedynamic mechanism, where the JVM dynamically creates instances of functional interfaces without generating separate class files, making them efficient and lightweight.
 
+7.	How do lambda expressions work internally?
+	Internally, lambda expressions are implemented using the invokedynamic mechanism, where the JVM dynamically creates 
+instances of functional interfaces without generating separate class files, making them efficient and lightweight.
 
 9.	What is functional interface?
-•	If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method or single abstract method (SAM). 
+•	If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method
+    or single abstract method (SAM). 
 •	 Functional interfaces are used as the target types for lambda expressions and method references.
 •	Ex: 1) Runnable  It contains only run() method 
 •	    2) Comparable  It contains only compareTo() method
 •	    3) ActionListener  It contains only actionPerformed() 
 •	   Callable  It contains only call() method Inside functional interface in addition to single Abstract 
 method (SAM) we write any number of default and static methods.
+
 10.	Why were functional interfaces introduced?
 •	Functional interfaces were introduced to:
 •	Support lambda expressions
@@ -42,13 +45,15 @@ method (SAM) we write any number of default and static methods.
 •	Make Java code simpler and more expressive
 •	
 11.	Advantages of functional interface?
-•	Functional interfaces simplify Java code by enabling lambda expressions, improving readability, supporting functional programming, and enhancing reusability and maintainability.
+•	Functional interfaces simplify Java code by enabling lambda expressions, improving readability, supporting functional programming,
+and enhancing reusability and maintainability.
 
 What happens if a functional interface extends another interface?
 When a functional interface extends another interface, it remains functional only if it still has exactly one abstract method in total.
 
 7.	What is the difference between Runnable and Callable?
-Runnable does not return a result and cannot throw checked exceptions, whereas Callable returns a value and can throw checked exceptions, making it more powerful for concurrent tasks.
+Runnable does not return a result and cannot throw checked exceptions, 
+whereas Callable returns a value and can throw checked exceptions, making it more powerful for concurrent tasks.
 
 What is Default method?
 A default method is a method defined inside an interface with a body (implementation) using the default keyword.
@@ -60,17 +65,16 @@ A default method is a method defined inside an interface with a body (implementa
 •	Default methods solve this by providing a default implementation, so old code continues to work.
 •	✅ 2. Interface Evolution
 9.	Helps extend and improve interfaces over time without forcing all implementing classes to change.
-
 10.	✅ 3. Reduce Need for Utility Classes
 11.	Common logic can be placed directly in the interface instead of separate helper classes.
-
 12.	✅ 4. Supports Functional Programming
 13.	Works well with lambda expressions and streams, enabling more flexible design.
 14.	✅ 5. Code Reusability
 15.	Allows sharing of common method implementations among multiple classes.
 
 16.	How to achieve multiple inheritance in Java 8?
-Multiple inheritance in Java 8 is achieved using multiple interfaces and default methods, allowing a class to inherit behavior from multiple sources while resolving conflicts explicitly.
+Multiple inheritance in Java 8 is achieved using multiple interfaces and default methods, allowing a class to inherit
+behavior from multiple sources while resolving conflicts explicitly.
 
 17.	What are predefined functional interfaces?
 1. Predicate
@@ -79,10 +83,8 @@ Multiple inheritance in Java 8 is achieved using multiple interfaces and default
 •	Takes input and returns a result
 3. Consumer
 •	Takes input but returns nothing
-
 4.Supplier
 Takes no input, returns a value
-
 5.BIFunction
 Takes two inputs, returns a result
 
@@ -90,64 +92,79 @@ Takes two inputs, returns a result
 •	in Java Method referance are a shorthand notation for calling methods that can be used wherever a functional interface is expected.
 •	They provide a more concise and readable way to refer to methods compared to using lambda expressions.
 •	They are particularly useful when the lambda expression simply calls an existing method or constructor, making your code more concise and expressive.
+
 13.	Types of method references?
 Referance of static method
 Referance of instance method
 Referance of constructor by using new keyword
+
 🔹 Streams API
 15.	What is Stream API?
 16.	The Stream API is used to process collections of data in a functional and efficient way.
 17.	It allows performing operations like filtering, mapping, sorting, and reducing on data in a declarative style
 
 18.	Difference between stream and collection?
-A Collection is used to store data, whereas a Stream is used to process data in a functional, efficient, and often parallel manner without modifying the original source.
+A Collection is used to store data, whereas a Stream is used to process data in a functional, efficient, and often 
+parallel manner without modifying the original source.
 
 19.	What are intermediate operations?
-Intermediate operations transform a stream into another stream. These operations are lazy; they are not executed until a terminal operation is invoked on the stream. 
-•	Intermediate operations return a new stream, allowing multiple operations to be chained together. Examples include:
+Intermediate operations transform a stream into another stream. These operations are lazy; they are not executed until a terminal 
+operation is invoked on the stream. 
+•	Intermediate operations return a new stream, allowing multiple operations to be chained together. 
+Examples include:
 •	filter, map ,sorted, distinct,limit,skip
+
 20.	What are terminal operations?
 •	Terminal operations produce a result or a side effect and mark the end of the stream processing. 
 •	Once a terminal operation is invoked, the stream is considered consumed and can no longer be used. 
 •	Examples include:
 •	forEach,toarray,Reduce collect,count,anymatch,allmatch,noneMatch,findFirst,FindAny.
+
 21.	What happens if terminal operation is not used?
 •	If a terminal operation is not used, the stream pipeline will not execute at all.
 •	because stream operations are lazy and require a terminal operation to trigger processing.
 
 22.	Why is Streams API faster than traditional loops?
-Stream API can be faster than traditional loops because it supports parallel processing, lazy evaluation, and optimized internal iteration, allowing better performance especially with large datasets.
+Stream API can be faster than traditional loops because it supports parallel processing, lazy evaluation, and optimized internal iteration, 
+allowing better performance especially with large datasets.
+
 23.	What is map() vs flatMap()?	
 map() transforms each element individually, whereas flatMap() transforms and flattens nested structures into a single stream.
-The function passed to map() operation returns a single value for a single input.	The function you pass to flatmap() operation returns an arbitrary number of values as the output.
+The function passed to map() operation returns a single value for a single input.The function you pass to flatmap() operation returns an 
+arbitrary number of values as the output.
 
 One-to-one mapping occurs in map().	    One-to-many mapping occurs in flatMap().
 Only perform the mapping.	                        Perform mapping as well as flattening.
 Produce a stream of value.	                           Produce a stream of stream value.
 map() is used only for transformation            flatMap() is used both for transformation and mapping.
+
 What are collectors in Java 8?
-Collectors are utility classes in Java 8 (available in java.util.stream.Collectors) used to transform or collect stream elements into a desired result such as a list, set, map, or string.
+Collectors are utility classes in Java 8 (available in java.util.stream.Collectors) used to transform or collect stream elements into a
+desired result such as a list, set, map, or string.
 A Collector is used in the terminal operation (collect()) of a Stream API to accumulate elements into a collection or other form.
-🔹 Optional Class
+
 31.	What is Optional in Java 8?
 Optional is a Java 8 class used to represent a value that may or may not be present, helping to avoid null checks and prevent NullPointerException.
 
 32.	Methods of Optional class?
 The Optional class provides methods like 
-of(), ofNullable(), isPresent(), get(), orElse(), map(), flatMap(), and filter() to safely handle and process values that may be absent.															
+of(), ofNullable(), isPresent(), get(), orElse(), map(), flatMap(), and filter() to safely handle and process values that may be absent.
+
 Difference between of(), ofNullable(), empty()?
 of() is used for non-null values and throws an exception if null, 
 ofNullable() safely handles null by returning an empty Optional, and
  empty() creates an explicitly empty Optional
 
-🔹 Date & Time API
 35.	What are new Date & Time APIs in Java 8?
 Java 8 introduced a new and improved Date and Time API in the java.time package to overcome the limitations of old classes like Date and Calendar.
-Java 8 introduced the java.time package with classes like LocalDate, LocalTime, LocalDateTime, ZonedDateTime, and Instant to provide a modern, thread-safe, and easy-to-use date and time API.
+Java 8 introduced the java.time package with classes like LocalDate, LocalTime, LocalDateTime, ZonedDateTime, and Instant to provide a modern, 
+thread-safe, and easy-to-use date and time API.
+
 🔹 Interface Improvements
 37.	What is static method in interface?
 •	A static method in an interface is a method defined with the static keyword inside an interface, and it has a method body (implementation).
-•	A static method in an interface is a method with implementation that belongs to the interface itself, cannot be overridden, and is accessed using the interface name.
+•	A static method in an interface is a method with implementation that belongs to the interface itself, cannot be overridden, and is accessed
+using the interface name.
 
 38.	Where to use default vs static methods?
 39.	•  Use default → if method should be inherited & customizable 
@@ -177,7 +194,7 @@ o	Tree converts back to Linked List
 •	Tree conversion happens only if: 
 o	HashMap capacity ≥ 64 (MIN_TREEIFY_CAPACITY)
 •	Otherwise, resizing is preferred
-________________________________________
+
 🔹 How It Improves Performance
 •	Faster search, insert, delete
 •	Handles high collision scenarios efficiently
@@ -192,7 +209,6 @@ Convert to Red-Black Tree
    ↓
 Faster operations (O(log n))
 
-🔹 Miscellaneous
 42.	What is Nashorn in Java 8?
 Nashorn is a JavaScript engine introduced in Java 8.
 Key Points:
@@ -201,15 +217,13 @@ Key Points:
 45.	✅ Written in Java, designed for better performance and tighter integration with Java.
 
 46.	What is MetaSpace and how is it different from PermGen?
-
-47.	Both MetaSpace and PermGen (Permanent Generation) are memory areas used by the JVM to store class metadata, but they differ in how they are managed.
-
+Both MetaSpace and PermGen (Permanent Generation) are memory areas used by the JVM to store class metadata, but they differ in how they are managed.
 •  PermGen was limited and prone to memory errors. 
 •  MetaSpace improves performance and flexibility by using native memory and dynamic allocation.
 
-
 48.	What are Predicate, Consumer, Supplier, Function?
-49.	In Java 8, Predicate, Consumer, Supplier, and Function are functional interfaces introduced in the java.util.function package to support lambda expressions and functional programming.
+49.	In Java 8, Predicate, Consumer, Supplier, and Function are functional interfaces introduced in the java.util.
+function package to support lambda expressions and functional programming.
 50.	1. Predicate
 51.	✅ Represents a boolean-valued function (returns true/false)
 52.	✅ Used for testing conditions
@@ -251,9 +265,8 @@ Key Points:
 85.	Java
 86.	Supplier<Double> randomValue = () -> Math.random();
 87.	System.out.println(randomValue.get());
-88.	Show more lines
+88
 89.	👉 Used for lazy generation
-90.	________________________________________
 91.	🔹 4. Function<T, R>
 92.	✅ Represents a function that takes input and returns a result
 93.	✅ Used for transforming data
@@ -265,22 +278,19 @@ Key Points:
 99.	Java
 100.	Function<String, Integer> length = s -> s.length();
 101.	System.out.println(length.apply("Java")); // 4
-102.	Show more lines
-103.	👉 Common in map operations
-104.	
-105.	
-106.	Explain BiFunction interface
 
 ✅ SPRING INTERVIEW QUESTION LIST
+===========================================
 🔹 Core Spring Basics
 1.	What is Spring Framework?
 2.	The Spring Framework is a powerful, lightweight, and open-source Java framework used for building enterprise-level applications. 
 3.	It provides a comprehensive programming and configuration model for modern Java-based systems.
 
 4.	What are the modules of Spring?
-5.	Spring Framework is modular and includes Core Container, Data Access/Integration, Web, AOP, Messaging, Instrumentation, and Test modules. These modules help in building scalable, loosely coupled enterprise applications.”
+5.	Spring Framework is modular and includes Core Container, Data Access/Integration, Web, AOP, Messaging, 
+Instrumentation, and Test modules. These modules help in building scalable, loosely coupled enterprise applications.”
 
-             • Core Container → DI & Bean management 
+ • Core Container → DI & Bean management 
 •  ✅ Data Access → Database & transactions 
 •  ✅ Web → Web & REST applications 
 •  ✅ AOP → Cross-cutting concerns 
@@ -301,6 +311,7 @@ Key Points:
 11.	=>to instantiate the application class
 12.	=>to configure the object
 13.	=>to assemble the dependencies between the objects
+
 14.	What is Dependency Injection (DI)?
 15.	Dependency Injection (DI) is a design pattern used in software development to achieve loose coupling between components. Instead of a class creating its own dependencies, those dependencies are provided (injected) from the outside.
 “Giving an object the things it needs (dependencies) from outside rather than letting it create them itself.”
@@ -324,24 +335,28 @@ The Spring Container is the core component of the Spring Framework responsible f
 
 🔹 IoC Container
 8.	What is IoC container?
-9.	An IoC (Inversion of Control) Container is a framework component that manages the creation, configuration, and lifecycle of objects and their dependencies instead of the programmer doing it manually.
-10.	
+9.	An IoC (Inversion of Control) Container is a framework component that manages the creation, configuration, and lifecycle of
+   objects and their dependencies instead of the programmer doing it manually.
+
 11.	Types of IoC containers?
 12.	1)BeanFactory
 13.	2)ApplicationContext
+
 14.	Difference between BeanFactory and ApplicationContext?
     BeanFactory is a basic IoC container with lazy initialization, 
 While
  ApplicationContext is an advanced container that provides additional features like AOP, event handling, and eager initialization.
 
 15.	Why ApplicationContext is preferred over BeanFactory?
-ApplicationContext is preferred over BeanFactory because it provides advanced features like AOP, event handling, and eager initialization, making it more suitable for enterprise-level applications.
-
-16.	ApplicationContext is preferred because it provides advanced features and better support for enterprise applications, whereas BeanFactory is limited to basic functionality.
+ApplicationContext is preferred over BeanFactory because it provides advanced features like AOP, event handling, and 
+eager initialization, making it more suitable for enterprise-level applications.
+16.	ApplicationContext is preferred because it provides advanced features and better support for enterprise applications,
+whereas BeanFactory is limited to basic functionality.
 
 🔹 Dependency Injection
 12.	What is dependency injection?
-13.	Dependency Injection (DI) is a design pattern in which an object receives its required dependencies from an external source rather than creating them itself.
+13.	Dependency Injection (DI) is a design pattern in which an object receives its required dependencies from an external 
+ source rather than creating them itself.
 
 14.	Types of DI in Spring?
 15.	1. Constructor Injection (Most Recommended)
@@ -367,13 +382,12 @@ Advantages:
 •	
 
 19.	Difference between constructor and setter injection?
-20.	Constructor injection is used for mandatory dependencies and ensures immutability, while setter injection is used for optional dependencies and provides flexibility.
+20.	Constructor injection is used for mandatory dependencies and ensures immutability, while setter injection is 
+used for optional dependencies and provides flexibility.
 
 21.	When to use constructor vs setter injection?
 Choosing between constructor injection and setter injection depends on the type of dependency and design requirements.
-
 If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
-
 If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
 
 17.	What is a Spring Bean?
@@ -398,18 +412,6 @@ If we want to involve only our choice of propetries into the spring class the we
 •	Bean Instantiation – Spring creates the bean instance.
 •	Dependency Injection – Dependencies are injected.
 •	Aware Interfaces Methods (optional)
-e.g., BeanNameAware, ApplicationContextAware
-•	BeanPostProcessor (before init)
-•	Initialization 
-•	@PostConstruct
-•	afterPropertiesSet()
-•	custom init-method
-•	BeanPostProcessor (after init)
-•	Bean is ready to use
-•	Destruction (when context closes) 
-•	@PreDestroy
-•	destroy()
-•	custom destroy-method
 •	
 . What are init and destroy methods?
 •	These are custom lifecycle callback methods used to perform initialization and cleanup.
@@ -420,7 +422,7 @@ e.g., BeanNameAware, ApplicationContextAware
 •	Runs before bean destruction.
 •	Used to release resources (close DB connections, cleanup tasks).
 
-19.	What are different bean scopes?
+19.	What are different bean scopes?****
 •	Spring supports multiple scopes:
 •	singleton (default)
 1.	One instance per Spring container.
@@ -435,7 +437,7 @@ e.g., BeanNameAware, ApplicationContextAware
 •	websocket
 1.	One instance per WebSocket session.
 •	
-20.	Difference between singleton and prototype?
+20.	Difference between singleton and prototype?***
 Singleton Scope
 •	✅ Only one instance of the bean is created per Spring container
 •	✅ The same object is shared everywhere in the application
@@ -461,7 +463,6 @@ ________________________________________
 •	MyBean obj2 = context.getBean(MyBean.class);
 •	
 •	System.out.println(obj1 == obj2); // false
-•	Show more lines
 •	👉 Each request creates a new object
 •	________________________________________
 •	🔑 Key Differences
@@ -481,8 +482,6 @@ Spring only creates the bean; developer must handle destruction
 •	✅ Summary
 •	Singleton → Single shared instance (default, efficient)
 •	Prototype → Multiple instances (good for stateful objects)
-•	
-
 
 21.	When to use request and session scope?
 Request Scope
@@ -496,7 +495,6 @@ Session Scope
 o	User login information
 o	Shopping cart
 
-🔹 Autowiring
 23.	What is autowiring?
 •	Autowiring is a feature in Spring that automatically injects dependencies into a bean without manual configuration.
 •	Spring resolves dependencies by type, name, or constructor.
@@ -569,51 +567,6 @@ o	Shopping cart
 92.	👉 Here:
 93.	@Primary sets default (CreditCardService)
 94.	@Qualifier overrides it to use PaypalService
-95.	________________________________________
-96.	✅ Summary
-97.	@Autowired → inject dependency automatically
-98.	@Qualifier → choose specific bean
-99.	@Primary → set default bean
-100.	👉 In short:
-When multiple beans exist:
-101.	Use @Primary for default
-102.	Use @Qualifier to override selection:
-________________________________________
-23. What is Autowiring?
-Autowiring is a feature in Spring that automatically injects dependencies into a bean without manual configuration.
-•	Spring resolves dependencies by type, name, or constructor.
-•	It reduces XML/configuration and improves readability.
-✅ Example:
-@Autowired
-private MyService myService;
-👉 Instead of manually creating objects, Spring injects them automatically.
-________________________________________
-24. Modes of Autowiring
-Spring supports different autowiring modes:
-1. byName
-•	Injects dependency based on property name matching bean name.
-•	Works with setter injection.
-✅ Example:
-// Bean name = myService
-private MyService myService; // variable name must match
-________________________________________
-
-]k.
-L;’.’?{
-•	Injects dependency based on type (class/interface).
-•	If multiple beans of same type exist → confusion/error.
-________________________________________
-3. constructor
-•	Injects dependencies through the constructor.
-•	Preferred approach (better for immutability and testing).
-✅ Example:
-@Autowired
-public MyController(MyService myService) {
-    this.myService = myService;
-}
-________________________________________
-✅ Important Note:
-•	In modern Spring (Spring Boot), annotation-based autowiring (@Autowired) is most common, instead of XML modes.
 
 🔹 Spring Annotations
 •	What is @Component?
@@ -639,8 +592,7 @@ ________________________________________
 •	The repository is a DAOs (Data Access Object) that access the database directly. 
 •	The repository does all the operations related to the database.
 •	@Controller → Used in MVC for handling HTTP requests
-•	👉 They behave similarly but improve code readability and architecture clarity.
-•	________________________________________
+•	
 •	28. What is @RestController?
 •	this annotation is specialized version of @controller that conbines the @controller and @ResponseBody annotation.
 •	it is used to mark class as restful webserbice controlller.it handles the http request and directly return the response body in format such json or xml.
@@ -695,8 +647,10 @@ ________________________________________
 •	}
 
 🔹 Spring MVC
+==================
 32.	What is Spring MVC?
-33.	Spring MVC (Model–View–Controller) is a web framework provided by the Spring Framework for building Java-based web applications following the MVC design pattern.
+33.	Spring MVC (Model–View–Controller) is a web framework provided by the Spring Framework for building Java-based web applications 
+following the MVC design pattern.
 
 Spring MVC is a lightweight, flexible framework used to develop web applications in Java. It separates the application into three main components:
 34.	1. Model
@@ -755,7 +709,8 @@ HandlerMapping is responsible for deciding which controller should handle a spec
 58.	What is ViewResolver?
 ViewResolver is a Spring MVC component that resolves the logical view name returned by the controller into the actual view resource.
 
-🔹 Spring Boot
+🔹 Spring Boot QuestionList
+======================
 37.	What is Spring Boot?
 •	Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
 •	 that makes it easier to create and run Java applications.
@@ -765,6 +720,7 @@ ViewResolver is a Spring MVC component that resolves the logical view name retur
 •	a. Configurations
 •	b. Dependency Management
 •	C. Embedded Server
+
 38.	Advantages of Spring Boot?
 •	Springboot reduce the lots of development time and increase the productivity
 •		• It avaoides boilerplate code ,annotation and xml configurations
@@ -776,333 +732,6 @@ ViewResolver is a Spring MVC component that resolves the logical view name retur
 •	c. Rapid Development- Opinionated approach and auto-configuration enable developers to quickly develop apps
 •	d. Provide Dependency Management- No need to manage separate dependencies manually.
 •	e. Autoconfiguration - Spring Boot AutoConfigure things by default.
-39.	What is auto-configuration?
-•	Auto-configuration is a feature of Spring Boot that automatically configures your application based on the dependencies present in the classpath.
-
-•	👉 In simple terms:
-Spring Boot reduces the need for manual configuration by setting up beans automatically.
-40.	How to disable auto-configuration?
-•	✅ 1. Disable Specific Auto-Configuration (Recommended)
-•	Use exclude in @SpringBootApplication:
-•	@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-•	
-•	public class MyApplication {
-1.	public static void main(String[] args) {
-2.	SpringApplication.run(MyApplication.class, args);
-3.	}
-•	}
-•	👉 Example use case:
-•	You don’t want Spring Boot to auto-configure a database.
-•	________________________________________
-•	✅ 2. Using @EnableAutoConfiguration
-•	@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-•	``
-•	👉 Works the same as above but used separately.
-•	________________________________________
-•	✅ 3. Disable via application.properties
-•	spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-•	👉 Useful when you don’t want to modify code.
-•	
-•	✅ 5. Conditional Disabling
-•	Spring automatically skips configuration if:
-•	Required dependency is missing
-•	Required bean already exists
-
-•	✅ Interview Tip (Short Answer)
-•	👉 “We can disable autoconfiguration using the exclude attribute in @SpringBootApplication, @EnableAutoConfiguration, or via application.properties.”
-🔹 Scenario-Based Questions
-41.	How to secure Spring Boot application (layer-wise)?
-42.	Securing a Spring Boot application requires a defense-in-depth approach, where security is applied at multiple layers:
-43.	🔹 1. Network Layer
-44.	Enable HTTPS (SSL/TLS) to encrypt communication
-45.	Use firewalls, load balancers, and reverse proxies
-46.	Restrict ports and allow only trusted IPs
-47.	
-48.	🔹 2. Application Layer (Spring Security)
-49.	Authentication: Use Basic Auth, JWT, OAuth2
-50.	Authorization: Role-based or permission-based access @PreAuthorize("hasRole('ADMIN')")
-51.	Use BCrypt for password hashing
-52.	Enable CSRF protection (disable only for stateless APIs)
-53.	Configure session management
-54.	
-55.	🔹 3. API / Controller Layer                                                                                                                                              
-56.	Validate user inputs using: @Valid, @Not                                            
-57.	Implement global exception handling to avoid exposing sensitive data
-58.	Add rate limiting to prevent abuse
-59.	________________________________________
-60.	🔹 4. Service Layer
-61.	Apply business-level security checks
-62.	Ensure users can access only their own data
-63.	Implement RBAC/ABAC logic
-64.	________________________________________
-65.	🔹 5. Data Layer
-66.	Prevent SQL injection using JPA/Prepared Statements
-67.	Encrypt sensitive data (PII)
-68.	Use least-privileged DB credentials
-69.	________________________________________
-70.	🔹 6. Configuration Layer
-71.	Store secrets in environment variables or secret managers
-72.	Avoid hardcoding passwords
-73.	Use Spring profiles (dev/test/prod)
-74.	________________________________________
-75.	🔹 7. Logging & Monitoring
-76.	Mask sensitive info in logs
-77.	Monitor suspicious activities
-78.	Use tools like ELK, Prometheus, Grafana
-79.	________________________________________
-80.	🔹 8. Dependency & Deployment
-81.	Regularly update dependencies
-82.	Use vulnerability scanning tools (OWASP, Snyk)
-83.	Secure Docker containers (run as non-root)
-84.	✅ Conclusion (1-liner)
-85.	“Spring Boot security should be implemented layer-wise—from network to database—using Spring Security, input validation, encryption, and monitoring to ensure complete protection.”
-
-🔹 Spring Data JPA
-42.	What is Spring Data JPA?
-  Spring Data JPA provides an abstraction layer over JPA, allowing developers to interact with databases without writing boilerplate code such as SQL queries or DAO implementations.
-
-43.	What is JpaRepository?
-JpaRepository is an interface in Spring Data JPA that provides ready-to-use methods for performing CRUD (Create, Read, Update, Delete) operations and more on database entities.
-
-CRUD Operations
-save(entity);          // Insert or update
-findById(id);          // Fetch by ID
-findAll();              // Fetch all records
-deleteById(id);        // Delete by ID
-existsById(id);        // Check existence
-Pagination & Sorting
-findAll(Pageable pageable);
-findAll(Sort sort);
-44.	Difference between CrudRepository and JpaRepository?
-CrudRepository
-•	A generic interface in Spring Data.
-•	Provides basic CRUD operations.
-•	Suitable for simple data access needs.
-•	
-JpaRepository
-•	Extends PagingAndSortingRepository, which extends CrudRepository.
-•	Provides advanced JPA-specific features.
-•	Used when working specifically with JPA (Hibernate, etc.).
-🔹 Additional Features
-•	Pagination and sorting
-•	Batch operations
-•	Flush and save-and-flush functionality
-
-45.	What are query methods?
-
-46.	Query methods are methods defined in a repository interface where Spring automatically generates the database query based on the method name.
-
-47.	A query method is a method whose name follows a specific naming convention, allowing Spring Data JPA to derive SQL/JPQL queries automatically without writing them manually.
-
-
-48.	•  No need to write SQL 
-49.	•  Reduces boilerplate code 
-50.	•  Easy to read and maintain 
-51.	•  Faster development
-
-52.	What is @Query annotation?
-53.	The @Query annotation is used in Spring Data JPA to define custom JPQL (Java Persistence Query Language) or native SQL queries directly in the repository interface.
-
-54.	What is pagination and sorting?
-55.	Pagination is the process of dividing large amounts of data into smaller chunks (pages) so that data can be retrieved and displayed in parts instead of loading everything at once
-
-🔹 Transactions
-48.	What is transaction in Spring?
-A transaction is a single unit of work that ensures a group of database operations either:
-49.	✅ All succeed (commit)
-50.	❌ All fail (rollback)		
-51.	Programmatic → Manual transaction handling
-52.	Declarative → Automatic using @Transactional (preferred)
-
-53.	Difference between programmatic and declarative transaction?
-54.	Feature	55.	Programmatic Transaction	56.	Declarative Transaction
-57.	Definition	58.	Managed manually in code	59.	Managed using annotations/config
-60.	Control	61.	Full control	62.	Less control, automatic
-63.	Complexity	64.	More complex	65.	Simple and clean
-66.	Code Dependency	67.	Tightly coupled with transaction logic	68.	Business logic is separate
-69.	Approach	70.	Uses TransactionTemplate or API	71.	Uses @Transactional
-72.	Boilerplate Code	73.	More	74.	Very less
-75.	Preferred	76.	Rarely used	77.	Mostly used ✅
-
-78.	What is @Transactional?
-@Transactional is a Spring annotation used to manage transactions automatically.
-•  Starts a transaction ✅ 
-•  Commits if successful ✅ 
-•  Rolls back if an exception occurs ✅
-Prapogation
-Propagation defines how transactions behave when one transactional method calls another (reuse, create new, or ignore transactions).
-All Propagation Types
-🔹 1. REQUIRED (Default ✅)
-🔸 Behavior:
-•	Uses existing transaction if available
-•	Otherwise, creates a new one
-🔸 Example:
-Java
-@Transactional(propagation = Propagation.REQUIRED)
-🔹 2. REQUIRES_NEW
-🔸 Behavior:
-•	Always creates a new transaction
-•	Suspends any existing transaction
-🔸 Use Case:
-•	Logging, audit operations (independent transaction)
-Java
-@Transactional(propagation = Propagation.REQUIRES_NEW)
-``
-Show more lines
-________________________________________
-🔹 3. SUPPORTS
-🔸 Behavior:
-•	Uses existing transaction if present
-•	If not, executes without transaction
-Java	
-@Transactional(propagation = Propagation.SUPPORTS)
-Show more lines
-________________________________________
-🔹 4. NOT_SUPPORTED
-🔸 Behavior:
-•	Always executes without a transaction
-•	Suspends any existing transaction
-Java
-@Transactional(propagation = Propagation.NOT_SUPPORTED)
-Show more lines
-________________________________________
-🔹 5. MANDATORY
-🔸 Behavior:
-•	Must run inside an existing transaction
-•	Throws exception if none exists ❌
-Java
-@Transactional(propagation = Propagation.MANDATORY)
-Show more lines
-________________________________________
-🔹 6. NEVER
-🔸 Behavior:
-•	Must NOT run inside a transaction
-•	Throws exception if a transaction exists ❌
-Java
-@Transactional(propagation = Propagation.NEVER)
-Show more lines
-________________________________________
-🔹 7. NESTED
-🔸 Behavior:
-•	Runs inside existing transaction
-•	Creates a savepoint (partial rollback possible)
-
-🔹 Spring AOP
-51.	What is AOP?
-•	Aspect-Oriented Programming (AOP) is a programming paradigm that aims to separate cross-cutting concerns (like logging, security, etc.) from the main business logic.
-•	It allows you to modularize concerns that affect multiple parts of a program.
-•	Instead of repeating the same code everywhere, AOP puts it in a single place called an aspect
-52.	Why use AOP?
-AOP is used to improve code quality and maintainability.
-Benefits:
-53.	✅ Reduces code duplication – common logic written once
-54.	✅ Improves modularity – separates business logic from supporting concerns
-55.	✅ Easier maintenance – changes made in one place
-56.	✅ Better readability – clean core logic without clutter
-57.	✅ Centralized management – for logging, security, etc.
-
-58.	What are cross-cutting concerns?
-•	Cross-cutting concerns are functionalities that span across multiple modules or layers of an application.
-•	They “cut across” the main business logic and are needed everywhere.
-59.	Examples of AOP (logging, security, transactions)
-🔹 ORM
-55.	What is ORM?
-ORM (Object-Relational Mapping) is a technique that allows you to map Java objects to database tables.
-
-56.	What is Spring ORM?
-Spring ORM is a module of the Spring Framework that provides integration support for ORM tools like Hibernate, JPA, etc
-
-57.	How Spring integrates with Hibernate?
-58.	spring integrates with Hibernate by using Spring ORM and Spring Data JPA to manage sessions, transactions, and exceptions automatically, allowing developers to focus on business logic.
-
-✅ IMPORTANT SCENARIO-BASED QUESTIONS
-🔹 Dependency Injection (Real Scenarios)
-1.	You have multiple beans of same type — how will you inject the correct one?
-👉 Use @Qualifier or @Primary
-2.	Your application fails due to missing dependency — how do you debug it?
-👉 Check:
-•	Bean configuration
-•	Component scan
-•	Constructor mismatch
-🔹 Bean Scope
-3.	When will you use prototype scope instead of singleton?
-👉 Stateful objects (e.g., user-specific data)
-4.	Why singleton scope for services?
-👉 Stateless + performance optimization
-________________________________________
-🔹 Autowiring Issue
-5.	Two beans of same type → NoUniqueBeanDefinitionException. Solution?
-👉 Use:
-@Qualifier("beanName")
-``
-________________________________________
-🔹 Transaction Management
-6.	Transaction not rolling back — why?
-👉 Possible reasons:
-•	Method not public
-•	Same class internal call
-•	No RuntimeException
-________________________________________
-🔹 Spring Boot
-7.	Application fails due to auto-configuration — what to do?
-👉 Disable:
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-________________________________________
-🔹 Spring MVC
-8.	Request not reaching controller — how to debug?
-👉 Check:
-•	URL mapping (@RequestMapping)
-•	DispatcherServlet config
-•	Component scan
-
-🔹 Spring Data JPA
-9.	Want custom query — how will you write?
-👉 Use:
-@Query("SELECT e FROM Employee e WHERE e.salary > :sal")
-``
-🔹 Performance & Design
-10.	How to improve Spring application performance?
-👉
-•	Use caching
-•	Use lazy loading
-•	Reduce DB calls
-•	Use connection pooling
-________________________________________
-🔹 Security (Common Interview Scenario)
-11.	Where to implement security in Spring Boot?
-👉
-•	Web layer (Spring Security filters)
-•	Service layer (@PreAuthorize)
-________________________________________
-
-🔹 Real-Time Application Questons
-13.	 scalable Spring Boot application?
-14.	How you handle exception globally? (@ControllerAdvice)
-15.	How will you handle large data with pagination?
-•  Fetch only required data using pages 
-•  Use DB-level pagination (LIMIT/OFFSET) 
-•  Prefer cursor-based pagination for large datasets 
-•  Return pagination metadata 
-•  Use frameworks like Spring Data for easy implementation
-
-16.	How do you secure REST APIs?
-17.	How do you integrate DB with Spring Boot?
-18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
-
-Spring boot
-Basic Questions
-1.	What is Spring Boot? How is it different from Spring?
-2.	What are the main features of Spring Boot?
-3.	What is auto-configuration?
-4.	What is Spring Boot Starter?
-5.	What is an embedded server?
-6.	What is the use of @SpringBootApplication?
-7.	How does Spring Boot work internally?
-8.	What are Spring Boot components (Starter, AutoConfig, Actuator)?
-9.	What is dependency injection?
-10.	What is IoC (Inversion of Control)?
-11.	Here are clear, interview-ready answers to your Spring Boot questions:
-12.	________________________________________
 13.	1. What is Spring Boot? How is it different from Spring?
 14.	✅ Spring Boot
 •	Spring Boot is a framework built on top of Spring that simplifies application development by providing:
@@ -1201,7 +830,332 @@ An embedded server is a built-in web server inside the application.
 52.	DI	53.	Way to implement IoC
 
 ________________________________________
+39.	What is auto-configuration?
+•	Auto-configuration is a feature of Spring Boot that automatically configures your application based on the dependencies present in the classpath.
+•	👉 In simple terms:
+Spring Boot reduces the need for manual configuration by setting up beans automatically
+.
+40.	How to disable auto-configuration?
+•	✅ 1. Disable Specific Auto-Configuration (Recommended)
+•	Use exclude in @SpringBootApplication:
+•	@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+•	
+•	public class MyApplication {
+1.	public static void main(String[] args) {
+2.	SpringApplication.run(MyApplication.class, args);
+3.	}
+•	}
+•	👉 Example use case:
+•	You don’t want Spring Boot to auto-configure a database.
+•	________________________________________
+•	✅ 2. Using @EnableAutoConfiguration
+•	@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+•	``
+•	👉 Works the same as above but used separately.
+•	________________________________________
+•	✅ 3. Disable via application.properties
+•	spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+•	👉 Useful when you don’t want to modify code.
+•	
+•	✅ 5. Conditional Disabling
+•	Spring automatically skips configuration if:
+•	Required dependency is missing
+•	Required bean already exists
+
+•	✅ Interview Tip (Short Answer)
+•	👉 “We can disable autoconfiguration using the exclude attribute in @SpringBootApplication, @EnableAutoConfiguration, or via application.properties.”
+
+🔹 Scenario-Based Questions
+41.	How to secure Spring Boot application (layer-wise)?
+42.	Securing a Spring Boot application requires a defense-in-depth approach, where security is applied at multiple layers:
+43.	🔹 1. Network Layer
+44.	Enable HTTPS (SSL/TLS) to encrypt communication
+45.	Use firewalls, load balancers, and reverse proxies
+46.	Restrict ports and allow only trusted IPs
+47.	
+48.	🔹 2. Application Layer (Spring Security)
+49.	Authentication: Use Basic Auth, JWT, OAuth2
+50.	Authorization: Role-based or permission-based access @PreAuthorize("hasRole('ADMIN')")
+51.	Use BCrypt for password hashing
+52.	Enable CSRF protection (disable only for stateless APIs)
+53.	Configure session management
+54.	
+55.	🔹 3. API / Controller Layer                                                                                                                                              
+56.	Validate user inputs using: @Valid, @Not                                            
+57.	Implement global exception handling to avoid exposing sensitive data
+58.	Add rate limiting to prevent abuse
+59.	________________________________________
+60.	🔹 4. Service Layer
+61.	Apply business-level security checks
+62.	Ensure users can access only their own data
+63.	Implement RBAC/ABAC logic
+64.	________________________________________
+65.	🔹 5. Data Layer
+66.	Prevent SQL injection using JPA/Prepared Statements
+67.	Encrypt sensitive data (PII)
+68.	Use least-privileged DB credentials
+69.	________________________________________
+70.	🔹 6. Configuration Layer
+71.	Store secrets in environment variables or secret managers
+72.	Avoid hardcoding passwords
+73.	Use Spring profiles (dev/test/prod)
+74.	________________________________________
+75.	🔹 7. Logging & Monitoring
+76.	Mask sensitive info in logs
+77.	Monitor suspicious activities
+78.	Use tools like ELK, Prometheus, Grafana
+79.	________________________________________
+80.	🔹 8. Dependency & Deployment
+81.	Regularly update dependencies
+82.	Use vulnerability scanning tools (OWASP, Snyk)
+83.	Secure Docker containers (run as non-root)
+84.	✅ Conclusion (1-liner)
+85.	“Spring Boot security should be implemented layer-wise—from network to database—using Spring Security, input validation, 
+encryption, and monitoring to ensure complete protection.”
+
+🔹 Spring Data JPA
+=========================
+42.	What is Spring Data JPA?
+  Spring Data JPA provides an abstraction layer over JPA, allowing developers to interact with databases without writing 
+boilerplate code such as SQL queries or DAO implementations.
+
+43.	What is JpaRepository?
+JpaRepository is an interface in Spring Data JPA that provides ready-to-use methods for performing CRUD (Create, Read, Update, Delete) 
+operations and more on database entities.
+
+CRUD Operations
+save(entity);          // Insert or update
+findById(id);          // Fetch by ID
+findAll();              // Fetch all records
+deleteById(id);        // Delete by ID
+existsById(id);        // Check existence
+Pagination & Sorting
+findAll(Pageable pageable);
+findAll(Sort sort);
+
+44.	Difference between CrudRepository and JpaRepository?
+CrudRepository
+•	A generic interface in Spring Data.
+•	Provides basic CRUD operations.
+•	Suitable for simple data access needs.
+•	
+JpaRepository
+•	Extends PagingAndSortingRepository, which extends CrudRepository.
+•	Provides advanced JPA-specific features.
+•	Used when working specifically with JPA (Hibernate, etc.).
+🔹 Additional Features
+•	Pagination and sorting
+•	Batch operations
+•	Flush and save-and-flush functionality
+
+45.	What are query methods?
+	Query methods are methods defined in a repository interface where Spring automatically generates the database query based on the method name.
+	A query method is a method whose name follows a specific naming convention, allowing Spring Data JPA to derive SQL/JPQL queries automatically 
+    without writing them manually.
+48.	•  No need to write SQL 
+49.	•  Reduces boilerplate code 
+50.	•  Easy to read and maintain 
+51.	•  Faster development
+
+52.	What is @Query annotation?
+53.	The @Query annotation is used in Spring Data JPA to define custom JPQL (Java Persistence Query Language) or native SQL queries directly
+in the repository interface.
+
+54.	What is pagination and sorting?
+55.	Pagination is the process of dividing large amounts of data into smaller chunks (pages) so that data can be retrieved and displayed 
+in parts instead of loading everything at once
+
+🔹 Transactions
+48.	What is transaction in Spring?
+A transaction is a single unit of work that ensures a group of database operations either:
+49.	✅ All succeed (commit)
+50.	❌ All fail (rollback)		
+51.	Programmatic → Manual transaction handling
+52.	Declarative → Automatic using @Transactional (preferred)
+
+53.	Difference between programmatic and declarative transaction?
+54.	Feature	55.	Programmatic Transaction	56.	Declarative Transaction
+57.	Definition	58.	Managed manually in code	59.	Managed using annotations/config
+60.	Control	61.	Full control	62.	Less control, automatic
+63.	Complexity	64.	More complex	65.	Simple and clean
+66.	Code Dependency	67.	Tightly coupled with transaction logic	68.	Business logic is separate
+69.	Approach	70.	Uses TransactionTemplate or API	71.	Uses @Transactional
+72.	Boilerplate Code	73.	More	74.	Very less
+75.	Preferred	76.	Rarely used	77.	Mostly used ✅
+
+78.	What is @Transactional?
+@Transactional is a Spring annotation used to manage transactions automatically.
+•  Starts a transaction ✅ 
+•  Commits if successful ✅ 
+•  Rolls back if an exception occurs ✅
+
+Prapogation
+Propagation defines how transactions behave when one transactional method calls another (reuse, create new, or ignore transactions).
+All Propagation Types
+🔹 1. REQUIRED (Default ✅)
+🔸 Behavior:
+•	Uses existing transaction if available
+•	Otherwise, creates a new one
+🔸 Example:
+Java
+@Transactional(propagation = Propagation.REQUIRED)
+🔹 2. REQUIRES_NEW
+🔸 Behavior:
+•	Always creates a new transaction
+•	Suspends any existing transaction
+🔸 Use Case:
+•	Logging, audit operations (independent transaction)
+Java
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+``_
+🔹 3. SUPPORTS
+🔸 Behavior:
+•	Uses existing transaction if present
+•	If not, executes without transaction
+Java	
+@Transactional(propagation = Propagation.SUPPORTS)
+Show more lines
+________________________________________
+🔹 4. NOT_SUPPORTED
+🔸 Behavior:
+•	Always executes without a transaction
+•	Suspends any existing transaction
+Java
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
+Show more lines
+________________________________________
+🔹 5. MANDATORY
+🔸 Behavior:
+•	Must run inside an existing transaction
+•	Throws exception if none exists ❌
+Java
+@Transactional(propagation = Propagation.MANDATORY)
+Show more lines
+________________________________________
+🔹 6. NEVER
+🔸 Behavior:
+•	Must NOT run inside a transaction
+•	Throws exception if a transaction exists ❌
+Java
+@Transactional(propagation = Propagation.NEVER)
+Show more lines
+________________________________________
+🔹 7. NESTED
+🔸 Behavior:
+•	Runs inside existing transaction
+•	Creates a savepoint (partial rollback possible)
+
+🔹 Spring AOP
+===================
+51.	What is AOP?
+•	Aspect-Oriented Programming (AOP) is a programming paradigm that aims to separate cross-cutting concerns (like logging, security, etc.)
+from the main business logic.
+•	It allows you to modularize concerns that affect multiple parts of a program.
+•	Instead of repeating the same code everywhere, AOP puts it in a single place called an aspect
+
+52.	Why use AOP?
+AOP is used to improve code quality and maintainability.
+Benefits:
+53.	✅ Reduces code duplication – common logic written once
+54.	✅ Improves modularity – separates business logic from supporting concerns
+55.	✅ Easier maintenance – changes made in one place
+56.	✅ Better readability – clean core logic without clutter
+57.	✅ Centralized management – for logging, security, etc.
+
+58.	What are cross-cutting concerns?
+•	Cross-cutting concerns are functionalities that span across multiple modules or layers of an application.
+•	They “cut across” the main business logic and are needed everywhere.
+59.	Examples of AOP (logging, security, transactions)
+
+🔹 ORM
+===========
+55.	What is ORM?
+ORM (Object-Relational Mapping) is a technique that allows you to map Java objects to database tables.
+
+56.	What is Spring ORM?
+Spring ORM is a module of the Spring Framework that provides integration support for ORM tools like Hibernate, JPA, etc
+
+57.	How Spring integrates with Hibernate?
+58.	spring integrates with Hibernate by using Spring ORM and Spring Data JPA to manage sessions, transactions, and exceptions 
+automatically, allowing developers to focus on business logic.
+
+✅ IMPORTANT SCENARIO-BASED QUESTIONS
+🔹 Dependency Injection (Real Scenarios)
+1.	You have multiple beans of same type — how will you inject the correct one?
+👉 Use @Qualifier or @Primary
+2.	Your application fails due to missing dependency — how do you debug it?
+👉 Check:
+•	Bean configuration
+•	Component scan
+•	Constructor mismatch
+🔹 Bean Scope
+3.	When will you use prototype scope instead of singleton?
+👉 Stateful objects (e.g., user-specific data)
+4.	Why singleton scope for services?
+👉 Stateless + performance optimization
+________________________________________
+🔹 Autowiring Issue
+5.	Two beans of same type → NoUniqueBeanDefinitionException. Solution?
+👉 Use:
+@Qualifier("beanName")
+``
+________________________________________
+🔹 Transaction Management
+6.	Transaction not rolling back — why?
+👉 Possible reasons:
+•	Method not public
+•	Same class internal call
+•	No RuntimeException
+________________________________________
+🔹 Spring Boot
+7.	Application fails due to auto-configuration — what to do?
+👉 Disable:
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+________________________________________
+🔹 Spring MVC
+8.	Request not reaching controller — how to debug?
+👉 Check:
+•	URL mapping (@RequestMapping)
+•	DispatcherServlet config
+•	Component scan
+
+🔹 Spring Data JPA
+9.	Want custom query — how will you write?
+👉 Use:
+@Query("SELECT e FROM Employee e WHERE e.salary > :sal")
+``
+🔹 Performance & Design
+10.	How to improve Spring application performance?
+👉
+•	Use caching
+•	Use lazy loading
+•	Reduce DB calls
+•	Use connection pooling
+________________________________________
+🔹 Security (Common Interview Scenario)
+11.	Where to implement security in Spring Boot?
+👉
+•	Web layer (Spring Security filters)
+•	Service layer (@PreAuthorize)
+________________________________________
+
+🔹 Real-Time Application Questons
+13.	 scalable Spring Boot application?
+14.	How you handle exception globally? (@ControllerAdvice)
+15.	How will you handle large data with pagination?
+•  Fetch only required data using pages 
+•  Use DB-level pagination (LIMIT/OFFSET) 
+•  Prefer cursor-based pagination for large datasets 
+•  Return pagination metadata 
+•  Use frameworks like Spring Data for easy implementation
+
+16.	How do you secure REST APIs?
+17.	How do you integrate DB with Spring Boot?
+18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
+
+
 🔸 REST API Questions
+============================
 1.	Difference between GET, POST, PUT, PATCH, DELETE
 2.	•  GET → Read/fetch data 
 1. GET
@@ -1216,7 +1170,6 @@ ________________________________________
 What is idempotent API?
 An idempotent API is an API in which making the same request multiple times produces the same result as making it once (i.e., it does not cause additional side effects after the first execution).
 An operation is idempotent if repeating it does not change the outcome beyond the initial application.
-
 ✔ Idempotent Methods
 These methods should produce the same result no matter how many times they are called:
 •	GET → Fetch data (no change)
@@ -1241,8 +1194,8 @@ These methods should produce the same result no matter how many times they are c
 38.	Error Handling	39.	Uses HTTP status codes	40.	Uses built-in error handling
 41.	Best Use Case	42.	Web/mobile apps, microservices	43.	Enterprise apps, banking, secure transactions
 
-REST is a lightweight, flexible architecture using HTTP and JSON, while SOAP is a strict protocol using XML with built-in security and reliability features.
-
+REST is a lightweight, flexible architecture using HTTP and JSON, while SOAP is a strict protocol using XML with built-in security and 
+reliability features.
 
 44.	How do you validate request body?
 45.	Request body validation ensures that the data sent by the client is correct, complete, and in the expected format before processing it on the server.
@@ -1332,9 +1285,10 @@ ________________________________________
 •	}
 
 23.	How to create global exception handling?
-Global exception handling in Spring Boot is implemented using @ControllerAdvice along with @ExceptionHandler to handle exceptions across all controllers in a centralized way.
-
-Global exception handling in Spring Boot is created using @ControllerAdvice along with @ExceptionHandler methods to handle exceptions centrally and return consistent error responses across all controllers.
+Global exception handling in Spring Boot is implemented using @ControllerAdvice along with @ExceptionHandler to handle exceptions 
+across all controllers in a centralized way.
+Global exception handling in Spring Boot is created using @ControllerAdvice along with @ExceptionHandler methods to handle exceptions 
+centrally and return consistent error responses across all controllers.
 
 public class ErrorResponse {
     private int status;
@@ -1353,40 +1307,15 @@ public ResponseEntity<ErrorResponse> handleException(Exception ex) {
     );
     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 }
-``
-
-24.	Difference between checked and unchecked exceptions?
-Checked Exceptions
-•	Checked at compile-time
-•	Must be handled (try-catch) or declared using throws
-•	Represent recoverable conditions
-Examples:
-•	IOException
-•	SQLException
-•	public void readFile() throws IOException {
-•	    FileReader file = new FileReader("test.txt");
-•	}
-
-Unchecked Exceptions
-•	Checked at runtime
-•	Not mandatory to handle
-•	Usually caused by programming errors
-✅ Examples:
-•	NullPointerException
-•	ArrayIndexOutOfBoundsException
-•	ArithmeticException
-•	int a = 10 / 0; // ArithmeticException at runtime
-
 🔸 Spring Data JPA
 1.	What is JPA?
-•	JPA (Java Persistence API) is a specification in Java used to manage relational data in applications. It provides a standard way to map Java objects to database tables and perform CRUD operations without writing complex SQL.
-
-•	JPA is a Java specification used to manage relational data through object-relational mapping, allowing developers to interact with a database using Java objects instead of SQL.
+•	JPA (Java Persistence API) is a specification in Java used to manage relational data in applications. It provides a standard way to map Java 
+objects to database tables and perform CRUD operations without writing complex SQL.
+•	JPA is a Java specification used to manage relational data through object-relational mapping, allowing developers to interact with a database 
+using Java objects instead of SQL.
 
 2.	What is Hibernate?
 Hibernate is an ORM (Object-Relational Mapping) framework for Java that simplifies database interactions by mapping Java objects to database tables.
-
-3.	.
 4.	Hibernate allows developers to perform database operations using Java objects instead of writing SQL queries manually
 
 5.	What is lazy vs eager loading?
@@ -1436,13 +1365,6 @@ entityManager.remove(user);
 ________________________________________
 🔁 Lifecycle Flow
 Transient → Persistent → Detached → Removed
-________________________________________
-🎯 Short Interview Answer
-Entity lifecycle represents the different states of an entity—Transient, Persistent, Detached, and Removed—during its interaction with the persistence context in JPA/Hibernate.
-1.	Create object → Transient
-2.	Save using persist() → 7 Persistent
-3.	Close session → Detached
-4.	Delete using remove() → Removed
 
 difference between persist() and merge()
 Both persist() and merge() are used to save/update entities, but they behave differently based on the entity state.
@@ -1470,8 +1392,7 @@ User detachedUser = new User();
 detachedUser.setId(1);
 
 User managedUser = entityManager.merge(detachedUser);
-Show more lines
-________________________________________
+
 🔁 Key Differences
 Feature	persist()	merge()
 Purpose	Insert new record	Update existing record
@@ -1498,7 +1419,8 @@ DETACH	Detach child from session
 ALL	Applies all cascade operations
 
 7.	What is JPQL?
-JPQL (Java Persistence Query Language) is a query language used in JPA to retrieve and manipulate data from the database using entity objects instead of tables.
+JPQL (Java Persistence Query Language) is a query language used in JPA to retrieve and manipulate data from the database using entity 
+objects instead of tables.
 ________________________________________
 🔹 Simple Explanation
 JPQL allows yo>u to write queries using Java entity names and their fields, rather than database table names and columns.
@@ -1508,8 +1430,8 @@ JPQL allows yo>u to write queries using Java entity names and their fields, rath
 •	✅ Similar to SQL but uses object-oriented syntax
 •	✅ Supports SELECT, UPDATE, DELETE operations
 
-________________________________________
-🔸 Microservices & Advanced
+🔸 Microservices & Advanced QuestionList
+====================================
 what is microservice architecture
 -----------------------------------------
 Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
@@ -1528,9 +1450,9 @@ Microservices
 1)Monolthic are larger and contains all functionality in signle unit
 2)monolithic requires the entire application to be deployed and scaled as whole
 3) entire application is developed in single technology stack.
+
 1.	What is Spring Boot Actuator?
 2.	Spring Boot Actuator is a feature of Spring Boot that provides production-ready tools to monitor and manage an application through built-in endpoints.
-
 Actuator helps you monitor application health, metrics, and runtime details using HTTP endpoints.
 •	Monitor application health 
 •	✅ Track metrics (CPU, memory, requests) 
@@ -1538,11 +1460,12 @@ Actuator helps you monitor application health, metrics, and runtime details usin
 •	✅ Check beans, environment, and configurations 
 •	✅ Perform management operations
 
-•	Spring Boot Actuator is used to monitor and manage applications by providing production-ready REST endpoints for health checks, metrics, and application details.
+•	Spring Boot Actuator is used to monitor and manage applications by providing production-ready REST endpoints for health checks, metrics,
+and application details.
 
 3.	What is Springs x Cloud? 
-4.	Spring × Cloud (Spring Cloud) refers to the combination of the Spring Framework (especially Spring Boot) with a set of tools and libraries designed to build cloud-native, distributed systems.
-
+4.	Spring × Cloud (Spring Cloud) refers to the combination of the Spring Framework (especially Spring Boot) with a set of tools and libraries 
+designed to build cloud-native, distributed systems.
 Spring Cloud is a collection of frameworks that helps developers build and manage cloud-based microservices architectures.
 It provides solutions for common distributed system problems like:
 •	Service discovery
@@ -1552,15 +1475,16 @@ It provides solutions for common distributed system problems like:
 •	API gateways
 
 5.	What is Feign Client?
-6.	Feign Client (Spring Cloud OpenFeign) is a declarative REST client used in Spring Boot applications to make HTTP calls to other microservices easily and cleanly.
-7.	
+6.	Feign Client (Spring Cloud OpenFeign) is a declarative REST client used in Spring Boot applications to make HTTP calls to other microservices 
+    easily and cleanly.	
 It simplifies the process of making HTTP requests between microservices by allowing you to define API clients using interfaces and annotations.
 •  Creates an implementation at runtime 
 •  Makes HTTP call to user-service 
 •  Maps response to Java object
 
 8.	What is API Gateway?
-•	In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access the underlaying microservices.
+•	In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access
+   the underlaying microservices.
 •	it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
 •	API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
 •	it can handle the authentication and authorzation validate acces token.
@@ -1588,12 +1512,13 @@ Example:
 
 9.	What is Circuit Breaker?
 10.	In microservices architecture, a Circuit Breaker is a design pattern used to prevent cascading failures when one service is unable to respond.
-
-A circuit breaker is a mechanism that stops calling a failing service after repeated failures and returns a fallback response instead, allowing the system to remain stable.
+A circuit breaker is a mechanism that stops calling a failing service after repeated failures and returns a fallback response instead, allowing the
+system to remain stable.
   Prevents cascade failures 
 Improves system stability 
  Reduces latency during failures 
  Enables graceful degradation
+
 How it works (States)
 A circuit breaker has 3 states:
 1. 🟢 Closed State (Normal)
@@ -1612,12 +1537,13 @@ ________________________________________
 o	✅ If successful → back to Closed
 o	❌ If still failing → back to Open
 
+JWT(JSON Web Token)
+=====
 11.	What is JWT?
-JWT (JSON Web Token) is a compact, secure, and self-contained way to transmit information between parties as a JSON object, mainly used for authentication and authorization.
-
+JWT (JSON Web Token) is a compact, secure, and self-contained way to transmit information between parties as a JSON object, mainly 
+used for authentication and authorization.
 JWT is a token that is generated after login and used to verify the identity of a user without storing session data on the server.
-
-•	JWT is a secure token used to authenticate users and exchange information between client and server without maintaining session state.
+JWT is a secure token used to authenticate users and exchange information between client and server without maintaining session state.
 
 How JWT Works
 1.	User logs in with credentials
@@ -1669,305 +1595,7 @@ return userRepository.save(user);
 •	Removes data from cache
 
 14.	How do you secure APIs?
-________________________________________
-✅ 🔥 Scenario-Based Interview Questions (VERY IMPORTANT)
-🔴 1. Exception Handling Scenario
-👉 “You have multiple APIs. How will you handle exceptions globally?”
-✅ Answer:
-•	Use @ControllerAdvice
-•	Create global exception class
-•	Return proper HTTP response
-________________________________________
-🔴 2. Transaction Scenario
-👉 “You are saving data in 2 tables. One fails. What should happen?”
-✅ Answer:
-•	Use @Transactional
-•	If one fails → rollback entire transaction
-________________________________________
-🔴 3. Performance Issue Scenario
-👉 “Your API is slow. What will you do?”
-✅ Answer:
-•	Add caching (Redis)
-•	Optimize DB query
-•	Use pagination
-•	Add indexing
-________________________________________
-🔴 4. Multiple Database Scenario
-👉 “You need to connect 2 databases. How will you configure?”
-✅ Answer:
-•	Define multiple DataSources
-•	Create separate config classes
-•	Use different repositories
-________________________________________
-🔴 5. Security Scenario
-👉 “How will you secure your API?”
-✅ Answer:
-•	Use Spring Security
-•	Implement JWT
-•	Role-based authentication
-________________________________________
-🔴 6. Configuration Scenario
-👉 “How will you manage different environments (dev/test/prod)?”
-✅ Answer:
-•	Use profiles (spring.profiles.active)
-•	Add application-dev.yml, application-prod.yml
-________________________________________
-🔴 7. Deployment Scenario
-👉 “How do you deploy Spring Boot application?”
-✅ Answer:
-•	Build jar file (mvn clean install)
-•	Run:
-Shell
-java -jar app.jar
-🔴 8. Logging Scenario
-👉 “How do you track logs in application?”
-✅ Answer:
-•	Use SLF4J + Logback
-•	Configure logback.xml
-________________________________________
-🔴 9. Pagination Scenario
-👉 “Your API returns huge data. What will you do?”
-✅ Answer:
-•	Use Pageable
-•	Return paginated data
-________________________________________
-🔴 10. File Upload Scenario
-👉 “How to upload file in Spring Boot?”
-✅ Answer:
-•	Use MultipartFile
-•	Save file in server/cloud
-________________________________________
-🔴 11. API Versioning Scenario
-👉 “How to maintain multiple API versions?”
-✅ Answer:
-•	URI versioning /v1/users
-•	Header-based versioning
-________________________________________
-🔴 12. Concurrency Scenario
-👉 “Multiple users updating same record. How to handle?”
-✅ Answer:
-•	Use optimistic locking (@Version)
-•	Or pessimistic locking
-________________________________________
-🔴 13. Cache Scenario
-👉 “Data rarely changes but is fetched frequently”
-✅ Answer:
-•	Use @Cacheable
-•	Redis for distributed cache
-________________________________________
-🔴 14. Microservice Communication
-👉 “How services communicate?”
-✅ Answer:
-•	REST APIs
-•	Feign Client
-•	Kafka (for async)
-________________________________________
-🔴 15. Failure Handling Scenario
-👉 “One microservice is down. What happens?”
-✅ Answer:
-•	Use Circuit Breaker (Resilience4j)
-•	Fallback methods
-________________________________________
-✅ 🔥 Quick HR + Practical Questions
-1.	What project you worked on using Spring Boot?
-•	I worked on a microservices-based application using Spring Boot for [example: e-commerce / banking / ticket booking].
-•	Designed REST APIs using Spring Boot + Spring MVC
-•	Used Spring Data JPA for database interactions
-•	Implemented JWT-based authentication
-•	Used Redis caching and Kafka (or RabbitMQ) for async communication
-•	Deployed services using Docker & Kubernetes / cloud (Azure/AWS)
-•	👉 Example: “I developed a User and Order service where each service was independently deployable and communicated via REST APIs.”
-2.	
-3.	What challenges you faced?
-•	Some common challenges I faced:
-•	⚠️ Inter-service communication delays
-•	⚠️ Handling failures between microservices
-•	⚠️ Database performance issues (slow queries)
-•	⚠️ Data consistency across services
-•	⚠️ Debugging distributed systems
-•	👉 Example: “One challenge was latency between services, which impacted response time when multiple services were chained.”
-•	________________________________________
-4.	✅ 3. How did you improve performance?
-•	I used multiple strategies:
-•	✅ Caching (Redis) to reduce DB calls
-•	✅ Database optimization 
-•	Added indexes
-•	Optimized queries
-•	✅ Pagination for large data
-•	✅ Async processing (Kafka / @Async)
-•	✅ Connection pooling (HikariCP)
-•	✅ Reduced unnecessary API calls
-•	👉 Example: “I improved API response time by 40% by introducing Redis caching and optimizing SQL queries.”
-•	________________________________________
-5.	✅ 4. How did you fix production issues?
-•	My approach:
-•	Understand issue (logs, monitoring tools)
-•	Reproduce in lower environment
-•	Analyze root cause
-•	Fix and test
-•	Deploy hotfix (if urgent)
-•	Tools used:
-•	Logs (ELK / Splunk)
-•	Monitoring (Prometheus, Grafana, Azure Monitor)
-•	👉 Example: “In production, a timeout issue was caused by a slow downstream service. I added a circuit breaker and timeout configuration to fix it.”
-________________________________________
-6.	✅ 5. How did you handle logs / debugging?
-7.	Used SLF4J + Logback for logging
-8.	Log levels: INFO, DEBUG, ERROR
-9.	Added correlation IDs for tracing requests
-10.	Used centralized logging (ELK stack)
-11.	Debugging using: 
-12.	Logs
-13.	Breakpoints (local)
-14.	API tools
-15.	👉 Best practice: “Never log sensitive data like passwords or tokens.”
-16.	________________________________________
-✅ 6. How do you test APIs?
-17.	🔹 Manual Testing
-18.	Postman / Swagger UI
-19.	Test different scenarios: 
-20.	Valid request
-21.	Invalid input
-22.	Edge cases
-23.	________________________________________
-24.	🔹 Automated Testing
-25.	Unit Testing → JUnit + Mockito
-26.	Integration Testing → Spring Boot Test
-27.	Use tools like: 
-28.	RestTemplate / MockMvc for API testing
 
-“Do you have experience in Microservices?”
-✅ Best Answer (Professional & Crisp):
-Yes, I have hands-on experience working with microservices architecture. In my project, we migrated a monolithic application into microservices-based architecture.
-We broke down the application into small, independent services based on business capabilities. Each service was developed, deployed, and scaled independently.
-We used technologies like Spring Boot, REST APIs, Eureka for service discovery, API Gateway (AWS API Gateway), and OpenFeign/WebClient for inter-service communication.
-We also implemented resilience patterns like Circuit Breaker using Resilience4j and followed 
-
-✅ 🔥 REAL SCENARIO-BASED QUESTIONS & ANSWERS
-🔴 1. Migration Scenario (VERY COMMON)
-👉 Question:
-“How did you migrate monolithic to microservices?”
-✅ Answer:
-•	Identified business modules
-•	Broke app into services (User, Order, Payment)
-•	Created independent databases
-•	Added API Gateway
-•	Implemented service discovery (Eureka)
-•	Used REST/Feign for communication
-•	Deployed services independently
-________________________________________
-🔴 2. Service Communication
-👉 Question:
-“How do microservices communicate?”
-✅ Answer:
-•	Synchronous → REST APIs (Feign, WebClient)
-•	Asynchronous → Kafka/RabbitMQ
-•	Service discovery → Eureka
-✅ Add line:
-In my project, we used Feign for synchronous calls and WebClient for non-blocking calls.
-________________________________________
-🔴 3. Why not RestTemplate?
-👉 Question: “Why you moved from RestTemplate?”
-✅ Answer:
-•	RestTemplate is blocking
-•	WebClient supports non-blocking (reactive)
-•	Feign is declarative & easy
-
-🔴 4. Circuit Breaker Scenario
-👉 Question:
-“What happens if one service goes down?”
-✅ Answer:
-•	Use Circuit Breaker (Resilience4j)
-•	Fallback response provided
-•	Prevent cascade failure
-________________________________________
-🔴 5. API Gateway Scenario
-👉 Question:
-“Why API Gateway?”
-✅ Answer:
-•	Single entry point
-•	Routing
-•	Security (JWT)
-•	Logging & monitoring
-________________________________________
-🔴 6. Eureka Scenario
-👉 Question:
-“Why use Eureka?”
-✅ Answer:
-•	Dynamic service discovery
-•	No hardcoded URL
-•	Automatically registers services
-________________________________________
-🔴 7. Load Balancing
-👉 Question:
-“How load balancing happens?”
-✅ Answer:
-•	Client-side (Ribbon / Spring Cloud LoadBalancer)
-•	Requests distributed across instances
-________________________________________
-🔴 8. Fault Tolerance Scenario
-👉 Question:
-“How system handles failure?”
-✅ Answer:
-•	Circuit breaker
-•	Retry mechanism
-•	Fallback methods
-________________________________________
-🔴 9. Loose Coupling
-👉 Question:
-“How do you achieve loose coupling?”
-✅ Answer:
-•	REST APIs (contracts)
-•	API Gateway
-•	Messaging (Kafka)
-•	Service discovery
-________________________________________
-🔴 10. Scaling Scenario
-👉 Question:
-“One service gets high load. What do you do?”
-✅ Answer:
-•	Scale only that service
-•	Add more instances
-•	Load balancing distributes traffic
-________________________________________
-🔴 11. Database Design
-👉 Question:
-“Do microservices share database?”
-✅ Answer: ❌ No
-✅ Each service should have its own database
-________________________________________
-🔴 12. Synchronous vs Asynchronous
-👉 Question:
-“When to use async communication?”
-✅ Answer:
-•	Use async when: 
-o	No immediate response needed
-o	Event-driven system
-o	High scalability required
-________________________________________
-🔴 13. Containerization
-👉 Question:
-“How do you deploy microservices?”
-✅ Answer:
-•	Docker containers
-•	Kubernetes (optional)
-•	CI/CD pipeline
-________________________________________
-🔴 14. Security Scenario
-👉 Question:
-“How do you secure microservices?”
-✅ Answer:
-•	JWT authentication
-•	API Gateway security
-•	Role-based access
-________________________________________
-🔴 15. Real Production Issue
-👉 Question:
-“Tell me a challenge you faced”
-✅ Example Answer:
-We faced performance issues due to multiple service calls.
-We optimized it using caching and reduced synchronous calls by introducing async communication.
-________________________________________
 ✅ 🔥 Bonus: Advanced Questions (High Chances)
 ________________________________________
 1. Distributed Tracing
@@ -3963,6 +3591,304 @@ This reduces manual effort and speeds up software delivery.
 Junit
 ----------
  
- 
+ ________________________________________
+✅ 🔥 Scenario-Based Interview Questions (VERY IMPORTANT)
+🔴 1. Exception Handling Scenario
+👉 “You have multiple APIs. How will you handle exceptions globally?”
+✅ Answer:
+•	Use @ControllerAdvice
+•	Create global exception class
+•	Return proper HTTP response
+________________________________________
+🔴 2. Transaction Scenario
+👉 “You are saving data in 2 tables. One fails. What should happen?”
+✅ Answer:
+•	Use @Transactional
+•	If one fails → rollback entire transaction
+________________________________________
+🔴 3. Performance Issue Scenario
+👉 “Your API is slow. What will you do?”
+✅ Answer:
+•	Add caching (Redis)
+•	Optimize DB query
+•	Use pagination
+•	Add indexing
+________________________________________
+🔴 4. Multiple Database Scenario
+👉 “You need to connect 2 databases. How will you configure?”
+✅ Answer:
+•	Define multiple DataSources
+•	Create separate config classes
+•	Use different repositories
+________________________________________
+🔴 5. Security Scenario
+👉 “How will you secure your API?”
+✅ Answer:
+•	Use Spring Security
+•	Implement JWT
+•	Role-based authentication
+________________________________________
+🔴 6. Configuration Scenario
+👉 “How will you manage different environments (dev/test/prod)?”
+✅ Answer:
+•	Use profiles (spring.profiles.active)
+•	Add application-dev.yml, application-prod.yml
+________________________________________
+🔴 7. Deployment Scenario
+👉 “How do you deploy Spring Boot application?”
+✅ Answer:
+•	Build jar file (mvn clean install)
+•	Run:
+Shell
+java -jar app.jar
+🔴 8. Logging Scenario
+👉 “How do you track logs in application?”
+✅ Answer:
+•	Use SLF4J + Logback
+•	Configure logback.xml
+________________________________________
+🔴 9. Pagination Scenario
+👉 “Your API returns huge data. What will you do?”
+✅ Answer:
+•	Use Pageable
+•	Return paginated data
+________________________________________
+🔴 10. File Upload Scenario
+👉 “How to upload file in Spring Boot?”
+✅ Answer:
+•	Use MultipartFile
+•	Save file in server/cloud
+________________________________________
+🔴 11. API Versioning Scenario
+👉 “How to maintain multiple API versions?”
+✅ Answer:
+•	URI versioning /v1/users
+•	Header-based versioning
+________________________________________
+🔴 12. Concurrency Scenario
+👉 “Multiple users updating same record. How to handle?”
+✅ Answer:
+•	Use optimistic locking (@Version)
+•	Or pessimistic locking
+________________________________________
+🔴 13. Cache Scenario
+👉 “Data rarely changes but is fetched frequently”
+✅ Answer:
+•	Use @Cacheable
+•	Redis for distributed cache
+________________________________________
+🔴 14. Microservice Communication
+👉 “How services communicate?”
+✅ Answer:
+•	REST APIs
+•	Feign Client
+•	Kafka (for async)
+________________________________________
+🔴 15. Failure Handling Scenario
+👉 “One microservice is down. What happens?”
+✅ Answer:
+•	Use Circuit Breaker (Resilience4j)
+•	Fallback methods
+________________________________________
+✅ 🔥 Quick HR + Practical Questions
+1.	What project you worked on using Spring Boot?
+•	I worked on a microservices-based application using Spring Boot for [example: e-commerce / banking / ticket booking].
+•	Designed REST APIs using Spring Boot + Spring MVC
+•	Used Spring Data JPA for database interactions
+•	Implemented JWT-based authentication
+•	Used Redis caching and Kafka (or RabbitMQ) for async communication
+•	Deployed services using Docker & Kubernetes / cloud (Azure/AWS)
+•	👉 Example: “I developed a User and Order service where each service was independently deployable and communicated via REST APIs.”
+2.	
+3.	What challenges you faced?
+•	Some common challenges I faced:
+•	⚠️ Inter-service communication delays
+•	⚠️ Handling failures between microservices
+•	⚠️ Database performance issues (slow queries)
+•	⚠️ Data consistency across services
+•	⚠️ Debugging distributed systems
+•	👉 Example: “One challenge was latency between services, which impacted response time when multiple services were chained.”
+•	________________________________________
+4.	✅ 3. How did you improve performance?
+•	I used multiple strategies:
+•	✅ Caching (Redis) to reduce DB calls
+•	✅ Database optimization 
+•	Added indexes
+•	Optimized queries
+•	✅ Pagination for large data
+•	✅ Async processing (Kafka / @Async)
+•	✅ Connection pooling (HikariCP)
+•	✅ Reduced unnecessary API calls
+•	👉 Example: “I improved API response time by 40% by introducing Redis caching and optimizing SQL queries.”
+•	________________________________________
+5.	✅ 4. How did you fix production issues?
+•	My approach:
+•	Understand issue (logs, monitoring tools)
+•	Reproduce in lower environment
+•	Analyze root cause
+•	Fix and test
+•	Deploy hotfix (if urgent)
+•	Tools used:
+•	Logs (ELK / Splunk)
+•	Monitoring (Prometheus, Grafana, Azure Monitor)
+•	👉 Example: “In production, a timeout issue was caused by a slow downstream service. I added a circuit breaker and timeout configuration to fix it.”
+________________________________________
+6.	✅ 5. How did you handle logs / debugging?
+7.	Used SLF4J + Logback for logging
+8.	Log levels: INFO, DEBUG, ERROR
+9.	Added correlation IDs for tracing requests
+10.	Used centralized logging (ELK stack)
+11.	Debugging using: 
+12.	Logs
+13.	Breakpoints (local)
+14.	API tools
+15.	👉 Best practice: “Never log sensitive data like passwords or tokens.”
+16.	________________________________________
+✅ 6. How do you test APIs?
+17.	🔹 Manual Testing
+18.	Postman / Swagger UI
+19.	Test different scenarios: 
+20.	Valid request
+21.	Invalid input
+22.	Edge cases
+23.	________________________________________
+24.	🔹 Automated Testing
+25.	Unit Testing → JUnit + Mockito
+26.	Integration Testing → Spring Boot Test
+27.	Use tools like: 
+28.	RestTemplate / MockMvc for API testing
+
+“Do you have experience in Microservices?”
+✅ Best Answer (Professional & Crisp):
+Yes, I have hands-on experience working with microservices architecture. In my project, we migrated a monolithic application into microservices-based architecture.
+We broke down the application into small, independent services based on business capabilities. Each service was developed, deployed, and scaled independently.
+We used technologies like Spring Boot, REST APIs, Eureka for service discovery, API Gateway (AWS API Gateway), and OpenFeign/WebClient for inter-service communication.
+We also implemented resilience patterns like Circuit Breaker using Resilience4j and followed 
+
+✅ 🔥 REAL SCENARIO-BASED QUESTIONS & ANSWERS
+🔴 1. Migration Scenario (VERY COMMON)
+👉 Question:
+“How did you migrate monolithic to microservices?”
+✅ Answer:
+•	Identified business modules
+•	Broke app into services (User, Order, Payment)
+•	Created independent databases
+•	Added API Gateway
+•	Implemented service discovery (Eureka)
+•	Used REST/Feign for communication
+•	Deployed services independently
+________________________________________
+🔴 2. Service Communication
+👉 Question:
+“How do microservices communicate?”
+✅ Answer:
+•	Synchronous → REST APIs (Feign, WebClient)
+•	Asynchronous → Kafka/RabbitMQ
+•	Service discovery → Eureka
+✅ Add line:
+In my project, we used Feign for synchronous calls and WebClient for non-blocking calls.
+________________________________________
+🔴 3. Why not RestTemplate?
+👉 Question: “Why you moved from RestTemplate?”
+✅ Answer:
+•	RestTemplate is blocking
+•	WebClient supports non-blocking (reactive)
+•	Feign is declarative & easy
+
+🔴 4. Circuit Breaker Scenario
+👉 Question:
+“What happens if one service goes down?”
+✅ Answer:
+•	Use Circuit Breaker (Resilience4j)
+•	Fallback response provided
+•	Prevent cascade failure
+________________________________________
+🔴 5. API Gateway Scenario
+👉 Question:
+“Why API Gateway?”
+✅ Answer:
+•	Single entry point
+•	Routing
+•	Security (JWT)
+•	Logging & monitoring
+________________________________________
+🔴 6. Eureka Scenario
+👉 Question:
+“Why use Eureka?”
+✅ Answer:
+•	Dynamic service discovery
+•	No hardcoded URL
+•	Automatically registers services
+________________________________________
+🔴 7. Load Balancing
+👉 Question:
+“How load balancing happens?”
+✅ Answer:
+•	Client-side (Ribbon / Spring Cloud LoadBalancer)
+•	Requests distributed across instances
+________________________________________
+🔴 8. Fault Tolerance Scenario
+👉 Question:
+“How system handles failure?”
+✅ Answer:
+•	Circuit breaker
+•	Retry mechanism
+•	Fallback methods
+________________________________________
+🔴 9. Loose Coupling
+👉 Question:
+“How do you achieve loose coupling?”
+✅ Answer:
+•	REST APIs (contracts)
+•	API Gateway
+•	Messaging (Kafka)
+•	Service discovery
+________________________________________
+🔴 10. Scaling Scenario
+👉 Question:
+“One service gets high load. What do you do?”
+✅ Answer:
+•	Scale only that service
+•	Add more instances
+•	Load balancing distributes traffic
+________________________________________
+🔴 11. Database Design
+👉 Question:
+“Do microservices share database?”
+✅ Answer: ❌ No
+✅ Each service should have its own database
+________________________________________
+🔴 12. Synchronous vs Asynchronous
+👉 Question:
+“When to use async communication?”
+✅ Answer:
+•	Use async when: 
+o	No immediate response needed
+o	Event-driven system
+o	High scalability required
+________________________________________
+🔴 13. Containerization
+👉 Question:
+“How do you deploy microservices?”
+✅ Answer:
+•	Docker containers
+•	Kubernetes (optional)
+•	CI/CD pipeline
+________________________________________
+🔴 14. Security Scenario
+👉 Question:
+“How do you secure microservices?”
+✅ Answer:
+•	JWT authentication
+•	API Gateway security
+•	Role-based access
+________________________________________
+🔴 15. Real Production Issue
+👉 Question:
+“Tell me a challenge you faced”
+✅ Example Answer:
+We faced performance issues due to multiple service calls.
+We optimized it using caching and reduced synchronous calls by introducing async communication.
+________________________________________
 
 
