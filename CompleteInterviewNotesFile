@@ -1,0 +1,3968 @@
+✅ Java 8 Interview Question List
+🔹 Basic Features
+1.	What are the features of Java 8?
+1.	• Lambda Expressions 
+2.	• Functional Interfaces 
+3.	• Stream API (and parallel streams) 
+4.	• Default & Static methods in interfaces 
+5.	• Optional class 
+6.	• Method references 
+7.	• New Date-Time API 
+8.	•  Nashorn engine
+9.	
+2.	What is a lambda expression?
+A lambda expression is a short, anonymous function—a function defined without a name. 
+It is typically used for small, simple operations and can be passed as an argument to other functions.
+Help us to write our code in functional style.it provides clear and concise way to implement single abstract method by using expression.
+It is very useful in collection library in which it helps to iterate, filter and extract data
+ They are particularly useful for passing behaviour as arguments to methods and creating instances of functional interfaces.
+
+3.	Syntax of lambda expression?
+4.	(parameters) -> expression
+OR
+5.	(parameters) -> { statements; }
+6.	
+7.	How do lambda expressions work internally?
+8.	Internally, lambda expressions are implemented using the invokedynamic mechanism, where the JVM dynamically creates instances of functional interfaces without generating separate class files, making them efficient and lightweight.
+
+
+9.	What is functional interface?
+•	If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method or single abstract method (SAM). 
+•	 Functional interfaces are used as the target types for lambda expressions and method references.
+•	Ex: 1) Runnable  It contains only run() method 
+•	    2) Comparable  It contains only compareTo() method
+•	    3) ActionListener  It contains only actionPerformed() 
+•	   Callable  It contains only call() method Inside functional interface in addition to single Abstract 
+method (SAM) we write any number of default and static methods.
+10.	Why were functional interfaces introduced?
+•	Functional interfaces were introduced to:
+•	Support lambda expressions
+•	Enable functional programming
+•	Reduce boilerplate code
+•	Make Java code simpler and more expressive
+•	
+11.	Advantages of functional interface?
+•	Functional interfaces simplify Java code by enabling lambda expressions, improving readability, supporting functional programming, and enhancing reusability and maintainability.
+
+What happens if a functional interface extends another interface?
+When a functional interface extends another interface, it remains functional only if it still has exactly one abstract method in total.
+
+7.	What is the difference between Runnable and Callable?
+Runnable does not return a result and cannot throw checked exceptions, whereas Callable returns a value and can throw checked exceptions, making it more powerful for concurrent tasks.
+
+What is Default method?
+A default method is a method defined inside an interface with a body (implementation) using the default keyword.
+
+8.	Why are default methods allowed in interfaces?
+•	✅ 1. Backward Compatibility
+•	Before Java 8, interfaces could only have abstract methods.
+•	Adding a new method to an interface would break all existing classes implementing it.
+•	Default methods solve this by providing a default implementation, so old code continues to work.
+•	✅ 2. Interface Evolution
+9.	Helps extend and improve interfaces over time without forcing all implementing classes to change.
+
+10.	✅ 3. Reduce Need for Utility Classes
+11.	Common logic can be placed directly in the interface instead of separate helper classes.
+
+12.	✅ 4. Supports Functional Programming
+13.	Works well with lambda expressions and streams, enabling more flexible design.
+14.	✅ 5. Code Reusability
+15.	Allows sharing of common method implementations among multiple classes.
+
+16.	How to achieve multiple inheritance in Java 8?
+Multiple inheritance in Java 8 is achieved using multiple interfaces and default methods, allowing a class to inherit behavior from multiple sources while resolving conflicts explicitly.
+
+17.	What are predefined functional interfaces?
+1. Predicate
+•	Takes input and returns boolean
+2. Function<T, R>
+•	Takes input and returns a result
+3. Consumer
+•	Takes input but returns nothing
+
+4.Supplier
+Takes no input, returns a value
+
+5.BIFunction
+Takes two inputs, returns a result
+
+12.	What is method reference and why do we use it?
+•	in Java Method referance are a shorthand notation for calling methods that can be used wherever a functional interface is expected.
+•	They provide a more concise and readable way to refer to methods compared to using lambda expressions.
+•	They are particularly useful when the lambda expression simply calls an existing method or constructor, making your code more concise and expressive.
+13.	Types of method references?
+Referance of static method
+Referance of instance method
+Referance of constructor by using new keyword
+🔹 Streams API
+15.	What is Stream API?
+16.	The Stream API is used to process collections of data in a functional and efficient way.
+17.	It allows performing operations like filtering, mapping, sorting, and reducing on data in a declarative style
+
+18.	Difference between stream and collection?
+A Collection is used to store data, whereas a Stream is used to process data in a functional, efficient, and often parallel manner without modifying the original source.
+
+19.	What are intermediate operations?
+Intermediate operations transform a stream into another stream. These operations are lazy; they are not executed until a terminal operation is invoked on the stream. 
+•	Intermediate operations return a new stream, allowing multiple operations to be chained together. Examples include:
+•	filter, map ,sorted, distinct,limit,skip
+20.	What are terminal operations?
+•	Terminal operations produce a result or a side effect and mark the end of the stream processing. 
+•	Once a terminal operation is invoked, the stream is considered consumed and can no longer be used. 
+•	Examples include:
+•	forEach,toarray,Reduce collect,count,anymatch,allmatch,noneMatch,findFirst,FindAny.
+21.	What happens if terminal operation is not used?
+•	If a terminal operation is not used, the stream pipeline will not execute at all.
+•	because stream operations are lazy and require a terminal operation to trigger processing.
+
+22.	Why is Streams API faster than traditional loops?
+Stream API can be faster than traditional loops because it supports parallel processing, lazy evaluation, and optimized internal iteration, allowing better performance especially with large datasets.
+23.	What is map() vs flatMap()?	
+map() transforms each element individually, whereas flatMap() transforms and flattens nested structures into a single stream.
+The function passed to map() operation returns a single value for a single input.	The function you pass to flatmap() operation returns an arbitrary number of values as the output.
+
+One-to-one mapping occurs in map().	    One-to-many mapping occurs in flatMap().
+Only perform the mapping.	                        Perform mapping as well as flattening.
+Produce a stream of value.	                           Produce a stream of stream value.
+map() is used only for transformation            flatMap() is used both for transformation and mapping.
+What are collectors in Java 8?
+Collectors are utility classes in Java 8 (available in java.util.stream.Collectors) used to transform or collect stream elements into a desired result such as a list, set, map, or string.
+A Collector is used in the terminal operation (collect()) of a Stream API to accumulate elements into a collection or other form.
+🔹 Optional Class
+31.	What is Optional in Java 8?
+Optional is a Java 8 class used to represent a value that may or may not be present, helping to avoid null checks and prevent NullPointerException.
+
+32.	Methods of Optional class?
+The Optional class provides methods like 
+of(), ofNullable(), isPresent(), get(), orElse(), map(), flatMap(), and filter() to safely handle and process values that may be absent.															
+Difference between of(), ofNullable(), empty()?
+of() is used for non-null values and throws an exception if null, 
+ofNullable() safely handles null by returning an empty Optional, and
+ empty() creates an explicitly empty Optional
+
+🔹 Date & Time API
+35.	What are new Date & Time APIs in Java 8?
+Java 8 introduced a new and improved Date and Time API in the java.time package to overcome the limitations of old classes like Date and Calendar.
+Java 8 introduced the java.time package with classes like LocalDate, LocalTime, LocalDateTime, ZonedDateTime, and Instant to provide a modern, thread-safe, and easy-to-use date and time API.
+🔹 Interface Improvements
+37.	What is static method in interface?
+•	A static method in an interface is a method defined with the static keyword inside an interface, and it has a method body (implementation).
+•	A static method in an interface is a method with implementation that belongs to the interface itself, cannot be overridden, and is accessed using the interface name.
+
+38.	Where to use default vs static methods?
+39.	•  Use default → if method should be inherited & customizable 
+40.	• Use static → if method should be fixed & utility-based
+
+40.	What changes came in HashMap after Java 8?
+In Java 8, HashMap improved collision handling by converting linked lists into Red-Black trees 
+when the bucket size exceeds a threshold, reducing worst-case complexity from O(n) to O(log n).aaaaaaaa1qwe
+
+✅ How Does Collision Handling Improve in Java 8?
+In Java 8, HashMap improved collision handling by switching from a linked list-only approach to a combination of Linked List and Red-Black Tree.
+🔹 Before Java 8
+•	Collisions handled using Linked List
+•	If many elements fall into the same bucket: 
+o	List becomes long
+o	Lookup time becomes O(n) (poor performance)
+🔹 After Java 8 (Improvement)
+✅ 1. Treeification (Key Change)
+•	If the number of elements in a bucket exceeds 8 (TREEIFY_THRESHOLD): 
+o	Linked list is converted into a Red-Black Tree
+✔ Time complexity improves:
+•	O(n) → O(log n)
+✅ 2. Untreeification
+•	If elements reduce below 6 (UNTREEIFY_THRESHOLD): 
+o	Tree converts back to Linked List
+✅ 3. Capacity Condition
+•	Tree conversion happens only if: 
+o	HashMap capacity ≥ 64 (MIN_TREEIFY_CAPACITY)
+•	Otherwise, resizing is preferred
+________________________________________
+🔹 How It Improves Performance
+•	Faster search, insert, delete
+•	Handles high collision scenarios efficiently
+•	Prevents worst-case degradation
+________________________________________
+🔹 Flow
+Collision occurs
+   ↓
+Small bucket → Linked List
+   ↓ (size > 8)
+Convert to Red-Black Tree
+   ↓
+Faster operations (O(log n))
+
+🔹 Miscellaneous
+42.	What is Nashorn in Java 8?
+Nashorn is a JavaScript engine introduced in Java 8.
+Key Points:
+43.	✅ Purpose: Nashorn allows Java applications to execute JavaScript code inside the JVM (Java Virtual Machine).
+44.	✅ It replaces the older Rhino JavaScript engine that was used in earlier Java versions.
+45.	✅ Written in Java, designed for better performance and tighter integration with Java.
+
+46.	What is MetaSpace and how is it different from PermGen?
+
+47.	Both MetaSpace and PermGen (Permanent Generation) are memory areas used by the JVM to store class metadata, but they differ in how they are managed.
+
+•  PermGen was limited and prone to memory errors. 
+•  MetaSpace improves performance and flexibility by using native memory and dynamic allocation.
+
+
+48.	What are Predicate, Consumer, Supplier, Function?
+49.	In Java 8, Predicate, Consumer, Supplier, and Function are functional interfaces introduced in the java.util.function package to support lambda expressions and functional programming.
+50.	1. Predicate
+51.	✅ Represents a boolean-valued function (returns true/false)
+52.	✅ Used for testing conditions
+53.	
+54.	Method:
+55.	Java
+56.	boolean test(T t);
+57.	Show more lines
+58.	Example:
+59.	Java
+60.	Predicate<Integer> isEven = n -> n % 2 == 0;
+61.	System.out.println(isEven.test(4)); // true
+
+62.	👉 Used in filtering (e.g., streams)
+63.	________________________________________
+64.	🔹 2. Consumer
+65.	✅ Represents an operation that takes input but returns nothing
+66.	✅ Used for processing or performing actions
+
+67.	Method:
+68.	Java
+69.	void accept(T t);
+70.	Show more lines
+71.	Example:
+72.	Java
+73.	Consumer<String> print = s -> System.out.println(s);
+74.	print.accept("
+👉 Often used in forEach
+75.	________________________________________
+76.	🔹 3. Supplier
+77.	✅ Represents a function that does not take input but returns a value
+78.	✅ Used for providing or generating data
+79.	
+80.	Method:
+81.	Java
+82.	T get();
+83.	Show more lines
+84.	Example:
+85.	Java
+86.	Supplier<Double> randomValue = () -> Math.random();
+87.	System.out.println(randomValue.get());
+88.	Show more lines
+89.	👉 Used for lazy generation
+90.	________________________________________
+91.	🔹 4. Function<T, R>
+92.	✅ Represents a function that takes input and returns a result
+93.	✅ Used for transforming data
+94.	Method:
+95.	Java
+96.	R apply(T t);
+97.	Show more lines
+98.	Example:
+99.	Java
+100.	Function<String, Integer> length = s -> s.length();
+101.	System.out.println(length.apply("Java")); // 4
+102.	Show more lines
+103.	👉 Common in map operations
+104.	
+105.	
+106.	Explain BiFunction interface
+
+✅ SPRING INTERVIEW QUESTION LIST
+🔹 Core Spring Basics
+1.	What is Spring Framework?
+2.	The Spring Framework is a powerful, lightweight, and open-source Java framework used for building enterprise-level applications. 
+3.	It provides a comprehensive programming and configuration model for modern Java-based systems.
+
+4.	What are the modules of Spring?
+5.	Spring Framework is modular and includes Core Container, Data Access/Integration, Web, AOP, Messaging, Instrumentation, and Test modules. These modules help in building scalable, loosely coupled enterprise applications.”
+
+             • Core Container → DI & Bean management 
+•  ✅ Data Access → Database & transactions 
+•  ✅ Web → Web & REST applications 
+•  ✅ AOP → Cross-cutting concerns 
+•  ✅ Messaging → Event-driven apps 
+•  ✅ Test → Testing support
+
+6.	Advantages of Spring Framework?
+•	spring framework provides predefined libraries and templates
+•	Spring framework privide loos coupling
+•	Manages the dependancies injection and IOC automatically
+•	Spring framwork very easy to  testing
+•	Spring web framework is well design mvc framework which provide the greate alteranative to another ````framework like struts
+
+7.	What is Inversion of Control (IoC)?
+8.	The IOC container is INVERSION of control which is responsible to instantiate, configure and assemble the objects. 
+9.	The IoC container gets informations from the XML file and works accordingly. 
+10.	The main tasks performed by IoC container are:
+11.	=>to instantiate the application class
+12.	=>to configure the object
+13.	=>to assemble the dependencies between the objects
+14.	What is Dependency Injection (DI)?
+15.	Dependency Injection (DI) is a design pattern used in software development to achieve loose coupling between components. Instead of a class creating its own dependencies, those dependencies are provided (injected) from the outside.
+“Giving an object the things it needs (dependencies) from outside rather than letting it create them itself.”
+
+16.	Difference between IoC and DI?
+17.	Aspect	18.	IoC (Inversion of Control)	19.	DI (Dependency Injection)
+20.	Definition	21.	A design principle where control of object creation and flow is transferred to a framework or container	22.	A design pattern used to implement IoC by injecting dependencies into objects
+23.	Concept	24.	Broad concept	25.	Specific technique
+26.	Purpose	27.	To invert control from developer to framework	28.	To provide dependencies from outside instead of creating them internally
+29.	How it works	30.	Framework manages object lifecycle and control flow	31.	Dependencies are passed via constructor, setter, or field
+32.	Relationship	33.	IoC is the parent concept	34.	DI is a way to achieve IoC
+35.	Example	36.	Spring container manages beans lifecycle	37.	Spring injects dependencies using @Autowired
+
+38.	What is Spring Container?
+The Spring Container is the core component of the Spring Framework responsible for:
+•	Creating objects (beans)
+•	Managing their lifecycle
+•	Injecting dependencies (DI)
+•	Configuring the application
+•	The Spring Container is a framework component that creates, configures, and manages objects (beans) and their dependencies.
+
+🔹 IoC Container
+8.	What is IoC container?
+9.	An IoC (Inversion of Control) Container is a framework component that manages the creation, configuration, and lifecycle of objects and their dependencies instead of the programmer doing it manually.
+10.	
+11.	Types of IoC containers?
+12.	1)BeanFactory
+13.	2)ApplicationContext
+14.	Difference between BeanFactory and ApplicationContext?
+    BeanFactory is a basic IoC container with lazy initialization, 
+While
+ ApplicationContext is an advanced container that provides additional features like AOP, event handling, and eager initialization.
+
+15.	Why ApplicationContext is preferred over BeanFactory?
+ApplicationContext is preferred over BeanFactory because it provides advanced features like AOP, event handling, and eager initialization, making it more suitable for enterprise-level applications.
+
+16.	ApplicationContext is preferred because it provides advanced features and better support for enterprise applications, whereas BeanFactory is limited to basic functionality.
+
+🔹 Dependency Injection
+12.	What is dependency injection?
+13.	Dependency Injection (DI) is a design pattern in which an object receives its required dependencies from an external source rather than creating them itself.
+
+14.	Types of DI in Spring?
+15.	1. Constructor Injection (Most Recommended)
+16.	Dependencies are provided through the constructor of the class.
+17.	Ioc container uses parameterised constructor to create the target bean class object.
+18.	In that process we inject the dependant class object to target class object
+Advantages:
+•	Ensures mandatory dependencies are provided
+•	Makes the object immutable
+•	Easier for unit testing
+•	The <constructor-args> tag is used for constructor injection.
+If all properties of spring bean class are mandatory to participate in the injection then we 
+Should go for constructor injection.
+✅ 2. Setter Injection
+Dependencies are provided through setter methods.
+Here IOC container calls the setter of target class to assign dependant class object to target class object.
+Advantages:
+•	Allows optional dependencies
+•	More flexible (can change dependency later)
+•	<property>tag used for setter injection
+•	3. Field Injection
+•	Dependencies are injected directly into class fields using annotations.
+•	
+
+19.	Difference between constructor and setter injection?
+20.	Constructor injection is used for mandatory dependencies and ensures immutability, while setter injection is used for optional dependencies and provides flexibility.
+
+21.	When to use constructor vs setter injection?
+Choosing between constructor injection and setter injection depends on the type of dependency and design requirements.
+
+If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
+
+If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
+
+17.	What is a Spring Bean?
+•	A Spring Bean is an object that is instantiated, configured, and managed by the Spring IoC (Inversion of Control) container.
+•	It is created based on configuration (XML, annotations, or Java config).
+•	Managed lifecycle (creation → initialization → destruction) is handled by Spring.
+
+18.	Bean lifecycle in Spring?
+•	spring bean life will start from the bean creation and end with bean destruction
+•	init and destry methods are important in spring bean life cycle which can configure in xml file with init-initailization and 
+•	init-destruction .or programatically we can do with @ initailization and @disposable method
+•	
+•	Spring bean life cycle is maintained by IOC Container
+•	
+•	1. Container gets started.
+•	
+•	2. Container creates the object of bean as per request.
+•	
+•	3. Dependencies is created
+•	
+•	4. Dependencies is injected
+•	Bean Instantiation – Spring creates the bean instance.
+•	Dependency Injection – Dependencies are injected.
+•	Aware Interfaces Methods (optional)
+e.g., BeanNameAware, ApplicationContextAware
+•	BeanPostProcessor (before init)
+•	Initialization 
+•	@PostConstruct
+•	afterPropertiesSet()
+•	custom init-method
+•	BeanPostProcessor (after init)
+•	Bean is ready to use
+•	Destruction (when context closes) 
+•	@PreDestroy
+•	destroy()
+•	custom destroy-method
+•	
+. What are init and destroy methods?
+•	These are custom lifecycle callback methods used to perform initialization and cleanup.
+•	Init method
+•	Runs after bean creation and dependency injection.
+•	Used to initialize resources (DB connection, configurations, etc.)
+•	Destroy method
+•	Runs before bean destruction.
+•	Used to release resources (close DB connections, cleanup tasks).
+
+19.	What are different bean scopes?
+•	Spring supports multiple scopes:
+•	singleton (default)
+1.	One instance per Spring container.
+•	prototype
+1.	New instance every time the bean is requested.
+•	request (Web)
+1.	One instance per HTTP request.
+•	session (Web)
+1.	One instance per HTTP session.
+•	application (Web)
+1.	One instance per ServletContext.
+•	websocket
+1.	One instance per WebSocket session.
+•	
+20.	Difference between singleton and prototype?
+Singleton Scope
+•	✅ Only one instance of the bean is created per Spring container
+•	✅ The same object is shared everywhere in the application
+•	✅ Default scope in Spring
+•	<bean id="myBean" class="com.example.MyClass" scope="singleton"/>
+•	
+•	MyBean obj1 = context.getBean(MyBean.class);
+•	MyBean obj2 = context.getBean(MyBean.class);
+•	
+•	System.out.println(obj1 == obj2); // true
+Both references point to the same object
+________________________________________
+🔹 Prototype Scope
+•	✅ A new instance is created every time the bean is requested
+•	✅ No sharing of objects
+•	Example:
+•	XML
+•	<bean id="myBean" class="com.example.MyClass" scope="prototype"/>
+•	Show more lines
+•	Behavior:
+•	Java
+•	MyBean obj1 = context.getBean(MyBean.class);
+•	MyBean obj2 = context.getBean(MyBean.class);
+•	
+•	System.out.println(obj1 == obj2); // false
+•	Show more lines
+•	👉 Each request creates a new object
+•	________________________________________
+•	🔑 Key Differences
+•	Feature	•	Singleton	•	Prototype
+•	Instances created	•	One per container	•	New instance every time
+•	Default scope	•	Yes	•	No
+•	Object sharing	•	Shared	•	Not shared
+•	Lifecycle managed	•	Fully managed by Spring	•	Only creation managed
+•	Memory usage	•	Less	•	More
+•	________________________________________
+•	🟢 Lifecycle Difference
+•	Singleton:
+Spring creates, manages, and destroys the bean
+•	Prototype:
+Spring only creates the bean; developer must handle destruction
+•	________________________________________
+•	✅ Summary
+•	Singleton → Single shared instance (default, efficient)
+•	Prototype → Multiple instances (good for stateful objects)
+•	
+
+
+21.	When to use request and session scope?
+Request Scope
+•	Use when data is needed only for a single HTTP request.
+•	Example: 
+1.	Form data processing
+2.	Request-specific data
+Session Scope
+•	Use when data must persist across multiple requests for a single user session.
+•	Example: 
+o	User login information
+o	Shopping cart
+
+🔹 Autowiring
+23.	What is autowiring?
+•	Autowiring is a feature in Spring that automatically injects dependencies into a bean without manual configuration.
+•	Spring resolves dependencies by type, name, or constructor.
+•	It reduces XML/configuration and improves readability.
+
+24.	Modes of autowiring? (byName, byType, constructor)
+1. byName
+•	Injects dependency based on property name matching bean name.
+•	Works with setter injection.
+•	
+•	byType
+•	Injects dependency based on type (class/interface).
+•	If multiple beans of same type exist → confusion/error.
+
+•	3. constructor
+•	Injects dependencies through the constructor.
+•	Preferred approach (better for immutability and testing).
+25.	
+26.	Difference between @Autowired, @Qualifier, @Primary?
+27.	In Spring, @Autowired, @Qualifier, and @Primary are used for dependency injection, especially when multiple beans exist.
+28.	🔹 1. @Autowired
+29.	✅ Used to automatically inject dependencies
+30.	✅ Works by type (byType)
+31.	Example:
+32.	@Autowired
+33.	private PaymentService paymentService;
+34.	👉 Spring will automatically find a bean of type PaymentService and inject it.
+35.	________________________________________
+36.	🔹 2. @Qualifier
+37.	✅ Used with @Autowired to resolve ambiguity
+38.	✅ Helps choose which specific bean to inject when multiple beans of the same type exist
+39.	Example:
+40.	@Autowired
+41.	@Qualifier("paypalService")
+42.	private PaymentService paymentService;
+43.	👉 Specifies exactly which bean to use.
+44.	________________________________________
+45.	🔹 3. @Primary
+46.	✅ Used at the bean definition level
+47.	✅ Marks a bean as the default choice when multiple beans exist
+48.	Example:
+49.	@Bean
+50.	@Primary
+51.	public PaymentService defaultService() {
+52.	    return new CreditCardService();
+53.	}
+54.	👉 If no @Qualifier is used, Spring will pick this bean.
+55.	________________________________________
+56.	🔑 Key Differences
+57.	Feature	58.	@Autowired	59.	@Qualifier	60.	@Primary
+61.	Purpose	62.	Inject dependency	63.	Specify exact bean	64.	Set default bean
+65.	Works by	66.	Type	67.	Name	68.	Priority
+69.	Used with	70.	Field/Constructor/Setter	71.	Along with @Autowired	72.	At bean declaration
+73.	When needed	74.	Always for injection	75.	When multiple beans exist	76.	When multiple beans exist
+77.	________________________________________
+78.	✅ Combined Example
+79.	@Component
+80.	class App {
+81.	
+82.	    @Autowired
+83.	    @Qualifier("paypalService")
+84.	    private PaymentService service;
+85.	}
+86.	@Component
+87.	@Primary
+88.	class CreditCardService implements PaymentService {}
+89.	
+90.	@Component("paypalService")
+91.	class PaypalService implements PaymentService
+92.	👉 Here:
+93.	@Primary sets default (CreditCardService)
+94.	@Qualifier overrides it to use PaypalService
+95.	________________________________________
+96.	✅ Summary
+97.	@Autowired → inject dependency automatically
+98.	@Qualifier → choose specific bean
+99.	@Primary → set default bean
+100.	👉 In short:
+When multiple beans exist:
+101.	Use @Primary for default
+102.	Use @Qualifier to override selection:
+________________________________________
+23. What is Autowiring?
+Autowiring is a feature in Spring that automatically injects dependencies into a bean without manual configuration.
+•	Spring resolves dependencies by type, name, or constructor.
+•	It reduces XML/configuration and improves readability.
+✅ Example:
+@Autowired
+private MyService myService;
+👉 Instead of manually creating objects, Spring injects them automatically.
+________________________________________
+24. Modes of Autowiring
+Spring supports different autowiring modes:
+1. byName
+•	Injects dependency based on property name matching bean name.
+•	Works with setter injection.
+✅ Example:
+// Bean name = myService
+private MyService myService; // variable name must match
+________________________________________
+
+]k.
+L;’.’?{
+•	Injects dependency based on type (class/interface).
+•	If multiple beans of same type exist → confusion/error.
+________________________________________
+3. constructor
+•	Injects dependencies through the constructor.
+•	Preferred approach (better for immutability and testing).
+✅ Example:
+@Autowired
+public MyController(MyService myService) {
+    this.myService = myService;
+}
+________________________________________
+✅ Important Note:
+•	In modern Spring (Spring Boot), annotation-based autowiring (@Autowired) is most common, instead of XML modes.
+
+🔹 Spring Annotations
+•	What is @Component?
+@Component is a generic stereotype annotation used to mark a class as a Spring-managed bean.
+•	.it tells Spring to auto-detect and register the class during component scanning.
+•	It is the base annotation for other specialized annotations.
+•	✅ ExwsAQample:
+•	@Component
+•	public class MyComponent {
+•	}
+-‘
+•	27. Difference between @Component, @Service, @Repository, @Controller
+•	All are stereotype annotations (specializations of @Component) used for different layers.
+•	Annotation	•	Purpose	•	Layer
+•	@Component	•	Generic bean	•	Any
+•	@Service	•	Business logic	•	Service layer
+•	@Repository	•	Data access + exception handling	•	DAO layer
+•	@Controller	•	Handles web requests	•	Presentation layer
+•	✅ Key Differences:
+•	@Component → General-purpose
+•	@Service → It is also used at class level. It tells the Spring that class contains the business logic.
+•	@Repository → Adds exception translation (converts DB exceptions to Spring exceptions)
+•	The repository is a DAOs (Data Access Object) that access the database directly. 
+•	The repository does all the operations related to the database.
+•	@Controller → Used in MVC for handling HTTP requests
+•	👉 They behave similarly but improve code readability and architecture clarity.
+•	________________________________________
+•	28. What is @RestController?
+•	this annotation is specialized version of @controller that conbines the @controller and @ResponseBody annotation.
+•	it is used to mark class as restful webserbice controlller.it handles the http request and directly return the response body in format such json or xml.
+•	Used to build REST APIs
+•	Methods return JSON/XML directly, not views
+•	✅ Example:
+•	@RestController
+•	public class MyController {
+•	
+•	    @GetMapping("/hello")
+•	    public String hello() {
+•	        return "Hello World";
+•	    }
+•	}
+
+•	 What is @Bean and @Configuration?
+•	✅ @Configuration
+•	Marks a class as a source of bean definitions
+•	. It allows us to register extra beans in the context or import additional configuration classes.
+•	Similar to XML configuration
+•	@Configuration
+•	public class AppConfig {
+•	}
+•	✅ @Bean
+•	Used inside @Configuration class
+•	Defines a method that returns a bean
+•	It is a method-level annotation. It is an alternative of XML <bean> tag. It tells the method to produce a bean to be managed by Spring Container
+•	@Configuration
+•	public class AppConfig {
+•	
+•	    @Bean
+•	    public MyService myService() {
+•	        return new MyService();
+•	    }
+•	}
+•	
+•	30. What is @Value?
+•	@Value is used to inject values into variables from:
+•	properties file
+•	environment variables
+•	hardcoded values
+•	✅ Example:
+•	@Value("${app.name}")
+•	private String appName;
+
+•	31. What is @PropertySource?
+•	@PropertySource is used to load external properties file into the Spring environment.
+•	✅ Example:
+•	@Configuration
+•	@PropertySource("classpath:application.properties")
+•	public class AppConfig {
+•	}
+
+🔹 Spring MVC
+32.	What is Spring MVC?
+33.	Spring MVC (Model–View–Controller) is a web framework provided by the Spring Framework for building Java-based web applications following the MVC design pattern.
+
+Spring MVC is a lightweight, flexible framework used to develop web applications in Java. It separates the application into three main components:
+34.	1. Model
+35.	Represents the data and business logic
+36.	Interacts with the database
+37.	Example: Java classes, services, DAOs
+38.	2. View
+39.	Responsible for displaying data to the user
+40.	Usually implemented using JSP, Thymeleaf, HTML, etc.
+41.	3. Controller
+42.	Handles user requests
+43.	Processes input and return the appropriate response
+44.	Acts as a bridge between Model and View
+
+45.	Explain Spring MVC flow?
+Spring MVC follows a structured request–response flow:
+✅ Step-by-step Flow:
+46.	Client Request
+1.	User sends an HTTP request (via browser).
+47.	DispatcherServlet (Front Controller)
+1.	Receives all incoming requests.
+48.	HandlerMapping
+1.	Identifies the appropriate controller based on the request URL.
+49.	Controller
+1.	Processes the request.
+2.	Calls business logic (Model/service layer).
+50.	Model
+1.	Prepares data to be displayed.
+51.	Controller returns ModelAndView
+1.	Contains: 
+1.	Model (data)
+2.	View name (UI page)
+52.	ViewResolver
+1.	Maps logical view name to actual view (JSP, HTML, Thymeleaf).
+53.	View Rendering
+1.	View displays the data to the user.
+54.	Response
+1.	Final output sent back to the browser.
+
+•  User sends a request to the server 
+•  Request goes to the DispatcherServlet (front controller) 
+•  DispatcherServlet forwards request to the appropriate Controller 
+•  Controller processes request using Model 
+•  Controller returns a ModelAndView 
+•  DispatcherServlet resolves the View 
+•  Response is sent back to the user
+
+55.	What is DispatcherServlet?
+DispatcherServlet is the central component (Front Controller) in the Spring MVC framework that handles all incoming HTTP requests and coordinates the entire request-processing workflow.
+
+56.	What is HandlerMapping?
+57.	HandlerMapping is a Spring MVC component that maps incoming HTTP requests to the appropriate controller.
+
+HandlerMapping is responsible for deciding which controller should handle a specific request
+
+58.	What is ViewResolver?
+ViewResolver is a Spring MVC component that resolves the logical view name returned by the controller into the actual view resource.
+
+🔹 Spring Boot
+37.	What is Spring Boot?
+•	Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
+•	 that makes it easier to create and run Java applications.
+• It provides easier and faster ways to set up ,configure and run both simple and web based application.
+•		• It provides rapid application development.
+•	2. It simplifies the configuration and setup process, allowing developers to focus more on writing code for their applications.
+•	a. Configurations
+•	b. Dependency Management
+•	C. Embedded Server
+38.	Advantages of Spring Boot?
+•	Springboot reduce the lots of development time and increase the productivity
+•		• It avaoides boilerplate code ,annotation and xml configurations
+•		• It provides lots of plugins to develop and test springboot app very easily build tool like maven and gradle
+•		• It test the web application easily with the help of different embedded http srvers like tomcat and jetti
+•		• Here don’t need to deployee the war files.
+•		•  increased productivity, reduced configuration, simplified dependency management, and easier deployment.
+•		b. Production Ready applications- Metrix, Health Check and many features are designed for production ready application.
+•	c. Rapid Development- Opinionated approach and auto-configuration enable developers to quickly develop apps
+•	d. Provide Dependency Management- No need to manage separate dependencies manually.
+•	e. Autoconfiguration - Spring Boot AutoConfigure things by default.
+39.	What is auto-configuration?
+•	Auto-configuration is a feature of Spring Boot that automatically configures your application based on the dependencies present in the classpath.
+
+•	👉 In simple terms:
+Spring Boot reduces the need for manual configuration by setting up beans automatically.
+40.	How to disable auto-configuration?
+•	✅ 1. Disable Specific Auto-Configuration (Recommended)
+•	Use exclude in @SpringBootApplication:
+•	@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+•	
+•	public class MyApplication {
+1.	public static void main(String[] args) {
+2.	SpringApplication.run(MyApplication.class, args);
+3.	}
+•	}
+•	👉 Example use case:
+•	You don’t want Spring Boot to auto-configure a database.
+•	________________________________________
+•	✅ 2. Using @EnableAutoConfiguration
+•	@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+•	``
+•	👉 Works the same as above but used separately.
+•	________________________________________
+•	✅ 3. Disable via application.properties
+•	spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+•	👉 Useful when you don’t want to modify code.
+•	
+•	✅ 5. Conditional Disabling
+•	Spring automatically skips configuration if:
+•	Required dependency is missing
+•	Required bean already exists
+
+•	✅ Interview Tip (Short Answer)
+•	👉 “We can disable autoconfiguration using the exclude attribute in @SpringBootApplication, @EnableAutoConfiguration, or via application.properties.”
+🔹 Scenario-Based Questions
+41.	How to secure Spring Boot application (layer-wise)?
+42.	Securing a Spring Boot application requires a defense-in-depth approach, where security is applied at multiple layers:
+43.	🔹 1. Network Layer
+44.	Enable HTTPS (SSL/TLS) to encrypt communication
+45.	Use firewalls, load balancers, and reverse proxies
+46.	Restrict ports and allow only trusted IPs
+47.	
+48.	🔹 2. Application Layer (Spring Security)
+49.	Authentication: Use Basic Auth, JWT, OAuth2
+50.	Authorization: Role-based or permission-based access @PreAuthorize("hasRole('ADMIN')")
+51.	Use BCrypt for password hashing
+52.	Enable CSRF protection (disable only for stateless APIs)
+53.	Configure session management
+54.	
+55.	🔹 3. API / Controller Layer                                                                                                                                              
+56.	Validate user inputs using: @Valid, @Not                                            
+57.	Implement global exception handling to avoid exposing sensitive data
+58.	Add rate limiting to prevent abuse
+59.	________________________________________
+60.	🔹 4. Service Layer
+61.	Apply business-level security checks
+62.	Ensure users can access only their own data
+63.	Implement RBAC/ABAC logic
+64.	________________________________________
+65.	🔹 5. Data Layer
+66.	Prevent SQL injection using JPA/Prepared Statements
+67.	Encrypt sensitive data (PII)
+68.	Use least-privileged DB credentials
+69.	________________________________________
+70.	🔹 6. Configuration Layer
+71.	Store secrets in environment variables or secret managers
+72.	Avoid hardcoding passwords
+73.	Use Spring profiles (dev/test/prod)
+74.	________________________________________
+75.	🔹 7. Logging & Monitoring
+76.	Mask sensitive info in logs
+77.	Monitor suspicious activities
+78.	Use tools like ELK, Prometheus, Grafana
+79.	________________________________________
+80.	🔹 8. Dependency & Deployment
+81.	Regularly update dependencies
+82.	Use vulnerability scanning tools (OWASP, Snyk)
+83.	Secure Docker containers (run as non-root)
+84.	✅ Conclusion (1-liner)
+85.	“Spring Boot security should be implemented layer-wise—from network to database—using Spring Security, input validation, encryption, and monitoring to ensure complete protection.”
+
+🔹 Spring Data JPA
+42.	What is Spring Data JPA?
+  Spring Data JPA provides an abstraction layer over JPA, allowing developers to interact with databases without writing boilerplate code such as SQL queries or DAO implementations.
+
+43.	What is JpaRepository?
+JpaRepository is an interface in Spring Data JPA that provides ready-to-use methods for performing CRUD (Create, Read, Update, Delete) operations and more on database entities.
+
+CRUD Operations
+save(entity);          // Insert or update
+findById(id);          // Fetch by ID
+findAll();              // Fetch all records
+deleteById(id);        // Delete by ID
+existsById(id);        // Check existence
+Pagination & Sorting
+findAll(Pageable pageable);
+findAll(Sort sort);
+44.	Difference between CrudRepository and JpaRepository?
+CrudRepository
+•	A generic interface in Spring Data.
+•	Provides basic CRUD operations.
+•	Suitable for simple data access needs.
+•	
+JpaRepository
+•	Extends PagingAndSortingRepository, which extends CrudRepository.
+•	Provides advanced JPA-specific features.
+•	Used when working specifically with JPA (Hibernate, etc.).
+🔹 Additional Features
+•	Pagination and sorting
+•	Batch operations
+•	Flush and save-and-flush functionality
+
+45.	What are query methods?
+
+46.	Query methods are methods defined in a repository interface where Spring automatically generates the database query based on the method name.
+
+47.	A query method is a method whose name follows a specific naming convention, allowing Spring Data JPA to derive SQL/JPQL queries automatically without writing them manually.
+
+
+48.	•  No need to write SQL 
+49.	•  Reduces boilerplate code 
+50.	•  Easy to read and maintain 
+51.	•  Faster development
+
+52.	What is @Query annotation?
+53.	The @Query annotation is used in Spring Data JPA to define custom JPQL (Java Persistence Query Language) or native SQL queries directly in the repository interface.
+
+54.	What is pagination and sorting?
+55.	Pagination is the process of dividing large amounts of data into smaller chunks (pages) so that data can be retrieved and displayed in parts instead of loading everything at once
+
+🔹 Transactions
+48.	What is transaction in Spring?
+A transaction is a single unit of work that ensures a group of database operations either:
+49.	✅ All succeed (commit)
+50.	❌ All fail (rollback)		
+51.	Programmatic → Manual transaction handling
+52.	Declarative → Automatic using @Transactional (preferred)
+
+53.	Difference between programmatic and declarative transaction?
+54.	Feature	55.	Programmatic Transaction	56.	Declarative Transaction
+57.	Definition	58.	Managed manually in code	59.	Managed using annotations/config
+60.	Control	61.	Full control	62.	Less control, automatic
+63.	Complexity	64.	More complex	65.	Simple and clean
+66.	Code Dependency	67.	Tightly coupled with transaction logic	68.	Business logic is separate
+69.	Approach	70.	Uses TransactionTemplate or API	71.	Uses @Transactional
+72.	Boilerplate Code	73.	More	74.	Very less
+75.	Preferred	76.	Rarely used	77.	Mostly used ✅
+
+78.	What is @Transactional?
+@Transactional is a Spring annotation used to manage transactions automatically.
+•  Starts a transaction ✅ 
+•  Commits if successful ✅ 
+•  Rolls back if an exception occurs ✅
+Prapogation
+Propagation defines how transactions behave when one transactional method calls another (reuse, create new, or ignore transactions).
+All Propagation Types
+🔹 1. REQUIRED (Default ✅)
+🔸 Behavior:
+•	Uses existing transaction if available
+•	Otherwise, creates a new one
+🔸 Example:
+Java
+@Transactional(propagation = Propagation.REQUIRED)
+🔹 2. REQUIRES_NEW
+🔸 Behavior:
+•	Always creates a new transaction
+•	Suspends any existing transaction
+🔸 Use Case:
+•	Logging, audit operations (independent transaction)
+Java
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+``
+Show more lines
+________________________________________
+🔹 3. SUPPORTS
+🔸 Behavior:
+•	Uses existing transaction if present
+•	If not, executes without transaction
+Java	
+@Transactional(propagation = Propagation.SUPPORTS)
+Show more lines
+________________________________________
+🔹 4. NOT_SUPPORTED
+🔸 Behavior:
+•	Always executes without a transaction
+•	Suspends any existing transaction
+Java
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
+Show more lines
+________________________________________
+🔹 5. MANDATORY
+🔸 Behavior:
+•	Must run inside an existing transaction
+•	Throws exception if none exists ❌
+Java
+@Transactional(propagation = Propagation.MANDATORY)
+Show more lines
+________________________________________
+🔹 6. NEVER
+🔸 Behavior:
+•	Must NOT run inside a transaction
+•	Throws exception if a transaction exists ❌
+Java
+@Transactional(propagation = Propagation.NEVER)
+Show more lines
+________________________________________
+🔹 7. NESTED
+🔸 Behavior:
+•	Runs inside existing transaction
+•	Creates a savepoint (partial rollback possible)
+
+🔹 Spring AOP
+51.	What is AOP?
+•	Aspect-Oriented Programming (AOP) is a programming paradigm that aims to separate cross-cutting concerns (like logging, security, etc.) from the main business logic.
+•	It allows you to modularize concerns that affect multiple parts of a program.
+•	Instead of repeating the same code everywhere, AOP puts it in a single place called an aspect
+52.	Why use AOP?
+AOP is used to improve code quality and maintainability.
+Benefits:
+53.	✅ Reduces code duplication – common logic written once
+54.	✅ Improves modularity – separates business logic from supporting concerns
+55.	✅ Easier maintenance – changes made in one place
+56.	✅ Better readability – clean core logic without clutter
+57.	✅ Centralized management – for logging, security, etc.
+
+58.	What are cross-cutting concerns?
+•	Cross-cutting concerns are functionalities that span across multiple modules or layers of an application.
+•	They “cut across” the main business logic and are needed everywhere.
+59.	Examples of AOP (logging, security, transactions)
+🔹 ORM
+55.	What is ORM?
+ORM (Object-Relational Mapping) is a technique that allows you to map Java objects to database tables.
+
+56.	What is Spring ORM?
+Spring ORM is a module of the Spring Framework that provides integration support for ORM tools like Hibernate, JPA, etc
+
+57.	How Spring integrates with Hibernate?
+58.	spring integrates with Hibernate by using Spring ORM and Spring Data JPA to manage sessions, transactions, and exceptions automatically, allowing developers to focus on business logic.
+
+✅ IMPORTANT SCENARIO-BASED QUESTIONS
+🔹 Dependency Injection (Real Scenarios)
+1.	You have multiple beans of same type — how will you inject the correct one?
+👉 Use @Qualifier or @Primary
+2.	Your application fails due to missing dependency — how do you debug it?
+👉 Check:
+•	Bean configuration
+•	Component scan
+•	Constructor mismatch
+🔹 Bean Scope
+3.	When will you use prototype scope instead of singleton?
+👉 Stateful objects (e.g., user-specific data)
+4.	Why singleton scope for services?
+👉 Stateless + performance optimization
+________________________________________
+🔹 Autowiring Issue
+5.	Two beans of same type → NoUniqueBeanDefinitionException. Solution?
+👉 Use:
+@Qualifier("beanName")
+``
+________________________________________
+🔹 Transaction Management
+6.	Transaction not rolling back — why?
+👉 Possible reasons:
+•	Method not public
+•	Same class internal call
+•	No RuntimeException
+________________________________________
+🔹 Spring Boot
+7.	Application fails due to auto-configuration — what to do?
+👉 Disable:
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+________________________________________
+🔹 Spring MVC
+8.	Request not reaching controller — how to debug?
+👉 Check:
+•	URL mapping (@RequestMapping)
+•	DispatcherServlet config
+•	Component scan
+
+🔹 Spring Data JPA
+9.	Want custom query — how will you write?
+👉 Use:
+@Query("SELECT e FROM Employee e WHERE e.salary > :sal")
+``
+🔹 Performance & Design
+10.	How to improve Spring application performance?
+👉
+•	Use caching
+•	Use lazy loading
+•	Reduce DB calls
+•	Use connection pooling
+________________________________________
+🔹 Security (Common Interview Scenario)
+11.	Where to implement security in Spring Boot?
+👉
+•	Web layer (Spring Security filters)
+•	Service layer (@PreAuthorize)
+________________________________________
+
+🔹 Real-Time Application Questons
+13.	 scalable Spring Boot application?
+14.	How you handle exception globally? (@ControllerAdvice)
+15.	How will you handle large data with pagination?
+•  Fetch only required data using pages 
+•  Use DB-level pagination (LIMIT/OFFSET) 
+•  Prefer cursor-based pagination for large datasets 
+•  Return pagination metadata 
+•  Use frameworks like Spring Data for easy implementation
+
+16.	How do you secure REST APIs?
+17.	How do you integrate DB with Spring Boot?
+18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
+
+Spring boot
+Basic Questions
+1.	What is Spring Boot? How is it different from Spring?
+2.	What are the main features of Spring Boot?
+3.	What is auto-configuration?
+4.	What is Spring Boot Starter?
+5.	What is an embedded server?
+6.	What is the use of @SpringBootApplication?
+7.	How does Spring Boot work internally?
+8.	What are Spring Boot components (Starter, AutoConfig, Actuator)?
+9.	What is dependency injection?
+10.	What is IoC (Inversion of Control)?
+11.	Here are clear, interview-ready answers to your Spring Boot questions:
+12.	________________________________________
+13.	1. What is Spring Boot? How is it different from Spring?
+14.	✅ Spring Boot
+•	Spring Boot is a framework built on top of Spring that simplifies application development by providing:
+•	Auto-configuration
+•	Embedded servers
+•	Minimal setup
+•	👉 Goal: Run Spring apps quickly with less configuration
+________________________________________
+15.	✅ Difference: Spring vs Spring Boot
+16.	Feature	17.	Spring	18.	Spring Boot
+19.	Configuration	20.	Manual (XML/Java)	21.	Auto-configured
+22.	Setup	23.	Complex	24.	Very simple
+25.	Server	26.	External (Tomcat)	27.	Embedded (Tomcat, Jetty)
+28.	Development speed	29.	Slower	30.	Faster
+
+31.	2. What are the main features of Spring Boot?
+•	✅ Auto-configuration
+✅ Standalone applications
+✅ Embedded servers (Tomcat, Jetty)
+✅ Starter dependencies
+✅ Production-ready features (Actuator)
+✅ Minimal configuration
+32.	3. What is auto-configuration?
+•	Auto-configuration automatically configures Spring application based on dependencies present in the classpath.
+•	✅ Example:
+•	If MySQL dependency is present → DB config is auto-created
+•	If Spring Web is added → DispatcherServlet is auto-configured
+•	👉 Reduces manual setup
+
+33.	4. What is Spring Boot Starter?
+34.	Starters are predefined dependency bundles.
+35.	✅ Example:
+36.	spring-boot-starter-web → Web apps + REST APIs
+37.	spring-boot-starter-data-jpa → JPA + Hibernate
+38.	👉 No need to add individual dependencies manually
+39.	5. What is an embedded server?
+An embedded server is a built-in web server inside the application.
+40.	✅ Examples:
+•	Tomcat (default)
+•	Jetty
+•	Undertow
+•	👉 You don’t need to deploy a WAR file separately
+•	Run app with:
+•	java -jar app.jar
+41.	6. What is the use of @SpringBootApplication?
+•	It is a main annotation that combines:
+•	@Configuration
+•	@EnableAutoConfiguration
+•	✅ Responsibilities:
+•	Enables auto-configuration
+•	Scans components
+•	Marks config class
+42.	7. How does Spring Boot work internally?
+43.	✅ Internal Flow:
+•	Main class starts (SpringApplication.run())
+•	Loads configuration
+•	Performs auto-configuration
+•	Scans components (@ComponentScan)
+•	Creates beans (IoC container)
+•	Starts embedded server
+•	Application is ready
+44.	8. What are Spring Boot components (Starter, AutoConfig, Actuator)?
+•	✅ 1. Starter
+•	Predefined dependency sets
+•	Simplifies setup
+•	________________________________________
+•	✅ 2. Auto-Configuration
+•	Automatically configures beans based on dependencies
+•	Uses @Conditional annotations
+•	________________________________________
+•	✅ 3. Actuator
+•	Provides production monitoring features
+•	✅ Example endpoints:
+•	/actuator/health
+•	/actuator/metrics
+•	/actuator/info
+45.	9. What is Dependency Injection (DI)?
+•	Dependency Injection is a design pattern where objects receive their dependencies instead of creating them.
+•	✅ Example:
+•	@Autowired
+•	private UserService userService;
+•	👉 Promotes:
+•	Loose coupling
+•	Easy testing
+•	Maintainability
+46.	10. What is IoC (Inversion of Control)?
+•	IoC means the control of object creation is given to the Spring container instead of the programmer.
+•	👉 Spring container:
+•	Creates objects (beans)
+•	Manages lifecycle
+•	Injects dependencies
+
+47.	✅ DI vs IoC
+48.	Concept	49.	Meaning
+50.	IoC	51.	Control given to container
+52.	DI	53.	Way to implement IoC
+
+________________________________________
+🔸 REST API Questions
+1.	Difference between GET, POST, PUT, PATCH, DELETE
+2.	•  GET → Read/fetch data 
+1. GET
+•	Used to fetch data from server
+•	Does not change data
+•	GET /user/1/’
+•	•  POST → Create data 
+•	•  PUT → Update full data 
+•	•  PATCH → Update partial data 
+•	•  DELETE → Remove data
+
+What is idempotent API?
+An idempotent API is an API in which making the same request multiple times produces the same result as making it once (i.e., it does not cause additional side effects after the first execution).
+An operation is idempotent if repeating it does not change the outcome beyond the initial application.
+
+✔ Idempotent Methods
+These methods should produce the same result no matter how many times they are called:
+•	GET → Fetch data (no change)
+•	PUT → Update/replace a resource with the same data
+•	DELETE → Deleting a resource repeatedly still results in "resource not present"
+
+3.	What is RESTful service?
+4.	A RESTful API is an application programming interface that follows the principles of REST (Representational State Transfer) architecture, using standard HTTP methods to perform operations on resources identified by URLs in a stateless, client-server communication model.
+5.	A RESTful API is a web service that follows REST principles and uses HTTP methods like GET, POST, PUT, and DELETE to perform operations on resources identified by URLs. It is stateless and uses standard protocols for communication.
+6.	
+7.	Diff b/w REST and SOAP?
+8.	Feature	9.	REST	10.	SOAP
+11.	Full Form	12.	Representational State Transfer	13.	Simple Object Access Protocol
+14.	Type	15.	Architectural style	16.	Protocol
+17.	Data Format	18.	JSON (mostly), XML, HTML	19.	Only XML
+20.	Protocol Support	21.	HTTP mainly	22.	HTTP, SMTP, TCP, etc.
+23.	Performance	24.	Fast (lightweight)	25.	Slower (heavy due to XML)
+26.	State	27.	Stateless	28.	Can be stateful or stateless
+29.	Security	30.	Basic (HTTPS, OAuth)	31.	Strong (WS-Security standard)
+32.	Ease of Use	33.	Simple and flexible	34.	Complex and strict
+35.	Caching	36.	Supported	37.	Not supported easily
+38.	Error Handling	39.	Uses HTTP status codes	40.	Uses built-in error handling
+41.	Best Use Case	42.	Web/mobile apps, microservices	43.	Enterprise apps, banking, secure transactions
+
+REST is a lightweight, flexible architecture using HTTP and JSON, while SOAP is a strict protocol using XML with built-in security and reliability features.
+
+
+44.	How do you validate request body?
+45.	Request body validation ensures that the data sent by the client is correct, complete, and in the expected format before processing it on the server.
+
+46.	What is @RequestBody vs @RequestParam?
+@RequestBody
+•	Used to read data from the HTTP request body
+•	Typically used with POST, PUT, PATCH
+•	Accepts JSON/XML data and maps it to a Java object
+EX.
+@PostMapping("/users")
+public ResponseEntity<?> createUser(@RequestBody User user) {
+    return ResponseEntity.ok(user);
+}
+@RequestParam
+•	Used to get query parameters from URL
+•	Typically used with GET requests
+•	Used for simple values (String, int, etc.)
+Ex.
+@GetMapping("/users")
+public ResponseEntity<?> getUser(@RequestParam String name) {
+    return ResponseEntity.ok(name);
+}
+
+47.	How to handle HTTP status codes?
+48.	Handling HTTP status codes means returning appropriate response codes and messages from your API to indicate the result of a request.
+Code	Meaning
+200 OK	Request successful
+201 Created	Resource created successfully
+400 Bad Request	Invalid input/request
+401 Unauthorized	Authentication required
+403 Forbidden	Access denied
+404 Not Found	Resource not found
+500 Internal Server Error	Server failure
+
+🔸 Exception Handling
+1.	What is @ExceptionHandler?
+by using this annotation you can define method in your controller class to handle the specific exceptions.
+2.	Annnotated method can have a specific exception type as a parameter,allowing you to handle the perticular exception.
+@ExceptionHandler is a Spring annotation used to handle exceptions in a controlled way and return a custom response with appropriate HTTP status codes.
+@ExceptionHandler is used in Spring to handle exceptions and return custom error responses with proper HTTP status codes, improving API reliability and readability.
+
+🔹 Purpose
+3.	Catches specific exceptions thrown in controller methods
+4.	Prevents application crashes
+5.	Returns user-friendly error messages
+EX
+6.	@RestController
+7.	public class UserController {
+8.	
+9.	    @GetMapping("/users/{id}")
+10.	    public String getUser(@PathVariable int id) {
+11.	        if (id == 0) {
+12.	            throw new RuntimeException("Invalid ID");
+13.	        }
+14.	        return "User found";
+15.	    }
+16.	
+17.	    @ExceptionHandler(RuntimeException.class)
+18.	    public ResponseEntity<String> handleException(RuntimeException ex) {
+19.	        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+20.	    }
+21.	}
+
+22.	What is @ControllerAdvice?
+       Allows you to define global exception handler that are applied across multiple controller.
+it is useful for centralizing exception handling logic and applying consistant error handling across the app
+@ControllerAdvice is a Spring annotation used to provide global exception handling and cross-cutting concerns (like error handling, validation, and data binding) across all controllers in an application.
+________________________________________
+🔹 Purpose
+•	Handles exceptions centrally instead of in each controller
+•	Applies to multiple controllers globally
+•	Keeps controller code clean and maintainable
+
+•	@ControllerAdvice
+•	public class GlobalExceptionHandler {
+•	
+•	    @ExceptionHandler(RuntimeException.class)
+•	    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
+•	        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+•	    }
+•	
+•	    @ExceptionHandler(Exception.class)
+•	    public ResponseEntity<String> handleAllExceptions(Exception ex) {
+•	        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+•	    }
+•	}
+
+23.	How to create global exception handling?
+Global exception handling in Spring Boot is implemented using @ControllerAdvice along with @ExceptionHandler to handle exceptions across all controllers in a centralized way.
+
+Global exception handling in Spring Boot is created using @ControllerAdvice along with @ExceptionHandler methods to handle exceptions centrally and return consistent error responses across all controllers.
+
+public class ErrorResponse {
+    private int status;
+    private String message;
+    private LocalDateTime timestamp;
+
+    // constructors, getters, setters
+}
+
+@ExceptionHandler(Exception.class)
+public ResponseEntity<ErrorResponse> handleException(Exception ex) {
+    ErrorResponse error = new ErrorResponse(
+        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+        ex.getMessage(),
+        LocalDateTime.now()
+    );
+    return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+}
+``
+
+24.	Difference between checked and unchecked exceptions?
+Checked Exceptions
+•	Checked at compile-time
+•	Must be handled (try-catch) or declared using throws
+•	Represent recoverable conditions
+Examples:
+•	IOException
+•	SQLException
+•	public void readFile() throws IOException {
+•	    FileReader file = new FileReader("test.txt");
+•	}
+
+Unchecked Exceptions
+•	Checked at runtime
+•	Not mandatory to handle
+•	Usually caused by programming errors
+✅ Examples:
+•	NullPointerException
+•	ArrayIndexOutOfBoundsException
+•	ArithmeticException
+•	int a = 10 / 0; // ArithmeticException at runtime
+
+🔸 Spring Data JPA
+1.	What is JPA?
+•	JPA (Java Persistence API) is a specification in Java used to manage relational data in applications. It provides a standard way to map Java objects to database tables and perform CRUD operations without writing complex SQL.
+
+•	JPA is a Java specification used to manage relational data through object-relational mapping, allowing developers to interact with a database using Java objects instead of SQL.
+
+2.	What is Hibernate?
+Hibernate is an ORM (Object-Relational Mapping) framework for Java that simplifies database interactions by mapping Java objects to database tables.
+
+3.	.
+4.	Hibernate allows developers to perform database operations using Java objects instead of writing SQL queries manually
+
+5.	What is lazy vs eager loading?
+Lazy and Eager loading define when related data is fetched from the database.
+
+Lazy Loading
+•	Data is loaded only when it is actually needed
+•	Improves performance by avoiding unnecessary data fetching
+•	@OneToMany(fetch = FetchType.LAZY)
+•	private List<Order> orders;
+
+user.getOrders();
+
+Eager Loading
+•	Data is loaded immediately along with the main entity
+•	Fetches all related data in one go
+•	@OneToMany(fetch = FetchType.EAGER)
+•	private List<Order> orders;
+
+@OneToMany(fetch = FetchType.EAGER)
+private List<Order> orders;
+When user is fetched → orders are also fetched automatically
+
+✅ What is Entity Lifecycle in JPA/Hibernate? (Interview Answer)
+The Entity Lifecycle defines the different states an entity (Java object) goes through during its interaction with the persistence context (database).
+🔹 Main States of Entity Lifecycle
+1. Transient State
+•	The object is created but not yet saved to the database
+•	Not associated with Hibernate/JPA session
+User user = new User(); // Transient
+________________________________________
+2. Persistent State
+•	The object is saved and managed by the persistence context
+•	Any changes are automatically synchronized with the database
+entityManager.persist(user); // Persistent
+________________________________________
+3. Detached State
+•	The object was persistent but no longer associated with session
+•	Changes are not automatically saved
+entityManager.detach(user);
+``
+________________________________________
+4. Removed State
+•	The object is marked for deletion
+•	Will be removed from the database
+entityManager.remove(user);
+________________________________________
+🔁 Lifecycle Flow
+Transient → Persistent → Detached → Removed
+________________________________________
+🎯 Short Interview Answer
+Entity lifecycle represents the different states of an entity—Transient, Persistent, Detached, and Removed—during its interaction with the persistence context in JPA/Hibernate.
+1.	Create object → Transient
+2.	Save using persist() → 7 Persistent
+3.	Close session → Detached
+4.	Delete using remove() → Removed
+
+difference between persist() and merge()
+Both persist() and merge() are used to save/update entities, but they behave differently based on the entity state.
+
+🔹 persist()
+•	Used to save a new entity
+•	Works only with transient objects
+•	Converts entity → Persistent state
+•	Does not return anything
+•	Throws error if entity already exists
+✅ Example:
+Java
+User user = new User(); // Transient
+entityManager.persist(user); // Now Persistent
+Show more lines
+________________________________________
+🔹 merge()
+•	Used to update an existing entity
+•	Works with detached objects
+•	Returns a managed (new) entity instance
+•	Copies data from given object into managed object
+✅ Example:
+Java
+User detachedUser = new User();
+detachedUser.setId(1);
+
+User managedUser = entityManager.merge(detachedUser);
+Show more lines
+________________________________________
+🔁 Key Differences
+Feature	persist()	merge()
+Purpose	Insert new record	Update existing record
+Works with	Transient entities	Detached entities
+Return type	void	Returns managed entity
+Behavior	Makes same object persistent	Creates new managed copy
+If entity exists	Error	Updates existing
+
+🎯 Short Interview Answer
+persist() is used to insert a new entity and make it persistent, while merge() is used to update a detached entity and returns a managed copy of it.
+
+6.	What are cascading types?
+Cascading types define how operations performed on a parent entity are automatically applied to its child entities.
+________________________________________
+Cascading allows you to propagate operations (like save, delete, update) from one entity to its related entities automatically.
+Cascading types in JPA define how operations like persist, merge, and delete performed on a parent entity are automatically propagated to its related child entities.
+
+Cascade Type	Description
+PERSIST	Save child entity when parent is saved
+MERGE	Update child when parent is updated
+REMOVE	Delete child when parent is deleted
+REFRESH	Refresh child from database
+DETACH	Detach child from session
+ALL	Applies all cascade operations
+
+7.	What is JPQL?
+JPQL (Java Persistence Query Language) is a query language used in JPA to retrieve and manipulate data from the database using entity objects instead of tables.
+________________________________________
+🔹 Simple Explanation
+JPQL allows yo>u to write queries using Java entity names and their fields, rather than database table names and columns.
+🔹 Key Features
+•	✅ Works on Entity objects, not tables
+•	✅ Database-independent (portable)
+•	✅ Similar to SQL but uses object-oriented syntax
+•	✅ Supports SELECT, UPDATE, DELETE operations
+
+________________________________________
+🔸 Microservices & Advanced
+what is microservice architecture
+-----------------------------------------
+Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
+loosely coupled services that communicate with other over well defined API'S.  In this approach, an application is divided into a set of services, 
+each representing a specific business capability and running as a separate process or container.
+
+## what is difference b/w Microservice and Monolithic architecture.
+--------------------------------------------------------------------
+Microservices                                                             
+1)are small and focused on bussiness capabilities.
+2)Microservices can developed,deployed and scaled independatly.allowing  for agility and flexibility.
+3)microservices are allow to use of diffenert tecnology,programming language for each service depending on the specific requirement
+
+ Monolithic
+--------------
+1)Monolthic are larger and contains all functionality in signle unit
+2)monolithic requires the entire application to be deployed and scaled as whole
+3) entire application is developed in single technology stack.
+1.	What is Spring Boot Actuator?
+2.	Spring Boot Actuator is a feature of Spring Boot that provides production-ready tools to monitor and manage an application through built-in endpoints.
+
+Actuator helps you monitor application health, metrics, and runtime details using HTTP endpoints.
+•	Monitor application health 
+•	✅ Track metrics (CPU, memory, requests) 
+•	✅ View application info 
+•	✅ Check beans, environment, and configurations 
+•	✅ Perform management operations
+
+•	Spring Boot Actuator is used to monitor and manage applications by providing production-ready REST endpoints for health checks, metrics, and application details.
+
+3.	What is Springs x Cloud? 
+4.	Spring × Cloud (Spring Cloud) refers to the combination of the Spring Framework (especially Spring Boot) with a set of tools and libraries designed to build cloud-native, distributed systems.
+
+Spring Cloud is a collection of frameworks that helps developers build and manage cloud-based microservices architectures.
+It provides solutions for common distributed system problems like:
+•	Service discovery
+•	Configuration management
+•	Load balancing
+•	Fault tolerance
+•	API gateways
+
+5.	What is Feign Client?
+6.	Feign Client (Spring Cloud OpenFeign) is a declarative REST client used in Spring Boot applications to make HTTP calls to other microservices easily and cleanly.
+7.	
+It simplifies the process of making HTTP requests between microservices by allowing you to define API clients using interfaces and annotations.
+•  Creates an implementation at runtime 
+•  Makes HTTP call to user-service 
+•  Maps response to Java object
+
+8.	What is API Gateway?
+•	In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access the underlaying microservices.
+•	it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
+•	API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
+•	it can handle the authentication and authorzation validate acces token.
+•	we use AWS API Gateway'"
+•	1. Request Routing
+•	Sends incoming requests to the correct microservice
+Example:
+/orders → Order Service
+/users → User Service
+•	________________________________________
+•	✅ 2. Load Balancing
+•	Distributes requests across multiple service instances
+•	________________________________________
+•	✅ 3. Authentication & Authorization
+•	Validates users (tokens, JWT, etc.)
+•	Ensures only authorized access
+•	________________________________________
+•	✅ 4. Rate Limiting
+•	Prevents too many requests from a client (protects system)
+•	________________________________________
+•	✅ 5. Logging & Monitoring
+•	Tracks API usage and performance
+•	✅ 6. Response Aggregation
+•	Combines data from multiple services into a single response
+
+9.	What is Circuit Breaker?
+10.	In microservices architecture, a Circuit Breaker is a design pattern used to prevent cascading failures when one service is unable to respond.
+
+A circuit breaker is a mechanism that stops calling a failing service after repeated failures and returns a fallback response instead, allowing the system to remain stable.
+  Prevents cascade failures 
+Improves system stability 
+ Reduces latency during failures 
+ Enables graceful degradation
+How it works (States)
+A circuit breaker has 3 states:
+1. 🟢 Closed State (Normal)
+•	Requests go through normally
+•	Failures are monitored
+________________________________________
+2. 🔴 Open State (Failure mode)
+•	After repeated failures (threshold exceeded)
+•	Circuit “opens”
+•	No requests are sent to the failing service
+•	Immediate fallback response is returned
+________________________________________
+3. 🟡 Half-Open State (Recovery check)
+•	After a timeout
+•	A few test requests are allowed: 
+o	✅ If successful → back to Closed
+o	❌ If still failing → back to Open
+
+11.	What is JWT?
+JWT (JSON Web Token) is a compact, secure, and self-contained way to transmit information between parties as a JSON object, mainly used for authentication and authorization.
+
+JWT is a token that is generated after login and used to verify the identity of a user without storing session data on the server.
+
+•	JWT is a secure token used to authenticate users and exchange information between client and server without maintaining session state.
+
+How JWT Works
+1.	User logs in with credentials
+2.	Server validates and creates JWT
+3.	JWT is sent to client (browser/mobile)
+4.	Client stores it (local storage / cookie)
+5.	Client sends JWT in each request (usually in headers)
+6.	Server verifies the token and allows access
+
+12.	What is caching in Spring Boot?
+13.	Caching in Spring Boot is a technique used to store frequently accessed data temporarily in memory so that future requests can be served faster without recomputing or fetching from the database.
+Caching is used to reduce response time and improve performance by avoiding repeated execution of expensive operations.
+________________________________________
+⚙️ How it works
+1.	First request:
+o	Method executes normally
+o	Result is stored in cache
+2.	Next requests (same input):
+o	Data is returned directly from cache
+o	No method execution or DB call needed
+Key Annotations in Spring Boot
+Spring provides caching using simple annotations:
+1. @EnableCaching
+•	Enables caching in Spring Boot application
+Java
+@SpringBootApplication
+@EnableCaching
+public class App {
+}
+________________________________________
+2. @Cacheable
+•	Stores method result in cache
+Java
+@Cacheable("users")
+public User getUserById(Long id) {
+return userRepository.findById(id);
+}
+✔ If data is already cached → method is skipped
+________________________________________
+3. @CachePut
+•	Updates cache without skipping method execution
+Java
+@CachePut(value = "users", key = "#user.id")
+public User updateUser(User user) {
+return userRepository.save(user);
+}
+`________________________________________
+4. @CacheEvict
+•	Removes data from cache
+
+14.	How do you secure APIs?
+________________________________________
+✅ 🔥 Scenario-Based Interview Questions (VERY IMPORTANT)
+🔴 1. Exception Handling Scenario
+👉 “You have multiple APIs. How will you handle exceptions globally?”
+✅ Answer:
+•	Use @ControllerAdvice
+•	Create global exception class
+•	Return proper HTTP response
+________________________________________
+🔴 2. Transaction Scenario
+👉 “You are saving data in 2 tables. One fails. What should happen?”
+✅ Answer:
+•	Use @Transactional
+•	If one fails → rollback entire transaction
+________________________________________
+🔴 3. Performance Issue Scenario
+👉 “Your API is slow. What will you do?”
+✅ Answer:
+•	Add caching (Redis)
+•	Optimize DB query
+•	Use pagination
+•	Add indexing
+________________________________________
+🔴 4. Multiple Database Scenario
+👉 “You need to connect 2 databases. How will you configure?”
+✅ Answer:
+•	Define multiple DataSources
+•	Create separate config classes
+•	Use different repositories
+________________________________________
+🔴 5. Security Scenario
+👉 “How will you secure your API?”
+✅ Answer:
+•	Use Spring Security
+•	Implement JWT
+•	Role-based authentication
+________________________________________
+🔴 6. Configuration Scenario
+👉 “How will you manage different environments (dev/test/prod)?”
+✅ Answer:
+•	Use profiles (spring.profiles.active)
+•	Add application-dev.yml, application-prod.yml
+________________________________________
+🔴 7. Deployment Scenario
+👉 “How do you deploy Spring Boot application?”
+✅ Answer:
+•	Build jar file (mvn clean install)
+•	Run:
+Shell
+java -jar app.jar
+🔴 8. Logging Scenario
+👉 “How do you track logs in application?”
+✅ Answer:
+•	Use SLF4J + Logback
+•	Configure logback.xml
+________________________________________
+🔴 9. Pagination Scenario
+👉 “Your API returns huge data. What will you do?”
+✅ Answer:
+•	Use Pageable
+•	Return paginated data
+________________________________________
+🔴 10. File Upload Scenario
+👉 “How to upload file in Spring Boot?”
+✅ Answer:
+•	Use MultipartFile
+•	Save file in server/cloud
+________________________________________
+🔴 11. API Versioning Scenario
+👉 “How to maintain multiple API versions?”
+✅ Answer:
+•	URI versioning /v1/users
+•	Header-based versioning
+________________________________________
+🔴 12. Concurrency Scenario
+👉 “Multiple users updating same record. How to handle?”
+✅ Answer:
+•	Use optimistic locking (@Version)
+•	Or pessimistic locking
+________________________________________
+🔴 13. Cache Scenario
+👉 “Data rarely changes but is fetched frequently”
+✅ Answer:
+•	Use @Cacheable
+•	Redis for distributed cache
+________________________________________
+🔴 14. Microservice Communication
+👉 “How services communicate?”
+✅ Answer:
+•	REST APIs
+•	Feign Client
+•	Kafka (for async)
+________________________________________
+🔴 15. Failure Handling Scenario
+👉 “One microservice is down. What happens?”
+✅ Answer:
+•	Use Circuit Breaker (Resilience4j)
+•	Fallback methods
+________________________________________
+✅ 🔥 Quick HR + Practical Questions
+1.	What project you worked on using Spring Boot?
+•	I worked on a microservices-based application using Spring Boot for [example: e-commerce / banking / ticket booking].
+•	Designed REST APIs using Spring Boot + Spring MVC
+•	Used Spring Data JPA for database interactions
+•	Implemented JWT-based authentication
+•	Used Redis caching and Kafka (or RabbitMQ) for async communication
+•	Deployed services using Docker & Kubernetes / cloud (Azure/AWS)
+•	👉 Example: “I developed a User and Order service where each service was independently deployable and communicated via REST APIs.”
+2.	
+3.	What challenges you faced?
+•	Some common challenges I faced:
+•	⚠️ Inter-service communication delays
+•	⚠️ Handling failures between microservices
+•	⚠️ Database performance issues (slow queries)
+•	⚠️ Data consistency across services
+•	⚠️ Debugging distributed systems
+•	👉 Example: “One challenge was latency between services, which impacted response time when multiple services were chained.”
+•	________________________________________
+4.	✅ 3. How did you improve performance?
+•	I used multiple strategies:
+•	✅ Caching (Redis) to reduce DB calls
+•	✅ Database optimization 
+•	Added indexes
+•	Optimized queries
+•	✅ Pagination for large data
+•	✅ Async processing (Kafka / @Async)
+•	✅ Connection pooling (HikariCP)
+•	✅ Reduced unnecessary API calls
+•	👉 Example: “I improved API response time by 40% by introducing Redis caching and optimizing SQL queries.”
+•	________________________________________
+5.	✅ 4. How did you fix production issues?
+•	My approach:
+•	Understand issue (logs, monitoring tools)
+•	Reproduce in lower environment
+•	Analyze root cause
+•	Fix and test
+•	Deploy hotfix (if urgent)
+•	Tools used:
+•	Logs (ELK / Splunk)
+•	Monitoring (Prometheus, Grafana, Azure Monitor)
+•	👉 Example: “In production, a timeout issue was caused by a slow downstream service. I added a circuit breaker and timeout configuration to fix it.”
+________________________________________
+6.	✅ 5. How did you handle logs / debugging?
+7.	Used SLF4J + Logback for logging
+8.	Log levels: INFO, DEBUG, ERROR
+9.	Added correlation IDs for tracing requests
+10.	Used centralized logging (ELK stack)
+11.	Debugging using: 
+12.	Logs
+13.	Breakpoints (local)
+14.	API tools
+15.	👉 Best practice: “Never log sensitive data like passwords or tokens.”
+16.	________________________________________
+✅ 6. How do you test APIs?
+17.	🔹 Manual Testing
+18.	Postman / Swagger UI
+19.	Test different scenarios: 
+20.	Valid request
+21.	Invalid input
+22.	Edge cases
+23.	________________________________________
+24.	🔹 Automated Testing
+25.	Unit Testing → JUnit + Mockito
+26.	Integration Testing → Spring Boot Test
+27.	Use tools like: 
+28.	RestTemplate / MockMvc for API testing
+
+“Do you have experience in Microservices?”
+✅ Best Answer (Professional & Crisp):
+Yes, I have hands-on experience working with microservices architecture. In my project, we migrated a monolithic application into microservices-based architecture.
+We broke down the application into small, independent services based on business capabilities. Each service was developed, deployed, and scaled independently.
+We used technologies like Spring Boot, REST APIs, Eureka for service discovery, API Gateway (AWS API Gateway), and OpenFeign/WebClient for inter-service communication.
+We also implemented resilience patterns like Circuit Breaker using Resilience4j and followed 
+
+✅ 🔥 REAL SCENARIO-BASED QUESTIONS & ANSWERS
+🔴 1. Migration Scenario (VERY COMMON)
+👉 Question:
+“How did you migrate monolithic to microservices?”
+✅ Answer:
+•	Identified business modules
+•	Broke app into services (User, Order, Payment)
+•	Created independent databases
+•	Added API Gateway
+•	Implemented service discovery (Eureka)
+•	Used REST/Feign for communication
+•	Deployed services independently
+________________________________________
+🔴 2. Service Communication
+👉 Question:
+“How do microservices communicate?”
+✅ Answer:
+•	Synchronous → REST APIs (Feign, WebClient)
+•	Asynchronous → Kafka/RabbitMQ
+•	Service discovery → Eureka
+✅ Add line:
+In my project, we used Feign for synchronous calls and WebClient for non-blocking calls.
+________________________________________
+🔴 3. Why not RestTemplate?
+👉 Question: “Why you moved from RestTemplate?”
+✅ Answer:
+•	RestTemplate is blocking
+•	WebClient supports non-blocking (reactive)
+•	Feign is declarative & easy
+
+🔴 4. Circuit Breaker Scenario
+👉 Question:
+“What happens if one service goes down?”
+✅ Answer:
+•	Use Circuit Breaker (Resilience4j)
+•	Fallback response provided
+•	Prevent cascade failure
+________________________________________
+🔴 5. API Gateway Scenario
+👉 Question:
+“Why API Gateway?”
+✅ Answer:
+•	Single entry point
+•	Routing
+•	Security (JWT)
+•	Logging & monitoring
+________________________________________
+🔴 6. Eureka Scenario
+👉 Question:
+“Why use Eureka?”
+✅ Answer:
+•	Dynamic service discovery
+•	No hardcoded URL
+•	Automatically registers services
+________________________________________
+🔴 7. Load Balancing
+👉 Question:
+“How load balancing happens?”
+✅ Answer:
+•	Client-side (Ribbon / Spring Cloud LoadBalancer)
+•	Requests distributed across instances
+________________________________________
+🔴 8. Fault Tolerance Scenario
+👉 Question:
+“How system handles failure?”
+✅ Answer:
+•	Circuit breaker
+•	Retry mechanism
+•	Fallback methods
+________________________________________
+🔴 9. Loose Coupling
+👉 Question:
+“How do you achieve loose coupling?”
+✅ Answer:
+•	REST APIs (contracts)
+•	API Gateway
+•	Messaging (Kafka)
+•	Service discovery
+________________________________________
+🔴 10. Scaling Scenario
+👉 Question:
+“One service gets high load. What do you do?”
+✅ Answer:
+•	Scale only that service
+•	Add more instances
+•	Load balancing distributes traffic
+________________________________________
+🔴 11. Database Design
+👉 Question:
+“Do microservices share database?”
+✅ Answer: ❌ No
+✅ Each service should have its own database
+________________________________________
+🔴 12. Synchronous vs Asynchronous
+👉 Question:
+“When to use async communication?”
+✅ Answer:
+•	Use async when: 
+o	No immediate response needed
+o	Event-driven system
+o	High scalability required
+________________________________________
+🔴 13. Containerization
+👉 Question:
+“How do you deploy microservices?”
+✅ Answer:
+•	Docker containers
+•	Kubernetes (optional)
+•	CI/CD pipeline
+________________________________________
+🔴 14. Security Scenario
+👉 Question:
+“How do you secure microservices?”
+✅ Answer:
+•	JWT authentication
+•	API Gateway security
+•	Role-based access
+________________________________________
+🔴 15. Real Production Issue
+👉 Question:
+“Tell me a challenge you faced”
+✅ Example Answer:
+We faced performance issues due to multiple service calls.
+We optimized it using caching and reduced synchronous calls by introducing async communication.
+________________________________________
+✅ 🔥 Bonus: Advanced Questions (High Chances)
+________________________________________
+1. Distributed Tracing
+Distributed tracing tracks a request as it flows through multiple microservices.
+•	It helps identify performance bottlenecks and failures.
+•	Each request is assigned a unique trace ID, allowing you to see the entire journey across services.
+________________________________________
+2. Centralized Logging
+Centralized logging collects logs from multiple services into a single system (e.g., ELK stack).
+•	Makes debugging easier by providing a unified view.
+•	Helps in monitoring, troubleshooting, and auditing.
+________________________________________
+3. Config Server
+A config server is a centralized service that manages configuration for multiple applications.
+•	Stores settings (DB URLs, APIs, feature flags) outside the code.
+•	Enables dynamic updates without redeploying applications.
+________________________________________
+4. Saga Pattern
+Saga pattern manages distributed transactions across microservices.
+•	Instead of a single transaction, it uses a sequence of local transactions.
+•	If something fails, compensating actions roll back previous steps.
+Two types:
+•	Choreography (event-driven)
+•	Orchestration (central coordinator)
+________________________________________
+5. Eventual Consistency
+Eventual consistency means data will become consistent over time across services.
+•	There is no guarantee of immediate consistency.
+•	Common in distributed systems to improve performance and availability.
+________________________________________
+6. CAP Theorem
+CAP states that a distributed system can guarantee only two of the three:
+•	Consistency (C) – same data everywhere
+•	Availability (A) – system always responds
+•	Partition Tolerance (P) – works despite network failures
+In practice, systems choose between:
+•	CP (Consistency + Partition tolerance)
+•	AP (Availability + Partition tolerance)
+________________________________________
+7. Bulkhead Pattern
+Bulkhead isolates parts of a system to prevent failure spreading.
+•	Like compartments in a ship.
+•	If one service fails, others continue functioning.
+________________________________________
+8. Rate Limiting
+Rate limiting restricts the number of requests a client can make.
+•	Prevents system overload and abuse.
+•	Example: Allow only 100 requests per minute per user.
+________________________________________
+9. Idempotency in Microservices
+An operation is idempotent if repeating it produces the same result.
+•	Prevents duplicate processing (e.g., payment or order creation).
+•	Commonly implemented using idempotency keys.
+________________________________________
+10. Blue-Green Deployment
+A deployment strategy with two environments:
+•	Blue: current version
+•	Green: new version
+Traffic switches from blue to green after validation.
+•	Enables zero downtime deployments
+•	Easy rollback by switching back
+
+✅ 🚀 If you want next
+I can help you with:
+•	🔥 Full real-time microservice project explanation
+Step-by-step flow:
+•	Client sends request → API Gateway
+•	API Gateway routes to microservice
+•	Service calls other services using: 
+o	Feign (sync)
+o	WebClient (async)
+•	Eureka server helps in service discovery
+•	Response is returned via API Gateway
+________________________________________
+✅ 🔥 Top 20 Tricky Interview Answers
+________________________________________
+🔴 1. What happens if @Transactional fails?
+✅ Answer:
+If an exception occurs (runtime), Spring rolls back the transaction automatically.
+Checked exceptions require manual configuration (rollbackFor).
+________________________________________
+🔴 2. Why is @Autowired sometimes not working?
+✅ Answer:
+•	Bean not in Spring context
+•	Component scan issue
+•	Multiple beans → need @Qualifier
+________________________________________
+🔴 3. Why does your API work locally but fail in production?
+✅ Answer:
+•	Config difference (profiles)
+•	DB connectivity issue
+•	Missing environment variables
+•	Port/firewall issue
+________________________________________
+🔴 4. Why should we not use RestTemplate now?
+✅ Answer:
+•	It is deprecated
+•	Blocking call
+•	Replaced by WebClient (non-blocking)
+________________________________________
+🔴 5. What if two users update the same record?
+✅ Answer:
+•	Use Optimistic Locking (@Version)
+•	Prevents data overwrite
+________________________________________
+🔴 6. Why microservices instead of monolith?
+✅ Answer:
+•	Scalability (scale specific service)
+•	Independent deployment
+•	Fault isolation
+________________________________________
+🔴 7. If one service fails, why whole system doesn't fail?
+✅ Answer:
+•	Circuit Breaker
+•	Fallback methods
+•	Service isolation
+________________________________________
+🔴 8. Why each microservice should have its own DB?
+✅ Answer:
+•	Loose coupling
+•	Independent deployment
+•	Avoid cross-service dependency
+________________________________________
+🔴 9. What is idempotency?
+✅ Answer:
+•	Same request → same result (no duplicates)
+👉 Example: PUT API
+
+________________________________________
+🔴 10. Difference: PUT vs PATCH (Tricky)
+✅ Answer:
+•	PUT → full update
+•	PATCH → partial update
+________________________________________
+🔴 11. Why use API Gateway?
+✅ Answer:
+•	Single entry point
+•	Authentication
+•	Routing
+•	Rate limiting
+________________________________________
+🔴 12. Why use Eureka if we have URLs?
+✅ Answer:
+•	Dynamic service discovery
+•	No hardcoding
+•	Auto scaling support
+________________________________________
+🔴 13. Why system is slow with microservices?
+✅ Answer:
+•	Too many API calls
+•	Network latency
+👉 Fix: caching, async calls
+________________________________________
+🔴 14. What is fallback in Circuit Breaker?
+✅ Answer:
+•	Backup response when service fails
+👉 Example: return cached data
+________________________________________
+🔴 15. What is difference: Feign vs WebClient?
+✅ Answer:
+•	Feign → synchronous, easy
+•	WebClient → async, non-blocking
+________________________________________
+🔴 16. How do you ensure data consistency?
+✅ Answer:
+•	Use transactions
+•	Saga pattern (for distributed systems)
+________________________________________
+🔴 17. Why not use shared DB in microservices?
+✅ Answer:
+•	Breaks independence
+•	Tight coupling
+•	Deployment dependency
+________________________________________
+🔴 18. What is lazy vs eager loading?
+✅ Answer:
+•	Lazy → loads when needed
+•	Eager → loads immediately
+________________________________________
+🔴 19. What is Circuit Breaker state flow?
+✅ Answer:
+•	Closed → normal
+•	Open → block calls
+•	Half-open → test service
+________________________________________
+🔴 20. What is biggest challenge in microservices?
+✅ Answer:
+•	Service communication
+•	Data consistency
+•	Debugging distributed systems
+________________________________________
+✅ 🎯 Bonus Smart Answer (VERY IMPRESSIVE)
+👉 If interviewer asks: “Why should we hire you?”
+✅ Answer:
+I have hands-on experience in designing and migrating microservices, handling real-time issues like performance, failures, and scaling. I not only understand concepts but have implemented them in real-world scenarios.
+________________________________________
+
+✅ 🔥 MOST FREQUENTLY ASKED SQL INTERVIEW QUESTIONS
+🔶 Index Questions
+1.	What is an index in SQL?
+•	In SQL databases, an index is a database object that improves the speed of data retrieval operations on a table.
+•	Indexes are created on one or more columns of a table and function similarly to the index of a book, allowing the database to find rows more quickly and efficiently.
+
+2.	Types of indexes?
+3.	Primary Index: Automatically created when a primary key is defined. Ensures that data in the indexed columns is unique and helps quickly locate rows.
+4.	Unique Index: Ensures that all values in the indexed column(s) are unique.
+5.	Non-Unique Index: Speeds up retrieval operations but does not enforce uniqueness.
+6.	Composite Index: Created on multiple columns, allowing searches based on multiple criteria.
+7.	Full-Text Index: Used for full-text searches within text data.
+8.	Clustered Index: Sorts and stores the data rows in the table based on their key values. Each table can have only one clustered index.
+9.	Non-Clustered Index: Creates a separate structure from the data rows. Each table can have multiple non-clustered indexes.
+10.	Difference between clustered and non-clustered index?
+11.	Feature	12.	Clustered Index	13.	Non-Clustered Index
+14.	Data storage	15.	Determines the physical order of data in the table	16.	Stores a separate structure pointing to data
+17.	Number per table	18.	Only one	19.	Can have multiple
+20.	Data location	21.	Data is stored in the same structure as the index	22.	Index contains pointers (row locators) to actual data
+23.	Performance	24.	Faster for range queries and sorting	25.	Faster for lookup queries
+26.	Leaf nodes	27.	Contains actual table data	28.	Contains index key + pointer to data
+29.	
+30.	Can a table have multiple clustered indexes?
+No
+31.	A table can have only one clustered index
+32.	Because data rows can be sorted physically in only one way
+✅ However:
+33.	You can create multiple non-clustered indexes on the same table
+
+34.	When NOT to use indexes?
+
+Indexes are helpful but not always beneficial. Avoid them when:
+35.	Small tables
+→ Full table scan is faster than using an index
+36.	Frequent INSERT/UPDATE/DELETE operations
+→ Indexes must be updated too, slowing performance
+37.	Columns with low selectivity
+→ Example: Gender (Male/Female)
+→ Index won’t filter much data
+38.	Too many indexes on a table
+→ Causes overhead in mantenance
+39.	Columns frequently modified
+→ Index needs constant updates
+
+40.	How do indexes improve performance?
+Indexes improve database performance by:
+41.	✅ Reducing data scans
+Instead of scanning every row, DB uses index to quickly locate data
+42.	✅ Faster search operations
+Uses efficient structures (like B-Trees) for quick lookup
+43.	✅ Improved sorting & filtering
+ORDER BY, WHERE, JOIN become faster
+44.	✅ Better query execution plans
+Optimizer chooses index-based access instead of full scan
+45.	
+46.	What is composite index?
+47.	A composite index (also called a multi-column index) is an index created on two or more columns of a table instead of just one.
+
+48.	A composite index is an index that includes multiple columns to improve query performance when those columns are used together in queries.
+How It Works
+•	The index is sorted based on the order of columns defined.
+.
+👉 Order matters!
+________________________________________
+✅ When It Is Useful
+Composite indexes are effective when queries use multiple columns in WHERE, JOIN, or ORDER BY clauses:
+
+🔶 Join Questions
+1.	What is a JOIN?
+2.	SQL joins are used to combine rows from two or more tables based on a related column between them.
+3.	 Types of Joins
+Join Type	Result
+INNER JOIN	Matching records only
+LEFT JOIN	All from left + matches
+RIGHT JOIN	All from right + matches
+FULL JOIN	All records from both
+CROSS JOIN	All combinations
+SELF JOIN	Table joined to itself
+NATURAL JOIN	Auto join on same column names
+
+4.	Difference between INNER JOIN and LEFT JOIN?
+5.	INNER JOIN
+6.	Returns only the matching rows from both tables
+7.	If there is no match, the row is excluded
+8.	Example:
+9.	SQL
+10.	SELECT *
+11.	FROM Employees e
+12.	INNER JOIN Departments d
+13.	ON e.DepartmentID = d.DepartmentID;
+
+✅ LEFT JOIN (LEFT OUTER JOIN)
+14.	Returns all rows from the left table
+15.	And matching rows from the right table
+16.	If no match → columns from right table will be NULL
+17.	Feature	18.	INNER JOIN	19.	LEFT JOIN
+20.	Rows returned	21.	Only matching rows	22.	All rows from left + matching from right
+23.	Unmatched rows	24.	Not included	25.	Included (with NULLs)
+26.	Use case	27.	When you need only related data	28.	When you need all left table data
+29.	Output size	30.	Usually smaller	31.	Usually larger
+
+32.	Difference between LEFT JOIN and RIGHT JOIN?
+33.	LEFT JOIN (LEFT OUTER JOIN)
+34.	Returns all rows from the left table
+35.	Matching rows from the right table
+36.	If no match → right table columns = NULL
+37.	Example:
+38.	SQL
+39.	SELECT *
+40.	FROM Employees e
+41.	LEFT JOIN Departments d
+42.	ON e.DepartmentID = d.DepartmentID;
+________________________________________
+43.	✅ RIGHT JOIN (RIGHT OUTER JOIN)
+44.	Returns all rows from the right table
+45.	Matching rows from the left table
+46.	If no match → left table columns = NULL
+
+47.	What is FULL OUTER JOIN?
+A FULL JOIN returns all rows when there is a match in either the left or right table. 
+If there is no match, the result is NULL for missing matches on either side.
+SELECT employees.name, departments.department_name
+FROM employees
+FULL JOIN departments ON employees.department_id = departments.department_id;
+
+48.	What is SELF JOIN?
+49.	SELF JOIN
+50.	A SELF JOIN is a regular join but the table is joined with itself. It is useful for comparing rows within the same table.	
+51.	Example
+52.	sql
+53.	Copy code
+54.	SELECT a.name AS Employee1, b.name AS Employee2
+55.	FROM employees a, employees b
+56.	WHERE a.manager_id = b.employee_id;
+57.	
+58.	What is CROSS JOIN?
+59.	returns the Cartesian product of the two tables, meaning it combines all rows from the left table with all rows from the right table. It does not require any condition.
+60.	Example
+61.	sql
+62.	Copy code
+63.	SELECT employees.name, departments.department_name
+64.	FROM employees
+65.	CROSS JOIN departments;
+66.	
+67.	Which join returns unmatched records?
+68.	OUTER JOINS return unmatched records
+69.	
+“OUTER JOINS (LEFT, RIGHT, and FULL), especially FULL JOIN for both tables.”
+
+🔶 Constraints Questions
+1.	What are SQL constraints?
+2.	SQL constraints are used to specify rules for the data in a table.
+3.	Constraints are used to limit the type of data that can go into a table. This ensures the accuracy and reliability of the data in the table. If there is any violation between the constraint and the data action, the action is aborted.
+4.	Constraints can be column level or table level. Column level constraints apply to a column, and table level constraints apply to the whole table.
+5.	Difference between PRIMARY KEY and UNIQUE?
+6.	PRIMARY KEY
+7.	Uniquely identifies each row in a table
+8.	Cannot contain NULL values
+9.	Only one primary key per table
+10.	Automatically creates a clustered index (in most DBs like SQL Server)
+11.	Example:
+12.	SQL
+13.	CREATE TABLE Employees (
+14.	EmpID INT PRIMARY KEY,
+15.	Name VARCHAR(50)
+16.	);
+17.	________________________________________
+18.	✅ UNIQUE KEY
+19.	Ensures all values in a column are unique
+20.	Can contain NULL value(s) (usually one NULL allowed, depends on DB)
+21.	You can have multiple UNIQUE constraints in a table
+22.	Creates a non-clustered index (by default)
+23.	Example:
+24.	SQL
+25.	CREATE TABLE Employees (
+26.	Email VARCHAR(100) UNIQUE
+27.	);
+28.	
+29.	What is FOREIGN KEY?
+30.	FOREIGN KEY - Prevents actions that would destroy links between tables
+
+31.	A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table.
+32.	The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+33.	
+34.	CREATE TABLE Orders (
+35.	    OrderID int NOT NULL PRIMARY KEY,
+36.	    OrderNumber int NOT NULL,
+37.	    PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+38.	);
+39.	What is NOT NULL constraint?
+40.	What is CHECK constraint?
+41.	CHECK - Ensures that the values in a column satisfies a specific condition
+The CHECK constraint is used to limit the value range that can be placed in a column.
+42.	If you define a CHECK constraint on a column it will allow only certain values for this column.
+43.	If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+44.	
+45.	create table person(
+46.	  2  ID int not null,
+47.	  3  firstname varchar(255),
+48.	  4  lastname varchar(255) not null,
+49.	  5  age int check (age>=18)
+50.	  6  );
+51.	What is DEFAULT constraint?
+52.	A DEFAULT constraint is used to assign a default value to a column when no value is specified during an INSERT operation
+
+53.	Can a table have multiple UNIQUE constraints?
+
+54.	Yes, a table can have multiple UNIQUE constraints.
+
+🔶 Query Questions
+1. Difference between WHERE and HAVING
+Feature	WHERE	HAVING
+Purpose	Filters rows	Filters groups
+Used with	SELECT, UPDATE, DELETE	GROUP BY
+Works on	Individual rows	Aggregated data
+Aggregate functions (SUM, COUNT, etc.)	❌ Not allowed	✅ Allowed
+✅ Example:
+-- WHERE filters rows before grouping
+SELECT * FROM Employees
+WHERE Salary > 50000;
+
+-- HAVING filters after grouping
+SELECT Department, COUNT()
+FROM Employees
+GROUP BY Department
+HAVING COUNT() > 5;
+________________________________________
+2. What is GROUP BY?
+✅ Definition:
+GROUP BY is used to group rows with the same values into summary rows, usually with aggregate functions.
+✅ Example:
+SELECT Department, COUNT(*) AS TotalEmployees
+FROM Employees
+GROUP BY Department;
+👉 Groups employees by department and counts them.
+________________________________________
+3. What is ORDER BY?
+✅ Definition:
+ORDER BY is used to sort the result set in ascending or descending order.
+✅ Example:
+SELECT * FROM Employees
+ORDER BY Salary DESC;
+👉 Sorts employees by salary (highest first)
+________________________________________
+4. What is DISTINCT?
+✅ Definition:
+DISTINCT removes duplicate values and returns only unique records.
+✅ Example:
+SELECT DISTINCT Department
+FROM Employees;
+👉 Returns unique department names.
+________________________________________
+5. What is IN Operator?
+✅ Definition:
+IN is used to check if a value matches any value in a list.
+✅ Example:
+SELECT * FROM Employees
+WHERE Department IN ('HR', 'IT', 'Sales');
+👉 Returns employees from HR, IT, or Sales.
+________________________________________
+6. What is BETWEEN Operator?
+✅ Definition:
+BETWEEN is used to filter values within a range (inclusive).
+✅ Example:
+SELECT * FROM Employees
+WHERE Salary BETWEEN 30000 AND 60000;
+👉 Includes 30000 and 60000 as well.
+________________________________________
+7. What is LIKE Operator?
+✅ Definition:
+LIKE is used for pattern matching in strings.
+✅ Common Wildcards:
+•	% → any number of characters
+•	_ → single character
+✅ Example:
+SELECT * FROM Employees
+WHERE Name LIKE 'A%';
+👉 Names starting with "A"
+SELECT * FROM Employees
+WHERE Name LIKE '_a%';
+👉 Second letter is "a"
+________________________________________
+✅ Quick Summary
+•	WHERE → Filter rows
+•	HAVING → Filter grouped data
+•	GROUP BY → Group rows
+•	ORDER BY → Sort data
+•	DISTINCT → Remove duplicates
+•	IN → Match values in list
+•	BETWEEN → Range filter
+•	LIKE → Pattern search
+________________________________________
+🔶 Aggregate Functions
+1.	What are aggregate functions?
+2.	Difference between COUNT(*) and COUNT(column)?
+3.	What is AVG(), SUM(), MAX(), MIN()?
+________________________________________
+🔶 DML & DDL Questions
+1.	Difference between DELETE, TRUNCATE, DROP?
+2.	What is ALTER TABLE?
+3.	What is CREATE TABLE?
+4.	What is INSERT, UPDATE?
+________________________________________
+🔶 Advanced SQL
+Here are clear and interview-friendly answers:
+________________________________________
+1. What is UNION vs UNION ALL?
+✅ UNION
+•	Combines results from two or more SELECT queries
+•	Removes duplicate rows
+SELECT Name FROM Employees
+UNION
+SELECT Name FROM Managers;
+________________________________________
+✅ UNION ALL
+•	Combines results from multiple queries
+•	Includes duplicates (faster than UNION)
+SELECT Name FROM Employees
+UNION ALL
+SELECT Name FROM Managers;
+________________________________________
+✅ Difference
+Feature	UNION	UNION ALL
+Duplicates	❌ Removed	✅ Allowed
+Performance	Slower	Faster
+Use case	Unique data needed	All data needed
+________________________________________
+2. What is EXISTS?
+✅ Definition:
+EXISTS checks if a subquery returns any row
+•	Returns TRUE if at least one record exists
+________________________________________
+✅ Example:
+SELECT Name
+FROM Employees e
+WHERE EXISTS (
+    SELECT 1
+    FROM Departments d
+    WHERE e.DepartmentID = d.DepartmentID
+);
+👉 Returns employees only if matching department exists
+________________________________________
+3. What is Subquery?
+✅ Definition:
+A subquery is a query inside another SQL query.
+________________________________________
+✅ Example:
+SELECT Name
+FROM Employees
+WHERE Salary > (
+    SELECT AVG(Salary)
+    FROM Employees
+);
+👉 Finds employees earning above average salary
+________________________________________
+✅ Types:
+•	Single-row subquery
+•	Multi-row subquery
+•	Correlated subquery
+________________________________________
+4. What is Stored Procedure?
+✅ Definition:
+A stored procedure is a precompiled set of SQL statements stored in the database that can be executed when needed.
+________________________________________
+✅ Example:
+CREATE PROCEDURE GetEmployees
+AS
+BEGIN
+    SELECT * FROM Employees;
+END;
+👉 Call using:
+EXEC GetEmployees;
+________________________________________
+✅ Benefits:
+•	✅ Improves performance
+•	✅ Reusable code
+•	✅ Better security
+•	✅ Reduces network traffic
+________________________________________
+5. What is Alias?
+✅ Definition:
+An alias is a temporary name given to a table or column in a query.
+________________________________________
+✅ Example (Column Alias):
+SELECT Name AS EmployeeName
+FROM Employees;
+________________________________________
+✅ Example (Table Alias):
+SELECT e.Name
+FROM Employees e;
+________________________________________
+✅ Benefits:
+•	Makes query shorter and readable
+•	Useful in joins
+________________________________________
+✅ Quick Summary
+•	UNION → removes duplicates
+•	UNION ALL → keeps duplicates (faster)
+•	EXISTS → checks if subquery returns rows
+•	Subquery → query inside another query
+•	Stored Procedure → reusable SQL block
+•	Alias → temporary name for table/column
+________________________________________
+
+1. Why is index not always good?
+Indexes improve read performance but have drawbacks:
+•	❌ Slows down INSERT, UPDATE, DELETE → index must be updated
+•	❌ Consumes extra storage space
+•	❌ Over-indexing reduces performance
+•	❌ Not useful for small tables
+•	❌ Inefficient for low-cardinality columns (e.g., Gender)
+✅ Conclusion: Indexes are a trade-off (fast reads vs slow writes)
+________________________________________
+2. Why GROUP BY is used with aggregate functions?
+Aggregate functions (SUM, COUNT, AVG, etc.) calculate values over multiple rows.
+👉 GROUP BY is used to:
+•	Divide data into groups
+•	Apply aggregate function per group
+Example:
+SELECT Department, COUNT(*)
+FROM Employees
+GROUP BY Department;
+``
+👉 Without GROUP BY → only one overall result
+👉 With GROUP BY → result per department
+________________________________________
+3. Why HAVING is needed?
+HAVING is used to filter aggregated results.
+👉 Because WHERE cannot use aggregate functions.
+Example:
+SELECT Department, COUNT()
+FROM Employees
+GROUP BY Department
+HAVING COUNT() > 5;
+👉 Filters groups after aggregation
+________________________________________
+________________________________________
+5. What happens if you use DELETE without WHERE?
+DELETE FROM Employees;
+``
+🚨 Result:
+•	Deletes ALL rows in the table
+•	Table structure remains intact
+⚠️ Very risky operation
+________________________________________
+6. Why TRUNCATE is faster than DELETE?
+Feature	DELETE	TRUNCATE
+Operation type	Row-by-row	Removes all data at once
+Logging	Fully logged	Minimal logging
+WHERE clause	✅ Supported	❌ Not supported
+Speed	Slower	Faster
+✅ Reason:
+TRUNCATE deallocates pages instead of deleting row-by-row
+________________________________________
+7. Difference between UNIQUE and PRIMARY KEY
+Feature	PRIMARY KEY	UNIQUE
+NULL values	❌ Not allowed	✅ Allowed (usually 1)
+Count per table	Only 1	Multiple
+Purpose	Row identification	Prevent duplicates
+👉 Primary Key = UNIQUE + NOT NULL
+________________________________________
+8. How JOIN works internally?
+Internally, databases use algorithms like:
+✅ Common Join Methods:
+1.	Nested Loop Join
+o	Compare each row of one table with another
+2.	Hash Join
+o	Uses hash table for faster matching
+3.	Merge Join
+o	Works on sorted data
+👉 Optimizer chooses best method based on:
+•	Table size
+•	Index availability
+•	Query conditions
+________________________________________
+9. Why NULL is not equal to anything?
+✅ NULL represents unknown/missing value
+👉 So:
+NULL = NULL   → FALSE
+NULL != NULL  → FALSE
+✔ Correct way:
+IS NULL
+IS NOT NULL
+👉 Because unknown cannot be compared
+________________________________________
+10. Why FULL JOIN not available in some DBs?
+Some databases (like older MySQL versions) don’t support FULL JOIN because:
+•	It is complex to implement efficiently
+•	Less frequently used compared to INNER/LEFT JOIN
+•	Can be simulated using UNION
+Alternative:
+SELECT * FROM A
+LEFT JOIN B ON A.id = B.id
+UNION
+SELECT * FROM A
+RIGHT JOIN B ON A.id = B.id;
+________________________________________
+✅ Quick Summary
+•	Indexes → improve reads but slow writes
+•	GROUP BY → groups data for aggregation
+•	HAVING → filters aggregated results
+•	WHERE vs HAVING → before vs after grouping
+•	DELETE without WHERE → removes all data
+•	TRUNCATE → faster due to minimal logging
+•	PRIMARY KEY vs UNIQUE → NULL + count difference
+•	JOIN → uses internal algorithms (nested loop, hash, merge)
+•	NULL → unknown, cannot be compared
+•	FULL JOIN → missing in some DBs, can use UNION
+________________________________________
+✅ 🔥 SCENARIO-BASED INTERVIEW QUESTIONS (VERY IMPORTANT)
+________________________________________
+🔴 1. Performance Issue Scenario
+👉 Question:
+“Your query is slow, what will you do?”
+✅ Answer:
+•	Add index on frequently used columns
+•	Optimize query
+•	Avoid unnecessary joins
+•	Use EXPLAIN plan
+________________________________________
+🔴 2. Duplicate Data Scenario
+👉 Question:
+“How will you prevent duplicate data?”
+✅ Answer:
+•	Use UNIQUE constraint
+•	Use PRIMARY KEY
+________________________________________
+🔴 3. Data Integrity Scenario
+👉 Question:
+“How to maintain relation between tables?”
+✅ Answer:
+•	Use FOREIGN KEY
+________________________________________
+🔴 4. Large Data Deletion
+👉 Question:
+“You need to delete all data fast?”
+✅ Answer:
+•	Use TRUNCATE (faster)
+________________________________________
+🔴 5. Partial Delete Scenario
+👉 Question:
+“You want to delete specific rows?”
+✅ Answer:
+•	Use DELETE with WHERE
+________________________________________
+🔴 6. Combine Data Scenario
+👉 Question:
+“How to combine 2 tables?”
+✅ Answer:
+•	Use JOIN
+________________________________________
+🔴 7. Missing Data Scenario
+👉 Question:
+“You need all records even if no match?”
+✅ Answer:
+•	Use LEFT JOIN
+________________________________________
+🔴 8. Filtering Aggregated Data
+👉 Question:
+“You want to filter grouped data?”
+✅ Answer:
+•	Use HAVING (not WHERE)
+________________________________________
+🔴 9. Pattern Search
+👉 Question:
+“Find names starting with ‘A’?”
+✅ Answer:
+WHERE name LIKE 'A%'
+________________________________________
+🔴 10. Range Query
+👉 Question:
+“Find data between 1000–5000?”
+✅ Answer:
+WHERE price BETWEEN 1000 AND 5000
+________________________________________
+🔴 11. Multiple Value Filter
+👉 Question:
+“Find employees with roles Analyst or Clerk?”
+✅ Answer:
+WHERE job IN ('ANALYST','CLERK
+________________________________________
+🔴 12. Top Records Scenario
+👉 Question:
+“Get top 5 highest salary?”
+✅ Answer:
+SELECT * FROM emp ORDER BY sal DESC LIMIT 5;
+________________________________________
+🔴 13. Duplicate Removal Scenario
+👉 Question:
+“Remove duplicate results?”
+✅ Answer:
+SELECT DISTINCT column_name FROM table;
+________________________________________
+🔴 14. Count Scenario
+👉 Question:
+“Count employees per department?”
+✅ Answer:
+SELECT deptno, COUNT(*) FROM emp GROUP
+________________________________________
+🔴 15. Real Business Scenario
+👉 Question:
+“Find departments having more than 5 employees?”
+✅ Answer:
+SELECT deptno, COUNT() 
+FROM emp 
+GROUP BY deptno 
+HAVING COUNT() > 5;
+________________________________________
+✅ 🔥 SUPER IMPORTANT DIFFERENCE QUESTIONS
+Question	Key Answer
+DELETE vs TRUNCATE	Row-level vs full table
+WHERE vs HAVING	Before group vs after group
+INNER vs LEFT JOIN	Matching vs all left
+UNION vs UNION ALL	Remove duplicates vs not
+PRIMARY vs UNIQUE	One vs multiple
+________________________________________
+✅ 🎯 Interview Tip
+👉 Always say:
+•	“For performance, we used indexing”
+•	“For data integrity, we used constraints”
+•	“For complex query, we used joins and group by”
+________________________________________
+✅ 🔥 BASIC → INTERMEDIATE CODING QUESTIONS
+________________________________________
+🔴 1. Find 2nd Highest Salary
+SELECT MAX(salary) 
+FROM employee 
+WHERE salary < (SELECT MAX(salary) FROM employee);
+________________________________________
+🔴 2. Find Duplicate Records
+SELECT name, COUNT() 
+FROM employee 
+GROUP BY name 
+HAVING COUNT() > 1;
+________________________________________
+🔴 3. Remove Duplicate Records
+DELETE FROM employee
+WHERE id NOT IN (
+  SELECT MIN(id) 
+  FROM employee 
+  GROUP BY name
+);
+________________________________________
+🔴 4. Get Employees with Highest Salary in Each Department
+SELECT dept_id, MAX(salary)
+FROM employee
+GROUP BY dept_id;
+________________________________________
+🔴 5. Fetch First 5 Records
+SELECT * FROM employee LIMIT 5;
+________________________________________
+🔴 6. Find Employees Who Don’t Have Manager
+SELECT * 
+FROM employee 
+WHERE manager_id IS NULL;
+________________________________________
+🔴 7. Find Employees Name Starting with ‘A’
+SELECT * 
+FROM employee 
+WHERE name LIKE 'A%';
+________________________________________
+🔴 8. Find Count of Employees in Each Department
+SELECT dept_id, COUNT(*) 
+FROM employee 
+GROUP BY dept_id;
+________________________________________
+🔴 9. Find Records Present in One Table but Not Another
+SELECT * FROM table1
+WHERE id NOT IN (SELECT id FROM table2);
+________________________________________
+🔴 10. Get Common Records Between Two Tables
+SELECT * FROM table1
+INTERSECT
+SELECT * FROM table2;
+________________________________________
+✅ 🔥 INTERMEDIATE → ADVANCED QUESTIONS
+________________________________________
+🔴 11. Find Nth Highest Salary
+SELECT salary 
+FROM employee e1
+WHERE N-1 = (
+  SELECT COUNT(DISTINCT salary)
+  FROM employee e2
+  WHERE e2.salary > e1.salary
+);
+________________________________________
+🔴 12. Find Employees with Same Salary
+SELECT 
+FROM employee
+WHERE salary IN (
+  SELECT salary 
+  FROM employee
+  GROUP BY salary
+  HAVING COUNT() > 1
+);
+________________________________________
+🔴 13. Find Last Record from Table
+SELECT * 
+FROM employee 
+ORDER BY id DESC 
+LIMIT 1;
+________________________________________
+🔴 14. Find Second Largest Value Using LIMIT
+SELECT salary 
+FROM employee 
+ORDER BY salary DESC 
+LIMIT 1 OFFSET 1;
+________________________________________
+🔴 15. Find Employees Who Joined in Last 30 Days
+SELECT * 
+FROM employee 
+WHERE joining_date >= CURRENT_DATE - INTERVAL 30 DAY;
+``
+________________________________________
+✅ 🔥 JOIN BASED CODING QUESTIONS
+________________________________________
+🔴 16. Get Employee Name with Department Name
+SELECT e.name, d.dept_name
+FROM employee e
+INNER JOIN department d 
+ON e.dept_id = d.id;
+________________________________________
+🔴 17. Find Employees Without Department
+SELECT e.name
+FROM employee e
+LEFT JOIN department d 
+ON e.dept_id = d.id
+WHERE d.id IS NULL;
+________________________________________
+🔴 18. Self Join (Employee & Manager)
+SELECT e.name AS employee, m.name AS manager
+FROM employee e
+LEFT JOIN employee m 
+ON e.manager_id = m.id;
+``
+________________________________________
+✅ 🔥 REAL SCENARIO QUESTIONS (VERY IMPORTANT)
+________________________________________
+🔴 19. Pagination (Used in APIs)
+👉 Question: Return page 2 with 5 records
+SELECT * 
+FROM employee 
+LIMIT 5 OFFSET 5;
+``
+________________________________________
+🔴 20. Find Top 3 Highest Salaries
+SELECT salary 
+FROM employee 
+ORDER BY salary DESC 
+LIMIT 3;
+________________________________________
+🔴 21. Rank Employees by Salary
+SELECT name, salary,
+RANK() OVER (ORDER BY salary DESC) AS rank
+FROM employee;
+________________________________________
+🔴 22. Running Total (Cumulative Sum)
+SELECT id, salary,
+SUM(salary) OVER (ORDER BY id) AS running_total
+FROM employee;
+________________________________________
+🔴 23. Find Gap in Sequence (Missing Numbers)
+SELECT id + 1 AS missing_number
+FROM employee
+WHERE (id + 1) NOT IN (SELECT id FROM employee);
+________________________________________
+🔴 24. Delete Duplicate Using ROW_NUMBER
+DELETE FROM employee
+WHERE id IN (
+  SELECT id FROM (
+    SELECT id,
+    ROW_NUMBER() OVER (PARTITION BY name ORDER BY id) AS rn
+    FROM employee
+  ) t
+  WHERE rn > 1
+);
+
+✅ 🔥 Most Frequently Asked Core Java Questions
+1. Basics / Conceptual
+•	What is JVM, JRE, JDK? Difference?
+•	JVM (Java Virtual Machine)
+•	It is an engine that runs Java bytecode.
+•	Converts bytecode → machine code.
+•	Platform-dependent (different for Windows, Linux, etc.).
+•	Handles: 
+•	Memory management
+•	Garbage collection
+•	Execution of Java programs
+•	👉 Key point: JVM = Runtime executor
+•	________________________________________
+•	🔹 JRE (Java Runtime Environment)
+•	Provides the environment to run Java programs.
+•	Includes: 
+•	JVM
+•	Core libraries (Java API)
+•	👉 Key point: JRE = JVM + Libraries
+•	________________________________________
+•	🔹 JDK (Java Development Kit)
+•	Used to develop Java applications.
+•	Contains: 
+•	JRE
+•	Development tools (javac, debugger, jar, etc.)
+•	👉 Key point: JDK = JRE + Development tools
+•	
+Is Java pass-by-value or pass-by-reference?
+Java is ALWAYS pass-by-value
+🔹 What does it mean?
+•	It passes copy of the variable
+•	Even for objects, the reference itself is passed by value
+
+•	What are OOP principles? Explain with real examples
+•	✅ OOP Principles in Java (with Real-Life Examples)
+•	Object-Oriented Programming (OOP) is a paradigm that organizes code using objects and classes. Java is built around 4 main OOP principles:
+•	________________________________________
+•	🔹 1. Encapsulation (Data Hiding)
+•	✅ Definition:
+•	Encapsulation means wrapping data (variables) and methods together into a single unit (class) and restricting direct access to data.
+•	✅ How it works:
+•	Use private variables
+•	Provide public getters/setters
+•	✅ Example:
+•	class BankAccount {
+•	    private double balance;
+•	
+•	    public void deposit(double amount) {
+•	        balance += amount;
+•	    }
+•	
+•	    public double getBalance() {
+•	        return balance;
+•	    }
+•	}
+•	✅ Real-Life Example:
+•	👉 ATM Machine
+•	You cannot directly access your bank balance
+•	You use methods like withdraw or check balance
+•	✅ Benefit: Improves data security and control
+•	________________________________________
+•	🔹 2. Abstraction (Hiding Implementation)
+•	✅ Definition:
+•	Abstraction means hiding internal details and showing only the essential features.
+•	✅ Example:
+•	abstract class Vehicle {
+•	    abstract void start();
+•	}
+•	``
+•	✅ Real-Life Example:
+•	👉 Driving a car
+•	You just turn the key / push button to start
+•	You don’t know how the engine internally works
+•	✅ Benefit: Reduces complexity and improves usability
+•	
+•	🔹 3. Inheritance (Code Reusability)
+•	✅ Definition:
+•	Inheritance allows one class (child) to acquire properties and behaviors of another class (parent).
+•	✅ Example:
+•	class Animal {
+•	    void eat() {
+•	        System.out.println("Eating...");
+•	    }
+•	}
+•	
+•	class Dog extends Animal {
+•	    void bark() {
+•	        System.out.println("Barking...");
+•	    }
+•	}
+•	✅ Real-Life Example:
+•	👉 Family traits
+•	Child inherits features (eye color, habits) from parents
+•	✅ Benefit: Promotes code reuse and reduces redundancy
+•	________________________________________
+•	🔹 4. Polymorphism (Many Forms)
+•	✅ Definition:
+•	Polymorphism allows a method to behave differently based on the context.
+•	________________________________________
+•	🔸 Types:
+•	1. Compile-time (Method Overloading)
+•	void add(int a, int b) {}
+•	void add(int a, int b, int c) {}
+•	2. Runtime (Method Overriding)
+•	class Animal {
+•	    void sound() {
+•	        System.out.println("Animal sound");
+•	    }
+•	}
+•	
+•	class Dog extends Animal {
+•	    void sound() {
+•	        System.out.println("Bark");
+•	    }
+•	}
+•	________________________________________
+•	✅ Real-Life Example:
+•	👉 Person behavior
+•	Same person behaves differently: 
+•	At work → professional
+•	At home → casual
+•	✅ Benefit: Provides flexibility and dynamic behavior
+•	________________________________________
+•	✅ Quick Summary Table
+•	Principle	•	Meaning	•	Real-Life Example
+•	Encapsulation	•	Data hiding	•	ATM machine
+•	Abstraction	•	Hide complexity	•	Driving a car
+•	Inheritance	•	Reuse code	•	Parent → Child
+•	Polymorphism	•	Many behaviors	•	Human roles
+•	________________________________________
+•	Difference between: 
+o	Encapsulation vs Abstraction
+o	what is diff b/w encapsulation and abstractions
+o	Aspect	     Encapsulation	                                                              Abstraction
+o	Definition	Bundles data and methods into a class and restricts direct access to fields.	Hides implementation details and shows only essential features.
+o	 Purpose	Protects internal data and controls access.	                          Simplifies complexity by focusing on what an object does.
+o	  Focus         	Securing and controlling access to data.	                               Simplifying interaction by hiding details.
+o	Implementation	Achieved using private fields and public getters/setters.              	Achieved using abstract classes, interfaces, and abstract methods.
+o	Visibility	   Controlled via access modifiers (private, public, etc.).	                  Hides internal logic; user only sees relevant features.
+Aspect	Encapsulation	Abstraction
+Definition	Wrapping data and methods together in a class	Hiding implementation details and showing only functionality
+Focus	Protecting data (data hiding)	Simplifying complexity (logic hiding)
+Purpose	Restrict direct access to variables	Expose only necessary features
+How achieved	Using private variables + getters/setters	Using abstract classes or interfaces
+Level	Implementation level	Design level
+Example in Java	Private fields in a class	Abstract class or interface
+
+o	Abstraction vs Interface
+o	Feature	o	Abstraction (Abstract Class)	o	Interface
+o	Definition	o	A class that can have both abstract and concrete methods	o	A blueprint that defines only behavior (contract)
+o	Methods	o	Can have abstract + non-abstract methods	o	Mostly abstract methods (Java 8+: can have default & static)
+o	Variables	o	Can have instance variables	o	Only public static final variables
+o	Inheritance	o	Supports single inheritance	o	Supports multiple inheritance
+o	Constructor	o	✅ Allowed	o	❌ Not allowed
+o	Access Modifiers	o	Can use private, protected, public	o	Methods are public by default
+o	Use Case	o	When classes share common behavior + base logic	o	When different classes need to follow a common contract
+o	
+•	What is marker interface? Give examples
+•	An interface which has no member is known as a marker or tagged interface, for example, Serializable, Cloneable, Remote, random access method.etc.
+•	They are used to provide some essential information to the JVM so that JVM may perform some useful operation.
+•	If an interface wont contains any method & by implementing that interface if our object will get ability such type of interface are called marker interface.
+•	By implementing seriazable interface we can send object across the n/w and we can save state of object to a file this extra ability is provided through seriazable interface
+•	
+•	By implemeting clonable interface our object will be in position to provide exactly duplicate object
+•	
+•	As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
+•	We can create our own marker interfface but customization of jvm required
+________________________________________
+2. OOPS & Design
+•	Explain Inheritance types
+•	Why multiple inheritance is not supported in Java?
+•	Difference: 
+o	IS-A vs HAS-A relationship
+o	Composition vs Aggregation
+•	What is polymorphism? 
+o	Compile-time vs runtime
+•	Method overloading vs overriding
+________________________________________
+3. String & Object
+•	Why String is immutable?
+•	The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
+•	The reason of making string final is to destroy the immutability and to not allow others to extend it.
+•	The String objects are cached in the String pool, and it makes the String immutable. 
+•	The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. 
+•	For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
+•	Difference: 
+o	String vs StringBuffer vs StringBuilder
+If the content will not change frequently then we should go for String 
+If content will change frequently and thread safety required then go for String buffer
+If content will change frequently and thread safety is not required then go for stringbuilder.
+•	What is == vs equals()?
+•	== compares references, while equals() compares object content (if overridden).
+•	== operator is always meant for referance comparision where as .equls() meant for content comparision.
+•	
+•	== operator is applicable for both premitives and object referance
+•	In case of  object referance == opeartor is always meant for referance comparation i.e
+•	If two referance pointing to the same object then only ==operator returns true.
+•	
+•	.equals()
+•	It is method applicable for only for object referance but not for primitives
+•	By default .equals method present in object class I also meant for referance comparasion only
+•	We cant override .equlas method for content comparation
+
+•	Why override equals() and hashCode() together?
+•	We override both equals() and hashCode() to maintain consistency in hash-based collections, ensuring that equal objects are stored and retrieved correctly.
+•	
+•	What is toString() method?
+•	toString() is a method of the Object class used to return a string representation of an object.
+•	
+________________________________________
+4. Collections Framework 🔥 (Very Important)
+•	Difference: 
+o	List vs Set vs Map
+o	Feature	o	List	o	Set	o	Map
+o	Definition	o	Colletion of ordered elements	o	Collection of unique elements	o	Key-value pair collection
+o	Duplicates	o	✅ Allowed	o	❌ Not allowed	o	❌ Keys unique, values can repeat
+o	Order	o	✅ Maintains insertion order	o	❌ No order (except some types)	o	❌ No order (depends on implementation)
+o	Access	o	By index	o	No index	o	By key
+o	Examples	o	ArrayList, LinkedList	o	HashSet, TreeSet	o	HashMap, TreeMap
+o	
+o	ArrayList vs LinkedList
+o	Feature	o	ArrayList	o	LinkedList
+o	Data Structure	o	Dynamic array	o	Doubly linked list
+o	Access time	o	✅ Fast (O(1))	o	❌ Slow (O(n))
+o	Insert/Delete (middle)	o	❌ Slow	o	✅ Fast
+o	Memory	o	Less	o	More (stores pointers)
+o	Use case	o	Frequent reading	o	Frequent insertion/deletion
+o	
+o	HashMap vs Hashtable
+o	Feature	o	HashMap	o	Hashtable
+o	Synchronization	o	❌ Not synchronized	o	✅ Synchronized
+o	Thread-safe	o	❌ No	o	✅ Yes
+o	Performance	o	✅ Faster	o	❌ Slower
+o	Null key/value	o	✅ Allows 1 null key, multiple null values	o	❌ No nulls allowed
+o	Legacy	o	Modern	o	Legacy class
+o	
+o	HashMap vs ConcurrentHashMap
+o	Feature	o	HashMap	o	ConcurrentHashMap
+o	Thread-safe	o	❌ No	o	✅ Yes
+o	Locking	o	No locking	o	✅ Segment/partial locking
+o	Performance	o	Fast (single thread)	o	Faster than Hashtable in multi-thread
+o	Null keys/values	o	✅ Allowed	o	❌ Not allowed
+o	
+o	TreeMap vs LinkedHashMap
+o	Feature	o	TreeMap	o	LinkedHashMap
+o	Order	o	✅ Sorted (ascending by key)	o	✅ Insertion order
+o	Data structure	o	Red-Black Tree	o	Hash table + Linked list
+o	Performance	o	Slower (O(log n))	o	Faster (O(1))
+o	Null key	o	❌ Not allowed	o	✅ Allowed (one)
+o	
+•	Internal working of HashMap
+•	HashMap uses hashing to store key-value pairs, where hashCode determines the bucket and equals ensures key uniqueness. Load factor controls resizing, and capacity defines bucket size 
+•	•  HashMap uses: ✅ hashCode() → to find bucket
+✅ equals() → to find exact key
+•	•  Collision handled by: ✅ LinkedList (before Java 8)
+✅ Tree (after Java 8)
+•	•  Default values: ✅ Capacity = 16
+✅ Load Factor = 0.75
+•	
+•	What is load factor & capacity
+•	Load factor is the ratio of the average load to the maximum (peak) load over a given period of time
+
+     Capacity is the maximum power output that a system or power plant can produce under specified conditions.
+
+•	What is fail-fast vs fail-safe
+•	Fail-Fast systems abort operation as-fast-as-possible exposing failures immediately and stopping the whole operation. 
+•	Whereas, Fail-Safe systems don't abort an operation in the case of a failure. Such systems try to avoid raising failures as much as possible.
+•	
+________________________________________
+5. Exception Handling
+•	Difference: 
+o	Checked vs Unchecked exception
+o	Checked exception
+o	-----------------------
+o	Checked exceptions are exceptions that are checked at compile-time by the Java compiler for smooth execution.
+o	If a method throws a checked exception, it must either handle the exception using a try-catch block or 
+o	declare the exception using the throws keyword in the method signature. If neither is done, the code will not compile.
+o	Examples:
+o	IOException
+o	SQLException
+o	FileNotFoundException
+o	ClassNotFoundException
+o	
+o	Key Characteristics:
+o	Must be explicitly handled or declared.
+o	Represents conditions that a reasonable application might want to catch (e.g., file not found, network issues).
+o	public class CheckedExceptionExample {
+o	    public static void main(String[] args) {
+o	        try {
+o	            File file = new File("nonexistentfile.txt");
+o	            FileInputStream fis = new FileInputStream(file);
+o	        } catch (IOException e) {
+o	            System.out.println("Caught IOException: " + e.getMessage());
+o	        }
+o	    }
+o	}
+o	Unchecked exception
+o	--------------------
+o	Unchecked exceptions are exceptions that are not checked at compile-time. 
+o	They are subclasses of RuntimeException and can occur during the execution of the program. Since the compiler does not check them, 
+o	it’s not mandatory to catch or declare them.
+o	Examples:
+o	NullPointerException
+o	ArrayIndexOutOfBoundsException
+o	ArithmeticException
+o	IllegalArgumentException
+o	
+o	Key Characteristics:
+o	Not required to be caught or declared.
+o	Represents programming errors, such as logic flaws or improper use of an API.
+•	What is: 
+o	try, catch, finally
+o	throw vs throws
+•	What is exception propagation?
+•	The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us called exception propogation.
+•	
+•	Create a custom exception
+________________________________________
+6. Multithreading 🔥🔥 (Highly Asked)
+•	What is thread lifecycle?
+Thread lifecycle consists of states like New, Runnable, Running, Waiting/Blocked, and Terminated, representing the execution flow of a thread
+•	New → Runnable → Running → Waiting/Blocked → Runnable → Terminated
+•	
+Real-Life Example
+👉 Student giving exam
+•	New → Student enters exam hall
+•	Runnable → Ready to write
+•	Running → Writing exam
+•	Waiting → Waiting for extra sheet
+•	Terminated → Exam finished
+•	
+•	Ways to define instantiate & start a new  thread
+•	We can define thread in two ways
+•	1)By extending thread class
+•	2)By implemeting runnable interface.
+o	Thread class
+o	Runnable
+•	Which is better: Thread vs Runnable?
+•	Among he two ways of defining a thread implements runnable mechanism is recommended to use.
+•	In the first approach our class always extending thread class& hence there is chance of extending any other class but 
+•	in the second approach we can extends some other class also while implementing runnable interface hence 2nd approach is recommended to use.
+•	What is: 
+o	Synchronized
+o	Synchronized is the modifier applicable only for methods and blocks& we cant apply for classes and variables.
+o	if a method or block declared as synchronized then at a time only one thread is allowed to execute that method or block on the given object.
+o	• The main advantages of sychronized keyword is it can resolve the inconsistancy problem
+o	• The main linitation of synchronized keyword is it increses waiting time of  threads & effect the performance of the system.
+o	• Hence if there is no requirement then its never recommended to use sychronized keyword.
+o	
+o	Syschronized block
+o	===================
+o	• If very few lines of code requires sycronization then it is never recommended to declare the entire method as sychronized .we have to declrae entire methods as sysnchronized .we have to declare those few lines of code inside sychronized block.
+o	• The main advantages of sychronized block over sychronized method is it reduces the waiting time of thread and improves the performance of the system.
+
+•	What is: 
+o	wait(), notify(), notifyAll()
+o	Two thread will communicate with other by using Wait ,Notify ,NitifyAll
+o	• The thread which requires updation it has to call wait() method.the thread which is responsible to update  it has to call notify methods
+o	• We can call wait () ,notify and notifyAll() methods only from sychronized area otherwise we will get runtime exception. Saying IllgalMonitorStateException.
+o	
+o	• If thread calls wait() method it releases lock immediately and entred into the waiting state.the releases lock of only current object but not all locks. 
+o	After calling notify and notifyAll() methods thread releases the lock but nt immediately. 
+o	Except these wait(),notify,notifyAll() there is no other case where thread release loc
+•	What is: 
+o	sleep(), yield(), join()
+o	• Yeild 
+o	----------
+o	• Yield () method causes to pause current executing thread for giving chance to reamaing waiting threads of same priority.
+o	• If there are no waiting threads or all waiting threads have low priority then the same thread will continue its excution once again.
+o	• Public void native yield()
+o	
+o	Join
+o	---------
+o	If  thread want to wait until completing some other thread then we should go for join() method
+o	Whenever we are using join () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error.
+o	
+o	Sleep
+o	======
+o	If thread don’t want to perform any operation for perticular amount of time then we should go for sleep()
+o	Whenever we are using sleep () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error
+•	What is deadlock & starvation?
+•	If two thread are waiting for each other forever.such type of situation is called Deadlock
+•	• There is no resolution technoque but  but several prevention techniques are possible.
+•	• Sychronized keyword is the only reseaon for deadlock hence while using sychronized keyword we have to take very much care.
+•	A long  waiting thread which ends at certain point of time is called starvation
+•	
+•	What is race condition?***
+•	A race condition occurs when multiple threads access and modify shared data at the same time, and the final result depends on the order of execution.
+•	
+•	👉 In simple words:
+Threads “race” with each other to update data, causing unpredictable or incorrect results.
+•	
+•	•  Two users try to book the last seat at the same time 
+•	•  Both may see seat as available and book it
+
+A race condition occurs when multiple threads access shared data concurrently and the final result depends on execution order, leading to unpredictable outcomes.
+
+•	What is ReentrantLock?***
+•	ReentrantLock is a flexible and explicit locking mechanism that allows a thread to acquire the same lock multiple times and provides advanced features like tryLock, fairness, and interruptible locking.
+•	
+•	ReentrantLock is a class in java.util.concurrent.locks package that provides explicit locking mechanism similar to synchronized, but with more control and flexibility.
+
+________________________________________
+7. Concurrency / Advanced
+•	What is ConcurrentHashMap?
+•	ConcurrentHashMap is an enhancement of Hashmap as we know that while dealing with threads in our application HashMap is not good choice 
+•	because performace wise hashmp is not upto the mark.
+•	• Underlaying data structure for Concurrenthashmap is hashtable
+•	• Concurrenthashmap is thread safe
+•	• At a time any no of thread are applicable for a read operation without locking the Concurrenthashmap object which is not there in hashmap
+•	• In Concurrenthashmap the object is divided into number of segments according to concurrency level
+•	• concurrency level Concurrenthashmap is 16.
+•	• In Concurrenthashmap,at a time any number of threads can perform retrival operation but for updated in the object, 
+•	the thread must lock the perticular segment in which the thread wants  to operate  this is called segment locking or bucket locking
+•	• inserting null object is not possible in concurrenthashmap as key or value.
+•	What is CopyOnWriteArrayList?***
+•	CopyOnWriteArrayList is a thread-safe version of ArrayList from
+java.util.concurrent package, where every modification creates a new copy of the array.
+
+CopyOnWriteArrayList is a thread-safe list where every write operation creates a new copy of the array, making reads fast and safe without synchronization.
+Whenever you:
+•	add()
+•	remove()
+•	update()
+➡ It creates a new copy of the underlying array, modifies it, and replaces the old one.
+
+•	Difference: 
+o	submit() vs execute()
+•	Both methods are used to submit tasks to a thread pool, but they behave differently.
+
+1. execute()
+🔹 Definition:
+•	Defined in Executor interface
+•	Used to execute a task (Runnable)
+
+✅ Key Points:
+•	Takes only Runnable
+•	No return value
+•	Cannot track result
+•	If exception occurs → goes to thread’s uncaught exception handler
+________________________________________
+✅ Example:
+Java
+ExecutorService executor = Executors.newFixedThreadPool(2);
+
+executor.execute(() -> {
+System.out.println("Task executed");
+});
+________________________________________
+✅ 2. submit()
+🔹 Definition:
+•	Defined in ExecutorService
+•	Used to submit tasks and get result or status
+________________________________________
+✅ Key Points:
+•	Accepts: 
+o	Runnable
+o	Callable
+•	Returns a Future object
+•	execute() runs a task without returning result, while submit() allows result tracking using a Future and supports Callable.
+
+•	How to handle concurrency in Java?
+•	Concurrency in Java is handled using synchronization, locks, atomic classes, concurrent collections, and thread pools to ensure safe and efficient multi-threaded execution.
+
+8. Generics
+•	What are Generics?
+•	Generics is powerful feature that allows you to write flexible, reusable, and type-safe code. By using generics, you can define classes, interfaces, and methods with type parameters,
+•	enabling them to operate on various data types while providing compile-time type checking.
+•	Advantages of Generics
+•	Generics provide type safety, eliminate casting, and enable reusable and maintainable code in Java.
+•	
+•	What is type safety?
+•	Type safety means that a program only allows operations on the correct type of data, preventing invalid data usage.
+•	👉 In simple words:
+It ensures you use the right data type in the right place.
+•	
+
+9. Memory Management
+•	Java Memory Model 
+•	Java manages memory automatically using JVM (Java Virtual Machine).
+The memory is mainly divided into Heap and Stack.
+•	
+o	Heap
+•	Heap memory is used to store objects and instance variables.
+Key Characteristics:
+•	Shared among all threads
+•	Created and managed by JVM
+•	Objects created using new keyword are stored here
+•	Managed by Garbage Collector (GC)
+o	
+o	Stack
+Stack memory stores method calls and local variables.
+________________________________________
+✅ Key Characteristics:
+•	Each thread has its own stack
+•	Stores: 
+o	Method frames
+o	Local variables
+o	References to objects
+
+•	What is Garbage Collection?
+•	Garbage collection is the process of identifying and discarding objects that are no longer needed to free up memory. T
+•	here are two main types:
+•	Minor GC: Occurs in the Young Generation and is typically fast.
+•	Major GC: Occurs in the Old Generation and can be more time-consuming1.
+•	Changes in Java 8
+•	Java 8 introduced significant changes to memory management, particularly with the replacement of the PermGen space with Metaspace23.
+
+•	Java 8 change: 
+o	PermGen → Metaspace
+________________________________________
+1.	Comparable & Comparator
+•	comparable interface is use for default natural sorting order.
+•	Java Comparable interface is used to order the objects of the user-defined class.
+•	This interface is found in java.lang package and contains only one method named compareTo(Object). 
+•	It provides a single sorting sequence only, i.e., you can sort the elements on the basis of single data member only
+•	
+•	compareTo(Object obj) method
+•	public int compareTo(Object obj):
+•	 It is used to compare the current object with the specified object. It returns
+•		• positive integer, if the current object is greater than the specified object.
+•		• negative integer, if the current object is less than the specified object.
+•		• zero, if the current object is equal to the specified object.
+
+2.	Comparator
+========================
+•	java caomparatir interface use for customize sorting order
+•	Java Comparator interface is used to order the objects of a user-defined class.
+•	This interface is found in java.util package and contains 2 methods compare(Object obj1,Object obj2) and equals(Object element).
+•	It provides multiple sorting sequences, i.e., you can sort the elements on the basis of any data member, for example, rollno, name, age or anything else.
+
+3.	dif b/w comparable and comparator
+4.	---------------------------------------
+•	Feature	•	Comparable	•	Comparator
+•	Package	•	java.lang	•	java.util
+•	Method	•	compareTo()	•	compare()
+•	Sorting type	•	Default (natural)	•	Custom
+•	Location	•	Inside class	•	Outside class
+•	Multiple sorting	•	❌ No	•	✅ Yes
+•	Modifies class	•	✅ Yes	•	❌ No
+When to use which?
+•	Use Comparable when:
+•	You want natural/default sorting
+✔ Sorting is based on one main field (e.g., ID, roll number)
+✔ You can modify the class
+•	Use Comparator when:
+•	✔ You want multiple ways of sorting
+✔ You cannot modify the class (e.g., third-party class)
+✔ Sorting logic is dynamic or external
+•	
+
+✅ 🔥 Scenario-Based Questions (Very Important in Interviews)
+🔁 Collections Scenarios
+1.	ConcurrentModificationException 👉 Why it occurs? How to fix?
+•	Use Iterator.remove()
+•	CopyOnWriteArrayList
+•	Streams
+________________________________________
+2.	Choose Collection 👉 You need:
+•	Fast lookup → HashMap
+•	Sorted data → TreeMap
+•	Thread safe → ConcurrentHashMap
+________________________________________
+3.	Duplicate Removal Scenario 👉 Remove duplicates:
+•	Use Set (HashSet)
+________________________________________
+🧵 Multithreading Scenarios
+1.	Race Condition 👉 Two threads updating same data
+✅ Solution:
+•	synchronized
+•	Lock
+•	Atomic variables
+________________________________________
+2.	Deadlock Scenario 👉 2 threads waiting for each other
+✅ Solution:
+•	Avoid nested locks
+•	Use tryLock()
+________________________________________
+3.	Thread Communication 👉 Producer-consumer problem
+✅ Use:
+•	wait(), notify()
+________________________________________
+⚡ Real-Time Coding Scenario
+1.	LRU Cache 👉 Use:
+•	LinkedHashMap
+________________________________________
+2.	Sorting Custom Object 👉 Use:
+•	Comparator
+________________________________________
+3.	Make Class Immutable 👉 Steps:
+•	final class
+•	private fields
+•	no setters
+•	defensive copy
+
+✅ 🔥 Most Important “Tricky Interview Questions”________________________________________
+✅ 1. Why is String immutable?
+👉 Reasons:
+•	✅ Security (used in URLs, file paths, DB connections)
+•	✅ Thread-safe (no synchronization needed)
+•	✅ String Pool optimization (memory efficient)
+•	✅ Caching hashCode (performance for HashMap)
+String s = "Java";
+s.concat("World"); // creates new object, original unchanged
+👉 Immutability = value cannot change once created
+________________________________________
+✅ 2. Why should HashMap key be immutable?
+👉 Reason: Consistency of hashing
+•	HashMap uses: 
+•	
+o	hashCode() → find bucket
+o	equals() → compare key
+❌ If key changes after insertion:
+•	Hash code changes
+•	Object goes to wrong bucket
+•	Retrieval fails
+✅ Example:
+map.put(key, "value");
+// if key changes → map.get(key) may return null
+``
+👉 Therefore keys should be immutable (e.g., String)
+________________________________________
+✅ 3. Why override equals() & hashCode() together?
+👉 Rule: ✅ If equals() is true → hashCode() MUST be same
+👉 Used by:
+•	HashMap
+•	HashSet
+❌ If only equals() overridden:
+•	Objects considered equal
+•	But stored in different buckets
+✅ Result → duplicate entries / wrong behavior
+________________________________________
+✅ 4. Why multiple inheritance is not allowed (classes)?
+👉 To avoid ambiguity (Diamond Problem)
+Example:
+class A { void show() {} }
+class B extends A {}
+class C extends A {}
+class D extends B, C {} // ❌ Not allowed
+👉 Which show() should be called?
+✅ Confusion → avoided in Java
+✔ Instead:
+•	Use interfaces (supports multiple inheritance)
+________________________________________
+✅ 5. Difference between Fail-Fast and Fail-Safe
+Feature	Fail-Fast	Fail-Safe
+Behavior	Throws exception	Works on copy
+Exception	✅ ConcurrentModificationException	❌ No exception
+Example	ArrayList, HashMap	CopyOnWriteArrayList
+Modification allowed	❌ No	✅ Yes
+👉 Fail-fast detects changes immediately
+👉 Fail-safe allows safe iteration
+________________________________________
+✅ 6. synchronized vs ReentrantLock
+Feature	synchronized	ReentrantLock
+Lock handling	Automatic	Manual
+Flexibility	Less	More
+tryLock()	❌ No	✅ Yes
+Interruptible	❌ No	✅ Yes
+Fairness	❌ No	✅ Yes
+👉 ReentrantLock = advanced version of synchronized
+________________________________________
+✅ 7. Why ConcurrentHashMap is faster than Hashtable?
+👉 Key reasons:
+•	✅ Fine-grained locking (segment-based / bucket-level)
+•	❌ Hashtable locks entire map (coarse locking)
+👉 Result:
+•	Multiple threads access different parts simultaneously ✅
+•	Better performance 🚀
+________________________________________
+✅ 8. Why wait() is in Object class (not Thread)?
+👉 Because:
+•	wait() works on object monitor (lock), not thread
+synchronized(obj) {
+    obj.wait();
+}
+👉 Every object has a lock (monitor)
+If in Thread: ❌ Thread doesn’t know which object lock to release
+✅ Hence placed in Object class
+________________________________________
+✅ Final One-Line Summary (Interview Gold)
+•	String is immutable for security & performance
+•	HashMap keys must be immutable for correct hashing
+•	equals() & hashCode() ensure HashMap consistency
+•	No multiple inheritance to avoid ambiguity
+•	Fail-fast vs Fail-safe → exception vs safe copy
+•	ReentrantLock provides more control than synchronized
+•	ConcurrentHashMap uses fine-grained locking
+•	wait() is in Object because it works on object locks
+
+Kafka
+
+🔹 Basic Kafka Questions (Very Common)
+1. What is Kafka?
+Kafka is a distributed event streaming platform that uses a publish-subscribe model to handle real-time data streams with high throughput, fault tolerance, and scalability.
+
+2. What are the core components of Kafka?
+✅ From your notes:
+•	Producer
+•	Consumer
+•	Topic
+•	Partition
+•	Broker
+•	Consumer Group
+👉 You can answer like:
+Kafka consists of producers that send messages, brokers that store them in topics, and consumers that read them using consumer groups.
+
+3. What is a Topic?
+A logical channel where messages are stored and categorized.
+
+4. What is a Partition?
+A subdivision of a topic that:
+•	Enables parallel processing
+•	Maintains ordering within the partition
+•	Uses offsets for message tracking
+
+5. What is an Offset?
+A unique ID of a message inside a partition.
+
+6. What is a Kafka Broker?
+A server that stores and serves data. A Kafka cluster contains multiple brokers.
+
+7. What is a Consumer Group?
+•	A group of consumers sharing workload
+•	Each partition is consumed by only one consumer in a group
+
+🔹 Intermediate Kafka Questions
+8. How does Kafka work?
+✅ Use your note structure:
+1.	Producers send messages to topics
+2.	Brokers store messages in partitions
+3.	Consumers read messages
+👉 Add:
+•	Data is persisted on disk
+•	Messages can be replayed
+________________________________________
+9. Why Kafka is fast?
+•	Sequential disk writes
+•	Zero-copy optimization
+•	Batching
+•	Partition parallelism
+
+10. What ensures fault tolerance in Kafka?
+•	Replication factor
+•	Data copied across brokers
+•	If one broker fails → others serve data
+
+11. What is replication?
+Kafka copies partitions across brokers to ensure data availability.
+
+12. What is ISR (In-Sync Replica)?
+Replicas that are fully caught up with the leader partition.
+
+13. Leader and Follower in Kafka?
+•	Leader handles reads/writes
+•	Followers replicate data
+________________________________________
+14. What happens if a broker fails?
+•	Kafka elects a new leader from replicas
+•	No data loss if replication is configured correctly
+
+15. What is Zookeeper / KRaft?
+•	Older Kafka uses Zookeeper for coordination
+•	New Kafka uses KRaft (Kafka Raft mode)
+
+🔹 Producer-Level Questions (From Your KafkaTemplate Notes)
+16. What is KafkaTemplate?
+✅ From your notes: KafkaTemplate is a Spring abstraction for Kafka Producer that:
+•	Sends messages
+•	Handles serialization
+•	Supports sync/async calls
+
+17. Difference between sync and async send?
+Sync:
+kafkaTemplate.send(topic, message).get();
+``
+•	Blocks thread
+Async:
+kafkaTemplate.send(topic, message).addCallback(...)
+``
+•	Non-blocking
+•	Uses callback
+________________________________________
+18. Why use message key?
+•	Messages with same key go to same partition
+•	Ensures ordering
+________________________________________
+19. What is serialization?
+Process of converting object → byte stream before sending to Kafka.
+________________________________________
+🔹 Consumer-Level Questions (Important - Based on @KafkaListener)
+20. What is @KafkaListener?
+✅ From your notes:
+•	Used to consume messages
+•	Automatically listens to topics
+•	Processes messages asynchronously
+________________________________________
+21. How does Kafka distribute messages in a consumer group?
+•	Each partition → one consumer
+•	Load is distributed evenly
+________________________________________
+22. Can multiple consumers read same message?
+✅ YES:
+•	Different consumer groups → each get full copy
+❌ SAME group:
+•	Only one consumer gets message
+________________________________________
+23. What is auto-offset reset?
+earliest → read from beginning  
+latest → read new messages 
+________________________________________
+24. What is manual acknowledgment?
+✅ From your notes:
+•	You manually commit after processing
+acknowledgment.acknowledge();
+
+25. What is concurrency in KafkaListener?
+@KafkaListener(concurrency = "3")
+•	Runs 3 parallel consumers
+
+26. How do you handle errors in Kafka?
+✅ From your notes:
+•	ErrorHandler
+•	Retry
+•	Dead Letter Topic (DLT)
+________________________________________
+🔹 Scenario-Based Questions (Very Important)
+27. How to ensure message order?
+•	Use same key
+•	Same partition
+
+28. How do you scale Kafka?
+•	Increase partitions
+•	Add brokers
+________________________________________
+29. What happens if consumer is slow?
+•	Kafka stores messages
+•	Consumer reads later using offset
+________________________________________
+30. How to avoid data loss?
+•	Enable replication
+•	Use acknowledgments (acks=all)
+•	Proper offset commits
+________________________________________
+🔹 Kafka vs RabbitMQ (Common Question)
+Feature	Kafka	RabbitMQ
+Model	Pull-based	Push-based
+Use case	Streaming	Messaging
+Storage	Disk (persistent)	Queue-based
+Throughput	Very high	Moderate
+Ordering	Partition-based	Queue-based
+________________________________________
+🔹 Real-World Use Case Questions
+31. Where is Kafka used?
+✅ From your notes:
+•	LinkedIn → activity tracking
+•	Uber → ride tracking
+•	Netflix → logs & monitoring
+•	Walmart → retail analytics
+________________________________________
+🔹 Tricky / Advanced Questions
+32. Can Kafka lose messages?
+•	Rare, but possible if: 
+o	replication = 1
+o	improper config
+________________________________________
+33. What is exactly-once processing?
+•	Ensures messages are: 
+o	Not lost
+o	Not duplicated
+________________________________________
+34. What is Kafka Streams?
+•	API for real-time stream processing
+________________________________________
+35. What is Kafka Connect?
+•	Tool for integrating external systems
+________________________________________
+🔹 Quick Revision (Your Notes Summary Answer)
+👉 If interviewer asks: Explain Kafka in 1 minute
+You can say:
+Kafka is a distributed event streaming platform that uses a publish-subscribe model. Producers send messages to topics, which are divided into partitions for scalability. Kafka brokers store these messages, and consumers read them using consumer groups. It provides high throughput, fault tolerance via replication, and is widely used for real-time data processing.
+________________________________________
+✅ Pro Tip (Interview)
+Always add:
+•	Kafka is pull-based
+•	Messages are retained (not deleted after read)
+•	Offsets are managed by consumers
+
+🔹 Basic RabbitMQ Questions
+1. What is RabbitMQ?
+RabbitMQ is an open-source message broker that enables communication between systems using a queue-based messaging model.
+________________________________________
+2. What is a Message Broker?
+Software that:
+•	Receives messages from producers
+•	Routes them
+•	Delivers to consumers
+________________________________________
+3. What are main components of RabbitMQ?
+✅ From your notes:
+•	Producer
+•	Consumer
+•	Queue
+•	Exchange
+•	Binding
+________________________________________
+4. What is a Queue?
+A buffer that stores messages until consumed.
+
+5. What is an Exchange?
+An intermediate routing agent that:
+•	Receives message from producer
+•	Decides which queue to send
+
+6. What is a Binding?
+A link between exchange and queue using routing rules.
+________________________________________
+🔹 Intermediate Questions
+7. How RabbitMQ works?
+Flow:
+1.	Producer → Exchange
+2.	Exchange → Queue
+3.	Queue → Consumer
+👉 Unlike Kafka, RabbitMQ does routing through exchange.
+________________________________________
+8. Types of Exchanges
+✅ Very important question
+1.	Direct Exchange
+o	Routes using exact routing key
+2.	Fanout Exchange
+o	Sends to ALL queues
+3.	Topic Exchange
+o	Pattern-based routing
+o	Example: order.*
+4.	Headers Exchange
+o	Uses headers instead of routing key
+________________________________________
+9. What is Routing Key?
+A key used by exchange to decide: 👉 which queue gets the message
+________________________________________
+10. What is Message Acknowledgment?
+•	Confirms message processed
+•	If not acknowledged → message re-delivered
+________________________________________
+11. What is Message Durability?
+•	Messages stored on disk
+•	Prevents data loss
+________________________________________
+12. What is Prefetch Count?
+•	Limits how many messages a consumer can receive at once
+•	Prevents overloading consumers
+________________________________________
+🔹 Scenario-Based Questions
+13. What happens if consumer crashes?
+•	Message returns to queue
+•	Another consumer processes it
+________________________________________
+14. How to ensure no message loss?
+•	Use durable queues
+•	Use persistent messages
+•	Enable acknowledgment
+________________________________________
+15. Can RabbitMQ deliver message to multiple consumers?
+✅ Yes:
+•	Using fanout exchange
+________________________________________
+16. How does load balancing work?
+•	Messages distributed across consumers
+•	Round-robin style
+________________________________________
+17. What is Dead Letter Queue (DLQ)?
+•	Stores failed or rejected messages
+•	Helps debugging
+________________________________________
+18. What is TTL (Time To Live)?
+•	Message expires after defined time
+
+🔹 Advanced Questions
+19. What is Publisher Confirms?
+•	Confirms broker received message successfully
+________________________________________
+20. What is Clustering in RabbitMQ?
+•	Multiple nodes work as one system
+________________________________________
+21. What is Federation?
+•	Connect multiple RabbitMQ brokers across locations
+________________________________________
+22. What is Mirrored Queue?
+•	Queue replicated across nodes for fault tolerance
+________________________________________
+23. What is Backpressure?
+•	Prevents system overload when consumers are slow
+________________________________________
+🔹 Quick 1-Minute Answer (Interview Ready)
+👉 If asked “Explain RabbitMQ”:
+RabbitMQ is a message broker that uses a queue-based system to enable communication between distributed systems. Producers send messages to exchanges, which route them to queues based on rules. Consumers then process messages from queues. It supports reliability through acknowledgments, durability, and flexible routing using different exchange types.
+________________________________________
+Jenkin
+Jenkin is open source Automation server used for CI/CD
+•	Continuous Integration (CI)
+•	Continuous Delivery/Deployment (CD)
+It helps developers automatically build, test, and deploy code whenever changes are made.
+ 
+Jenkin automates repititive development task 
+Building applications
+Running tests
+Deploying apps to server or cloud
+This reduces manual effort and speeds up software delivery.
+ 
+•	flow
+•	Developer pushes code to Git
+•	Jenkins detects the change
+•	Jenkins: 
+•	Builds the code
+•	Runs tests
+•	Deploys (optional)
+•	Reports success/failure
+ 
+Junit
+----------
+ 
+ 
+
+
