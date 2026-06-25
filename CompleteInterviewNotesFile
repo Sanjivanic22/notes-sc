@@ -279,7 +279,8 @@ function package to support lambda expressions and functional programming.
 100.	Function<String, Integer> length = s -> s.length();
 101.	System.out.println(length.apply("Java")); // 4
 
-
+Core java QuestionList
+==============================
 ✅ 🔥 Most Frequently Asked Core Java Questions
 1. Basics / Conceptual
 •	What is JVM, JRE, JDK? Difference?
@@ -1347,8 +1348,8 @@ HandlerMapping is responsible for deciding which controller should handle a spec
 58.	What is ViewResolver?
 ViewResolver is a Spring MVC component that resolves the logical view name returned by the controller into the actual view resource.
 
-🔹 Spring Boot QuestionList
-======================
+Spring Boot QuestionList
+==========================
 37.	What is Spring Boot?
 •	Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
 •	 that makes it easier to create and run Java applications.
@@ -1792,7 +1793,7 @@ ________________________________________
 18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
 
 
-🔸 REST API Questions
+ REST API QuestionsList
 ============================
 1.	Difference between GET, POST, PUT, PATCH, DELETE
 2.	•  GET → Read/fetch data 
@@ -2068,8 +2069,8 @@ JPQL allows yo>u to write queries using Java entity names and their fields, rath
 •	✅ Similar to SQL but uses object-oriented syntax
 •	✅ Supports SELECT, UPDATE, DELETE operations
 
-🔸 Microservices & Advanced QuestionList
-====================================
+🔸Microservices & Advanced QuestionList
+=========================================
 what is microservice architecture
 -----------------------------------------
 Microservice is an architectural style for designing and building software applications as a collection of small, independent, and 
