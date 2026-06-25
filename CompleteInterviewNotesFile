@@ -1170,91 +1170,6 @@ When to use which?
 •	✔ You want multiple ways of sorting
 ✔ You cannot modify the class (e.g., third-party class)
 ✔ Sorting logic is dynamic or external
-
-✅ 🔥 Most Important “Tricky Interview Questions”________________________________________
-✅ 1. Why is String immutable?
-👉 Reasons:
-•	✅ Security (used in URLs, file paths, DB connections)
-•	✅ Thread-safe (no synchronization needed)
-•	✅ String Pool optimization (memory efficient)
-•	✅ Caching hashCode (performance for HashMap)
-String s = "Java";
-s.concat("World"); // creates new object, original unchanged
-👉 Immutability = value cannot change once created
-________________________________________
-✅ 2. Why should HashMap key be immutable?
-👉 Reason: Consistency of hashing
-•	HashMap uses: 
-•	
-o	hashCode() → find bucket
-o	equals() → compare key
-❌ If key changes after insertion:
-•	Hash code changes
-•	Object goes to wrong bucket
-•	Retrieval fails
-✅ Example:
-map.put(key, "value");
-// if key changes → map.get(key) may return null
-``
-👉 Therefore keys should be immutable (e.g., String)
-________________________________________
-✅ 3. Why override equals() & hashCode() together?
-👉 Rule: ✅ If equals() is true → hashCode() MUST be same
-👉 Used by:
-•	HashMap
-•	HashSet
-❌ If only equals() overridden:
-•	Objects considered equal
-•	But stored in different buckets
-✅ Result → duplicate entries / wrong behavior
-________________________________________
-✅ 4. Why multiple inheritance is not allowed (classes)?
-👉 To avoid ambiguity (Diamond Problem)
-Example:
-class A { void show() {} }
-class B extends A {}
-class C extends A {}
-class D extends B, C {} // ❌ Not allowed
-👉 Which show() should be called?
-✅ Confusion → avoided in Java
-✔ Instead:
-•	Use interfaces (supports multiple inheritance)
-________________________________________
-✅ 5. Difference between Fail-Fast and Fail-Safe
-Feature	Fail-Fast	Fail-Safe
-Behavior	Throws exception	Works on copy
-Exception	✅ ConcurrentModificationException	❌ No exception
-Example	ArrayList, HashMap	CopyOnWriteArrayList
-Modification allowed	❌ No	✅ Yes
-👉 Fail-fast detects changes immediately
-👉 Fail-safe allows safe iteration
-________________________________________
-✅ 6. synchronized vs ReentrantLock
-Feature	synchronized	ReentrantLock
-Lock handling	Automatic	Manual
-Flexibility	Less	More
-tryLock()	❌ No	✅ Yes
-Interruptible	❌ No	✅ Yes
-Fairness	❌ No	✅ Yes
-👉 ReentrantLock = advanced version of synchronized
-________________________________________
-✅ 7. Why ConcurrentHashMap is faster than Hashtable?
-👉 Key reasons:
-•	✅ Fine-grained locking (segment-based / bucket-level)
-•	❌ Hashtable locks entire map (coarse locking)
-👉 Result:
-•	Multiple threads access different parts simultaneously ✅
-•	Better performance 🚀
-________________________________________
-✅ 8. Why wait() is in Object class (not Thread)?
-👉 Because:
-•	wait() works on object monitor (lock), not thread
-synchronized(obj) {
-    obj.wait();
-}
-👉 Every object has a lock (monitor)
-If in Thread: ❌ Thread doesn’t know which object lock to release
-✅ Hence placed in Object class
 ________________________________________
 ✅ Final One-Line Summary (Interview Gold)
 •	String is immutable for security & performance
@@ -4238,3 +4153,87 @@ ________________________________________
 •	private fields
 •	no setters
 •	defensive copy
+✅ 🔥 Most Important “Tricky Interview Questions”________________________________________
+✅ 1. Why is String immutable?
+👉 Reasons:
+•	✅ Security (used in URLs, file paths, DB connections)
+•	✅ Thread-safe (no synchronization needed)
+•	✅ String Pool optimization (memory efficient)
+•	✅ Caching hashCode (performance for HashMap)
+String s = "Java";
+s.concat("World"); // creates new object, original unchanged
+👉 Immutability = value cannot change once created
+________________________________________
+✅ 2. Why should HashMap key be immutable?
+👉 Reason: Consistency of hashing
+•	HashMap uses: 
+•	
+o	hashCode() → find bucket
+o	equals() → compare key
+❌ If key changes after insertion:
+•	Hash code changes
+•	Object goes to wrong bucket
+•	Retrieval fails
+✅ Example:
+map.put(key, "value");
+// if key changes → map.get(key) may return null
+``
+👉 Therefore keys should be immutable (e.g., String)
+________________________________________
+✅ 3. Why override equals() & hashCode() together?
+👉 Rule: ✅ If equals() is true → hashCode() MUST be same
+👉 Used by:
+•	HashMap
+•	HashSet
+❌ If only equals() overridden:
+•	Objects considered equal
+•	But stored in different buckets
+✅ Result → duplicate entries / wrong behavior
+________________________________________
+✅ 4. Why multiple inheritance is not allowed (classes)?
+👉 To avoid ambiguity (Diamond Problem)
+Example:
+class A { void show() {} }
+class B extends A {}
+class C extends A {}
+class D extends B, C {} // ❌ Not allowed
+👉 Which show() should be called?
+✅ Confusion → avoided in Java
+✔ Instead:
+•	Use interfaces (supports multiple inheritance)
+________________________________________
+✅ 5. Difference between Fail-Fast and Fail-Safe
+Feature	Fail-Fast	Fail-Safe
+Behavior	Throws exception	Works on copy
+Exception	✅ ConcurrentModificationException	❌ No exception
+Example	ArrayList, HashMap	CopyOnWriteArrayList
+Modification allowed	❌ No	✅ Yes
+👉 Fail-fast detects changes immediately
+👉 Fail-safe allows safe iteration
+________________________________________
+✅ 6. synchronized vs ReentrantLock
+Feature	synchronized	ReentrantLock
+Lock handling	Automatic	Manual
+Flexibility	Less	More
+tryLock()	❌ No	✅ Yes
+Interruptible	❌ No	✅ Yes
+Fairness	❌ No	✅ Yes
+👉 ReentrantLock = advanced version of synchronized
+________________________________________
+✅ 7. Why ConcurrentHashMap is faster than Hashtable?
+👉 Key reasons:
+•	✅ Fine-grained locking (segment-based / bucket-level)
+•	❌ Hashtable locks entire map (coarse locking)
+👉 Result:
+•	Multiple threads access different parts simultaneously ✅
+•	Better performance 🚀
+________________________________________
+✅ 8. Why wait() is in Object class (not Thread)?
+👉 Because:
+•	wait() works on object monitor (lock), not thread
+synchronized(obj) {
+    obj.wait();
+}
+👉 Every object has a lock (monitor)
+If in Thread: ❌ Thread doesn’t know which object lock to release
+✅ Hence placed in Object class
