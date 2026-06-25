@@ -283,29 +283,25 @@ Internal Structure
 A HashMap consists of an array of buckets, where each bucket is a linked list . Each bucket corresponds to a hash code calculated from the key.
 Hash Calculation: The hash code for the key is calculated and further processed to find the index of the array (bucket).
 Index Calculation: The index in the array is determined by the formula (n - 1) & hash, where n is the length of the array.
-
-Handling Collisions: If the bucket at the calculated index is already occupied, the HashMap traverses the linked list (or tree) to find the correct spot for the new entry.
-If the key already exists, the value is updated.
+Handling Collisions: If the bucket at the calculated index is already occupied, the HashMap traverses the linked list (or tree) to
+find the correct spot for the new entry.If the key already exists, the value is updated.
 Resize: If the load factor exceeds a certain threshold, the HashMap will resize itself by doubling the array size and rehashing all entries.
-
 Bucket Traversal: The HashMap traverses the bucket at the calculated index to find the matching key and return its value.
+
 Handling Collisions
 Initially, collisions are handled using linked lists. If the number of entries in a bucket exceeds a threshold (default is 8), 
 the linked list is transformed into a balanced tree (red-black tree) to improve performance from O(n) to O(log n) for lookups and insertions.
 
 Resize Operation
 When the number of entries exceeds the product of the current capacity and load factor (default is 0.75), the HashMap resizes itself:
-
-The capacity is doubled.
-All existing entries are rehashed and redistributed into the new array.
+the capacity is doubled.All existing entries are rehashed and redistributed into the new array.
 Performance
 Average Time Complexity: O(1) for put and get operations, assuming a good hash function and uniform distribution.
-Worst Case Time Complexity: O(n) for put and get operations, if all keys hash to the same bucket and form a single linked list. However, with treeification, the worst-case time complexity is improved to O(log n).
+Worst Case Time Complexity: O(n) for put and get operations, if all keys hash to the same bucket and form a single linked list.
+However, with treeification, the worst-case time complexity is improved to O(log n).
 
 Core java QuestionList
 ==============================
-✅ 🔥 Most Frequently Asked Core Java Questions
-1. Basics / Conceptual
 •	What is JVM, JRE, JDK? Difference?
 •	JVM (Java Virtual Machine)
 •	It is an engine that runs Java bytecode.
@@ -330,7 +326,7 @@ Core java QuestionList
 •	JRE
 •	Development tools (javac, debugger, jar, etc.)
 •	👉 Key point: JDK = JRE + Development tools
-•	
+	
 Is Java pass-by-value or pass-by-reference?*
 Java is ALWAYS pass-by-value
 🔹 What does it mean?
@@ -338,7 +334,6 @@ Java is ALWAYS pass-by-value
 •	Even for objects, the reference itself is passed by value
 
 •	What are OOP principles? Explain with real examples****
-•	✅ OOP Principles in Java (with Real-Life Examples)
 •	Object-Oriented Programming (OOP) is a paradigm that organizes code using objects and classes. Java is built around 4 main OOP principles:
 •	________________________________________
 •	🔹 1. Encapsulation (Data Hiding)
@@ -404,11 +399,12 @@ Java is ALWAYS pass-by-value
 •	Polymorphism allows a method to behave differently based on the context.
 Polymorphism in Java is a concept by which we can perform a single action in different ways.
  So polymorphism means many forms.
+
 There are two types of polymorphism in Java: 
-compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
+compile-time polymorphism and runtime polymorphism.
 Overloading (COMPILE TIME POLYMORPHISM)
 ===============
-Method overloading is a form of compile-time polymorphism where multiple methods share the same name but differ in parameters (type, number, or order).ading
+Method overloading is a form of compile-time polymorphism where multiple methods share the same name but differ in parameters (type, number, or order).
 public class Calculator {
     // Overloaded method to add two integers
     public int add(int a, int b) {
@@ -449,10 +445,9 @@ public class Main {
 
 Overriding(RUNTIME POLYMORPHISM)
 ==============
-If methdo names and arhuments must be matched  i.e method signature must be matched is called overriding.
-2. Runtime Polymorphism (Method Overriding)
-Runtime polymorphism is achieved through method overriding. This occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. 
-The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
+If methdo names and arguments must be matched  i.e method signature must be matched is called overriding.
+ This occurs when a subclass provides a specific implementation of a method 
+that is already defined in its superclass. 
 class BankAccount {
     void calculateInterest() {
         System.out.println("Calculating general bank account interest");
@@ -485,10 +480,6 @@ public class Main {
     }
 
 }
-
-•	________________________________________
-
-•	🔸 Types:
 •	1. Compile-time (Method Overloading)
 •	void add(int a, int b) {}
 •	void add(int a, int b, int c) {}
@@ -520,67 +511,52 @@ public class Main {
 •	Polymorphism	•	Many behaviors	•	Human roles
 •	________________________________________
 
-•	Difference between: Encapsulation vs Abstraction**
+•	Difference between: Encapsulation vs Abstraction?**
+
 o	Aspect	     Encapsulation	                                                              Abstraction
 o	Definition	Bundles data and methods into a class and restricts direct access to fields.	Hides implementation details and shows only essential features.
 o	 Purpose	Protects internal data and controls access.	                          Simplifies complexity by focusing on what an object does.
 o	  Focus         	Securing and controlling access to data.	                               Simplifying interaction by hiding details.
 o	Implementation	Achieved using private fields and public getters/setters.              	Achieved using abstract classes, interfaces, and abstract methods.
 o	Visibility	   Controlled via access modifiers (private, public, etc.).	                  Hides internal logic; user only sees relevant features.
-Aspect	Encapsulation	Abstraction
-Definition	Wrapping data and methods together in a class	Hiding implementation details and showing only functionality
-Focus	Protecting data (data hiding)	Simplifying complexity (logic hiding)
-Purpose	Restrict direct access to variables	Expose only necessary features
-How achieved	Using private variables + getters/setters	Using abstract classes or interfaces
-Level	Implementation level	Design level
-Example in Java	Private fields in a class	Abstract class or interface
 
-o	Abstraction vs Interface
-o	Feature	o	Abstraction (Abstract Class)	o	Interface
+o	Abstraction vs Interface?
+o	Feature	o	Abstraction (Abstract Class)	                                o	Interface
 o	Definition	o	A class that can have both abstract and concrete methods	o	A blueprint that defines only behavior (contract)
-o	Methods	o	Can have abstract + non-abstract methods	o	Mostly abstract methods (Java 8+: can have default & static)
-o	Variables	o	Can have instance variables	o	Only public static final variables
-o	Inheritance	o	Supports single inheritance	o	Supports multiple inheritance
-o	Constructor	o	✅ Allowed	o	❌ Not allowed
-o	Access Modifiers	o	Can use private, protected, public	o	Methods are public by default
-o	Use Case	o	When classes share common behavior + base logic	o	When different classes need to follow a common contract
-o	
+o	Methods	o	Can have abstract + non-abstract methods	                    o	Mostly abstract methods (Java 8+: can have default & static)
+o	Variables	o	Can have instance variables	                                o	Only public static final variables
+o	Inheritance	o	Supports single inheritance                                	o	Supports multiple inheritance
+o	Constructor	o	✅ Allowed	                                                o	❌ Not allowed
+o	Access Modifiers	o	Can use private, protected, public	                o	Methods are public by default
+o	Use Case	o	When classes share common behavior + base logic         	o	When different classes need to follow a common contract
+
 •	What is marker interface? Give examples
-•	An interface which has no member is known as a marker or tagged interface, for example, Serializable, Cloneable, Remote, random access method.etc.
-•	They are used to provide some essential information to the JVM so that JVM may perform some useful operation.
+•	An interface which has no member is known as a marker or tagged interface,
 •	If an interface wont contains any method & by implementing that interface if our object will get ability such type of interface are called marker interface.
+    They are used to provide some essential information to the JVM so that JVM may perform some useful operation.
+Examples 
+Serializable, Cloneable, Remote, random access method.etc.
 •	By implementing seriazable interface we can send object across the n/w and we can save state of object to a file this extra ability is provided through seriazable interface
 •	By implemeting clonable interface our object will be in position to provide exactly duplicate object
-•	As marker interface interface wont contain method them jvm is responsible for that to reduce complexity of program
 •	We can create our own marker interfface but customization of jvm required
-________________________________________
-2. OOPS & Design
-•	Explain Inheritance types
-•	Why multiple inheritance is not supported in Java?
-•	Difference: 
-o	IS-A vs HAS-A relationship
-o	Composition vs Aggregation
-•	What is polymorphism? 
-o	Compile-time vs runtime
-•	Method overloading vs overriding
-________________________________________
 
-3. String & Object
+ String & Object
+	What is toString() method?
+•	toString() is a method of the Object class used to return a string representation of an object.
+
 •	Why String is immutable?
 •	The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
-•	The reason of making string final is to destroy the immutability and to not allow others to extend it.
 •	The String objects are cached in the String pool, and it makes the String immutable. 
 •	The cached String literals are accessed by multiple clients. So, there is always a risk, where action performs by one client affects all other clients. 
-•	For example, if one client performs an action and changes the string value from Pressure to PRESSURE, all remaining clients will also read that value. For the performance reason, caching of String objects was important, so to remove that risk, we have to make the String Immutable.
 
-Difference: String vs StringBuffer vs StringBuilder
+Difference: String vs StringBuffer vs StringBuilder?
 If the content will not change frequently then we should go for String 
 If content will change frequently and thread safety required then go for String buffer
 If content will change frequently and thread safety is not required then go for stringbuilder.
 
 •	What is == vs equals()?
-•	== compares references, while equals() compares object content (if overridden).
 •	== operator is always meant for referance comparision where as .equls() meant for content comparision.
+
 •	== operator is applicable for both premitives and object referance
 •	In case of  object referance == opeartor is always meant for referance comparation i.e
 •	If two referance pointing to the same object then only ==operator returns true.
@@ -593,70 +569,59 @@ If content will change frequently and thread safety is not required then go for 
 •	Why override equals() and hashCode() together?
 •	We override both equals() and hashCode() to maintain consistency in hash-based collections, ensuring that equal objects are
     stored and retrieved correctly.
-•	
-•	What is toString() method?
-•	toString() is a method of the Object class used to return a string representation of an object.	
 ________________________________________
 4. Collections Framework 🔥 (Very Important)
 •	Difference: 
 o	List vs Set vs Map
-o	Feature	o	List	o	Set	o	Map
+o	Feature	    o	List	                        o	Set                         	o	Map
 o	Definition	o	Colletion of ordered elements	o	Collection of unique elements	o	Key-value pair collection
-o	Duplicates	o	✅ Allowed	o	❌ Not allowed	o	❌ Keys unique, values can repeat
-o	Order	o	✅ Maintains insertion order	o	❌ No order (except some types)	o	❌ No order (depends on implementation)
-o	Access	o	By index	o	No index	o	By key
-o	Examples	o	ArrayList, LinkedList	o	HashSet, TreeSet	o	HashMap, TreeMap
+o	Duplicates	o	✅ Allowed	                    o	❌ Not allowed	                o	❌ Keys unique, values can repeat
+o	Order	    o	✅ Maintains insertion order	o	❌ No order (except some types)	o	❌ No order (depends on implementation)
+o	Access	    o	By index	                    o	No index	o	By key
+o	Examples	o	ArrayList, LinkedList	        o	HashSet, TreeSet	            o	HashMap, TreeMap
 	
 o	ArrayList vs LinkedList**
-o	Feature	o	ArrayList	o	LinkedList
+o	Feature      	o	ArrayList	    o	LinkedList
 o	Data Structure	o	Dynamic array	o	Doubly linked list
-o	Access time	o	✅ Fast (O(1))	o	❌ Slow (O(n))
+o	Access time	    o	✅ Fast (O(1))	o	❌ Slow (O(n))
 o	Insert/Delete (middle)	o	❌ Slow	o	✅ Fast
-o	Memory	o	Less	o	More (stores pointers)
-o	Use case	o	Frequent reading	o	Frequent insertion/deletion
-o	
+o	Memory	        o	Less	        o	More (stores pointers)
+o	Use case	    o	Frequent reading	o	Frequent insertion/deletion
+
 o	HashMap vs Hashtable
-o	Feature	o	HashMap	o	Hashtable
+o	Feature	            o	HashMap	            o	Hashtable
 o	Synchronization	o	❌ Not synchronized	o	✅ Synchronized
-o	Thread-safe	o	❌ No	o	✅ Yes
-o	Performance	o	✅ Faster	o	❌ Slower
+o	Thread-safe	    o	❌ No              	o	✅ Yes
+o	Performance	    o	✅ Faster           	o	❌ Slower
 o	Null key/value	o	✅ Allows 1 null key, multiple null values	o	❌ No nulls allowed
 o	Legacy	o	Modern	o	Legacy class
-o	
+
 o	HashMap vs ConcurrentHashMap
-o	Feature	o	HashMap	o	ConcurrentHashMap
+o	Feature	        o	HashMap	o	ConcurrentHashMap
 o	Thread-safe	o	❌ No	o	✅ Yes
-o	Locking	o	No locking	o	✅ Segment/partial locking
-o	Performance	o	Fast (single thread)	o	Faster than Hashtable in multi-thread
+o	Locking	        o	No locking	o	✅ Segment/partial locking
+o	Performance	    o	Fast (single thread)	o	Faster than Hashtable in multi-thread
 o	Null keys/values	o	✅ Allowed	o	❌ Not allowed
 o	
 o	TreeMap vs LinkedHashMap
-o	Feature	o	TreeMap	o	LinkedHashMap
+o	Feature	    o	TreeMap	                    o	LinkedHashMap
 o	Order	o	✅ Sorted (ascending by key)	o	✅ Insertion order
-o	Data structure	o	Red-Black Tree	o	Hash table + Linked list
-o	Performance	o	Slower (O(log n))	o	Faster (O(1))
-o	Null key	o	❌ Not allowed	o	✅ Allowed (one)
-o	
-•	Internal working of HashMap****
-•	HashMap uses hashing to store key-value pairs, where hashCode determines the bucket and equals ensures key uniqueness. Load factor controls resizing, and capacity defines bucket size 
-•	•  HashMap uses: ✅ hashCode() → to find bucket
-✅ equals() → to find exact key
-•	•  Collision handled by: ✅ LinkedList (before Java 8)
-✅ Tree (after Java 8)
-•	•  Default values: ✅ Capacity = 16
-✅ Load Factor = 0.75
-•	
+o	Data structure	o	Red-Black Tree	         o	Hash table + Linked list
+o	Performance	     o	Slower (O(log n))	     o	Faster (O(1))
+o	Null key	o	❌ Not allowed	o	         ✅ Allowed (one)
+
 •	What is load factor & capacity?
-•	Load factor is the ratio of the average load to the maximum (peak) load over a given period of time
-    Capacity is the maximum power output that a system or power plant can produce under specified conditions.
+	Load factor is the ratio of the average load to the maximum (peak) load over a given period of time
+    Capacity is the maximum power output that a system can produce under specified conditions.
 
 •	What is fail-fast vs fail-safe
 •	Fail-Fast systems abort operation as-fast-as-possible exposing failures immediately and stopping the whole operation. 
 •	Whereas, Fail-Safe systems don't abort an operation in the case of a failure. Such systems try to avoid raising failures as much as possible.
-•	______________________________________
+
 5. Exception Handling
-•	Difference: 
-o	Checked vs Unchecked exception
+----------------------------
+•	Difference: Checked vs Unchecked exception
+
 o	Checked exception
 o	-----------------------
 o	Checked exceptions are exceptions that are checked at compile-time by the Java compiler for smooth execution.
@@ -695,19 +660,16 @@ o
 o	Key Characteristics:
 o	Not required to be caught or declared.
 o	Represents programming errors, such as logic flaws or improper use of an API.
-•	What is: 
-o	try, catch, finally
-o	throw vs throws
-•	What is exception propagation?
-•	The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us called exception propogation.
-•	
+•	/	
 Custom exception
 -------------------
 To meet programing requirement some times we have create our own exception is known as custom exception.
 In Java, you can create your own exceptions by extending the Exception class (for checked exceptions) or the RuntimeException class (for unchecked exceptions). 
 Custom exceptions are useful for creating meaningful and domain-specific error handling.
 Ex.TooOldException,Insufficient balance
+
 Steps to Create a Custom Exception:
+--------------------------------------
 Create a Class: Extend Exception or RuntimeException.
 Add Constructors: Include constructors that match the standard exception constructors,
 e.g., a no-argument constructor, a constructor that takes a message, and one that takes a message and a cause.
@@ -720,15 +682,147 @@ Because they are detected during the compilation phase, your program won't run u
 
 Runtime error
 ==================
- runtime error in Java occurs while the program is running, after successful compilation. These errors are typically due to issues that only manifest 
-during the execution of the program, such as invalid user input, resource unavailability, or logical errors that lead to exceptions. 
-Unlike compile-time errors, runtime errors are not caught by the compiler and can cause the program to terminate unexpectedly if not handled properly.
-Try 
-----
-To maintain the risky code
-Catch
---------
-To maintain handling code
+ runtime error in Java occurs while the program is running, after successful compilation.
+These errors are typically due to issues that only manifest during the execution of the program, such as invalid user input, resource unavailability, 
+or logical errors that lead to exceptions. 
+can cause the program to terminate unexpectedly if not handled properly.
+
+TRy catch block
+--------------
+try → Contains code that might throw an exception (To maintain the risky code)
+catch → Handles the exception (like ArithmeticException) (To maintain handling code)
+
+try {
+    // code that may cause an exception
+} catch (ExceptionType e) {
+    // code to handle the exception
+} finally {
+    // optional block (always executes)
+}
+
+Will finally block always execute?
+No — not always.
+🚫 Cases where finally does NOT execute:
+If System.exit() is called
+JVM crashes
+### ✅ Example:
+
+```java
+try {
+    System.exit(0);
+} finally {
+    System.out.println("Finally block");
+}
+
+➡️ Output: *(nothing printed)*
+
+# 🔥 2. Return inside try vs finally
+## ❓ Question
+Which return value is used?
+public class Test {
+    public static int test() {
+        try {
+            return 1;
+        } finally {
+            return 2;
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println(test());
+    }
+}
+Output:2
+
+### 💡 Explanation:
+* `finally` overrides the `try` return
+* Always avoid return in `finally` (bad practice)
+
+# 🔥 3. Exception in finally block
+What happens if `finally` throws exception?
+try {
+    int x = 5 / 0;
+} finally {
+    throw new RuntimeException("Error in finally");
+}
+Ans
+* **Original exception is lost**
+* Only exception from `finally` is thrown
+
+# 🔥 4. Multiple catch blocks order
+Is this valid?
+
+```java
+try {
+} catch (Exception e) {
+} catch (ArithmeticException e) {
+}
+## ❌ Answer:
+
+Compilation Error
+### 💡 Reason:
+* Parent class (`Exception`) must come **after** child class
+✅ Correct order:
+```java
+catch (ArithmeticException e) {}
+catch (Exception e) {}
+
+# 🔥 5. Try without catch?
+Is this valid?
+try {
+    System.out.println("Hello");
+}
+## ❌ Answer:
+Not valid
+✅ Must have:
+* At least one `catch` OR A `finally`
+
+# 🔥 6. System return vs finally execution
+Will finally run here?
+try {
+    return;
+} finally {
+    System.out.println("Finally runs");
+}
+## ✅ Answer:Yes ✅
+Output:Finally runs
+
+# 🔥 7. Nested try-catch behavior
+try {
+    try {
+        int x = 10 / 0;
+    } catch (NullPointerException e) {
+        System.out.println("Inner catch");
+    }
+} catch (ArithmeticException e) {
+    System.out.println("Outer catch");
+}
+## ✅ Answer:Outer catch
+### 💡 Explanation:
+* Inner catch doesn't match → exception propagates
+* Outer catch handles it
+
+# 🔥 8. Try with multiple exceptions in one catch (Java 7+)
+try {
+    int a = 5 / 0;
+} catch (ArithmeticException | NullPointerException e) {
+    System.out.println("Handled");
+}`
+
+✅ Valid ✅
+# 🔥 9. Can we write only try-finally?
+✅ Yes
+try {
+    System.out.println("Try block");
+} finally {
+    System.out.println("Finally block");
+}
+
+# 🔥 10. Checked vs Unchecked Exception trick
+Why compiler forces handling some exceptions?
+✅ Answer:
+
+* **Checked Exception** → Must handle (IOException)
+* **Unchecked Exception** → Optional (RuntimeException)
 
 Difference between final/finally/finalize?
 Final
@@ -742,14 +836,14 @@ Finally
 ---------
 It is block associated with try -catch To maitain the clean up code which should be  always executed  irrespective of whether exception raised or not 
 and exception handled or not.such type place is nothing but finally block.finally will executed then return will be excuted.
-	• 
+
 Finalize
 --------------
 It is method which should excuted by garbage collector before destroying the  any object to perform cleanup activities.
 
 Throw
 ---------
-The main purpose of throw keyword is to handover iur created exception manually to the jvm.
+The main purpose of throw keyword is to handover our created exception manually to the jvm.
 Sometimes we can create exception object maunally & handover that object to the JVM explicitly by using throw keyword.
 We can use throw keyword for customized exceptions.
 
@@ -763,20 +857,96 @@ Exception propagation
 The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us
 called exception propogation.
 
-
 clasLoader
 -----------------
-The Java ClassLoader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine. 
+The Java ClassLoader is a part of the Java Runtime Environment that dynamically loads Java classes into the jvm. 
 The Java run time system does not need to know about files and file systems because of classloaders.
-Java classes aren’t loaded into memory all at once, 
-but when required by an application. At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
-•	Create a custom exception
-________________________________________
+Java classes aren’t loaded into memory all at once, but when required by an application. 
+At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
+_____________________________________
 6. Multithreading 🔥🔥 (Highly Asked)
 •	What is thread lifecycle?
-Thread lifecycle consists of states like New, Runnable, Running, Waiting/Blocked, and Terminated, representing the execution flow of a thread
-•	New → Runnable → Running → Waiting/Blocked → Runnable → Terminated
-•	
+The **Thread Lifecycle** (mainly in Java) describes the **different states a thread goes through** from creation to termination.
+# ✅ Thread Lifecycle States
+A thread has **6 main states**:
+## 🔹 1. NEW
+* Thread is created but not started
+* Uses `new Thread()`
+Thread t = new Thread();
+## 🔹 2. RUNNABLE
+* Thread is ready to run or running
+* After calling `start()`
+t.start();
+```
+👉 JVM decides when to actually run it (thread scheduling)
+## 🔹 3. BLOCKED
+* Thread is waiting to acquire a **lock**
+* Happens in synchronization
+synchronized(obj) {
+    // thread may get blocked if lock not available
+}
+## 🔹 4. WAITING
+* Thread waits indefinitely for another thread
+Methods:
+* `wait()`
+* `join()`
+t.join();```
+
+👉 Needs another thread to notify it
+## 🔹 5. TIMED\_WAITING
+
+* Thread waits for a **fixed time**
+* `sleep()`
+* `wait(time)`
+* `join(time)`
+Thread.sleep(1000);
+👉 Wakes up after specified time
+## 🔹 6. TERMINATED (DEAD)
+
+* Thread has completed execution
+
+👉 Cannot restart the thread again
+# 🔥 Tricky Interview Points
+### ✅ 1. Difference between Runnable and Running
+* Java does NOT define a separate "Running" state officially
+* Both are part of **RUNNABLE**
+
+### ✅ 2. Can we restart a thread?
+
+❌ No
+t.start();
+t.start(); // Exception
+👉 Throws `IllegalThreadStateException`
+
+### ✅ 3. sleep() vs wait()
+
+| Feature             | sleep() | wait()         |
+| ------------------- | ------- | -------------- |
+| Class               | Thread  | Object         |
+| Releases lock?      | ❌ No    | ✅ Yes          |
+| Used in sync block? | No need | Must be inside |
+
+### ✅ 4. How thread goes to BLOCKED?
+* When trying to enter synchronized block but lock is busy
+### ✅ 5. Who moves thread from waiting to runnable?
+* `notify()` or `notifyAll()`
+
+# ✅ Example Code
+
+```java
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        MyThread t = new MyThread(); // NEW
+        t.start(); // RUNNABLE → RUNNING
+    }
+}
+```
 Real-Life Example
 👉 Student giving exam
 •	New → Student enters exam hall
@@ -789,33 +959,37 @@ Real-Life Example
 •	We can define thread in two ways
 •	1)By extending thread class
 •	2)By implemeting runnable interface.
-o	Thread class
-o	Runnable
 
 •	Which is better: Thread vs Runnable?
-•	Among he two ways of defining a thread implements runnable mechanism is recommended to use.
-•	In the first approach our class always extending thread class& hence there is chance of extending any other class but 
-•	in the second approach we can extends some other class also while implementing runnable interface hence 2nd approach is recommended to use.
+In the first approach, a class extends the Thread class. Since Java does not support multiple inheritance, extending Thread prevents the
+class from extending any other class.
+In the second approach, a class implements the Runnable interface, so it is still free to extend another class.
+Therefore, the Runnable approach is more flexible and recommended.
 
 •	What is: Synchronized?
 o	Synchronized is the modifier applicable only for methods and blocks& we cant apply for classes and variables.
 o	if a method or block declared as synchronized then at a time only one thread is allowed to execute that method or block on the given object.
 o	• The main advantages of sychronized keyword is it can resolve the inconsistancy problem
-o	• The main linitation of synchronized keyword is it increses waiting time of  threads & effect the performance of the system.
-o	• Hence if there is no requirement then its never recommended to use sychronized keyword.
-o	
+o	• The main limitation of synchronized keyword is it increses waiting time of  threads & effect the performance of the system.
+
 o	Syschronized block
 o	===================
-o	• If very few lines of code requires sycronization then it is never recommended to declare the entire method as sychronized .we have to declrae entire methods as sysnchronized .we have to declare those few lines of code inside sychronized block.
+o	• If very few lines of code requires sycronization then it is never recommended to declare the entire method as sychronized .
+       .we have to declare those few lines of code inside sychronized block.
 o	• The main advantages of sychronized block over sychronized method is it reduces the waiting time of thread and improves the performance of the system.
 
 •	What is: wait(), notify(), notifyAll()?
 o	Two thread will communicate with other by using Wait ,Notify ,NitifyAll
+The thread waiting for an update should call:
+👉 wait()
+The thread performing the update should call:
+👉 notify() or notifyAll()
+
 o	• The thread which requires updation it has to call wait() method.the thread which is responsible to update  it has to call notify methods
-o	• We can call wait () ,notify and notifyAll() methods only from sychronized area otherwise we will get runtime exception. Saying IllgalMonitorStateException.
+o	• We can call wait () ,notify and notifyAll() methods only from sychronized area otherwise we will get runtime exception.Saying IllgalMonitorStateException.
 o	• If thread calls wait() method it releases lock immediately and entred into the waiting state.the releases lock of only current object but not all locks. 
 o	After calling notify and notifyAll() methods thread releases the lock but nt immediately. 
-o	Except these wait(),notify,notifyAll() there is no other case where thread release loc
+o	Except these wait(),notify,notifyAll() there is no other case where thread release lock
 
 •	What is: sleep(), yield(), join()?
 o	• Yeild 
@@ -833,10 +1007,12 @@ o	Sleep
 o	======
 o	If thread don’t want to perform any operation for perticular amount of time then we should go for sleep()
 o	Whenever we are using sleep () we should compulsary handle the inturrupted exception.either by try catch or thows  otherwise we will get compiletime error
-•	What is deadlock & starvation?
+
+What is deadlock & starvation?
 •	If two thread are waiting for each other forever.such type of situation is called Deadlock
 •	• There is no resolution technoque but  but several prevention techniques are possible.
 •	• Sychronized keyword is the only reseaon for deadlock hence while using sychronized keyword we have to take very much care.
+
 •	A long  waiting thread which ends at certain point of time is called starvation
 •	
 •	What is race condition?***
@@ -848,18 +1024,21 @@ Threads “race” with each other to update data, causing unpredictable or inco
 •	•  Two users try to book the last seat at the same time 
 •	•  Both may see seat as available and book it
 
-A race condition occurs when multiple threads access shared data concurrently and the final result depends on execution order, leading to unpredictable outcomes.
+A race condition occurs when multiple threads access shared data concurrently and the final result depends on execution order,
+leading to unpredictable outcomee
 
 •	What is ReentrantLock?***
-•	ReentrantLock is a flexible and explicit locking mechanism that allows a thread to acquire the same lock multiple times and provides advanced features like tryLock, fairness, and interruptible locking.
-•	ReentrantLock is a class in java.util.concurrent.locks package that provides explicit locking mechanism similar to synchronized, but with more control and flexibility.
+•	ReentrantLock is a flexible and explicit locking mechanism that allows a thread to acquire the same lock multiple times and provides advanced features 
+like tryLock, fairness, and interruptible locking.
+•	ReentrantLock is a class in java.util.concurrent.locks package that provides explicit locking mechanism similar to synchronized, but
+    with more control and flexibility.
 ________________________________________
 7. Concurrency / Advanced
 •	What is ConcurrentHashMap?
 •	ConcurrentHashMap is an enhancement of Hashmap as we know that while dealing with threads in our application HashMap is not good choice 
 •	because performace wise hashmp is not upto the mark.
-•	• Underlaying data structure for Concurrenthashmap is hashtable
 •	• Concurrenthashmap is thread safe
+•	• Underlaying data structure for Concurrenthashmap is hashtable
 •	• At a time any no of thread are applicable for a read operation without locking the Concurrenthashmap object which is not there in hashmap
 •	• In Concurrenthashmap the object is divided into number of segments according to concurrency level
 •	• concurrency level Concurrenthashmap is 16.
@@ -873,20 +1052,12 @@ java.util.concurrent package, where every modification creates a new copy of the
 
 CopyOnWriteArrayList is a thread-safe list where every write operation creates a new copy of the array, making reads fast 
 and safe without synchronization.
-Whenever you:
-•	add()
-•	remove()
-•	update()
-➡ It creates a new copy of the underlying array, modifies it, and replaces the old one.
 
 •	Difference: submit() vs execute()?
-•	Both methods are used to submit tasks to a thread pool, but they behave differently.
-
 1. execute()
 🔹 Definition:
 •	Defined in Executor interface
 •	Used to execute a task (Runnable)
-
 ✅ Key Points:
 •	Takes only Runnable
 •	No return value
@@ -914,7 +1085,8 @@ o	Callable
 •	execute() runs a task without returning result, while submit() allows result tracking using a Future and supports Callable.
 
 •	How to handle concurrency in Java?
-•	Concurrency in Java is handled using synchronization, locks, atomic classes, concurrent collections, and thread pools to ensure safe and efficient multi-threaded execution.
+•	Concurrency in Java is handled using synchronization, locks, atomic classes, concurrent collections, and thread pools   
+    to ensure safe and efficient multi-threaded execution.
 
 8. Generics
 •	What are Generics?
@@ -922,7 +1094,7 @@ o	Callable
 •	enabling them to operate on various data types while providing compile-time type checking.
 •	Advantages of Generics
 •	Generics provide type safety, eliminate casting, and enable reusable and maintainable code in Java.
-•	
+
 •	What is type safety?
 •	Type safety means that a program only allows operations on the correct type of data, preventing invalid data usage.
 •	👉 In simple words:
@@ -939,7 +1111,6 @@ Key Characteristics:
 •	Created and managed by JVM
 •	Objects created using new keyword are stored here
 •	Managed by Garbage Collector (GC)
-o	
 o	Stack
 Stack memory stores method calls and local variables.
 ________________________________________
