@@ -409,7 +409,92 @@ Java is ALWAYS pass-by-value
 •	🔹 4. Polymorphism (Many Forms)
 •	✅ Definition:
 •	Polymorphism allows a method to behave differently based on the context.
+Polymorphism in Java is a concept by which we can perform a single action in different ways.
+ So polymorphism means many forms.
+There are two types of polymorphism in Java: 
+compile-time polymorphism and runtime polymorphism. We can perform polymorphism in java by method overloading and method overriding.
+Overloading (COMPILE TIME POLYMORPHISM)
+===============
+Method overloading is a form of compile-time polymorphism where multiple methods share the same name but differ in parameters (type, number, or order).ading
+public class Calculator {
+    // Overloaded method to add two integers
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // Overloaded method to add three integers
+    public int add(int a, int b, int c) {
+        return a + b + c;
+    }
+class PaymentService {
+
+    // Method 1: Pay using cash
+    void makePayment(double amount) {
+        System.out.println("Paid " + amount + " using cash.");
+    }
+
+    // Method 2: Pay using credit card
+    void makePayment(double amount, String cardNumber) {
+        System.out.println("Paid " + amount + " using card: " + cardNumber);
+    }
+
+    // Method 3: Pay using UPI
+    void makePayment(String upiId, double amount) {
+        System.out.println("Paid " + amount + " using UPI ID: " + upiId);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PaymentService payment = new PaymentService();
+
+        payment.makePayment(500.0);                        // cash
+        payment.makePayment(1200.0, "1234-XXXX-5678");     // card
+        payment.makePayment("user@upi", 300.0);            // UPI
+    }
+}
+
+Overriding(RUNTIME POLYMORPHISM)
+==============
+If methdo names and arhuments must be matched  i.e method signature must be matched is called overriding.
+2. Runtime Polymorphism (Method Overriding)
+Runtime polymorphism is achieved through method overriding. This occurs when a subclass provides a specific implementation of a method that is already defined in its superclass. 
+The method in the subclass must have the same name, return type, and parameters as the method in the superclass.
+class BankAccount {
+    void calculateInterest() {
+        System.out.println("Calculating general bank account interest");
+    }
+}
+
+class SavingsAccount extends BankAccount {
+    @Override
+    void calculateInterest() {
+        System.out.println("Calculating savings account interest at 4%");
+    }
+}
+
+class CurrentAccount extends BankAccount {
+    @Override
+    void calculateInterest() {
+        System.out.println("Current account has no interest");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount acc;
+
+        acc = new SavingsAccount();
+        acc.calculateInterest();  
+
+        acc = new CurrentAccount();
+        acc.calculateInterest();  
+    }
+
+}
+
 •	________________________________________
+
 •	🔸 Types:
 •	1. Compile-time (Method Overloading)
 •	void add(int a, int b) {}
@@ -623,6 +708,75 @@ o	throw vs throws
 •	What is exception propagation?
 •	The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us called exception propogation.
 •	
+Custom exception
+-------------------
+To meet programing requirement some times we have create our own exception is known as custom exception.
+In Java, you can create your own exceptions by extending the Exception class (for checked exceptions) or the RuntimeException class (for unchecked exceptions). 
+Custom exceptions are useful for creating meaningful and domain-specific error handling.
+Ex.TooOldException,Insufficient balance
+Steps to Create a Custom Exception:
+Create a Class: Extend Exception or RuntimeException.
+Add Constructors: Include constructors that match the standard exception constructors,
+e.g., a no-argument constructor, a constructor that takes a message, and one that takes a message and a cause.
+
+Compiletime error 
+====================
+A compile-time error in Java occurs when the Java compiler detects an issue in your code that prevents it from being successfully compiled into bytecode.
+These errors are typically related to syntax, type checking, and the rules of the Java language.
+Because they are detected during the compilation phase, your program won't run until these errors are fixed.
+
+Runtime error
+==================
+ runtime error in Java occurs while the program is running, after successful compilation. These errors are typically due to issues that only manifest 
+during the execution of the program, such as invalid user input, resource unavailability, or logical errors that lead to exceptions. 
+Unlike compile-time errors, runtime errors are not caught by the compiler and can cause the program to terminate unexpectedly if not handled properly.
+Try 
+----
+To maintain the risky code
+Catch
+--------
+To maintain handling code
+
+Difference between final/finally/finalize?
+Final
+-------
+We can use final keyword with method ,variable and classess.
+If we decalre class as final then we cant create the child class. 
+If we declare the varibale as final then reassignment of variable is not possible.
+If declare the method as final the method overriding is not possible.
+
+Finally 
+---------
+It is block associated with try -catch To maitain the clean up code which should be  always executed  irrespective of whether exception raised or not 
+and exception handled or not.such type place is nothing but finally block.finally will executed then return will be excuted.
+	• 
+Finalize
+--------------
+It is method which should excuted by garbage collector before destroying the  any object to perform cleanup activities.
+
+Throw
+---------
+The main purpose of throw keyword is to handover iur created exception manually to the jvm.
+Sometimes we can create exception object maunally & handover that object to the JVM explicitly by using throw keyword.
+We can use throw keyword for customized exceptions.
+
+Throws
+----------
+The main purpose of throws keyword is to delegate the responsibity of exception handling to the caller methods in case of checked exception ,
+to convince compiler.
+
+Exception propagation
+---------------------
+The process of delegating the responsibility of exception handling from one method to another method by using throws keywords us
+called exception propogation.
+
+
+clasLoader
+-----------------
+The Java ClassLoader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine. 
+The Java run time system does not need to know about files and file systems because of classloaders.
+Java classes aren’t loaded into memory all at once, 
+but when required by an application. At this point, the Java ClassLoader is called by the JRE and these ClassLoaders load classes into memory dynamically.
 •	Create a custom exception
 ________________________________________
 6. Multithreading 🔥🔥 (Highly Asked)
