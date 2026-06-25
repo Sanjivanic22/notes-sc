@@ -16,7 +16,6 @@ A lambda expression is a short, anonymous function—a function defined without 
 It is typically used for small, simple operations and can be passed as an argument to other functions.
 Help us to write our code in functional style.it provides clear and concise way to implement single abstract method by using expression.
 It is very useful in collection library in which it helps to iterate, filter and extract data
- They are particularly useful for passing behaviour as arguments to methods and creating instances of functional interfaces.
 
 3.	Syntax of lambda expression?
 4.	(parameters) -> expression
@@ -31,52 +30,51 @@ instances of functional interfaces without generating separate class files, maki
 •	If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method
     or single abstract method (SAM). 
 •	 Functional interfaces are used as the target types for lambda expressions and method references.
+
 •	Ex: 1) Runnable  It contains only run() method 
 •	    2) Comparable  It contains only compareTo() method
-•	    3) ActionListener  It contains only actionPerformed() 
-•	   Callable  It contains only call() method Inside functional interface in addition to single Abstract 
-method (SAM) we write any number of default and static methods.
+        3)Callable  It contains only call() method
+•	    4) ActionListener  It contains only actionPerformed() 
+•	   
+    Inside functional interface in addition to single Abstract method (SAM) we write any number of default and static methods.
 
 10.	Why were functional interfaces introduced?
-•	Functional interfaces were introduced to:
+Functional interfaces were introduced to:
 •	Support lambda expressions
 •	Enable functional programming
 •	Reduce boilerplate code
 •	Make Java code simpler and more expressive
-•	
-11.	Advantages of functional interface?
-•	Functional interfaces simplify Java code by enabling lambda expressions, improving readability, supporting functional programming,
-and enhancing reusability and maintainability.
+     enhancing reusability and maintainability.
 
-What happens if a functional interface extends another interface?
-When a functional interface extends another interface, it remains functional only if it still has exactly one abstract method in total.
+ What happens if a functional interface extends another interface?
+ When a functional interface extends another interface, it remains functional only if it still has exactly one abstract method in total.
 
 7.	What is the difference between Runnable and Callable?
-Runnable does not return a result and cannot throw checked exceptions, 
-whereas Callable returns a value and can throw checked exceptions, making it more powerful for concurrent tasks.
+Runnable does not return a result and cannot throw checked exceptions, whereas
+Callable returns a value and can throw checked exceptions, making it more powerful for concurrent tasks.
 
-What is Default method?
+8. What is Default method?
 A default method is a method defined inside an interface with a body (implementation) using the default keyword.
 
-8.	Why are default methods allowed in interfaces?
+9.	Why are default methods allowed in interfaces?
 •	✅ 1. Backward Compatibility
 •	Before Java 8, interfaces could only have abstract methods.
 •	Adding a new method to an interface would break all existing classes implementing it.
 •	Default methods solve this by providing a default implementation, so old code continues to work.
 •	✅ 2. Interface Evolution
-9.	Helps extend and improve interfaces over time without forcing all implementing classes to change.
-10.	✅ 3. Reduce Need for Utility Classes
-11.	Common logic can be placed directly in the interface instead of separate helper classes.
-12.	✅ 4. Supports Functional Programming
-13.	Works well with lambda expressions and streams, enabling more flexible design.
-14.	✅ 5. Code Reusability
-15.	Allows sharing of common method implementations among multiple classes.
+	Helps extend and improve interfaces over time without forcing all implementing classes to change.
+	✅ 3. Reduce Need for Utility Classes
+	Common logic can be placed directly in the interface instead of separate helper classes.
+	✅ 4. Supports Functional Programming
+	Works well with lambda expressions and streams, enabling more flexible design.
+	✅ 5. Code Reusability
+	Allows sharing of common method implementations among multiple classes.
 
-16.	How to achieve multiple inheritance in Java 8?
-Multiple inheritance in Java 8 is achieved using multiple interfaces and default methods, allowing a class to inherit
-behavior from multiple sources while resolving conflicts explicitly.
+	How to achieve multiple inheritance in Java 8?
+Multiple inheritance in Java 8 is achieved using multiple interfaces and default methods,
+allowing a class to inherit behavior from multiple sources while resolving conflicts explicitly.
 
-17.	What are predefined functional interfaces?
+.	What are predefined functional interfaces?
 1. Predicate
 •	Takes input and returns boolean
 2. Function<T, R>
@@ -100,8 +98,8 @@ Referance of constructor by using new keyword
 
 🔹 Streams API
 15.	What is Stream API?
-16.	The Stream API is used to process collections of data in a functional and efficient way.
-17.	It allows performing operations like filtering, mapping, sorting, and reducing on data in a declarative style
+	The Stream API is used to process collections of data in a functional and efficient way.
+	It allows performing operations like filtering, mapping, sorting, and reducing on data in a declarative style
 
 18.	Difference between stream and collection?
 A Collection is used to store data, whereas a Stream is used to process data in a functional, efficient, and often 
@@ -130,9 +128,8 @@ allowing better performance especially with large datasets.
 
 23.	What is map() vs flatMap()?	
 map() transforms each element individually, whereas flatMap() transforms and flattens nested structures into a single stream.
-The function passed to map() operation returns a single value for a single input.The function you pass to flatmap() operation returns an 
-arbitrary number of values as the output.
-
+The function passed to map() operation returns a single value for a single input.
+The function you pass to flatmap() operation returns an arbitrary number of values as the output.
 One-to-one mapping occurs in map().	    One-to-many mapping occurs in flatMap().
 Only perform the mapping.	                        Perform mapping as well as flattening.
 Produce a stream of value.	                           Produce a stream of stream value.
@@ -156,7 +153,7 @@ ofNullable() safely handles null by returning an empty Optional, and
  empty() creates an explicitly empty Optional
 
 35.	What are new Date & Time APIs in Java 8?
-Java 8 introduced a new and improved Date and Time API in the java.time package to overcome the limitations of old classes like Date and Calendar.
+e to overcome the limitations of old classes like Date and Calendar.
 Java 8 introduced the java.time package with classes like LocalDate, LocalTime, LocalDateTime, ZonedDateTime, and Instant to provide a modern, 
 thread-safe, and easy-to-use date and time API.
 
@@ -164,11 +161,11 @@ thread-safe, and easy-to-use date and time API.
 37.	What is static method in interface?
 •	A static method in an interface is a method defined with the static keyword inside an interface, and it has a method body (implementation).
 •	A static method in an interface is a method with implementation that belongs to the interface itself, cannot be overridden, and is accessed
-using the interface name.
+    using the interface name.
 
 38.	Where to use default vs static methods?
-39.	•  Use default → if method should be inherited & customizable 
-40.	• Use static → if method should be fixed & utility-based
+	•  Use default → if method should be inherited & customizable 
+	• Use static → if method should be fixed & utility-based
 
 40.	What changes came in HashMap after Java 8?
 In Java 8, HashMap improved collision handling by converting linked lists into Red-Black trees 
@@ -217,7 +214,6 @@ Key Points:
 45.	✅ Written in Java, designed for better performance and tighter integration with Java.
 
 46.	What is MetaSpace and how is it different from PermGen?
-Both MetaSpace and PermGen (Permanent Generation) are memory areas used by the JVM to store class metadata, but they differ in how they are managed.
 •  PermGen was limited and prone to memory errors. 
 •  MetaSpace improves performance and flexibility by using native memory and dynamic allocation.
 
@@ -271,23 +267,20 @@ function package to support lambda expressions and functional programming.
 92.	✅ Represents a function that takes input and returns a result
 93.	✅ Used for transforming data
 94.	Method:
-95.	Java
-96.	R apply(T t);
-97.	Show more lines
-98.	Example:
-99.	Java
-100.	Function<String, Integer> length = s -> s.length();
-101.	System.out.println(length.apply("Java")); // 4
+	R apply(T t);
+
+	Example:
+	Function<String, Integer> length = s -> s.length();
+	System.out.println(length.apply("Java")); // 
 
 HashMap
 =========
 The HashMap class in Java is part of the Java Collections Framework and is used to store key-value pairs. 
 
 Internal Structure
+------------------------
 
 A HashMap consists of an array of buckets, where each bucket is a linked list . Each bucket corresponds to a hash code calculated from the key.
-
-
 Hash Calculation: The hash code for the key is calculated and further processed to find the index of the array (bucket).
 Index Calculation: The index in the array is determined by the formula (n - 1) & hash, where n is the length of the array.
 
