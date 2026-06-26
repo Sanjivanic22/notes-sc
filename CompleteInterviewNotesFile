@@ -1527,7 +1527,6 @@ o	Shopping cart
 32.	What is Spring MVC?
 33.	Spring MVC (Model–View–Controller) is a web framework provided by the Spring Framework for building Java-based web applications 
 following the MVC design pattern.
-
 Spring MVC is a lightweight, flexible framework used to develop web applications in Java. It separates the application into three main components:
 34.	1. Model
 35.	Represents the data and business logic
