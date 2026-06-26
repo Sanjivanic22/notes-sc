@@ -1182,7 +1182,7 @@ ________________________________________
 •	wait() is in Object because it works on object locks
 
 ✅ SPRING INTERVIEW QUESTION LIST
-===========================================
+=======================================
 🔹 Core Spring Basics
 1.	What is Spring Framework?
 2.	The Spring Framework is a powerful, lightweight, and open-source Java framework used for building enterprise-level applications. 
@@ -1205,28 +1205,6 @@ Instrumentation, and Test modules. These modules help in building scalable, loos
 •	Manages the dependancies injection and IOC automatically
 •	Spring framwork very easy to  testing
 •	Spring web framework is well design mvc framework which provide the greate alteranative to another ````framework like struts
-
-7.	What is Inversion of Control (IoC)?
-8.	The IOC container is INVERSION of control which is responsible to instantiate, configure and assemble the objects. 
-9.	The IoC container gets informations from the XML file and works accordingly. 
-10.	The main tasks performed by IoC container are:
-11.	=>to instantiate the application class
-12.	=>to configure the object
-13.	=>to assemble the dependencies between the objects
-
-14.	What is Dependency Injection (DI)?
-15.	Dependency Injection (DI) is a design pattern used in software development to achieve loose coupling between components. Instead of a class creating its own dependencies, those dependencies are provided (injected) from the outside.
-“Giving an object the things it needs (dependencies) from outside rather than letting it create them itself.”
-
-16.	Difference between IoC and DI?
-17.	Aspect	18.	IoC (Inversion of Control)	19.	DI (Dependency Injection)
-20.	Definition	21.	A design principle where control of object creation and flow is transferred to a framework or container	22.	A design pattern used to implement IoC by injecting dependencies into objects
-23.	Concept	24.	Broad concept	25.	Specific technique
-26.	Purpose	27.	To invert control from developer to framework	28.	To provide dependencies from outside instead of creating them internally
-29.	How it works	30.	Framework manages object lifecycle and control flow	31.	Dependencies are passed via constructor, setter, or field
-32.	Relationship	33.	IoC is the parent concept	34.	DI is a way to achieve IoC
-35.	Example	36.	Spring container manages beans lifecycle	37.	Spring injects dependencies using @Autowired
-
 38.	What is Spring Container?
 The Spring Container is the core component of the Spring Framework responsible for:
 •	Creating objects (beans)
@@ -1255,6 +1233,17 @@ eager initialization, making it more suitable for enterprise-level applications.
 16.	ApplicationContext is preferred because it provides advanced features and better support for enterprise applications,
 whereas BeanFactory is limited to basic functionality.
 
+16.	Difference between IoC and DI?
+17.	Aspect	    18.	IoC (Inversion of Control)	                                    
+19.	DI (Dependency Injection)
+20.	Definition	21.	A design principle where control of object creation and flow is transferred to a framework or container	
+22.	A design pattern used to implement IoC by injecting dependencies into objects
+23.	Concept	24.	Broad concept	25.	Specific technique
+26.	Purpose	27.	To invert control from developer to framework	28.	To provide dependencies from outside instead of creating them internally
+29.	How it works	30.	Framework manages object lifecycle and control flow	31.	Dependencies are passed via constructor, setter, or field
+32.	Relationship	33.	IoC is the parent concept	34.	DI is a way to achieve IoC
+35.	Example	36.	Spring container manages beans lifecycle	37.	Spring injects dependencies using @Autowired
+
 🔹 Dependency Injection
 12.	What is dependency injection?
 13.	Dependency Injection (DI) is a design pattern in which an object receives its required dependencies from an external 
@@ -1264,14 +1253,15 @@ whereas BeanFactory is limited to basic functionality.
 15.	1. Constructor Injection (Most Recommended)
 16.	Dependencies are provided through the constructor of the class.
 17.	Ioc container uses parameterised constructor to create the target bean class object.
-18.	In that process we inject the dependant class object to target class object
+
 Advantages:
 •	Ensures mandatory dependencies are provided
 •	Makes the object immutable
 •	Easier for unit testing
 •	The <constructor-args> tag is used for constructor injection.
-If all properties of spring bean class are mandatory to participate in the injection then we 
+If all properties of spring bean class are mandatory to participate in the injection then we
 Should go for constructor injection.
+
 ✅ 2. Setter Injection
 Dependencies are provided through setter methods.
 Here IOC container calls the setter of target class to assign dependant class object to target class object.
@@ -1279,18 +1269,18 @@ Advantages:
 •	Allows optional dependencies
 •	More flexible (can change dependency later)
 •	<property>tag used for setter injection
+
 •	3. Field Injection
 •	Dependencies are injected directly into class fields using annotations.
-•	
 
 19.	Difference between constructor and setter injection?
 20.	Constructor injection is used for mandatory dependencies and ensures immutability, while setter injection is 
 used for optional dependencies and provides flexibility.
 
 21.	When to use constructor vs setter injection?
-Choosing between constructor injection and setter injection depends on the type of dependency and design requirements.
 If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
-If we want to involve only our choice of propetries into the spring class the we should go for setter injection.
+If all properties of spring bean class are mandatory to participate in the injection then we
+Should go for constructor injection.
 
 17.	What is a Spring Bean?
 •	A Spring Bean is an object that is instantiated, configured, and managed by the Spring IoC (Inversion of Control) container.
@@ -1303,13 +1293,9 @@ If we want to involve only our choice of propetries into the spring class the we
 •	init-destruction .or programatically we can do with @ initailization and @disposable method
 •	
 •	Spring bean life cycle is maintained by IOC Container
-•	
 •	1. Container gets started.
-•	
 •	2. Container creates the object of bean as per request.
-•	
 •	3. Dependencies is created
-•	
 •	4. Dependencies is injected
 •	Bean Instantiation – Spring creates the bean instance.
 •	Dependency Injection – Dependencies are injected.
@@ -1374,17 +1360,7 @@ ________________________________________
 •	Object sharing	•	Shared	•	Not shared
 •	Lifecycle managed	•	Fully managed by Spring	•	Only creation managed
 •	Memory usage	•	Less	•	More
-•	________________________________________
-•	🟢 Lifecycle Difference
-•	Singleton:
-Spring creates, manages, and destroys the bean
-•	Prototype:
-Spring only creates the bean; developer must handle destruction
-•	________________________________________
-•	✅ Summary
-•	Singleton → Single shared instance (default, efficient)
-•	Prototype → Multiple instances (good for stateful objects)
-
+•
 21.	When to use request and session scope?
 Request Scope
 •	Use when data is needed only for a single HTTP request.
@@ -1414,9 +1390,8 @@ o	Shopping cart
 •	3. constructor
 •	Injects dependencies through the constructor.
 •	Preferred approach (better for immutability and testing).
-25.	
+
 26.	Difference between @Autowired, @Qualifier, @Primary?
-27.	In Spring, @Autowired, @Qualifier, and @Primary are used for dependency injection, especially when multiple beans exist.
 28.	🔹 1. @Autowired
 29.	✅ Used to automatically inject dependencies
 30.	✅ Works by type (byType)
@@ -1444,7 +1419,7 @@ o	Shopping cart
 52.	    return new CreditCardService();
 53.	}
 54.	👉 If no @Qualifier is used, Spring will pick this bean.
-55.	________________________________________
+55
 56.	🔑 Key Differences
 57.	Feature	58.	@Autowired	59.	@Qualifier	60.	@Primary
 61.	Purpose	62.	Inject dependency	63.	Specify exact bean	64.	Set default bean
@@ -1474,7 +1449,6 @@ o	Shopping cart
 •	What is @Component?
 @Component is a generic stereotype annotation used to mark a class as a Spring-managed bean.
 •	.it tells Spring to auto-detect and register the class during component scanning.
-•	It is the base annotation for other specialized annotations.
 •	✅ ExwsAQample:
 •	@Component
 •	public class MyComponent {
@@ -1487,6 +1461,7 @@ o	Shopping cart
 •	@Service	•	Business logic	•	Service layer
 •	@Repository	•	Data access + exception handling	•	DAO layer
 •	@Controller	•	Handles web requests	•	Presentation layer
+
 •	✅ Key Differences:
 •	@Component → General-purpose
 •	@Service → It is also used at class level. It tells the Spring that class contains the business logic.
@@ -1520,7 +1495,6 @@ o	Shopping cart
 •	}
 •	✅ @Bean
 •	Used inside @Configuration class
-•	Defines a method that returns a bean
 •	It is a method-level annotation. It is an alternative of XML <bean> tag. It tells the method to produce a bean to be managed by Spring Container
 •	@Configuration
 •	public class AppConfig {
