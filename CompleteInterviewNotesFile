@@ -1954,81 +1954,6 @@ Spring ORM is a module of the Spring Framework that provides integration support
 58.	spring integrates with Hibernate by using Spring ORM and Spring Data JPA to manage sessions, transactions, and exceptions 
 automatically, allowing developers to focus on business logic.
 
-✅ IMPORTANT SCENARIO-BASED QUESTIONS
-🔹 Dependency Injection (Real Scenarios)
-1.	You have multiple beans of same type — how will you inject the correct one?
-👉 Use @Qualifier or @Primary
-2.	Your application fails due to missing dependency — how do you debug it?
-👉 Check:
-•	Bean configuration
-•	Component scan
-•	Constructor mismatch
-🔹 Bean Scope
-3.	When will you use prototype scope instead of singleton?
-👉 Stateful objects (e.g., user-specific data)
-4.	Why singleton scope for services?
-👉 Stateless + performance optimization
-________________________________________
-🔹 Autowiring Issue
-5.	Two beans of same type → NoUniqueBeanDefinitionException. Solution?
-👉 Use:
-@Qualifier("beanName")
-``
-________________________________________
-🔹 Transaction Management
-6.	Transaction not rolling back — why?
-👉 Possible reasons:
-•	Method not public
-•	Same class internal call
-•	No RuntimeException
-________________________________________
-🔹 Spring Boot
-7.	Application fails due to auto-configuration — what to do?
-👉 Disable:
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-________________________________________
-🔹 Spring MVC
-8.	Request not reaching controller — how to debug?
-👉 Check:
-•	URL mapping (@RequestMapping)
-•	DispatcherServlet config
-•	Component scan
-
-🔹 Spring Data JPA
-9.	Want custom query — how will you write?
-👉 Use:
-@Query("SELECT e FROM Employee e WHERE e.salary > :sal")
-``
-🔹 Performance & Design
-10.	How to improve Spring application performance?
-👉
-•	Use caching
-•	Use lazy loading
-•	Reduce DB calls
-•	Use connection pooling
-________________________________________
-🔹 Security (Common Interview Scenario)
-11.	Where to implement security in Spring Boot?
-👉
-•	Web layer (Spring Security filters)
-•	Service layer (@PreAuthorize)
-________________________________________
-
-🔹 Real-Time Application Questons
-13.	 scalable Spring Boot application?
-14.	How you handle exception globally? (@ControllerAdvice)
-15.	How will you handle large data with pagination?
-•  Fetch only required data using pages 
-•  Use DB-level pagination (LIMIT/OFFSET) 
-•  Prefer cursor-based pagination for large datasets 
-•  Return pagination metadata 
-•  Use frameworks like Spring Data for easy implementation
-
-16.	How do you secure REST APIs?
-17.	How do you integrate DB with Spring Boot?
-18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
-
-
  REST API QuestionsList
 ============================
 1.	Difference between GET, POST, PUT, PATCH, DELETE
@@ -4210,3 +4135,77 @@ synchronized(obj) {
 👉 Every object has a lock (monitor)
 If in Thread: ❌ Thread doesn’t know which object lock to release
 ✅ Hence placed in Object class
+
+✅ IMPORTANT SCENARIO-BASED QUESTIONS
+🔹 Dependency Injection (Real Scenarios)
+1.	You have multiple beans of same type — how will you inject the correct one?
+👉 Use @Qualifier or @Primary
+2.	Your application fails due to missing dependency — how do you debug it?
+👉 Check:
+•	Bean configuration
+•	Component scan
+•	Constructor mismatch
+🔹 Bean Scope
+3.	When will you use prototype scope instead of singleton?
+👉 Stateful objects (e.g., user-specific data)
+4.	Why singleton scope for services?
+👉 Stateless + performance optimization
+________________________________________
+🔹 Autowiring Issue
+5.	Two beans of same type → NoUniqueBeanDefinitionException. Solution?
+👉 Use:
+@Qualifier("beanName")
+``
+________________________________________
+🔹 Transaction Management
+6.	Transaction not rolling back — why?
+👉 Possible reasons:
+•	Method not public
+•	Same class internal call
+•	No RuntimeException
+________________________________________
+🔹 Spring Boot
+7.	Application fails due to auto-configuration — what to do?
+👉 Disable:
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+________________________________________
+🔹 Spring MVC
+8.	Request not reaching controller — how to debug?
+👉 Check:
+•	URL mapping (@RequestMapping)
+•	DispatcherServlet config
+•	Component scan
+
+🔹 Spring Data JPA
+9.	Want custom query — how will you write?
+👉 Use:
+@Query("SELECT e FROM Employee e WHERE e.salary > :sal")
+``
+🔹 Performance & Design
+10.	How to improve Spring application performance?
+👉
+•	Use caching
+•	Use lazy loading
+•	Reduce DB calls
+•	Use connection pooling
+________________________________________
+🔹 Security (Common Interview Scenario)
+11.	Where to implement security in Spring Boot?
+👉
+•	Web layer (Spring Security filters)
+•	Service layer (@PreAuthorize)
+________________________________________
+
+🔹 Real-Time Application Questons
+13.	 scalable Spring Boot application?
+14.	How you handle exception globally? (@ControllerAdvice)
+15.	How will you handle large data with pagination?
+•  Fetch only required data using pages 
+•  Use DB-level pagination (LIMIT/OFFSET) 
+•  Prefer cursor-based pagination for large datasets 
+•  Return pagination metadata 
+•  Use frameworks like Spring Data for easy implementation
+
+16.	How do you secure REST APIs?
+17.	How do you integrate DB with Spring Boot?
+18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
