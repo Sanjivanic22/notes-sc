@@ -1977,8 +1977,10 @@ These methods should produce the same result no matter how many times they are c
 •	DELETE → Deleting a resource repeatedly still results in "resource not present"
 
 3.	What is RESTful service?
-4.	A RESTful API is an application programming interface that follows the principles of REST (Representational State Transfer) architecture, using standard HTTP methods to perform operations on resources identified by URLs in a stateless, client-server communication model.
-5.	A RESTful API is a web service that follows REST principles and uses HTTP methods like GET, POST, PUT, and DELETE to perform operations on resources identified by URLs. It is stateless and uses standard protocols for communication.
+4.	A RESTful API is an application programming interface that follows the principles of REST (Representational State Transfer) architecture, 
+using standard HTTP methods to perform operations on resources identified by URLs in a stateless, client-server communication model.
+5.	A RESTful API is a web service that follows REST principles and uses HTTP methods like GET, POST, PUT, and DELETE to perform operations on
+resources identified by URLs. It is stateless and uses standard protocols for communication.
 6.	
 7.	Diff b/w REST and SOAP?
 8.	Feature	9.	REST	10.	SOAP
@@ -2087,8 +2089,6 @@ ________________________________________
 23.	How to create global exception handling?
 Global exception handling in Spring Boot is implemented using @ControllerAdvice along with @ExceptionHandler to handle exceptions 
 across all controllers in a centralized way.
-Global exception handling in Spring Boot is created using @ControllerAdvice along with @ExceptionHandler methods to handle exceptions 
-centrally and return consistent error responses across all controllers.
 
 public class ErrorResponse {
     private int status;
@@ -2107,26 +2107,18 @@ public ResponseEntity<ErrorResponse> handleException(Exception ex) {
     );
     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 }
-🔸 Spring Data JPA
-1.	What is JPA?
-•	JPA (Java Persistence API) is a specification in Java used to manage relational data in applications. It provides a standard way to map Java 
-objects to database tables and perform CRUD operations without writing complex SQL.
-•	JPA is a Java specification used to manage relational data through object-relational mapping, allowing developers to interact with a database 
-using Java objects instead of SQL.
 
 2.	What is Hibernate?
 Hibernate is an ORM (Object-Relational Mapping) framework for Java that simplifies database interactions by mapping Java objects to database tables.
-4.	Hibernate allows developers to perform database operations using Java objects instead of writing SQL queries manually
+4.	Hibernate allows developers to perform database operations using Java objects instead of writing SQL queries manually.
 
 5.	What is lazy vs eager loading?
 Lazy and Eager loading define when related data is fetched from the database.
-
 Lazy Loading
 •	Data is loaded only when it is actually needed
 •	Improves performance by avoiding unnecessary data fetching
 •	@OneToMany(fetch = FetchType.LAZY)
 •	private List<Order> orders;
-
 user.getOrders();
 
 Eager Loading
@@ -2134,7 +2126,6 @@ Eager Loading
 •	Fetches all related data in one go
 •	@OneToMany(fetch = FetchType.EAGER)
 •	private List<Order> orders;
-
 @OneToMany(fetch = FetchType.EAGER)
 private List<Order> orders;
 When user is fetched → orders are also fetched automatically
@@ -2264,8 +2255,6 @@ Actuator helps you monitor application health, metrics, and runtime details usin
 and application details.
 
 3.	What is Springs x Cloud? 
-4.	Spring × Cloud (Spring Cloud) refers to the combination of the Spring Framework (especially Spring Boot) with a set of tools and libraries 
-designed to build cloud-native, distributed systems.
 Spring Cloud is a collection of frameworks that helps developers build and manage cloud-based microservices architectures.
 It provides solutions for common distributed system problems like:
 •	Service discovery
