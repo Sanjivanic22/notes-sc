@@ -2343,7 +2343,8 @@ How JWT Works
 6.	Server verifies the token and allows access
 
 12.	What is caching in Spring Boot?
-13.	Caching in Spring Boot is a technique used to store frequently accessed data temporarily in memory so that future requests can be served faster without recomputing or fetching from the database.
+13.	Caching in Spring Boot is a technique used to store frequently accessed data temporarily in memory so that future requests can be served faster
+without recomputing or fetching from the database.
 Caching is used to reduce response time and improve performance by avoiding repeated execution of expensive operations.
 ________________________________________
 ⚙️ How it works
@@ -2382,8 +2383,6 @@ return userRepository.save(user);
 `________________________________________
 4. @CacheEvict
 •	Removes data from cache
-
-14.	How do you secure APIs?
 
 ✅ 🔥 Bonus: Advanced Questions (High Chances)
 ________________________________________
@@ -2447,8 +2446,6 @@ Traffic switches from blue to green after validation.
 •	Enables zero downtime deployments
 •	Easy rollback by switching back
 
-✅ 🚀 If you want next
-I can help you with:
 •	🔥 Full real-time microservice project explanation
 Step-by-step flow:
 •	Client sends request → API Gateway
@@ -2458,6 +2455,445 @@ o	Feign (sync)
 o	WebClient (async)
 •	Eureka server helps in service discovery
 •	Response is returned via API Gateway
+Kafka
+==========
+🔹 Basic Kafka Questions (Very Common)
+1. What is Kafka?
+Kafka is a distributed event streaming platform that uses a publish-subscribe model to handle real-time data streams with high throughput,
+fault tolerance, and scalability.
+
+2. What are the core components of Kafka?
+✅ From your notes:
+•	Producer
+•	Consumer
+•	Topic
+•	Partition
+•	Broker
+•	Consumer Group
+👉 You can answer like:
+Kafka consists of producers that send messages, brokers that store them in topics, and consumers that read them using consumer groups.
+
+3. What is a Topic?
+A logical channel where messages are stored and categorized.
+
+4. What is a Partition?
+A subdivision of a topic that:
+•	Enables parallel processing
+•	Maintains ordering within the partition
+•	Uses offsets for message tracking
+
+5. What is an Offset?
+A unique ID of a message inside a partition.
+
+6. What is a Kafka Broker?
+A server that stores and serves data. A Kafka cluster contains multiple brokers.
+
+7. What is a Consumer Group?
+•	A group of consumers sharing workload
+•	Each partition is consumed by only one consumer in a group
+
+🔹 Intermediate Kafka Questions
+8. How does Kafka work?
+✅ Use your note structure:
+1.	Producers send messages to topics
+2.	Brokers store messages in partitions
+3.	Consumers read messages
+👉 Add:
+•	Data is persisted on disk
+•	Messages can be replayed
+________________________________________
+9. Why Kafka is fast?
+•	Sequential disk writes
+•	Zero-copy optimization
+•	Batching
+•	Partition parallelism
+
+10. What ensures fault tolerance in Kafka?
+•	Replication factor
+•	Data copied across brokers
+•	If one broker fails → others serve data
+
+11. What is replication?
+Kafka copies partitions across brokers to ensure data availability.
+
+12. What is ISR (In-Sync Replica)?
+Replicas that are fully caught up with the leader partition.
+
+13. Leader and Follower in Kafka?
+•	Leader handles reads/writes
+•	Followers replicate data
+________________________________________
+14. What happens if a broker fails?
+•	Kafka elects a new leader from replicas
+•	No data loss if replication is configured correctly
+
+15. What is Zookeeper / KRaft?
+•	Older Kafka uses Zookeeper for coordination
+•	New Kafka uses KRaft (Kafka Raft mode)
+
+🔹 Producer-Level Questions (From Your KafkaTemplate Notes)
+16. What is KafkaTemplate?
+✅ From your notes: KafkaTemplate is a Spring abstraction for Kafka Producer that:
+•	Sends messages
+•	Handles serialization
+•	Supports sync/async calls
+
+17. Difference between sync and async send?
+Sync:
+kafkaTemplate.send(topic, message).get();
+``
+•	Blocks thread
+Async:
+kafkaTemplate.send(topic, message).addCallback(...)
+``
+•	Non-blocking
+•	Uses callback
+________________________________________
+18. Why use message key?
+•	Messages with same key go to same partition
+•	Ensures ordering
+________________________________________
+19. What is serialization?
+Process of converting object → byte stream before sending to Kafka.
+________________________________________
+🔹 Consumer-Level Questions (Important - Based on @KafkaListener)
+20. What is @KafkaListener?
+✅ From your notes:
+•	Used to consume messages
+•	Automatically listens to topics
+•	Processes messages asynchronously
+________________________________________
+21. How does Kafka distribute messages in a consumer group?
+•	Each partition → one consumer
+•	Load is distributed evenly
+________________________________________
+22. Can multiple consumers read same message?
+✅ YES:
+•	Different consumer groups → each get full copy
+❌ SAME group:
+•	Only one consumer gets message
+________________________________________
+23. What is auto-offset reset?
+earliest → read from beginning  
+latest → read new messages 
+________________________________________
+24. What is manual acknowledgment?
+✅ From your notes:
+•	You manually commit after processing
+acknowledgment.acknowledge();
+
+25. What is concurrency in KafkaListener?
+@KafkaListener(concurrency = "3")
+•	Runs 3 parallel consumers
+
+26. How do you handle errors in Kafka?
+✅ From your notes:
+•	ErrorHandler
+•	Retry
+•	Dead Letter Topic (DLT)
+________________________________________
+🔹 Scenario-Based Questions (Very Important)
+27. How to ensure message order?
+•	Use same key
+•	Same partition
+
+28. How do you scale Kafka?
+•	Increase partitions
+•	Add brokers
+________________________________________
+29. What happens if consumer is slow?
+•	Kafka stores messages
+•	Consumer reads later using offset
+________________________________________
+30. How to avoid data loss?
+•	Enable replication
+•	Use acknowledgments (acks=all)
+•	Proper offset commits
+________________________________________
+🔹 Kafka vs RabbitMQ (Common Question)
+Feature	Kafka	RabbitMQ
+Model	Pull-based	Push-based
+Use case	Streaming	Messaging
+Storage	Disk (persistent)	Queue-based
+Throughput	Very high	Moderate
+Ordering	Partition-based	Queue-based
+________________________________________
+🔹 Real-World Use Case Questions
+31. Where is Kafka used?
+✅ From your notes:
+•	LinkedIn → activity tracking
+•	Uber → ride tracking
+•	Netflix → logs & monitoring
+•	Walmart → retail analytics
+________________________________________
+🔹 Tricky / Advanced Questions
+32. Can Kafka lose messages?
+•	Rare, but possible if: 
+o	replication = 1
+o	improper config
+________________________________________
+33. What is exactly-once processing?
+•	Ensures messages are: 
+o	Not lost
+o	Not duplicated
+________________________________________
+34. What is Kafka Streams?
+•	API for real-time stream processing
+________________________________________
+35. What is Kafka Connect?
+•	Tool for integrating external systems
+________________________________________
+🔹 Quick Revision (Your Notes Summary Answer)
+👉 If interviewer asks: Explain Kafka in 1 minute
+You can say:
+Kafka is a distributed event streaming platform that uses a publish-subscribe model. Producers send messages to topics, which are divided into partitions for scalability. Kafka brokers store these messages, and consumers read them using consumer groups. It provides high throughput, fault tolerance via replication, and is widely used for real-time data processing.
+________________________________________
+✅ Pro Tip (Interview)
+Always add:
+•	Kafka is pull-based
+•	Messages are retained (not deleted after read)
+•	Offsets are managed by consumers
+
+🔹 Basic RabbitMQ Questions
+=================================
+
+1. What is RabbitMQ?
+RabbitMQ is an open-source message broker that enables communication between systems using a queue-based messaging model.
+________________________________________
+2. What is a Message Broker?
+Software that:
+•	Receives messages from producers
+•	Routes them
+•	Delivers to consumers
+________________________________________
+3. What are main components of RabbitMQ?
+✅ From your notes:
+•	Producer
+•	Consumer
+•	Queue
+•	Exchange
+•	Binding
+________________________________________
+4. What is a Queue?
+A buffer that stores messages until consumed.
+
+5. What is an Exchange?
+An intermediate routing agent that:
+•	Receives message from producer
+•	Decides which queue to send
+
+6. What is a Binding?
+A link between exchange and queue using routing rules.
+________________________________________
+🔹 Intermediate Questions
+7. How RabbitMQ works?
+Flow:
+1.	Producer → Exchange
+2.	Exchange → Queue
+3.	Queue → Consumer
+👉 Unlike Kafka, RabbitMQ does routing through exchange.
+________________________________________
+8. Types of Exchanges
+✅ Very important question
+1.	Direct Exchange
+o	Routes using exact routing key
+2.	Fanout Exchange
+o	Sends to ALL queues
+3.	Topic Exchange
+o	Pattern-based routing
+o	Example: order.*
+4.	Headers Exchange
+o	Uses headers instead of routing key
+________________________________________
+9. What is Routing Key?
+A key used by exchange to decide: 👉 which queue gets the message
+________________________________________
+10. What is Message Acknowledgment?
+•	Confirms message processed
+•	If not acknowledged → message re-delivered
+________________________________________
+11. What is Message Durability?
+•	Messages stored on disk
+•	Prevents data loss
+________________________________________
+12. What is Prefetch Count?
+•	Limits how many messages a consumer can receive at once
+•	Prevents overloading consumers
+________________________________________
+🔹 Scenario-Based Questions
+13. What happens if consumer crashes?
+•	Message returns to queue
+•	Another consumer processes it
+________________________________________
+14. How to ensure no message loss?
+•	Use durable queues
+•	Use persistent messages
+•	Enable acknowledgment
+________________________________________
+15. Can RabbitMQ deliver message to multiple consumers?
+✅ Yes:
+•	Using fanout exchange
+________________________________________
+16. How does load balancing work?
+•	Messages distributed across consumers
+•	Round-robin style
+________________________________________
+17. What is Dead Letter Queue (DLQ)?
+•	Stores failed or rejected messages
+•	Helps debugging
+________________________________________
+18. What is TTL (Time To Live)?
+•	Message expires after defined time
+
+🔹 Advanced Questions
+19. What is Publisher Confirms?
+•	Confirms broker received message successfully
+________________________________________
+20. What is Clustering in RabbitMQ?
+•	Multiple nodes work as one system
+________________________________________
+21. What is Federation?
+•	Connect multiple RabbitMQ brokers across locations
+________________________________________
+22. What is Mirrored Queue?
+•	Queue replicated across nodes for fault tolerance
+________________________________________
+23. What is Backpressure?
+•	Prevents system overload when consumers are slow
+________________________________________
+🔹 Quick 1-Minute Answer (Interview Ready)
+👉 If asked “Explain RabbitMQ”:
+RabbitMQ is a message broker that uses a queue-based system to enable communication between distributed systems.
+Producers send messages to exchanges, which route them to queues based on rules. Consumers then process messages from queues.
+It supports reliability through acknowledgments, durability, and flexible routing using different exchange types.
+________________________________________
+Jenkin
+=========
+Jenkin is open source Automation server used for CI/CD
+•	Continuous Integration (CI)
+•	Continuous Delivery/Deployment (CD)
+It helps developers automatically build, test, and deploy code whenever changes are made.
+ 
+Jenkin automates repititive development task 
+Building applications
+Running tests
+Deploying apps to server or cloud
+This reduces manual effort and speeds up software delivery.
+ 
+•	flow
+•	Developer pushes code to Git
+•	Jenkins detects the change
+•	Jenkins: 
+•	Builds the code
+•	Runs tests
+•	Deploys (optional)
+•	Reports success/failure
+ 
+Junit
+---------
+# ✅ Basic JUnit Questions
+
+### 1. What is JUnit?
+JUnit is a **Java testing framework** used to write and run **unit tests**. It helps automate testing and ensures code quality.
+
+### 2. What is a Unit Test?
+A unit test tests **small, independent pieces of code** (like a method or class).
+### 3. Difference between JUnit 4 and JUnit 5?
+
+| Feature      | JUnit 4             | JUnit 5                                    |
+| ------------ | ------------------- | ------------------------------------------ |
+| Architecture | Single              | Modular (JUnit Platform, Jupiter, Vintage) |
+| Annotations  | `@Before`, `@After` | `@BeforeEach`, `@AfterEach`                |
+| Assertions   | Basic               | More powerful                              |
+| Java version | Java 5+             | Java 8+                                    |
+
+# ✅ Annotations Questions
+### 4. Common JUnit annotations?
+```java
+@Test        // marks test method
+@BeforeEach  // runs before each test
+@AfterEach   // runs after each test
+@BeforeAll   // runs once before all tests
+@AfterAll    // runs once after all tests
+```
+### 5. What is @Test?
+Marks a method as a **test method** to be executed by JUnit.
+
+### 6. Difference between @BeforeEach and @BeforeAll?
+* `@BeforeEach` → runs **before every test**
+* `@BeforeAll` → runs **once before all tests**
+
+# ✅ Assertions Question
+### 7. What are assertions?
+Assertions are used to **verify expected vs actual results**.
+Example:
+```java
+assertEquals(10, result);
+### 8. Common assertion methods
+assertEquals(expected, actual);
+assertTrue(condition);
+assertFalse(condition);
+assertNull(object);
+assertNotNull(object);
+
+# ✅ Exception Testing
+### 9. How to test exceptions in JUnit?
+```java
+assertThrows(Exception.class, () -> {
+    methodThatThrows();
+});
+
+# ✅ Parameterized Tests
+### 10. What is a parameterized test?
+Runs the same test with **multiple inputs**.
+Example:
+```java
+@ParameterizedTest
+@ValueSource(ints = {1, 2, 3})
+void testNumbers(int num) {
+    assertTrue(num > 0);
+}
+# ✅ Mocking Questions (Very Important)
+### 11. What is Mockito?
+Mockito is used to **mock dependencies** in unit testing.
+### 12. What is a Mock?
+A **fake object** that simulates real object behavior.
+### 13. Example of mocking
+```java
+@Mock
+UserService userService;
+when(userService.getUser()).thenReturn("John");
+
+### 14. Difference between Mock and Spy?
+
+| Mock          | Spy                              |
+| ------------- | -------------------------------- |
+| Fully fake    | Partial real object              |
+| No real logic | Calls real methods unless mocked |
+
+# ✅ Test Lifecycle
+### 15. JUnit lifecycle order
+
+1. `@BeforeAll`
+2. `@BeforeEach`
+3. `@Test`
+4. `@AfterEach`
+5. `@AfterAll`
+# ✅ Advanced Questions
+### 16. What is Test Suite?
+A **collection of test cases** grouped together.
+### 17. What is @Disabled?
+Used to skip a test:
+
+```java
+@Disabled("Not ready yet")
+```
+### 18. What is timeout in JUnit?
+Ensures test runs within a time:
+```java
+assertTimeout(Duration.ofSeconds(2), () -> {
+    method();
+});
 
 ✅ 🔥 MOST FREQUENTLY ASKED SQL INTERVIEW QUESTIONS
 🔶 Index Questions
@@ -3077,446 +3513,7 @@ ________________________________________
 •	“For performance, we used indexing”
 •	“For data integrity, we used constraints”
 •	“For complex query, we used joins and group by”
-________________________________________
-Kafka
-==========
-🔹 Basic Kafka Questions (Very Common)
-1. What is Kafka?
-Kafka is a distributed event streaming platform that uses a publish-subscribe model to handle real-time data streams with high throughput,
-fault tolerance, and scalability.
-
-2. What are the core components of Kafka?
-✅ From your notes:
-•	Producer
-•	Consumer
-•	Topic
-•	Partition
-•	Broker
-•	Consumer Group
-👉 You can answer like:
-Kafka consists of producers that send messages, brokers that store them in topics, and consumers that read them using consumer groups.
-
-3. What is a Topic?
-A logical channel where messages are stored and categorized.
-
-4. What is a Partition?
-A subdivision of a topic that:
-•	Enables parallel processing
-•	Maintains ordering within the partition
-•	Uses offsets for message tracking
-
-5. What is an Offset?
-A unique ID of a message inside a partition.
-
-6. What is a Kafka Broker?
-A server that stores and serves data. A Kafka cluster contains multiple brokers.
-
-7. What is a Consumer Group?
-•	A group of consumers sharing workload
-•	Each partition is consumed by only one consumer in a group
-
-🔹 Intermediate Kafka Questions
-8. How does Kafka work?
-✅ Use your note structure:
-1.	Producers send messages to topics
-2.	Brokers store messages in partitions
-3.	Consumers read messages
-👉 Add:
-•	Data is persisted on disk
-•	Messages can be replayed
-________________________________________
-9. Why Kafka is fast?
-•	Sequential disk writes
-•	Zero-copy optimization
-•	Batching
-•	Partition parallelism
-
-10. What ensures fault tolerance in Kafka?
-•	Replication factor
-•	Data copied across brokers
-•	If one broker fails → others serve data
-
-11. What is replication?
-Kafka copies partitions across brokers to ensure data availability.
-
-12. What is ISR (In-Sync Replica)?
-Replicas that are fully caught up with the leader partition.
-
-13. Leader and Follower in Kafka?
-•	Leader handles reads/writes
-•	Followers replicate data
-________________________________________
-14. What happens if a broker fails?
-•	Kafka elects a new leader from replicas
-•	No data loss if replication is configured correctly
-
-15. What is Zookeeper / KRaft?
-•	Older Kafka uses Zookeeper for coordination
-•	New Kafka uses KRaft (Kafka Raft mode)
-
-🔹 Producer-Level Questions (From Your KafkaTemplate Notes)
-16. What is KafkaTemplate?
-✅ From your notes: KafkaTemplate is a Spring abstraction for Kafka Producer that:
-•	Sends messages
-•	Handles serialization
-•	Supports sync/async calls
-
-17. Difference between sync and async send?
-Sync:
-kafkaTemplate.send(topic, message).get();
-``
-•	Blocks thread
-Async:
-kafkaTemplate.send(topic, message).addCallback(...)
-``
-•	Non-blocking
-•	Uses callback
-________________________________________
-18. Why use message key?
-•	Messages with same key go to same partition
-•	Ensures ordering
-________________________________________
-19. What is serialization?
-Process of converting object → byte stream before sending to Kafka.
-________________________________________
-🔹 Consumer-Level Questions (Important - Based on @KafkaListener)
-20. What is @KafkaListener?
-✅ From your notes:
-•	Used to consume messages
-•	Automatically listens to topics
-•	Processes messages asynchronously
-________________________________________
-21. How does Kafka distribute messages in a consumer group?
-•	Each partition → one consumer
-•	Load is distributed evenly
-________________________________________
-22. Can multiple consumers read same message?
-✅ YES:
-•	Different consumer groups → each get full copy
-❌ SAME group:
-•	Only one consumer gets message
-________________________________________
-23. What is auto-offset reset?
-earliest → read from beginning  
-latest → read new messages 
-________________________________________
-24. What is manual acknowledgment?
-✅ From your notes:
-•	You manually commit after processing
-acknowledgment.acknowledge();
-
-25. What is concurrency in KafkaListener?
-@KafkaListener(concurrency = "3")
-•	Runs 3 parallel consumers
-
-26. How do you handle errors in Kafka?
-✅ From your notes:
-•	ErrorHandler
-•	Retry
-•	Dead Letter Topic (DLT)
-________________________________________
-🔹 Scenario-Based Questions (Very Important)
-27. How to ensure message order?
-•	Use same key
-•	Same partition
-
-28. How do you scale Kafka?
-•	Increase partitions
-•	Add brokers
-________________________________________
-29. What happens if consumer is slow?
-•	Kafka stores messages
-•	Consumer reads later using offset
-________________________________________
-30. How to avoid data loss?
-•	Enable replication
-•	Use acknowledgments (acks=all)
-•	Proper offset commits
-________________________________________
-🔹 Kafka vs RabbitMQ (Common Question)
-Feature	Kafka	RabbitMQ
-Model	Pull-based	Push-based
-Use case	Streaming	Messaging
-Storage	Disk (persistent)	Queue-based
-Throughput	Very high	Moderate
-Ordering	Partition-based	Queue-based
-________________________________________
-🔹 Real-World Use Case Questions
-31. Where is Kafka used?
-✅ From your notes:
-•	LinkedIn → activity tracking
-•	Uber → ride tracking
-•	Netflix → logs & monitoring
-•	Walmart → retail analytics
-________________________________________
-🔹 Tricky / Advanced Questions
-32. Can Kafka lose messages?
-•	Rare, but possible if: 
-o	replication = 1
-o	improper config
-________________________________________
-33. What is exactly-once processing?
-•	Ensures messages are: 
-o	Not lost
-o	Not duplicated
-________________________________________
-34. What is Kafka Streams?
-•	API for real-time stream processing
-________________________________________
-35. What is Kafka Connect?
-•	Tool for integrating external systems
-________________________________________
-🔹 Quick Revision (Your Notes Summary Answer)
-👉 If interviewer asks: Explain Kafka in 1 minute
-You can say:
-Kafka is a distributed event streaming platform that uses a publish-subscribe model. Producers send messages to topics, which are divided into partitions for scalability. Kafka brokers store these messages, and consumers read them using consumer groups. It provides high throughput, fault tolerance via replication, and is widely used for real-time data processing.
-________________________________________
-✅ Pro Tip (Interview)
-Always add:
-•	Kafka is pull-based
-•	Messages are retained (not deleted after read)
-•	Offsets are managed by consumers
-
-🔹 Basic RabbitMQ Questions
-=================================
-
-1. What is RabbitMQ?
-RabbitMQ is an open-source message broker that enables communication between systems using a queue-based messaging model.
-________________________________________
-2. What is a Message Broker?
-Software that:
-•	Receives messages from producers
-•	Routes them
-•	Delivers to consumers
-________________________________________
-3. What are main components of RabbitMQ?
-✅ From your notes:
-•	Producer
-•	Consumer
-•	Queue
-•	Exchange
-•	Binding
-________________________________________
-4. What is a Queue?
-A buffer that stores messages until consumed.
-
-5. What is an Exchange?
-An intermediate routing agent that:
-•	Receives message from producer
-•	Decides which queue to send
-
-6. What is a Binding?
-A link between exchange and queue using routing rules.
-________________________________________
-🔹 Intermediate Questions
-7. How RabbitMQ works?
-Flow:
-1.	Producer → Exchange
-2.	Exchange → Queue
-3.	Queue → Consumer
-👉 Unlike Kafka, RabbitMQ does routing through exchange.
-________________________________________
-8. Types of Exchanges
-✅ Very important question
-1.	Direct Exchange
-o	Routes using exact routing key
-2.	Fanout Exchange
-o	Sends to ALL queues
-3.	Topic Exchange
-o	Pattern-based routing
-o	Example: order.*
-4.	Headers Exchange
-o	Uses headers instead of routing key
-________________________________________
-9. What is Routing Key?
-A key used by exchange to decide: 👉 which queue gets the message
-________________________________________
-10. What is Message Acknowledgment?
-•	Confirms message processed
-•	If not acknowledged → message re-delivered
-________________________________________
-11. What is Message Durability?
-•	Messages stored on disk
-•	Prevents data loss
-________________________________________
-12. What is Prefetch Count?
-•	Limits how many messages a consumer can receive at once
-•	Prevents overloading consumers
-________________________________________
-🔹 Scenario-Based Questions
-13. What happens if consumer crashes?
-•	Message returns to queue
-•	Another consumer processes it
-________________________________________
-14. How to ensure no message loss?
-•	Use durable queues
-•	Use persistent messages
-•	Enable acknowledgment
-________________________________________
-15. Can RabbitMQ deliver message to multiple consumers?
-✅ Yes:
-•	Using fanout exchange
-________________________________________
-16. How does load balancing work?
-•	Messages distributed across consumers
-•	Round-robin style
-________________________________________
-17. What is Dead Letter Queue (DLQ)?
-•	Stores failed or rejected messages
-•	Helps debugging
-________________________________________
-18. What is TTL (Time To Live)?
-•	Message expires after defined time
-
-🔹 Advanced Questions
-19. What is Publisher Confirms?
-•	Confirms broker received message successfully
-________________________________________
-20. What is Clustering in RabbitMQ?
-•	Multiple nodes work as one system
-________________________________________
-21. What is Federation?
-•	Connect multiple RabbitMQ brokers across locations
-________________________________________
-22. What is Mirrored Queue?
-•	Queue replicated across nodes for fault tolerance
-________________________________________
-23. What is Backpressure?
-•	Prevents system overload when consumers are slow
-________________________________________
-🔹 Quick 1-Minute Answer (Interview Ready)
-👉 If asked “Explain RabbitMQ”:
-RabbitMQ is a message broker that uses a queue-based system to enable communication between distributed systems.
-Producers send messages to exchanges, which route them to queues based on rules. Consumers then process messages from queues.
-It supports reliability through acknowledgments, durability, and flexible routing using different exchange types.
-________________________________________
-Jenkin
-=========
-Jenkin is open source Automation server used for CI/CD
-•	Continuous Integration (CI)
-•	Continuous Delivery/Deployment (CD)
-It helps developers automatically build, test, and deploy code whenever changes are made.
- 
-Jenkin automates repititive development task 
-Building applications
-Running tests
-Deploying apps to server or cloud
-This reduces manual effort and speeds up software delivery.
- 
-•	flow
-•	Developer pushes code to Git
-•	Jenkins detects the change
-•	Jenkins: 
-•	Builds the code
-•	Runs tests
-•	Deploys (optional)
-•	Reports success/failure
- 
-Junit
----------
-# ✅ Basic JUnit Questions
-
-### 1. What is JUnit?
-JUnit is a **Java testing framework** used to write and run **unit tests**. It helps automate testing and ensures code quality.
-
-### 2. What is a Unit Test?
-A unit test tests **small, independent pieces of code** (like a method or class).
-### 3. Difference between JUnit 4 and JUnit 5?
-
-| Feature      | JUnit 4             | JUnit 5                                    |
-| ------------ | ------------------- | ------------------------------------------ |
-| Architecture | Single              | Modular (JUnit Platform, Jupiter, Vintage) |
-| Annotations  | `@Before`, `@After` | `@BeforeEach`, `@AfterEach`                |
-| Assertions   | Basic               | More powerful                              |
-| Java version | Java 5+             | Java 8+                                    |
-
-# ✅ Annotations Questions
-### 4. Common JUnit annotations?
-```java
-@Test        // marks test method
-@BeforeEach  // runs before each test
-@AfterEach   // runs after each test
-@BeforeAll   // runs once before all tests
-@AfterAll    // runs once after all tests
-```
-### 5. What is @Test?
-Marks a method as a **test method** to be executed by JUnit.
-
-### 6. Difference between @BeforeEach and @BeforeAll?
-* `@BeforeEach` → runs **before every test**
-* `@BeforeAll` → runs **once before all tests**
-
-# ✅ Assertions Question
-### 7. What are assertions?
-Assertions are used to **verify expected vs actual results**.
-Example:
-```java
-assertEquals(10, result);
-### 8. Common assertion methods
-assertEquals(expected, actual);
-assertTrue(condition);
-assertFalse(condition);
-assertNull(object);
-assertNotNull(object);
-
-# ✅ Exception Testing
-### 9. How to test exceptions in JUnit?
-```java
-assertThrows(Exception.class, () -> {
-    methodThatThrows();
-});
-
-# ✅ Parameterized Tests
-### 10. What is a parameterized test?
-Runs the same test with **multiple inputs**.
-Example:
-```java
-@ParameterizedTest
-@ValueSource(ints = {1, 2, 3})
-void testNumbers(int num) {
-    assertTrue(num > 0);
-}
-# ✅ Mocking Questions (Very Important)
-### 11. What is Mockito?
-Mockito is used to **mock dependencies** in unit testing.
-### 12. What is a Mock?
-A **fake object** that simulates real object behavior.
-### 13. Example of mocking
-```java
-@Mock
-UserService userService;
-when(userService.getUser()).thenReturn("John");
-
-### 14. Difference between Mock and Spy?
-
-| Mock          | Spy                              |
-| ------------- | -------------------------------- |
-| Fully fake    | Partial real object              |
-| No real logic | Calls real methods unless mocked |
-
-# ✅ Test Lifecycle
-### 15. JUnit lifecycle order
-
-1. `@BeforeAll`
-2. `@BeforeEach`
-3. `@Test`
-4. `@AfterEach`
-5. `@AfterAll`
-# ✅ Advanced Questions
-### 16. What is Test Suite?
-A **collection of test cases** grouped together.
-### 17. What is @Disabled?
-Used to skip a test:
-
-```java
-@Disabled("Not ready yet")
-```
-### 18. What is timeout in JUnit?
-Ensures test runs within a time:
-```java
-assertTimeout(Duration.ofSeconds(2), () -> {
-    method();
-});
+_______________________________________
 `
 ### 19. What is Dependency Injection in tests?
 Injecting dependencies into test classes instead of creating them manually.
