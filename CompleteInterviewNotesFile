@@ -3190,20 +3190,7 @@ ________________________________________
 •	BETWEEN → Range filter
 •	LIKE → Pattern search
 ________________________________________
-🔶 Aggregate Functions
-1.	What are aggregate functions?
-2.	Difference between COUNT(*) and COUNT(column)?
-3.	What is AVG(), SUM(), MAX(), MIN()?
-________________________________________
-🔶 DML & DDL Questions
-1.	Difference between DELETE, TRUNCATE, DROP?
-2.	What is ALTER TABLE?
-3.	What is CREATE TABLE?
-4.	What is INSERT, UPDATE?
-________________________________________
 🔶 Advanced SQL
-Here are clear and interview-friendly answers:
-________________________________________
 1. What is UNION vs UNION ALL?
 ✅ UNION
 •	Combines results from two or more SELECT queries
@@ -3299,17 +3286,7 @@ ________________________________________
 •	EXISTS → checks if subquery returns rows
 •	Subquery → query inside another query
 •	Stored Procedure → reusable SQL block
-•	Alias → temporary name for table/column
-________________________________________
-
-1. Why is index not always good?
-Indexes improve read performance but have drawbacks:
-•	❌ Slows down INSERT, UPDATE, DELETE → index must be updated
-•	❌ Consumes extra storage space
-•	❌ Over-indexing reduces performance
-•	❌ Not useful for small tables
-•	❌ Inefficient for low-cardinality columns (e.g., Gender)
-✅ Conclusion: Indexes are a trade-off (fast reads vs slow writes)
+•	Alias → temporary name for table/column)
 ________________________________________
 
 2. Why GROUP BY is used with aggregate functions?
@@ -3334,8 +3311,7 @@ FROM Employees
 GROUP BY Department
 HAVING COUNT() > 5;
 👉 Filters groups after aggregation
-________________________________________
-________________________________________
+
 5. What happens if you use DELETE without WHERE?
 DELETE FROM Employees;
 ``
@@ -3388,188 +3364,6 @@ LEFT JOIN B ON A.id = B.id
 UNION
 SELECT * FROM A
 RIGHT JOIN B ON A.id = B.id;
-________________________________________
-✅ Quick Summary
-•	Indexes → improve reads but slow writes
-•	GROUP BY → groups data for aggregation
-•	HAVING → filters aggregated results
-•	WHERE vs HAVING → before vs after grouping
-•	DELETE without WHERE → removes all data
-•	TRUNCATE → faster due to minimal logging
-•	PRIMARY KEY vs UNIQUE → NULL + count difference
-•	JOIN → uses internal algorithms (nested loop, hash, merge)
-•	NULL → unknown, cannot be compared
-•	FULL JOIN → missing in some DBs, can use UNION
-________________________________________
-✅ 🔥 SCENARIO-BASED INTERVIEW QUESTIONS (VERY IMPORTANT)
-________________________________________
-🔴 1. Performance Issue Scenario
-👉 Question:
-“Your query is slow, what will you do?”
-✅ Answer:
-•	Add index on frequently used columns
-•	Optimize query
-•	Avoid unnecessary joins
-•	Use EXPLAIN plan
-________________________________________
-🔴 2. Duplicate Data Scenario
-👉 Question:
-“How will you prevent duplicate data?”
-✅ Answer:
-•	Use UNIQUE constraint
-•	Use PRIMARY KEY
-________________________________________
-🔴 3. Data Integrity Scenario
-👉 Question:
-“How to maintain relation between tables?”
-✅ Answer:
-•	Use FOREIGN KEY
-________________________________________
-🔴 4. Large Data Deletion
-👉 Question:
-“You need to delete all data fast?”
-✅ Answer:
-•	Use TRUNCATE (faster)
-________________________________________
-🔴 5. Partial Delete Scenario
-👉 Question:
-“You want to delete specific rows?”
-✅ Answer:
-•	Use DELETE with WHERE
-________________________________________
-🔴 6. Combine Data Scenario
-👉 Question:
-“How to combine 2 tables?”
-✅ Answer:
-•	Use JOIN
-________________________________________
-🔴 7. Missing Data Scenario
-👉 Question:
-“You need all records even if no match?”
-✅ Answer:
-•	Use LEFT JOIN
-________________________________________
-🔴 8. Filtering Aggregated Data
-👉 Question:
-“You want to filter grouped data?”
-✅ Answer:
-•	Use HAVING (not WHERE)
-________________________________________
-🔴 9. Pattern Search
-👉 Question:
-“Find names starting with ‘A’?”
-✅ Answer:
-WHERE name LIKE 'A%'
-________________________________________
-🔴 10. Range Query
-👉 Question:
-“Find data between 1000–5000?”
-✅ Answer:
-WHERE price BETWEEN 1000 AND 5000
-________________________________________
-🔴 11. Multiple Value Filter
-👉 Question:
-“Find employees with roles Analyst or Clerk?”
-✅ Answer:
-WHERE job IN ('ANALYST','CLERK
-________________________________________
-🔴 12. Top Records Scenario
-👉 Question:
-“Get top 5 highest salary?”
-✅ Answer:
-SELECT * FROM emp ORDER BY sal DESC LIMIT 5;
-________________________________________
-🔴 13. Duplicate Removal Scenario
-👉 Question:
-“Remove duplicate results?”
-✅ Answer:
-SELECT DISTINCT column_name FROM table;
-________________________________________
-🔴 14. Count Scenario
-👉 Question:
-“Count employees per department?”
-✅ Answer:
-SELECT deptno, COUNT(*) FROM emp GROUP
-________________________________________
-🔴 15. Real Business Scenario
-👉 Question:
-“Find departments having more than 5 employees?”
-✅ Answer:
-SELECT deptno, COUNT() 
-FROM emp 
-GROUP BY deptno 
-HAVING COUNT() > 5;
-________________________________________
-✅ 🔥 SUPER IMPORTANT DIFFERENCE QUESTIONS
-Question	Key Answer
-DELETE vs TRUNCATE	Row-level vs full table
-WHERE vs HAVING	Before group vs after group
-INNER vs LEFT JOIN	Matching vs all left
-UNION vs UNION ALL	Remove duplicates vs not
-PRIMARY vs UNIQUE	One vs multiple
-________________________________________
-✅ 🎯 Interview Tip
-👉 Always say:
-•	“For performance, we used indexing”
-•	“For data integrity, we used constraints”
-•	“For complex query, we used joins and group by”
-_______________________________________
-`
-### 19. What is Dependency Injection in tests?
-Injecting dependencies into test classes instead of creating them manually.
-
-### 20. How do you test Spring Boot using JUnit?
-```java
-@SpringBootTest
-class MyTest {
-}
-```
-# ✅ Scenario-Based Questions
-
-### 21. How do you test a service layer?
-* Mock repository layer (using Mockito)
-* Test only business logic
-
-### 22. How do you test REST APIs?
-Use:
-
-```java
-MockMvc
-```
-
-# ✅ Coding Question Example
-
-```java
-@Test
-void testAddition() {
-    int result = add(2, 3);
-    assertEquals(5, result);
-}
-`
-
-# ✅ Tips for Interviews
-
-* Understand **JUnit 5 (Jupiter)** well
-* Practice **Mockito + Spring Boot testing**
-
-If you want, I can also give:
-✅ Real interview coding questions  
-✅ Spring Boot + JUnit interview Q\&A  
-✅ Mock interview practice
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  ________________________________________
 ✅ 🔥 Scenario-Based Interview Questions (VERY IMPORTANT)
 🔴 1. Exception Handling Scenario
@@ -3618,8 +3412,6 @@ ________________________________________
 ✅ Answer:
 •	Build jar file (mvn clean install)
 •	Run:
-Shell
-java -jar app.jar
 🔴 8. Logging Scenario
 👉 “How do you track logs in application?”
 ✅ Answer:
@@ -3678,7 +3470,6 @@ ________________________________________
 •	Used Redis caching and Kafka (or RabbitMQ) for async communication
 •	Deployed services using Docker & Kubernetes / cloud (Azure/AWS)
 •	👉 Example: “I developed a User and Order service where each service was independently deployable and communicated via REST APIs.”
-2.	
 3.	What challenges you faced?
 •	Some common challenges I faced:
 •	⚠️ Inter-service communication delays
@@ -3990,9 +3781,8 @@ ________________________________________
 ✅ 🎯 Bonus Smart Answer (VERY IMPRESSIVE)
 👉 If interviewer asks: “Why should we hire you?”
 ✅ Answer:
-I have hands-on experience in designing and migrating microservices, handling real-time issues like performance, failures, and scaling. I not only understand concepts but have implemented them in real-world scenarios.
-________________________________________
-
+I have hands-on experience in designing and migrating microservices, handling real-time issues like performance, failures, and scaling.
+I not only understand concepts but have implemented them in real-world scenarios.
 
 ✅ 🔥 Scenario-Based Questions (Very Important in Interviews)
 🔁 Collections Scenarios
@@ -4060,32 +3850,6 @@ o	equals() → compare key
 •	Retrieval fails
 ✅ Example:
 map.put(key, "value");
-// if key changes → map.get(key) may return null
-``
-👉 Therefore keys should be immutable (e.g., String)
-________________________________________
-✅ 3. Why override equals() & hashCode() together?
-👉 Rule: ✅ If equals() is true → hashCode() MUST be same
-👉 Used by:
-•	HashMap
-•	HashSet
-❌ If only equals() overridden:
-•	Objects considered equal
-•	But stored in different buckets
-✅ Result → duplicate entries / wrong behavior
-________________________________________
-✅ 4. Why multiple inheritance is not allowed (classes)?
-👉 To avoid ambiguity (Diamond Problem)
-Example:
-class A { void show() {} }
-class B extends A {}
-class C extends A {}
-class D extends B, C {} // ❌ Not allowed
-👉 Which show() should be called?
-✅ Confusion → avoided in Java
-✔ Instead:
-•	Use interfaces (supports multiple inheritance)
-________________________________________
 ✅ 5. Difference between Fail-Fast and Fail-Safe
 Feature	Fail-Fast	Fail-Safe
 Behavior	Throws exception	Works on copy
@@ -4182,16 +3946,4 @@ ________________________________________
 •	Service layer (@PreAuthorize)
 ________________________________________
 
-🔹 Real-Time Application Questons
-13.	 scalable Spring Boot application?
-14.	How you handle exception globally? (@ControllerAdvice)
-15.	How will you handle large data with pagination?
-•  Fetch only required data using pages 
-•  Use DB-level pagination (LIMIT/OFFSET) 
-•  Prefer cursor-based pagination for large datasets 
-•  Return pagination metadata 
-•  Use frameworks like Spring Data for easy implementation
-
-16.	How do you secure REST APIs?
-17.	How do you integrate DB with Spring Boot?
-18.	Integrating a database with Spring Boot involves configuring the database connection and using Spring Data to interact with it.
+🔹
