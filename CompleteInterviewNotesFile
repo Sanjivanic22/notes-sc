@@ -1194,9 +1194,15 @@ ________________________________________
 •	wait() is in Object because it works on object locks
 
 Executer framework
+it is java concurrency framework that manages thread creation,reuse,and execution using pools,improving application performance and resource utilization.
+
 completablefuture
+is java 8API that enables asynchronous,nonblocking programming by alowing task to run in parallel chain operation conbine result and handle exception effieciently.
+
 forkjoinpool
-threadpoolTuning
+is a specified thread pool that implements the work-stealing alogorithm to effieciently execute large task into smaller subtask(fork) and combinig the result (join)
+it is used internally by parallele stream and completable future.
+
 
 ✅ SPRING INTERVIEW QUESTION LIST
 =======================================
