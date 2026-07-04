@@ -1,7 +1,7 @@
 ✅ Java 8 Interview Question List
 =====================================
 🔹 Basic Features
-1.	What are the features of Java 8?
+1.	What are the features of Java 8?***
 1.	• Lambda Expressions 
 2.	• Functional Interfaces 
 3.	• Stream API (and parallel streams) 
@@ -11,7 +11,8 @@
 7.	• New Date-Time API 
 8.	•  Nashorn engine
 
-2.	What is a lambda expression?
+
+2.	What is a lambda expression?****
 A lambda expression is a short, anonymous function—a function defined without a name. 
 It is typically used for small, simple operations and can be passed as an argument to other functions.
 Help us to write our code in functional style.it provides clear and concise way to implement single abstract method by using expression.
@@ -22,11 +23,11 @@ It is very useful in collection library in which it helps to iterate, filter and
 OR
 5.	(parameters) -> { statements; }
 
-7.	How do lambda expressions work internally?
+7.	How do lambda expressions work internally?**
 	Internally, lambda expressions are implemented using the invokedynamic mechanism, where the JVM dynamically creates 
 instances of functional interfaces without generating separate class files, making them efficient and lightweight.
 
-9.	What is functional interface?
+9.	What is functional interface?***
 •	If an interface contain only one abstract method, such type of interfaces are called functional interfaces and the method is called functional method
     or single abstract method (SAM). 
 •	 Functional interfaces are used as the target types for lambda expressions and method references.
@@ -38,7 +39,7 @@ instances of functional interfaces without generating separate class files, maki
 •	   
     Inside functional interface in addition to single Abstract method (SAM) we write any number of default and static methods.
 
-10.	Why were functional interfaces introduced?
+10.	Why were functional interfaces introduced?**
 Functional interfaces were introduced to:
 •	Support lambda expressions
 •	Enable functional programming
@@ -326,7 +327,18 @@ Core java QuestionList
 •	JRE
 •	Development tools (javac, debugger, jar, etc.)
 •	👉 Key point: JDK = JRE + Development tools
-	
+
+can we override static method?***
+No, static methods cannot be overridden in Java.
+They can only be hidden (also called method hiding).
+
+Why?
+Method overriding works with runtime polymorphism.
+Static methods belong to the class, not to an object. The method call is resolved at compile time, so Java doesn't support overriding for static methods.
+
+What is immutable, how to make class as immutable?****
+An immutable class is a class whose state cannot be changed after object creation. To make a class immutable, declare it as final, make all fields private final,
+initialize them through the constructor, avoid setters, and use defensive copying for mutable fields.
 Is Java pass-by-value or pass-by-reference?*
 Java is ALWAYS pass-by-value
 🔹 What does it mean?
@@ -1181,38 +1193,13 @@ ________________________________________
 •	ConcurrentHashMap uses fine-grained locking
 •	wait() is in Object because it works on object locks
 
+Executer framework
+completablefuture
+forkjoinpool
+threadpoolTuning
+
 ✅ SPRING INTERVIEW QUESTION LIST
 =======================================
-🔹 Core Spring Basics
-1.	What is Spring Framework?
-2.	The Spring Framework is a powerful, lightweight, and open-source Java framework used for building enterprise-level applications. 
-3.	It provides a comprehensive programming and configuration model for modern Java-based systems.
-
-4.	What are the modules of Spring?
-5.	Spring Framework is modular and includes Core Container, Data Access/Integration, Web, AOP, Messaging, 
-Instrumentation, and Test modules. These modules help in building scalable, loosely coupled enterprise applications.”
-
- • Core Container → DI & Bean management 
-•  ✅ Data Access → Database & transactions 
-•  ✅ Web → Web & REST applications 
-•  ✅ AOP → Cross-cutting concerns 
-•  ✅ Messaging → Event-driven apps 
-•  ✅ Test → Testing support
-
-6.	Advantages of Spring Framework?
-•	spring framework provides predefined libraries and templates
-•	Spring framework privide loos coupling
-•	Manages the dependancies injection and IOC automatically
-•	Spring framwork very easy to  testing
-•	Spring web framework is well design mvc framework which provide the greate alteranative to another ````framework like struts
-38.	What is Spring Container?
-The Spring Container is the core component of the Spring Framework responsible for:
-•	Creating objects (beans)
-•	Managing their lifecycle
-•	Injecting dependencies (DI)
-•	Configuring the application
-•	The Spring Container is a framework component that creates, configures, and manages objects (beans) and their dependencies.
-
 🔹 IoC Container
 8.	What is IoC container?
 9.	An IoC (Inversion of Control) Container is a framework component that manages the creation, configuration, and lifecycle of
@@ -1419,14 +1406,7 @@ o	Shopping cart
 52.	    return new CreditCardService();
 53.	}
 54.	👉 If no @Qualifier is used, Spring will pick this bean.
-55
-56.	🔑 Key Differences
-57.	Feature	58.	@Autowired	59.	@Qualifier	60.	@Primary
-61.	Purpose	62.	Inject dependency	63.	Specify exact bean	64.	Set default bean
-65.	Works by	66.	Type	67.	Name	68.	Priority
-69.	Used with	70.	Field/Constructor/Setter	71.	Along with @Autowired	72.	At bean declaration
-73.	When needed	74.	Always for injection	75.	When multiple beans exist	76.	When multiple beans exist
-77.	________________________________________
+
 78.	✅ Combined Example
 79.	@Component
 80.	class App {
@@ -1522,113 +1502,15 @@ o	Shopping cart
 •	public class AppConfig {
 •	}
 
-🔹 Spring MVC
-==================
-32.	What is Spring MVC?
-33.	Spring MVC (Model–View–Controller) is a web framework provided by the Spring Framework for building Java-based web applications 
-following the MVC design pattern.
-Spring MVC is a lightweight, flexible framework used to develop web applications in Java. It separates the application into three main components:
-34.	1. Model
-35.	Represents the data and business logic
-36.	Interacts with the database
-37.	Example: Java classes, services, DAOs
-38.	2. View
-39.	Responsible for displaying data to the user
-40.	Usually implemented using JSP, Thymeleaf, HTML, etc.
-41.	3. Controller
-42.	Handles user requests
-43.	Processes input and return the appropriate response
-44.	Acts as a bridge between Model and View
-
-45.	Explain Spring MVC flow?
-Spring MVC follows a structured request–response flow:
-✅ Step-by-step Flow:
-46.	Client Request
-1.	User sends an HTTP request (via browser).
-47.	DispatcherServlet (Front Controller)
-1.	Receives all incoming requests.
-48.	HandlerMapping
-1.	Identifies the appropriate controller based on the request URL.
-49.	Controller
-1.	Processes the request.
-2.	Calls business logic (Model/service layer).
-50.	Model
-1.	Prepares data to be displayed.
-51.	Controller returns ModelAndView
-1.	Contains: 
-1.	Model (data)
-2.	View name (UI page)
-52.	ViewResolver
-1.	Maps logical view name to actual view (JSP, HTML, Thymeleaf).
-53.	View Rendering
-1.	View displays the data to the user.
-54.	Response
-1.	Final output sent back to the browser.
-
-•  User sends a request to the server 
-•  Request goes to the DispatcherServlet (front controller) 
-•  DispatcherServlet forwards request to the appropriate Controller 
-•  Controller processes request using Model 
-•  Controller returns a ModelAndView 
-•  DispatcherServlet resolves the View 
-•  Response is sent back to the user
-
-55.	What is DispatcherServlet?
-DispatcherServlet is the central component (Front Controller) in the Spring MVC framework that handles all incoming HTTP requests and coordinates the entire request-processing workflow.
-
-56.	What is HandlerMapping?
-57.	HandlerMapping is a Spring MVC component that maps incoming HTTP requests to the appropriate controller.
-
-HandlerMapping is responsible for deciding which controller should handle a specific request
-
-58.	What is ViewResolver?
-ViewResolver is a Spring MVC component that resolves the logical view name returned by the controller into the actual view resource.
-
 Spring Boot QuestionList
-==========================
-37.	What is Spring Boot?
-•	Spring Boot is a module of the Spring Framework that provides a simplified way to create Spring-based applications with minimal configuration.
-•	 that makes it easier to create and run Java applications.
-• It provides easier and faster ways to set up ,configure and run both simple and web based application.
-•		• It provides rapid application development.
-•	2. It simplifies the configuration and setup process, allowing developers to focus more on writing code for their applications.
-•	a. Configurations
-•	b. Dependency Management
-•	C. Embedded Server
-
-38.	Advantages of Spring Boot?
-•	Springboot reduce the lots of development time and increase the productivity
-•		• It avaoides boilerplate code ,annotation and xml configurations
-•		• It provides lots of plugins to develop and test springboot app very easily build tool like maven and gradle
-•		• It test the web application easily with the help of different embedded http srvers like tomcat and jetti
-•		• Here don’t need to deployee the war files.
-•		•  increased productivity, reduced configuration, simplified dependency management, and easier deployment.
-•		b. Production Ready applications- Metrix, Health Check and many features are designed for production ready application.
-•	c. Rapid Development- Opinionated approach and auto-configuration enable developers to quickly develop apps
-•	d. Provide Dependency Management- No need to manage separate dependencies manually.
-•	e. Autoconfiguration - Spring Boot AutoConfigure things by default.
-13.	1. What is Spring Boot? How is it different from Spring?
-14.	✅ Spring Boot
-•	Spring Boot is a framework built on top of Spring that simplifies application development by providing:
-•	Auto-configuration
-•	Embedded servers
-•	Minimal setup
-•	👉 Goal: Run Spring apps quickly with less configuration
+==========================n
 ________________________________________
-15.	✅ Difference: Spring vs Spring Boot
+15.	✅ Difference: Spring vs Spring Boot**
 16.	Feature	17.	Spring	18.	Spring Boot
 19.	Configuration	20.	Manual (XML/Java)	21.	Auto-configured
 22.	Setup	23.	Complex	24.	Very simple
 25.	Server	26.	External (Tomcat)	27.	Embedded (Tomcat, Jetty)
 28.	Development speed	29.	Slower	30.	Faster
-
-31.	2. What are the main features of Spring Boot?
-•	✅ Auto-configuration
-✅ Standalone applications
-✅ Embedded servers (Tomcat, Jetty)
-✅ Starter dependencies
-✅ Production-ready features (Actuator)
-✅ Minimal configuration
 32.	3. What is auto-configuration?
 •	Auto-configuration automatically configures Spring application based on dependencies present in the classpath.
 •	✅ Example:
@@ -1651,7 +1533,7 @@ An embedded server is a built-in web server inside the application.
 •	👉 You don’t need to deploy a WAR file separately
 •	Run app with:
 •	java -jar app.jar
-41.	6. What is the use of @SpringBootApplication?
+41.	6. What is the use of @SpringBootApplication?**
 •	It is a main annotation that combines:
 •	@Configuration
 •	@EnableAutoConfiguration
@@ -1659,7 +1541,7 @@ An embedded server is a built-in web server inside the application.
 •	Enables auto-configuration
 •	Scans components
 •	Marks config class
-42.	7. How does Spring Boot work internally?
+42.	7. How does Spring Boot work internally?flow****
 43.	✅ Internal Flow:
 •	Main class starts (SpringApplication.run())
 •	Loads configuration
@@ -1683,7 +1565,7 @@ An embedded server is a built-in web server inside the application.
 •	/actuator/health
 •	/actuator/metrics
 •	/actuator/info
-45.	9. What is Dependency Injection (DI)?
+45.	9. What is Dependency Injection (DI)?**
 •	Dependency Injection is a design pattern where objects receive their dependencies instead of creating them.
 •	✅ Example:
 •	@Autowired
@@ -1692,7 +1574,7 @@ An embedded server is a built-in web server inside the application.
 •	Loose coupling
 •	Easy testing
 •	Maintainability
-46.	10. What is IoC (Inversion of Control)?
+46.	10. What is IoC (Inversion of Control)?***
 •	IoC means the control of object creation is given to the Spring container instead of the programmer.
 •	👉 Spring container:
 •	Creates objects (beans)
@@ -1710,7 +1592,7 @@ ________________________________________
 •	👉 In simple terms:
 Spring Boot reduces the need for manual configuration by setting up beans automatically
 .
-40.	How to disable auto-configuration?
+40.	How to disable auto-configuration?***
 •	✅ 1. Disable Specific Auto-Configuration (Recommended)
 •	Use exclude in @SpringBootApplication:
 •	@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
@@ -1808,7 +1690,7 @@ Pagination & Sorting
 findAll(Pageable pageable);
 findAll(Sort sort);
 
-44.	Difference between CrudRepository and JpaRepository?
+44.	Difference between CrudRepository and JpaRepository?****
 CrudRepository
 •	A generic interface in Spring Data.
 •	Provides basic CRUD operations.
@@ -1840,7 +1722,7 @@ in the repository interface.
 55.	Pagination is the process of dividing large amounts of data into smaller chunks (pages) so that data can be retrieved and displayed 
 in parts instead of loading everything at once
 
-🔹 Transactions
+🔹 Transactions***
 48.	What is transaction in Spring?
 A transaction is a single unit of work that ensures a group of database operations either:
 49.	✅ All succeed (commit)
@@ -1858,7 +1740,7 @@ A transaction is a single unit of work that ensures a group of database operatio
 72.	Boilerplate Code	73.	More	74.	Very less
 75.	Preferred	76.	Rarely used	77.	Mostly used ✅
 
-78.	What is @Transactional?
+78.	What is @Transactional?******
 @Transactional is a Spring annotation used to manage transactions automatically.
 •  Starts a transaction ✅ 
 •  Commits if successful ✅ 
@@ -2112,7 +1994,7 @@ public ResponseEntity<ErrorResponse> handleException(Exception ex) {
 Hibernate is an ORM (Object-Relational Mapping) framework for Java that simplifies database interactions by mapping Java objects to database tables.
 4.	Hibernate allows developers to perform database operations using Java objects instead of writing SQL queries manually.
 
-5.	What is lazy vs eager loading?
+5.	What is lazy vs eager loading?****
 Lazy and Eager loading define when related data is fetched from the database.
 Lazy Loading
 •	Data is loaded only when it is actually needed
@@ -2229,7 +2111,7 @@ Microservice is an architectural style for designing and building software appli
 loosely coupled services that communicate with other over well defined API'S.  In this approach, an application is divided into a set of services, 
 each representing a specific business capability and running as a separate process or container.
 
-## what is difference b/w Microservice and Monolithic architecture.
+## what is difference b/w Microservice and Monolithic architecture.**
 --------------------------------------------------------------------
 Microservices                                                             
 1)are small and focused on bussiness capabilities.
@@ -2242,7 +2124,7 @@ Microservices
 2)monolithic requires the entire application to be deployed and scaled as whole
 3) entire application is developed in single technology stack.
 
-1.	What is Spring Boot Actuator?
+1.	What is Spring Boot Actuator?***
 2.	Spring Boot Actuator is a feature of Spring Boot that provides production-ready tools to monitor and manage an application through built-in endpoints.
 Actuator helps you monitor application health, metrics, and runtime details using HTTP endpoints.
 •	Monitor application health 
@@ -2263,7 +2145,7 @@ It provides solutions for common distributed system problems like:
 •	Fault tolerance
 •	API gateways
 
-5.	What is Feign Client?
+5.	What is Feign Client?****
 6.	Feign Client (Spring Cloud OpenFeign) is a declarative REST client used in Spring Boot applications to make HTTP calls to other microservices 
     easily and cleanly.	
 It simplifies the process of making HTTP requests between microservices by allowing you to define API clients using interfaces and annotations.
@@ -2271,7 +2153,7 @@ It simplifies the process of making HTTP requests between microservices by allow
 •  Makes HTTP call to user-service 
 •  Maps response to Java object
 
-8.	What is API Gateway?
+8.	What is API Gateway?****
 •	In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access
    the underlaying microservices.
 •	it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
@@ -2299,7 +2181,7 @@ Example:
 •	✅ 6. Response Aggregation
 •	Combines data from multiple services into a single response
 
-9.	What is Circuit Breaker?
+9.	What is Circuit Breaker?***
 10.	In microservices architecture, a Circuit Breaker is a design pattern used to prevent cascading failures when one service is unable to respond.
 A circuit breaker is a mechanism that stops calling a failing service after repeated failures and returns a fallback response instead, allowing the
 system to remain stable.
@@ -2326,7 +2208,7 @@ ________________________________________
 o	✅ If successful → back to Closed
 o	❌ If still failing → back to Open
 
-JWT(JSON Web Token)
+JWT(JSON Web Token)*********
 =====
 11.	What is JWT?
 JWT (JSON Web Token) is a compact, secure, and self-contained way to transmit information between parties as a JSON object, mainly 
@@ -2385,22 +2267,6 @@ return userRepository.save(user);
 •	Removes data from cache
 
 ✅ 🔥 Bonus: Advanced Questions (High Chances)
-________________________________________
-1. Distributed Tracing
-Distributed tracing tracks a request as it flows through multiple microservices.
-•	It helps identify performance bottlenecks and failures.
-•	Each request is assigned a unique trace ID, allowing you to see the entire journey across services.
-________________________________________
-2. Centralized Logging
-Centralized logging collects logs from multiple services into a single system (e.g., ELK stack).
-•	Makes debugging easier by providing a unified view.
-•	Helps in monitoring, troubleshooting, and auditing.
-________________________________________
-3. Config Server
-A config server is a centralized service that manages configuration for multiple applications.
-•	Stores settings (DB URLs, APIs, feature flags) outside the code.
-•	Enables dynamic updates without redeploying applications.
-________________________________________
 4. Saga Pattern
 Saga pattern manages distributed transactions across microservices.
 •	Instead of a single transaction, it uses a sequence of local transactions.
@@ -2408,12 +2274,7 @@ Saga pattern manages distributed transactions across microservices.
 Two types:
 •	Choreography (event-driven)
 •	Orchestration (central coordinator)
-________________________________________
-5. Eventual Consistency
-Eventual consistency means data will become consistent over time across services.
-•	There is no guarantee of immediate consistency.
-•	Common in distributed systems to improve performance and availability.
-________________________________________
+
 6. CAP Theorem
 CAP states that a distributed system can guarantee only two of the three:
 •	Consistency (C) – same data everywhere
@@ -2516,21 +2377,9 @@ ________________________________________
 11. What is replication?
 Kafka copies partitions across brokers to ensure data availability.
 
-12. What is ISR (In-Sync Replica)?
-Replicas that are fully caught up with the leader partition.
-
-13. Leader and Follower in Kafka?
-•	Leader handles reads/writes
-•	Followers replicate data
-________________________________________
 14. What happens if a broker fails?
 •	Kafka elects a new leader from replicas
 •	No data loss if replication is configured correctly
-
-15. What is Zookeeper / KRaft?
-•	Older Kafka uses Zookeeper for coordination
-•	New Kafka uses KRaft (Kafka Raft mode)
-
 🔹 Producer-Level Questions (From Your KafkaTemplate Notes)
 16. What is KafkaTemplate?
 ✅ From your notes: KafkaTemplate is a Spring abstraction for Kafka Producer that:
@@ -2548,68 +2397,7 @@ kafkaTemplate.send(topic, message).addCallback(...)
 ``
 •	Non-blocking
 •	Uses callback
-________________________________________
-18. Why use message key?
-•	Messages with same key go to same partition
-•	Ensures ordering
-________________________________________
-19. What is serialization?
-Process of converting object → byte stream before sending to Kafka.
-________________________________________
-🔹 Consumer-Level Questions (Important - Based on @KafkaListener)
-20. What is @KafkaListener?
-✅ From your notes:
-•	Used to consume messages
-•	Automatically listens to topics
-•	Processes messages asynchronously
-________________________________________
-21. How does Kafka distribute messages in a consumer group?
-•	Each partition → one consumer
-•	Load is distributed evenly
-________________________________________
-22. Can multiple consumers read same message?
-✅ YES:
-•	Different consumer groups → each get full copy
-❌ SAME group:
-•	Only one consumer gets message
-________________________________________
-23. What is auto-offset reset?
-earliest → read from beginning  
-latest → read new messages 
-________________________________________
-24. What is manual acknowledgment?
-✅ From your notes:
-•	You manually commit after processing
-acknowledgment.acknowledge();
-
-25. What is concurrency in KafkaListener?
-@KafkaListener(concurrency = "3")
-•	Runs 3 parallel consumers
-
-26. How do you handle errors in Kafka?
-✅ From your notes:
-•	ErrorHandler
-•	Retry
-•	Dead Letter Topic (DLT)
-________________________________________
-🔹 Scenario-Based Questions (Very Important)
-27. How to ensure message order?
-•	Use same key
-•	Same partition
-
-28. How do you scale Kafka?
-•	Increase partitions
-•	Add brokers
-________________________________________
-29. What happens if consumer is slow?
-•	Kafka stores messages
-•	Consumer reads later using offset
-________________________________________
-30. How to avoid data loss?
-•	Enable replication
-•	Use acknowledgments (acks=all)
-•	Proper offset commits
-________________________________________
+_______________________________________________
 🔹 Kafka vs RabbitMQ (Common Question)
 Feature	Kafka	RabbitMQ
 Model	Pull-based	Push-based
@@ -2618,42 +2406,6 @@ Storage	Disk (persistent)	Queue-based
 Throughput	Very high	Moderate
 Ordering	Partition-based	Queue-based
 ________________________________________
-🔹 Real-World Use Case Questions
-31. Where is Kafka used?
-✅ From your notes:
-•	LinkedIn → activity tracking
-•	Uber → ride tracking
-•	Netflix → logs & monitoring
-•	Walmart → retail analytics
-________________________________________
-🔹 Tricky / Advanced Questions
-32. Can Kafka lose messages?
-•	Rare, but possible if: 
-o	replication = 1
-o	improper config
-________________________________________
-33. What is exactly-once processing?
-•	Ensures messages are: 
-o	Not lost
-o	Not duplicated
-________________________________________
-34. What is Kafka Streams?
-•	API for real-time stream processing
-________________________________________
-35. What is Kafka Connect?
-•	Tool for integrating external systems
-________________________________________
-🔹 Quick Revision (Your Notes Summary Answer)
-👉 If interviewer asks: Explain Kafka in 1 minute
-You can say:
-Kafka is a distributed event streaming platform that uses a publish-subscribe model. Producers send messages to topics, which are divided into partitions for scalability. Kafka brokers store these messages, and consumers read them using consumer groups. It provides high throughput, fault tolerance via replication, and is widely used for real-time data processing.
-________________________________________
-✅ Pro Tip (Interview)
-Always add:
-•	Kafka is pull-based
-•	Messages are retained (not deleted after read)
-•	Offsets are managed by consumers
-
 🔹 Basic RabbitMQ Questions
 =================================
 
@@ -2705,195 +2457,6 @@ o	Example: order.*
 4.	Headers Exchange
 o	Uses headers instead of routing key
 ________________________________________
-9. What is Routing Key?
-A key used by exchange to decide: 👉 which queue gets the message
-________________________________________
-10. What is Message Acknowledgment?
-•	Confirms message processed
-•	If not acknowledged → message re-delivered
-________________________________________
-11. What is Message Durability?
-•	Messages stored on disk
-•	Prevents data loss
-________________________________________
-12. What is Prefetch Count?
-•	Limits how many messages a consumer can receive at once
-•	Prevents overloading consumers
-________________________________________
-🔹 Scenario-Based Questions
-13. What happens if consumer crashes?
-•	Message returns to queue
-•	Another consumer processes it
-________________________________________
-14. How to ensure no message loss?
-•	Use durable queues
-•	Use persistent messages
-•	Enable acknowledgment
-________________________________________
-15. Can RabbitMQ deliver message to multiple consumers?
-✅ Yes:
-•	Using fanout exchange
-________________________________________
-16. How does load balancing work?
-•	Messages distributed across consumers
-•	Round-robin style
-________________________________________
-17. What is Dead Letter Queue (DLQ)?
-•	Stores failed or rejected messages
-•	Helps debugging
-________________________________________
-18. What is TTL (Time To Live)?
-•	Message expires after defined time
-
-🔹 Advanced Questions
-19. What is Publisher Confirms?
-•	Confirms broker received message successfully
-________________________________________
-20. What is Clustering in RabbitMQ?
-•	Multiple nodes work as one system
-________________________________________
-21. What is Federation?
-•	Connect multiple RabbitMQ brokers across locations
-________________________________________
-22. What is Mirrored Queue?
-•	Queue replicated across nodes for fault tolerance
-________________________________________
-23. What is Backpressure?
-•	Prevents system overload when consumers are slow
-________________________________________
-🔹 Quick 1-Minute Answer (Interview Ready)
-👉 If asked “Explain RabbitMQ”:
-RabbitMQ is a message broker that uses a queue-based system to enable communication between distributed systems.
-Producers send messages to exchanges, which route them to queues based on rules. Consumers then process messages from queues.
-It supports reliability through acknowledgments, durability, and flexible routing using different exchange types.
-________________________________________
-Jenkin
-=========
-Jenkin is open source Automation server used for CI/CD
-•	Continuous Integration (CI)
-•	Continuous Delivery/Deployment (CD)
-It helps developers automatically build, test, and deploy code whenever changes are made.
- 
-Jenkin automates repititive development task 
-Building applications
-Running tests
-Deploying apps to server or cloud
-This reduces manual effort and speeds up software delivery.
- 
-•	flow
-•	Developer pushes code to Git
-•	Jenkins detects the change
-•	Jenkins: 
-•	Builds the code
-•	Runs tests
-•	Deploys (optional)
-•	Reports success/failure
- 
-Junit
----------
-# ✅ Basic JUnit Questions
-
-### 1. What is JUnit?
-JUnit is a **Java testing framework** used to write and run **unit tests**. It helps automate testing and ensures code quality.
-
-### 2. What is a Unit Test?
-A unit test tests **small, independent pieces of code** (like a method or class).
-### 3. Difference between JUnit 4 and JUnit 5?
-
-| Feature      | JUnit 4             | JUnit 5                                    |
-| ------------ | ------------------- | ------------------------------------------ |
-| Architecture | Single              | Modular (JUnit Platform, Jupiter, Vintage) |
-| Annotations  | `@Before`, `@After` | `@BeforeEach`, `@AfterEach`                |
-| Assertions   | Basic               | More powerful                              |
-| Java version | Java 5+             | Java 8+                                    |
-
-# ✅ Annotations Questions
-### 4. Common JUnit annotations?
-```java
-@Test        // marks test method
-@BeforeEach  // runs before each test
-@AfterEach   // runs after each test
-@BeforeAll   // runs once before all tests
-@AfterAll    // runs once after all tests
-```
-### 5. What is @Test?
-Marks a method as a **test method** to be executed by JUnit.
-
-### 6. Difference between @BeforeEach and @BeforeAll?
-* `@BeforeEach` → runs **before every test**
-* `@BeforeAll` → runs **once before all tests**
-
-# ✅ Assertions Question
-### 7. What are assertions?
-Assertions are used to **verify expected vs actual results**.
-Example:
-```java
-assertEquals(10, result);
-### 8. Common assertion methods
-assertEquals(expected, actual);
-assertTrue(condition);
-assertFalse(condition);
-assertNull(object);
-assertNotNull(object);
-
-# ✅ Exception Testing
-### 9. How to test exceptions in JUnit?
-```java
-assertThrows(Exception.class, () -> {
-    methodThatThrows();
-});
-
-# ✅ Parameterized Tests
-### 10. What is a parameterized test?
-Runs the same test with **multiple inputs**.
-Example:
-```java
-@ParameterizedTest
-@ValueSource(ints = {1, 2, 3})
-void testNumbers(int num) {
-    assertTrue(num > 0);
-}
-# ✅ Mocking Questions (Very Important)
-### 11. What is Mockito?
-Mockito is used to **mock dependencies** in unit testing.
-### 12. What is a Mock?
-A **fake object** that simulates real object behavior.
-### 13. Example of mocking
-```java
-@Mock
-UserService userService;
-when(userService.getUser()).thenReturn("John");
-
-### 14. Difference between Mock and Spy?
-
-| Mock          | Spy                              |
-| ------------- | -------------------------------- |
-| Fully fake    | Partial real object              |
-| No real logic | Calls real methods unless mocked |
-
-# ✅ Test Lifecycle
-### 15. JUnit lifecycle order
-
-1. `@BeforeAll`
-2. `@BeforeEach`
-3. `@Test`
-4. `@AfterEach`
-5. `@AfterAll`
-# ✅ Advanced Questions
-### 16. What is Test Suite?
-A **collection of test cases** grouped together.
-### 17. What is @Disabled?
-Used to skip a test:
-
-```java
-@Disabled("Not ready yet")
-```
-### 18. What is timeout in JUnit?
-Ensures test runs within a time:
-```java
-assertTimeout(Duration.ofSeconds(2), () -> {
-    method();
-});
 
 ✅ 🔥 MOST FREQUENTLY ASKED SQL INTERVIEW QUESTIONS
 🔶 Index Questions
@@ -2957,12 +2520,6 @@ Optimizer chooses index-based access instead of full scan
 48.	A composite index is an index that includes multiple columns to improve query performance when those columns are used together in queries.
 How It Works
 •	The index is sorted based on the order of columns defined.
-.
-👉 Order matters!
-________________________________________
-✅ When It Is Useful
-Composite indexes are effective when queries use multiple columns in WHERE, JOIN, or ORDER BY clauses:
-
 🔶 Join Questions
 1.	What is a JOIN?
 2.	SQL joins are used to combine rows from two or more tables based on a related column between them.
@@ -3106,6 +2663,142 @@ The CHECK constraint is used to limit the value range that can be placed in a co
 52.	A DEFAULT constraint is used to assign a default value to a column when no value is specified during an INSERT operation
 53.	Can a table have multiple UNIQUE constraints?
 54.	Yes, a table can have multiple UNIQUE constraints.
+Jenkin
+=========
+Jenkin is open source Automation server used for CI/CD
+•	Continuous Integration (CI)
+•	Continuous Delivery/Deployment (CD)
+It helps developers automatically build, test, and deploy code whenever changes are made.
+ 
+Jenkin automates repititive development task 
+Building applications
+Running tests
+Deploying apps to server or cloud
+This reduces manual effort and speeds up software delivery.
+ 
+•	flow
+•	Developer pushes code to Git
+•	Jenkins detects the change
+•	Jenkins: 
+•	Builds the code
+•	Runs tests
+•	Deploys (optional)
+•	Reports success/failure
+ 
+Junit
+---------
+# ✅ Basic JUnit Questions
+
+### 1. What is JUnit?
+JUnit is a **Java testing framework** used to write and run **unit tests**. It helps automate testing and ensures code quality.
+
+### 2. What is a Unit Test?
+A unit test tests **small, independent pieces of code** (like a method or class).
+### 3. Difference between JUnit 4 and JUnit 5?
+
+| Feature      | JUnit 4             | JUnit 5                                    |
+| ------------ | ------------------- | ------------------------------------------ |
+| Architecture | Single              | Modular (JUnit Platform, Jupiter, Vintage) |
+| Annotations  | `@Before`, `@After` | `@BeforeEach`, `@AfterEach`                |
+| Assertions   | Basic               | More powerful                              |
+| Java version | Java 5+             | Java 8+                                    |
+
+# ✅ Annotations Questions
+### 4. Common JUnit annotations?
+```java
+@Test        // marks test method
+@BeforeEach  // runs before each test
+@AfterEach   // runs after each test
+@BeforeAll   // runs once before all tests
+@AfterAll    // runs once after all tests
+```
+### 5. What is @Test?
+Marks a method as a **test method** to be executed by JUnit.
+
+### 6. Difference between @BeforeEach and @BeforeAll?
+* `@BeforeEach` → runs **before every test**
+* `@BeforeAll` → runs **once before all tests**
+
+# ✅ Assertions Question
+### 7. What are assertions?
+Assertions are used to **verify expected vs actual results**.
+Example:
+```java
+assertEquals(10, result);
+### 8. Common assertion methods
+assertEquals(expected, actual);
+assertTrue(condition);
+assertFalse(condition);
+assertNull(object);
+assertNotNull(object);
+
+# ✅ Exception Testing
+### 9. How to test exceptions in JUnit?
+```java
+assertThrows(Exception.class, () -> {
+    methodThatThrows();
+});
+
+# ✅ Parameterized Tests
+### 10. What is a parameterized test?
+Runs the same test with **multiple inputs**.
+Example:
+```java
+@ParameterizedTest
+@ValueSource(ints = {1, 2, 3})
+void testNumbers(int num) {
+    assertTrue(num > 0);
+}
+# ✅ Mocking Questions (Very Important)
+### 11. What is Mockito?
+Mockito is used to **mock dependencies** in unit testing.
+### 12. What is a Mock?
+A **fake object** that simulates real object behavior.
+### 13. Example of mocking
+```java
+@Mock
+UserService userService;
+when(userService.getUser()).thenReturn("John");
+
+### 14. Difference between Mock and Spy?
+
+| Mock          | Spy                              |
+| ------------- | -------------------------------- |
+| Fully fake    | Partial real object              |
+| No real logic | Calls real methods unless mocked |
+
+# ✅ Test Lifecycle
+### 15. JUnit lifecycle order
+
+1. `@BeforeAll`
+2. `@BeforeEach`
+3. `@Test`
+4. `@AfterEach`
+5. `@AfterAll`
+# ✅ Advanced Questions
+### 16. What is Test Suite?
+A **collection of test cases** grouped together.
+### 17. What is @Disabled?
+Used to skip a test:
+
+```java
+@Disabled("Not ready yet")
+```
+### 18. What is timeout in JUnit?
+Ensures test runs within a time:
+```java
+assertTimeout(Duration.ofSeconds(2), () -> {
+    method();
+});
+
+
+.
+👉 Order matters!
+________________________________________
+✅ When It Is Useful
+Composite indexes are effective when queries use multiple columns in WHERE, JOIN, or ORDER BY clauses:
+
+
 
 🔶 Query Questions
 1. Difference between WHERE and HAVING
@@ -3320,28 +3013,7 @@ DELETE FROM Employees;
 •	Table structure remains intact
 ⚠️ Very risky operation
 ________________________________________
-6. Why TRUNCATE is faster than DELETE?
-Feature	DELETE	TRUNCATE
-Operation type	Row-by-row	Removes all data at once
-Logging	Fully logged	Minimal logging
-WHERE clause	✅ Supported	❌ Not supported
-Speed	Slower	Faster
-✅ Reason:
-TRUNCATE deallocates pages instead of deleting row-by-row
-__________________________________________
-8. How JOIN works internally?
-Internally, databases use algorithms like:
-✅ Common Join Methods:
-1.	Nested Loop Join
-o	Compare each row of one table with another
-2.	Hash Join
-o	Uses hash table for faster matching
-3.	Merge Join
-o	Works on sorted data
-👉 Optimizer chooses best method based on:
-•	Table size
-•	Index availability
-•	Query conditions
+
 ________________________________________
 9. Why NULL is not equal to anything?
 ✅ NULL represents unknown/missing value
