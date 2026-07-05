@@ -2082,6 +2082,19 @@ JPQL allows yo>u to write queries using Java entity names and their fields, rath
 •	✅ Similar to SQL but uses object-oriented syntax
 •	✅ Supports SELECT, UPDATE, DELETE operations
 
+profiles
+In Spring Boot, Profiles are used to manage environment-specific configurations. They allow you to run the same application with different settings for development, 
+testing, staging, and production environments without changing the code.
+@Configuration
+@Profile("dev")
+public class DevConfig {
+
+    @Bean
+    public String environment() {
+        return "Development Environment";
+    }
+}
+`
 🔸Microservices & Advanced QuestionList
 =========================================
 what is microservice architecture
@@ -2112,9 +2125,6 @@ Actuator helps you monitor application health, metrics, and runtime details usin
 •	✅ Check beans, environment, and configurations 
 •	✅ Perform management operations
 
-•	Spring Boot Actuator is used to monitor and manage applications by providing production-ready REST endpoints for health checks, metrics,
-and application details.
-
 3.	What is Springs x Cloud? 
 Spring Cloud is a collection of frameworks that helps developers build and manage cloud-based microservices architectures.
 It provides solutions for common distributed system problems like:
@@ -2127,17 +2137,73 @@ It provides solutions for common distributed system problems like:
 5.	What is Feign Client?****
 6.	Feign Client (Spring Cloud OpenFeign) is a declarative REST client used in Spring Boot applications to make HTTP calls to other microservices 
     easily and cleanly.	
-It simplifies the process of making HTTP requests between microservices by allowing you to define API clients using interfaces and annotations.
-•  Creates an implementation at runtime 
-•  Makes HTTP call to user-service 
-•  Maps response to Java object
+
+Feign Client is a declarative REST client provided by Spring Cloud OpenFeign.
+It allows communication between microservices by defining REST calls as Java interfaces, reducing boilerplate code and 
+integrating easily with service discovery, load balancing, and fault-tolerance mechanisms.
+}
+How to Configure Feign Client
+1. Add Dependency
+For Maven:
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+2. Enable Feign Clients
+@SpringBootApplication
+@EnableFeignClients
+public class OrderServiceApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(OrderServiceApplication.class, args);
+    }
+}
+3. Create Feign Interface
+@FeignClient(name = "user-service")
+public interface UserClient {
+
+    @GetMapping("/users/{id}")
+    User getUser(@PathVariable Long id);
+}
+
+Calling External APIs
+@FeignClient(
+    name = "weather-client",
+    url = "https://api.weather.com"
+)
+public interface WeatherClient {
+    @GetMapping("/forecast")
+    String getForecast();
+}
+Feign with Eureka Service Discovery
+If Eureka is used:
+@FeignClient(name="USER-SERVICE")
+Feign automatically discovers the service from Eureka and performs load balancing.
+
+Fallback for Fault Tolerance
+Using Circuit Breaker:
+@FeignClient(    name = "USER-SERVICE", 
+                     fallback = UserFallback.class)
+public interface UserClient {    
+@GetMapping("/users/{id}")   
+User getUser(@PathVariable Long id);}
+
+Fallback class:
+@Component
+public class UserFallback implements UserClient { 
+@Override   
+public User getUser(Long id) {        
+return new User(id, "Default User");    }}
+
+If the remote service is down, fallback logic executes.
 
 8.	What is API Gateway?****
-•	In microservice architerure an ApI gateway is server side componenet that acts as an entry point or facade for client application to access
-   the underlaying microservices.
+An API Gateway is a server that acts as a single entry point for all client requests in a microservices architecture.
+Instead of clients calling individual microservices directly, requests first go to the API Gateway, which then routes them to the appropriate service.
+
 •	it provides centralized point,encapsulating the complexity of the ms ecosystem and offering a unified interface to the client.
 •	API gateway handle incoming client request and route them to the appropriate MS based the requested API endpoint.
 •	it can handle the authentication and authorzation validate acces token.
+
 •	we use AWS API Gateway'"
 •	1. Request Routing
 •	Sends incoming requests to the correct microservice
@@ -2160,14 +2226,56 @@ Example:
 •	✅ 6. Response Aggregation
 •	Combines data from multiple services into a single response
 
+Spring Cloud Gateway
+In Spring Boot, the most popular API Gateway is:
+Spring Cloud Gateway
+It is the replacement for Netflix Zuul.
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>
+        spring-cloud-starter-gateway
+    </artifactId>
+</dependency>
+
+Request:
+http://gateway/users/1
+
+Gateway ->
+http://localhost:8081/users/1
+
+API Gateway with Eureka
+Instead of hardcoding URLs:
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+The gateway automatically discovers services through Eureka.
+
 9.	What is Circuit Breaker?***
 10.	In microservices architecture, a Circuit Breaker is a design pattern used to prevent cascading failures when one service is unable to respond.
 A circuit breaker is a mechanism that stops calling a failing service after repeated failures and returns a fallback response instead, allowing the
 system to remain stable.
+
   Prevents cascade failures 
 Improves system stability 
  Reduces latency during failures 
  Enables graceful degradation
+
+Why Do We Need It?
+Suppose:
+tOrder Service ---> Payment Service
+When Payment Service goes down:
+Order Service keeps sending requests.
+Requests start timing out.
+Threads get blocked.
+System performance degrades.
+Failure spreads to other services.
+This is called cascading failure.
+A Circuit Breaker prevents this situation.
 
 How it works (States)
 A circuit breaker has 3 states:
@@ -2187,6 +2295,54 @@ ________________________________________
 o	✅ If successful → back to Closed
 o	❌ If still failing → back to Open
 
+# Spring Security
+**Spring Security** is a framework that provides **authentication, authorization, and protection against common security vulnerabilities** for Spring applications.
+It helps secure REST APIs, web applications, and microservices.
+## Key Features
+### 1. Authentication (Who are you?)
+Verifies the identity of a user.
+Examples:
+* Username/Password
+* JWT Token
+* OAuth2
+* LDAP
+User -> Login -> Authentication
+### 2. Authorization (What can you access?)
+Determines whether an authenticated user has permission to access a resource.
+Example:
+ADMIN -> Create User ✅
+USER  -> Create User ❌
+### 3. Protection Against Attacks
+Spring Security provides built-in protection against:
+* CSRF (Cross-Site Request Forgery)
+* Session Fixation
+* Clickjacking
+* Password attacks
+# Architecture Flow
+Client Request
+       |
+       v
+Spring Security Filter Chain
+       |
+Authentication
+       |
+Authorization
+       |
+Controller
+       |
+Response
+Spring Security uses a **Filter Chain** to intercept every request before it reaches the controller.
+# Adding Spring Security
+### Maven Dependency
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+After adding this dependency:
+* All endpoints become secured by default.
+* A default login page is generated.
+
 JWT(JSON Web Token)*********
 =====
 11.	What is JWT?
@@ -2202,7 +2358,25 @@ How JWT Works
 4.	Client stores it (local storage / cookie)
 5.	Client sends JWT in each request (usually in headers)
 6.	Server verifies the token and allows access
-
+Real-Time Example
+Client
+   |
+   | Login
+   v
+Auth Service
+   |
+   | Generate JWT
+   v
+JWT Token
+   |
+   | Bearer Token
+   v
+API Gateway
+   |
+   v
+Order Service
+Payment Service
+User Service
 12.	What is caching in Spring Boot?
 13.	Caching in Spring Boot is a technique used to store frequently accessed data temporarily in memory so that future requests can be served faster
 without recomputing or fetching from the database.
