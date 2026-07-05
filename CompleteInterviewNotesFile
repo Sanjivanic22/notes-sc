@@ -1,3 +1,33 @@
+SOLID Principle
+S-Single responsility principle
+O-open/closed principle
+L-LIskov substitution principle
+I-interface segration principle
+D-dependancy inversion principle
+S-Single responsility principle
+a class should have only oone reason to change
+
+O-open/closed principle
+software entities should be open for extension and closed for extension
+ whenever new requirement comes existing code should not modified extensively
+
+L-LIskov substitution principle
+a class should be able to replace parent class without breaking functionality.
+
+I-interface segretion principle
+client should not forced to depend on method they do not use
+instead of large interface we use small interface
+
+D-dependancy inversion principle
+high level module should not depends on low level modules
+ex if we used DB in class should define specific on .if DB changes there is problem
+which solid principle mostly used in SPringboot
+SRP-controler ,service and repolayers
+OCP strategy pattern interface
+DIP-dependancy injection using @autowired
+ISP small service interface
+
+
 ✅ Java 8 Interview Question List
 =====================================
 🔹 Basic Features
