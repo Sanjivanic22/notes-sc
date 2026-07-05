@@ -554,7 +554,8 @@ Serializable, Cloneable, Remote, random access method.etc.
 
  String & Object
 	What is toString() method?
-•	toString() is a method of the Object class used to return a string representation of an object.
+•	toString() is a method of the Object class 
+used to return a string representation of an object.
 
 •	Why String is immutable?
 •	The String is immutable in Java because of the security, synchronization and concurrency, caching, and class loading. 
@@ -2418,47 +2419,34 @@ return userRepository.save(user);
 `________________________________________
 4. @CacheEvict
 •	Removes data from cache
+scheduling in MS
+---------------------
+Scheduling is the process of executing a task automatically at a specific time or at fixed intervals without manual intervention.
+Examples:
+Generate daily reports
+Send email notifications
+Clean old data
+Process pending orders
+Sync data with external systems
 
-✅ 🔥 Bonus: Advanced Questions (High Chances)
-4. Saga Pattern
-Saga pattern manages distributed transactions across microservices.
-•	Instead of a single transaction, it uses a sequence of local transactions.
-•	If something fails, compensating actions roll back previous steps.
-Two types:
-•	Choreography (event-driven)
-•	Orchestration (central coordinator)
+Use @Scheduled annotation.
+Enable Scheduling
+@SpringBootApplicatio
+n@EnableScheduling
+public class Application {}s
+Example
+@Component
+public class ReportJob {   
+@Scheduled(fixedRate = 5000)    
+public void generateReport() {        
+System.out.println("Running every 5 seconds");    }}
 
-6. CAP Theorem
-CAP states that a distributed system can guarantee only two of the three:
-•	Consistency (C) – same data everywhere
-•	Availability (A) – system always responds
-•	Partition Tolerance (P) – works despite network failures
-In practice, systems choose between:
-•	CP (Consistency + Partition tolerance)
-•	AP (Availability + Partition tolerance)
-________________________________________
-7. Bulkhead Pattern
-Bulkhead isolates parts of a system to prevent failure spreading.
-•	Like compartments in a ship.
-•	If one service fails, others continue functioning.
-________________________________________
-8. Rate Limiting
-Rate limiting restricts the number of requests a client can make.
-•	Prevents system overload and abuse.
-•	Example: Allow only 100 requests per minute per user.
-________________________________________
-9. Idempotency in Microservices
-An operation is idempotent if repeating it produces the same result.
-•	Prevents duplicate processing (e.g., payment or order creation).
-•	Commonly implemented using idempotency keys.
-________________________________________
-10. Blue-Green Deployment
-A deployment strategy with two environments:
-•	Blue: current version
-•	Green: new version
-Traffic switches from blue to green after validation.
-•	Enables zero downtime deployments
-•	Easy rollback by switching back
+Types of Scheduling in Spring Boot
+
+Fixed Rate (fixedRate)
+Fixed Delay (fixedDelay)
+Initial Delay (initialDelay)
+Cron Scheduling (cron)
 
 •	🔥 Full real-time microservice project explanation
 Step-by-step flow:
@@ -2469,6 +2457,39 @@ o	Feign (sync)
 o	WebClient (async)
 •	Eureka server helps in service discovery
 •	Response is returned via API Gateway
+
+what are the deign patterns used in microservices?
+Common microservices design patterns include API Gateway, Circuit Breaker, Service Discovery, Saga, Database per Service, CQRS, Event Sourcing, Retry, Bulkhead, 
+and Strangler Fig.
+These patterns help achieve scalability, fault tolerance, loose coupling, distributed transaction management, and efficient service communication in microservices architectures.
+### Microservices Design Patterns – One-Line Explanations
+
+1. **API Gateway** – A single entry point that routes client requests to the appropriate microservices.
+2. **Circuit Breaker** – Stops calls to a failing service and returns a fallback response to prevent cascading failures.
+3. **Service Discovery** – Allows services to dynamically find and communicate with each other without hardcoded URLs.
+6. **Saga Pattern** – Manages distributed transactions across multiple services using compensating actions on failure.
+7. **CQRS (Command Query Responsibility Segation)** – Separates read operations from write operations using different models.
+10. **Retry Pattern** – Automatically retries failed requests to handle temporary network or service issues.
+Eureka server
+------------
+Eureka Server
+Eureka Server is a Service Registry provided by Netflix OSS and commonly used with Spring Cloud. It helps microservices register themselves and 
+discover other services dynamically without hardcoded URLs.
+Problems:without eureka
+URL changes require code changes.
+Difficult to manage in cloud environments.
+Service instances may scale up/down dynamically.
+solution
+All services register with Eureka.
+
+Enable Eureka Server
+@SpringBootApplication
+@EnableEurekaServer
+
+server.port=8761
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
 Kafka
 ==========
 🔹 Basic Kafka Questions (Very Common)
