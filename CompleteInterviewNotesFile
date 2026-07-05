@@ -1571,32 +1571,6 @@ An embedded server is a built-in web server inside the application.
 •	/actuator/health
 •	/actuator/metrics
 •	/actuator/info
-45.	9. What is Dependency Injection (DI)?**
-•	Dependency Injection is a design pattern where objects receive their dependencies instead of creating them.
-•	✅ Example:
-•	@Autowired
-•	private UserService userService;
-•	👉 Promotes:
-•	Loose coupling
-•	Easy testing
-•	Maintainability
-46.	10. What is IoC (Inversion of Control)?***
-•	IoC means the control of object creation is given to the Spring container instead of the programmer.
-•	👉 Spring container:
-•	Creates objects (beans)
-•	Manages lifecycle
-•	Injects dependencies
-
-47.	✅ DI vs IoC
-48.	Concept	49.	Meaning
-50.	IoC	51.	Control given to container
-52.	DI	53.	Way to implement IoC
-
-________________________________________
-39.	What is auto-configuration?
-•	Auto-configuration is a feature of Spring Boot that automatically configures your application based on the dependencies present in the classpath.
-•	👉 In simple terms:
-Spring Boot reduces the need for manual configuration by setting up beans automatically
 .
 40.	How to disable auto-configuration?***
 •	✅ 1. Disable Specific Auto-Configuration (Recommended)
@@ -1771,7 +1745,7 @@ Java
 Java
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 ``_
-🔹 3. SUPPORTS
+🔹 . SUPPORTS
 🔸 Behavior:
 •	Uses existing transaction if present
 •	If not, executes without transaction
@@ -1813,6 +1787,7 @@ ________________________________________
 51.	What is AOP?
 •	Aspect-Oriented Programming (AOP) is a programming paradigm that aims to separate cross-cutting concerns (like logging, security, etc.)
 from the main business logic.
+}|
 •	It allows you to modularize concerns that affect multiple parts of a program.
 •	Instead of repeating the same code everywhere, AOP puts it in a single place called an aspect
 
@@ -1865,7 +1840,7 @@ These methods should produce the same result no matter how many times they are c
 •	DELETE → Deleting a resource repeatedly still results in "resource not present"
 
 3.	What is RESTful service?
-4.	A RESTful API is an application programming interface that follows the principles of REST (Representational State Transfer) architecture, 
+4.	A RESTful API is an applicaction programming interface that follows the principles of REST (Representational State Transfer) architecture, 
 using standard HTTP methods to perform operations on resources identified by URLs in a stateless, client-server communication model.
 5.	A RESTful API is a web service that follows REST principles and uses HTTP methods like GET, POST, PUT, and DELETE to perform operations on
 resources identified by URLs. It is stateless and uses standard protocols for communication.
@@ -1995,7 +1970,8 @@ public ResponseEntity<ErrorResponse> handleException(Exception ex) {
     );
     return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 }
-
+Hibrnate
+===========
 2.	What is Hibernate?
 Hibernate is an ORM (Object-Relational Mapping) framework for Java that simplifies database interactions by mapping Java objects to database tables.
 4.	Hibernate allows developers to perform database operations using Java objects instead of writing SQL queries manually.
@@ -2018,7 +1994,7 @@ Eager Loading
 private List<Order> orders;
 When user is fetched → orders are also fetched automatically
 
-✅ What is Entity Lifecycle in JPA/Hibernate? (Interview Answer)
+✅ What is Entity Lifecycle in JPA/Hibernate? (Interview Answer)*******
 The Entity Lifecycle defines the different states an entity (Java object) goes through during its interaction with the persistence context (database).
 🔹 Main States of Entity Lifecycle
 1. Transient State
@@ -2045,7 +2021,7 @@ ________________________________________
 🔁 Lifecycle Flow
 Transient → Persistent → Detached → Removed
 
-difference between persist() and merge()
+difference between persist() and merge()**
 Both persist() and merge() are used to save/update entities, but they behave differently based on the entity state.
 
 🔹 persist()
@@ -2084,10 +2060,7 @@ If entity exists	Error	Updates existing
 persist() is used to insert a new entity and make it persistent, while merge() is used to update a detached entity and returns a managed copy of it.
 
 6.	What are cascading types?
-Cascading types define how operations performed on a parent entity are automatically applied to its child entities.
-________________________________________
-Cascading allows you to propagate operations (like save, delete, update) from one entity to its related entities automatically.
-Cascading types in JPA define how operations like persist, merge, and delete performed on a parent entity are automatically propagated to its related child entities.
+Cascading types define how operations(like save, delete, update) performed on a parent entity are automatically applied to its child entities.
 
 Cascade Type	Description
 PERSIST	Save child entity when parent is saved
