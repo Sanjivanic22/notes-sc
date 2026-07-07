@@ -338,21 +338,6 @@ ForkJoinPool
 •	Thread pool using Work-Stealing Algorithm.
 •	Splits large tasks (Fork) and combines results (Join).
 •	Used internally by Parallel Streams and CompletableFuture.
-________________________________________
-🔥 Interview Gold One-Liners
-✅ Java is always Pass-By-Value.
-✅ String is immutable for Security, Performance, and Thread Safety.
-✅ equals() compares content, == compares references.
-✅ ConcurrentHashMap is thread-safe, HashMap is not.
-✅ wait() releases lock, sleep() does not.
-✅ Runnable is preferred over Thread.
-✅ Overloading = Compile-Time Polymorphism.
-✅ Overriding = Runtime Polymorphism.
-✅ HashMap Average Complexity = O(1).
-✅ ReentrantLock provides more control than synchronized.
-✅ ExecutorService manages threads efficiently using thread pools.
-✅ CompletableFuture enables asynchronous non-blocking programming.
-✅ ForkJoinPool uses Work-Stealing for parallel task execution.
 
 ✅ Spring Framework Quick Revision Notes (One-Liners)
 IoC Container
