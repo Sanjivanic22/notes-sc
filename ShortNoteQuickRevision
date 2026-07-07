@@ -1,0 +1,2233 @@
+Solid principles
+•  S – Single Responsibility Principle (SRP): A class should have only one responsibility and therefore only one reason to change. 
+•  O – Open/Closed Principle (OCP): Software entities should be open for extension but closed for modification. 
+•  L – Liskov Substitution Principle (LSP): A subclass should be able to replace its parent class without affecting program correctness. 
+•  I – Interface Segregation Principle (ISP): Clients should not be forced to implement or depend on methods they don't use. 
+•  D – Dependency Inversion Principle (DIP): High-level modules should depend on abstractions, not concrete implementations.
+✅ Java 8 Quick Revision Notes (One-Liners)
+Java 8 Features
+•	Java 8 Features: Lambda, Functional Interface, Stream API, Method Reference, Optional, Default/Static Methods, New Date-Time API, Nashorn.
+Lambda Expression
+•	Lambda Expression: Anonymous function used to implement a functional interface.
+•	Syntax: (parameters) -> expression or (parameters) -> { statements; }
+•	Internal Working: Uses invokedynamic to create functional interface instances at runtime.
+Functional Interface
+•	Functional Interface: Interface with exactly one abstract method (SAM).
+•	Purpose: Supports Lambda Expressions and Method References.
+•	Examples: Runnable, Callable, Comparable, Predicate, Consumer, Supplier.
+•	@FunctionalInterface: Ensures only one abstract method exists.
+Runnable vs Callable
+•	Runnable: No return value, cannot throw checked exceptions.
+•	Callable: Returns value and can throw checked exceptions.
+Default Methods
+•	Default Method: Interface method with implementation using default keyword.
+•	Why Introduced: Backward compatibility and interface evolution.
+Multiple Inheritance in Java 8
+•	Achieved Through: Multiple interfaces with default methods.
+Predefined Functional Interfaces
+•	Predicate: Takes input, returns boolean.
+•	Function<T,R>: Takes input, returns result.
+•	Consumer: Takes input, returns nothing.
+•	Supplier: No input, returns value.
+•	BiFunction<T,U,R>: Takes two inputs, returns result.
+Method Reference
+•	Method Reference: Short form of lambda for calling existing methods.
+•	Types: Static Method, Instance Method, Constructor Reference.
+________________________________________
+Streams API
+Stream API
+•	Stream API: Functional way to process collections of data.
+Stream vs Collection
+•	Collection: Stores data.
+•	Stream: Processes data.
+Intermediate Operations
+•	Intermediate Operations: Return another stream and are lazy.
+•	Examples: filter(), map(), sorted(), distinct(), limit(), skip().
+Terminal Operations
+•	Terminal Operations: Produce result and trigger execution.
+•	Examples: collect(), forEach(), count(), reduce(), findFirst().
+Without Terminal Operation
+•	No Terminal Operation: Stream pipeline never executes.
+Why Streams Are Faster
+•	Reason: Lazy evaluation, internal iteration, parallel processing.
+map() vs flatMap()
+•	map(): One-to-one transformation.
+•	flatMap(): One-to-many transformation and flattening.
+Collectors
+•	Collectors: Used to collect stream results into List, Set, Map, String, etc.
+•	Used With: collect() terminal operation.
+________________________________________
+Optional Class
+Optional
+•	Optional: Container object used to avoid NullPointerException.
+Optional Methods
+•	Methods: of(), ofNullable(), empty(), get(), isPresent(), orElse(), map(), flatMap(), filter().
+of() vs ofNullable() vs empty()
+•	of(): Accepts non-null value only.
+•	ofNullable(): Accepts null and non-null.
+•	empty(): Creates empty Optional.
+________________________________________
+Date & Time API
+Java 8 Date-Time API
+•	Purpose: Thread-safe replacement for Date and Calendar.
+•	Classes: LocalDate, LocalTime, LocalDateTime, ZonedDateTime, Instant.
+________________________________________
+Interface Improvements
+Static Method in Interface
+•	Static Method: Belongs to interface and called using interface name.
+Default vs Static Method
+•	Default: Inherited and can be overridden.
+•	Static: Utility method, cannot be overridden.
+________________________________________
+HashMap Java 8
+HashMap
+•	HashMap: Stores data as key-value pairs.
+Internal Working
+•	Data Structure: Array of buckets.
+•	Index Formula: (n - 1) & hash.
+•	Collision Handling: Linked List → Red-Black Tree.
+•	Default Load Factor: 0.75.
+Collision Handling Java 8
+•	Bucket Size > 8: Convert Linked List to Red-Black Tree.
+•	Bucket Size < 6: Convert Tree back to Linked List.
+•	Capacity ≥ 64: Treeification allowed.
+Time Complexity
+•	Average: O(1)
+•	Worst Case (Tree): O(log n)
+________________________________________
+Nashorn
+Nashorn Engine
+•	Nashorn: JavaScript engine introduced in Java 8 to execute JavaScript within JVM.
+________________________________________
+Memory Management
+PermGen vs MetaSpace
+•	PermGen: Fixed-size JVM memory area.
+•	MetaSpace: Uses native memory and grows dynamically.
+________________________________________
+Functional Interfaces Quick Revision
+Predicate
+•	Method: boolean test(T t)
+•	Use: Condition checking.
+Consumer
+•	Method: void accept(T t)
+•	Use: Perform action.
+Supplier
+•	Method: T get()
+•	Use: Generate/provide data.
+Function
+•	Method: R apply(T t)
+•	Use: Transform data.
+________________________________________
+5 Interview One-Liners
+✅ Lambda: Anonymous function implementation of functional interface.
+✅ Functional Interface: Interface with one abstract method.
+✅ Stream: Functional pipeline for processing data.
+✅ Optional: Wrapper to avoid null handling issues.
+✅ HashMap: Key-value data structure with O(1) average lookup time.
+
+✅ Core Java Quick Revision Notes (Interview One-Liners)
+JVM, JRE, JDK
+•	JVM: Executes Java bytecode and converts it into machine code.
+•	JRE: JVM + Core Java libraries required to run applications.
+•	JDK: JRE + Development tools (javac, jar, debugger).
+________________________________________
+Static Method Overriding
+•	Static methods cannot be overridden; they can only be hidden.
+•	Reason: Static methods belong to the class and are resolved at compile time.
+________________________________________
+Immutable Class
+•	Immutable Class: Object state cannot be changed after creation.
+•	How to Make Immutable: final class + private final fields + constructor initialization + no setters + defensive copying.
+________________________________________
+Pass By Value
+•	Java is always Pass-By-Value.
+•	Even object references are passed as a copy of the reference.
+________________________________________
+OOP Principles
+Encapsulation
+•	Wrapping data and methods into a class and restricting direct access.
+•	Real Example: ATM machine.
+Abstraction
+•	Hiding implementation details and showing only functionality.
+•	Real Example: Driving a car.
+Inheritance
+•	Acquiring properties and behavior from a parent class.
+•	Real Example: Parent → Child.
+Polymorphism
+•	One action, many forms.
+Compile-Time Polymorphism
+•	Method Overloading: Same method name, different parameters.
+Runtime Polymorphism
+•	Method Overriding: Child class provides its own implementation.
+________________________________________
+Encapsulation vs Abstraction
+•	Encapsulation: Hides data.
+•	Abstraction: Hides implementation.
+________________________________________
+Abstract Class vs Interface
+•	Abstract Class: Partial abstraction with state and behavior.
+•	Interface: Complete contract for behavior.
+________________________________________
+Marker Interface
+•	Marker Interface: Interface with no methods.
+•	Examples: Serializable, Cloneable, Remote.
+________________________________________
+String & Object
+toString()
+•	Returns string representation of an object.
+Why String is Immutable?
+•	Security, Thread Safety, String Pool, Performance.
+String vs StringBuffer vs StringBuilder
+•	String: Immutable.
+•	StringBuffer: Mutable and Thread-Safe.
+•	StringBuilder: Mutable and Faster (Not Thread-Safe).
+== vs equals()
+•	== : Reference Comparison
+•	equals(): Content Comparison
+equals() and hashCode()
+•	Equal objects must produce the same hashCode.
+•	Override both together for HashMap consistency.
+________________________________________
+Collections
+List vs Set vs Map
+•	List: Ordered, duplicates allowed.
+•	Set: Unique elements.
+•	Map: Key-Value pairs.
+ArrayList vs LinkedList
+•	ArrayList: Fast retrieval.
+•	LinkedList: Fast insertion/deletion.
+HashMap vs Hashtable
+•	HashMap: Not synchronized, faster.
+•	Hashtable: Synchronized, slower.
+HashMap vs ConcurrentHashMap
+•	HashMap: Not thread-safe.
+•	ConcurrentHashMap: Thread-safe with bucket-level locking.
+TreeMap vs LinkedHashMap
+•	TreeMap: Sorted order.
+•	LinkedHashMap: Insertion order.
+________________________________________
+Capacity & Load Factor
+•	Capacity: Number of buckets.
+•	Load Factor: Threshold for resizing (Default: 0.75).
+________________________________________
+Fail-Fast vs Fail-Safe
+•	Fail-Fast: Throws ConcurrentModificationException.
+•	Fail-Safe: Works on a copy and avoids exceptions.
+________________________________________
+Exception Handling
+Checked Exception
+•	Checked at compile time.
+•	Examples: IOException, SQLException.
+Unchecked Exception
+•	Occurs at runtime.
+•	Examples: NullPointerException, ArithmeticException.
+Custom Exception
+•	User-defined exception created by extending Exception or RuntimeException.
+Compile-Time Error
+•	Error detected by compiler before execution.
+Runtime Error
+•	Error occurring during program execution.
+try-catch-finally
+•	try: Risky code.
+•	catch: Exception handling.
+•	finally: Cleanup code.
+finally Block
+•	Generally executes always.
+•	Exception: System.exit() or JVM crash.
+final vs finally vs finalize
+•	final: Restricts modification.
+•	finally: Cleanup block.
+•	finalize(): Called by GC before object destruction (deprecated).
+throw
+•	Used to explicitly throw an exception.
+throws
+•	Delegates exception handling responsibility to caller.
+Exception Propagation
+•	Passing exception handling responsibility up the call stack using throws.
+________________________________________
+ClassLoader
+•	ClassLoader dynamically loads classes into JVM memory when required.
+________________________________________
+Multithreading
+Thread Lifecycle
+•	NEW → RUNNABLE → BLOCKED → WAITING → TIMED_WAITING → TERMINATED
+Creating Threads
+•	By extending Thread class
+•	By implementing Runnable interface
+Thread vs Runnable
+•	Runnable is preferred because Java supports single inheritance only.
+________________________________________
+Synchronization
+•	Allows only one thread at a time to access critical code.
+Synchronized Block
+•	Synchronizes only required code and improves performance.
+________________________________________
+wait(), notify(), notifyAll()
+•	wait(): Releases lock and waits.
+•	notify(): Wakes one waiting thread.
+•	notifyAll(): Wakes all waiting threads.
+________________________________________
+sleep(), join(), yield()
+sleep()
+•	Pauses thread for specified time.
+join()
+•	Waits for another thread to complete.
+yield()
+•	Gives other same-priority threads chance to execute.
+________________________________________
+Deadlock
+•	Two or more threads wait forever for each other.
+Starvation
+•	Thread waits indefinitely due to lack of CPU/resources.
+Race Condition
+•	Multiple threads update shared data simultaneously causing unpredictable results.
+ReentrantLock
+•	Advanced locking mechanism providing more flexibility than synchronized.
+________________________________________
+Concurrency
+ConcurrentHashMap
+•	Thread-safe HashMap with bucket-level locking.
+•	Does not allow null keys or values.
+CopyOnWriteArrayList
+•	Thread-safe list where every modification creates a new copy.
+execute() vs submit()
+•	execute(): No result returned.
+•	submit(): Returns Future and supports Callable.
+Handling Concurrency
+•	Synchronization, Locks, Atomic Classes, Concurrent Collections, Thread Pools.
+________________________________________
+Generics
+Generics
+•	Enable type-safe, reusable, compile-time checked code.
+Type Safety
+•	Ensures only valid data types are used.
+________________________________________
+Memory Management
+Heap
+•	Stores objects and instance variables.
+•	Shared among threads.
+Stack
+•	Stores method calls and local variables.
+•	Each thread has its own stack.
+Garbage Collection
+•	Automatically removes unreachable objects from memory.
+Java 8 Memory Change
+•	PermGen replaced by Metaspace.
+________________________________________
+Comparable & Comparator
+Comparable
+•	Used for natural/default sorting.
+•	Method: compareTo()
+•	Package: java.lang
+Comparator
+•	Used for custom sorting.
+•	Method: compare()
+•	Package: java.util
+Comparable vs Comparator
+•	Comparable: Single sorting sequence.
+•	Comparator: Multiple sorting sequences.
+________________________________________
+Executor Framework
+•	Manages thread creation, pooling, scheduling, and execution efficiently.
+________________________________________
+CompletableFuture
+•	Java 8 API for asynchronous and non-blocking programming.
+•	Supports chaining, combining results, and exception handling.
+________________________________________
+ForkJoinPool
+•	Thread pool using Work-Stealing Algorithm.
+•	Splits large tasks (Fork) and combines results (Join).
+•	Used internally by Parallel Streams and CompletableFuture.
+________________________________________
+🔥 Interview Gold One-Liners
+✅ Java is always Pass-By-Value.
+✅ String is immutable for Security, Performance, and Thread Safety.
+✅ equals() compares content, == compares references.
+✅ ConcurrentHashMap is thread-safe, HashMap is not.
+✅ wait() releases lock, sleep() does not.
+✅ Runnable is preferred over Thread.
+✅ Overloading = Compile-Time Polymorphism.
+✅ Overriding = Runtime Polymorphism.
+✅ HashMap Average Complexity = O(1).
+✅ ReentrantLock provides more control than synchronized.
+✅ ExecutorService manages threads efficiently using thread pools.
+✅ CompletableFuture enables asynchronous non-blocking programming.
+✅ ForkJoinPool uses Work-Stealing for parallel task execution.
+
+✅ Spring Framework Quick Revision Notes (One-Liners)
+IoC Container
+What is IoC?
+•	IoC (Inversion of Control): Spring container manages object creation and lifecycle instead of the programmer.
+Types of IoC Container
+•	BeanFactory: Basic IoC container with lazy initialization.
+•	ApplicationContext: Advanced IoC container with enterprise features.
+BeanFactory vs ApplicationContext
+•	BeanFactory: Basic, lazy loading.
+•	ApplicationContext: Supports AOP, Events, Internationalization, eager loading.
+Why ApplicationContext?
+•	Provides enterprise-level features and better bean management.
+IoC vs DI
+•	IoC: Design principle that transfers control to container.
+•	DI: Technique used to achieve IoC by injecting dependencies.
+________________________________________
+Dependency Injection (DI)
+What is Dependency Injection?
+•	DI is providing dependencies from outside instead of creating them inside the class.
+Types of DI
+Constructor Injection
+•	Dependencies injected through constructor.
+•	Best for mandatory dependencies.
+•	Supports immutability and unit testing.
+Setter Injection
+•	Dependencies injected using setter methods.
+•	Best for optional dependencies.
+Field Injection
+•	Dependencies injected directly into fields using annotations.
+Constructor vs Setter Injection
+•	Constructor: Mandatory dependency.
+•	Setter: Optional dependency.
+When to Use?
+•	All properties mandatory → Constructor Injection
+•	Some properties optional → Setter Injection
+________________________________________
+Spring Bean
+Spring Bean
+•	Object created, configured, and managed by Spring IoC Container.
+________________________________________
+Spring Bean Lifecycle
+Lifecycle Flow
+Container Start
+     ↓
+Bean Instantiation
+     ↓
+Dependency Injection
+     ↓
+Initialization
+     ↓
+Bean Ready
+     ↓
+Destroy Method
+     ↓
+Bean Destruction
+Bean Lifecycle (One Line)
+•	Spring manages bean creation, initialization, usage, and destruction.
+Init Method
+•	Executed after dependency injection for initialization tasks.
+Destroy Method
+•	Executed before bean destruction for cleanup activities.
+________________________________________
+Bean Scopes
+Singleton (Default)
+•	One bean instance per Spring container.
+Prototype
+•	New bean instance every request.
+Request
+•	One bean instance per HTTP request.
+Session
+•	One bean instance per HTTP session.
+Application
+•	One bean instance per ServletContext.
+WebSocket
+•	One bean instance per WebSocket session.
+________________________________________
+Singleton vs Prototype
+Singleton
+•	One instance shared across application.
+•	Less memory consumption.
+•	Fully managed by Spring.
+Prototype
+•	New object every request.
+•	More memory consumption.
+•	Spring manages only creation.
+Interview One-Liner
+•	Singleton = One Object, Prototype = New Object Every Time.
+________________________________________
+Request vs Session Scope
+Request Scope
+•	Valid only for one HTTP request.
+•	Example: Form processing.
+Session Scope
+•	Valid throughout user session.
+•	Example: Shopping cart, Login data.
+________________________________________
+Autowiring
+What is Autowiring?
+•	Automatic dependency injection by Spring container.
+Autowiring Modes
+byName
+•	Injects dependency based on bean name.
+byType
+•	Injects dependency based on bean type.
+Constructor
+•	Injects dependency using constructor.
+________________________________________
+@Autowired, @Qualifier, @Primary
+@Autowired
+•	Automatically injects dependency by type.
+@Autowired
+private PaymentService paymentService;
+@Qualifier
+•	Resolves ambiguity when multiple beans exist.
+@Autowired
+@Qualifier("paypalService")
+private PaymentService paymentService;
+@Primary
+•	Marks default bean for dependency injection.
+@Bean
+@Primary
+public PaymentService paymentService() {
+    return new CreditCardService();
+}
+Interview One-Liner
+•	@Autowired → Inject
+•	@Qualifier → Select Specific Bean
+•	@Primary → Default Bean
+________________________________________
+Spring Stereotype Annotations
+@Component
+•	Generic Spring-managed bean.
+@Service
+•	Represents business logic layer.
+@Repository
+•	Represents DAO/Data Access layer.
+•	Provides exception translation.
+@Controller
+•	Handles web requests in MVC applications.
+________________________________________
+Component vs Service vs Repository vs Controller
+Annotation	Purpose
+@Component	Generic Bean
+@Service	Business Logic
+@Repository	Database Layer
+@Controller	Web Layer
+Interview One-Liner
+•	All are Spring beans; only semantic purpose differs.
+________________________________________
+@RestController
+What is @RestController?
+•	Combination of @Controller + @ResponseBody.
+Purpose
+•	Used to create REST APIs.
+•	Returns JSON/XML directly.
+@RestController
+public class UserController {
+}
+Interview One-Liner
+•	@RestController directly returns response data instead of views.
+________________________________________
+@Configuration and @Bean
+@Configuration
+•	Defines Spring configuration class.
+@Configuration
+public class AppConfig {
+}
+@Bean
+•	Defines a Spring-managed bean.
+@Bean
+public EmployeeService service() {
+    return new EmployeeService();
+}
+Interview One-Liner
+•	@Configuration = Class level
+•	@Bean = Method level
+________________________________________
+@Value
+What is @Value?
+•	Injects values from properties file, environment variables, or literals.
+@Value("${app.name}")
+private String appName;
+Interview One-Liner
+•	Used to inject external configuration values.
+________________________________________
+@PropertySource
+What is @PropertySource?
+•	Loads external properties file into Spring Environment.
+@Configuration
+@PropertySource("classpath:application.properties")
+public class AppConfig {
+}
+Interview One-Liner
+•	Loads custom properties files into Spring.
+________________________________________
+🔥 Spring Interview Gold One-Liners
+✅ IoC = Container controls object creation.
+✅ DI = Dependencies injected from outside.
+✅ ApplicationContext = Advanced BeanFactory.
+✅ Constructor Injection is preferred over Setter Injection.
+✅ Spring Bean = Object managed by Spring Container.
+✅ Singleton = One object per container.
+✅ Prototype = New object every request.
+✅ @Autowired injects beans automatically.
+✅ @Qualifier resolves multiple bean ambiguity.
+✅ @Primary defines default bean.
+✅ @Component = Generic Bean.
+✅ @Service = Business Layer.
+✅ @Repository = Data Access Layer.
+✅ @Controller = MVC Request Handler.
+✅ @RestController = REST API Controller.
+✅ @Configuration + @Bean = Java-based Spring Configuration.
+✅ @Value = Inject property value.
+✅ @PropertySource = Load external properties file.
+✅ Spring Boot Quick Revision Notes (Interview One-Liners)
+Spring vs Spring Boot
+Feature	Spring	Spring Boot
+Configuration	Manual	Auto Configuration
+Setup	Complex	Simple
+Server	External Tomcat	Embedded Tomcat
+Development Speed	Slower	Faster
+One-Liner
+•	Spring Boot is an extension of Spring that simplifies configuration and development using auto-configuration and embedded servers.
+________________________________________
+Auto Configuration
+What is Auto Configuration?
+•	Automatically configures beans based on dependencies available in the classpath.
+Example
+•	MySQL Dependency → DataSource auto-created.
+•	Spring Web Dependency → DispatcherServlet auto-configured.
+One-Liner
+•	Auto-Configuration reduces manual configuration work.
+________________________________________
+Spring Boot Starter
+What is Spring Boot Starter?
+•	Predefined dependency bundles for specific functionality.
+Examples
+•	spring-boot-starter-web → REST APIs/Web Applications
+•	spring-boot-starter-data-jpa → JPA + Hibernate
+•	spring-boot-starter-security → Security Features
+One-Liner
+•	Starters eliminate the need to add multiple related dependencies manually.
+________________________________________
+Embedded Server
+What is Embedded Server?
+•	A web server packaged inside the application.
+Examples
+•	Tomcat (Default)
+•	Jetty
+•	Undertow
+One-Liner
+•	Spring Boot applications run directly using embedded servers without external deployment.
+java -jar app.jar
+________________________________________
+@SpringBootApplication
+What is @SpringBootApplication?
+•	Main annotation of Spring Boot.
+Combination Of
+@Configuration
+@ComponentScan
+@EnableAutoConfiguration
+Responsibilities
+•	Enables Auto Configuration
+•	Component Scanning
+•	Configuration Class
+One-Liner
+•	@SpringBootApplication combines configuration, component scanning, and auto-configuration.
+________________________________________
+Spring Boot Internal Flow
+Internal Working
+SpringApplication.run()
+          ↓
+Load Configuration
+          ↓
+Auto Configuration
+          ↓
+Component Scanning
+          ↓
+Create Beans
+          ↓
+Start Embedded Server
+          ↓
+Application Ready
+One-Liner
+•	Spring Boot automatically creates and configures the entire application context at startup.
+________________________________________
+Spring Boot Components
+Starter
+•	Predefined dependency bundles.
+Auto Configuration
+•	Automatically configures required beans.
+Actuator
+•	Monitoring and management endpoints.
+Actuator Endpoints
+/actuator/health
+/actuator/info
+/actuator/metrics
+One-Liner
+•	Starter + AutoConfig + Actuator are core Spring Boot building blocks.
+________________________________________
+Disable Auto Configuration
+Using @SpringBootApplication
+@SpringBootApplication(
+exclude = DataSourceAutoConfiguration.class
+)
+Using @EnableAutoConfiguration
+@EnableAutoConfiguration(
+exclude = DataSourceAutoConfiguration.class
+)
+Using application.properties
+spring.autoconfigure.exclude=
+org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+One-Liner
+•	Auto-configuration can be disabled using exclude attributes or properties configuration.
+________________________________________
+Spring Boot Security (Layer Wise)
+Network Layer
+•	HTTPS
+•	Firewall
+•	Reverse Proxy
+Application Layer
+•	Spring Security
+•	JWT
+•	OAuth2
+•	BCrypt Password Encoding
+Controller Layer
+•	Input Validation
+•	Global Exception Handling
+•	Rate Limiting
+Service Layer
+•	Business Authorization Checks
+•	Role Based Access Control
+Data Layer
+•	JPA
+•	Prepared Statements
+•	Data Encryption
+Configuration Layer
+•	Environment Variables
+•	Profiles (dev/test/prod)
+Monitoring Layer
+•	ELK
+•	Prometheus
+•	Grafana
+One-Liner
+•	Spring Boot security should be implemented at every layer from API to database.
+________________________________________
+Spring Data JPA
+What is Spring Data JPA?
+•	Provides abstraction over JPA, reducing boilerplate DAO code.
+One-Liner
+•	Spring Data JPA simplifies database operations using repositories.
+________________________________________
+JpaRepository
+What is JpaRepository?
+•	Interface providing ready-made CRUD operations.
+Common Methods
+save()
+findById()
+findAll()
+deleteById()
+existsById()
+Pagination & Sorting
+findAll(Pageable pageable)
+findAll(Sort sort)
+One-Liner
+•	JpaRepository provides CRUD, pagination, sorting, and JPA-specific operations.
+________________________________________
+CrudRepository vs JpaRepository
+Feature	CrudRepository	JpaRepository
+CRUD Operations	✅	✅
+Sorting	❌	✅
+Pagination	❌	✅
+Flush	❌	✅
+Batch Operations	❌	✅
+One-Liner
+•	JpaRepository extends CrudRepository with advanced JPA capabilities.
+________________________________________
+Query Methods
+What are Query Methods?
+•	Spring automatically generates queries based on method names.
+Example
+findByName(String name)
+
+findByEmail(String email)
+Benefits
+•	No SQL Required
+•	Less Boilerplate
+•	Fast Development
+One-Liner
+•	Spring derives queries automatically from repository method names.
+________________________________________
+@Query Annotation
+What is @Query?
+•	Used to write custom JPQL or native SQL queries.
+@Query("select e from Employee e")
+List<Employee> findEmployees();
+One-Liner
+•	@Query allows custom database queries inside repositories.
+________________________________________
+Pagination & Sorting
+Pagination
+•	Retrieves data page by page.
+Sorting
+•	Orders data ascending or descending.
+One-Liner
+•	Pagination improves performance by fetching data in smaller chunks.
+________________________________________
+Transactions
+Transaction
+•	Group of database operations executed as a single unit.
+Rules
+•	All Success → Commit ✅
+•	Any Failure → Rollback ❌
+One-Liner
+•	Transaction guarantees data consistency and integrity.
+________________________________________
+Programmatic vs Declarative Transaction
+Feature	Programmatic	Declarative
+Management	Manual	Automatic
+Complexity	High	Low
+Preferred	Rarely	Mostly Used
+Approach	TransactionTemplate	@Transactional
+One-Liner
+•	Declarative transaction management using @Transactional is preferred.
+________________________________________
+@Transactional
+What is @Transactional?
+•	Automatically manages transaction boundaries.
+Responsibilities
+•	Starts transaction
+•	Commits transaction
+•	Rolls back on exception
+@Transactional
+public void saveUser() {
+}
+One-Liner
+•	@Transactional manages commit and rollback automatically.
+________________________________________
+Transaction Propagation
+REQUIRED (Default)
+•	Use existing transaction or create a new one.
+@Transactional(propagation = Propagation.REQUIRED)
+REQUIRES_NEW
+•	Always create a new transaction.
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+SUPPORTS
+•	Use transaction if available.
+@Transactional(propagation = Propagation.SUPPORTS)
+NOT_SUPPORTED
+•	Execute without transaction.
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
+MANDATORY
+•	Existing transaction required.
+@Transactional(propagation = Propagation.MANDATORY)
+NEVER
+•	Must not run inside transaction.
+@Transactional(propagation = Propagation.NEVER)
+NESTED
+•	Existing transaction + Savepoint.
+@Transactional(propagation = Propagation.NESTED)
+Interview One-Liner
+•	Propagation defines transaction behavior when one transactional method calls another.
+________________________________________
+Spring AOP
+What is AOP?
+•	Aspect Oriented Programming separates cross-cutting concerns from business logic.
+Examples
+•	Logging
+•	Security
+•	Transactions
+•	Auditing
+One-Liner
+•	AOP avoids code duplication by centralizing common functionality.
+________________________________________
+Why Use AOP?
+✅ Reduces Code Duplication
+✅ Improves Modularity
+✅ Easier Maintenance
+✅ Better Readability
+✅ Centralized Logging & Security
+________________________________________
+Cross-Cutting Concerns
+Definition
+•	Features used across multiple modules.
+Examples
+•	Logging
+•	Security
+•	Exception Handling
+•	Transaction Management
+One-Liner
+•	Cross-cutting concerns affect multiple layers of an application.
+________________________________________
+ORM
+What is ORM?
+•	Object Relational Mapping maps Java objects to database tables.
+One-Liner
+•	ORM bridges the gap between Java objects and relational databases.
+________________________________________
+Spring ORM
+What is Spring ORM?
+•	Spring module that integrates Hibernate, JPA, and other ORM frameworks.
+One-Liner
+•	Spring ORM simplifies ORM framework integration.
+________________________________________
+Spring + Hibernate Integration
+How Spring Integrates Hibernate?
+•	Spring ORM
+•	Spring Data JPA
+•	Transaction Management
+•	Session Management
+•	Exception Translation
+One-Liner
+•	Spring manages Hibernate sessions, transactions, and exceptions automatically.
+________________________________________
+🔥 Spring Boot Interview Gold One-Liners
+✅ Spring Boot = Spring + Auto Configuration + Embedded Server.
+✅ Auto Configuration configures beans based on classpath dependencies.
+✅ Starter = Predefined dependency bundle.
+✅ Embedded Tomcat eliminates separate deployment.
+✅ @SpringBootApplication = @Configuration + @ComponentScan + @EnableAutoConfiguration.
+✅ Actuator provides health, metrics, and monitoring endpoints.
+✅ JpaRepository = CRUD + Pagination + Sorting + JPA Features.
+✅ Query Methods generate SQL automatically from method names.
+✅ @Query is used for custom JPQL/SQL queries.
+✅ Transaction = Commit all or Rollback all.
+✅ @Transactional manages transactions automatically.
+✅ REQUIRED is the default propagation type.
+✅ AOP separates cross-cutting concerns from business logic.
+✅ ORM maps Java objects to database tables.
+✅ Spring Data JPA reduces DAO boilerplate code.
+✅ Spring Boot Security should be implemented layer-wise (Controller → Service → DB).
+
+✅ REST API + Hibernate + Profiles Quick Revision Notes
+REST API
+HTTP Methods
+GET
+•	Used to retrieve data from server.
+•	Example: GET /users/1
+POST
+•	Used to create a new resource.
+•	Example: POST /users
+PUT
+•	Used to fully update/replace a resource.
+•	Example: PUT /users/1
+PATCH
+•	Used to partially update a resource.
+•	Example: PATCH /users/1
+DELETE
+•	Used to delete a resource.
+•	Example: DELETE /users/1
+Interview One-Liner
+•	GET=Read, POST=Create, PUT=Full Update, PATCH=Partial Update, DELETE=Remove
+________________________________________
+Idempotent API
+What is Idempotent?
+•	Multiple identical requests produce the same result as a single request.
+Idempotent Methods
+✅ GET
+✅ PUT
+✅ DELETE
+Not Idempotent
+❌ POST
+One-Liner
+•	Calling an idempotent API multiple times does not change the final result.
+________________________________________
+RESTful Service
+RESTful API
+•	Web service following REST principles using HTTP methods to operate on resources identified by URLs.
+REST Principles
+•	Stateless
+•	Client-Server
+•	Resource-Based
+•	Cacheable
+One-Liner
+•	REST API exposes resources through URLs and manipulates them using HTTP methods.
+________________________________________
+REST vs SOAP
+Feature	REST	SOAP
+Type	Architectural Style	Protocol
+Data Format	JSON/XML	XML Only
+Performance	Faster	Slower
+State	Stateless	Can be Stateful
+Security	Basic	Strong WS-Security
+Ease of Use	Simple	Complex
+Interview One-Liner
+•	REST is lightweight and JSON-based, while SOAP is protocol-based and XML-driven.
+________________________________________
+Request Validation
+Request Body Validation
+•	Ensures incoming data is valid before processing.
+Common Validation Annotations
+@NotNull
+@NotEmpty
+@NotBlank
+@Email
+@Size
+@Min
+@Max
+One-Liner
+•	Validation prevents invalid data from entering the application.
+________________________________________
+@RequestBody vs @RequestParam
+@RequestBody
+•	Reads data from request body.
+•	Used with POST, PUT, PATCH.
+•	Maps JSON to Java Object.
+@PostMapping("/users")
+public User create(@RequestBody User user)
+@RequestParam
+•	Reads query parameters from URL.
+•	Mostly used with GET requests.
+@GetMapping("/users")
+public User get(@RequestParam String name)
+Interview One-Liner
+•	@RequestBody reads request payload, @RequestParam reads URL parameters.
+________________________________________
+HTTP Status Codes
+Code	Meaning
+200	OK
+201	Created
+400	Bad Request
+401	Unauthorized
+403	Forbidden
+404	Not Found
+500	Internal Server Error
+One-Liner
+•	HTTP status codes indicate the result of an API request.
+________________________________________
+Exception Handling
+@ExceptionHandler
+What is @ExceptionHandler?
+•	Handles specific exceptions inside controller.
+@ExceptionHandler(RuntimeException.class)
+Benefits
+✅ Custom Error Response
+✅ User-Friendly Message
+✅ Prevents Application Crash
+One-Liner
+•	@ExceptionHandler handles specific exceptions locally within controller.
+________________________________________
+@ControllerAdvice
+What is @ControllerAdvice?
+•	Global exception handler for all controllers.
+@ControllerAdvice
+public class GlobalExceptionHandler {
+}
+Benefits
+✅ Centralized Exception Handling
+✅ Reusable
+✅ Clean Controller Code
+One-Liner
+•	@ControllerAdvice provides application-wide exception handling.
+________________________________________
+Global Exception Handling
+@ControllerAdvice
+public class GlobalHandler {
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handle(Exception ex){
+        return ResponseEntity.internalServerError().build();
+    }
+}
+One-Liner
+•	Global exception handling is implemented using @ControllerAdvice + @ExceptionHandler.
+________________________________________
+Hibernate
+What is Hibernate?
+•	Hibernate is an ORM framework that maps Java objects to database tables.
+Benefits
+✅ No JDBC Boilerplate
+✅ Automatic SQL Generation
+✅ Database Independence
+One-Liner
+•	Hibernate simplifies database operations using Java objects.
+________________________________________
+Lazy vs Eager Loading
+Lazy Loading
+•	Data loads only when required.
+@OneToMany(fetch = FetchType.LAZY)
+Benefits
+✅ Better Performance
+✅ Reduces Unnecessary Queries
+________________________________________
+Eager Loading
+•	Data loads immediately with parent entity.
+@OneToMany(fetch = FetchType.EAGER)
+Benefits
+✅ Immediate Availability
+Interview One-Liner
+•	Lazy loads on demand, Eager loads immediately.
+________________________________________
+Entity Lifecycle
+Transient State
+•	Object created but not managed by JPA.
+User user = new User();
+________________________________________
+Persistent State
+•	Managed by Persistence Context.
+entityManager.persist(user);
+________________________________________
+Detached State
+•	No longer managed by EntityManager.
+entityManager.detach(user);
+________________________________________
+Removed State
+•	Marked for deletion.
+entityManager.remove(user);
+________________________________________
+Lifecycle Flow
+Transient
+   ↓
+Persistent
+   ↓
+Detached
+   ↓
+Removed
+Interview One-Liner
+•	Entity lifecycle represents various states of an entity inside the persistence context.
+________________________________________
+persist() vs merge()
+persist()
+•	Inserts new entity.
+•	Works with Transient State.
+•	Returns void.
+entityManager.persist(user);
+________________________________________
+merge()
+•	Updates detached entity.
+•	Returns managed entity.
+entityManager.merge(user);
+________________________________________
+Quick Difference
+Feature	persist()	merge()
+Purpose	Insert	Update
+State	Transient	Detached
+Return	void	Entity
+Existing Record	Error	Update
+Interview One-Liner
+•	persist() inserts new entity, merge() updates detached entity.
+________________________________________
+Cascade Types
+Cascade.PERSIST
+•	Parent save → Child save.
+Cascade.MERGE
+•	Parent update → Child update.
+Cascade.REMOVE
+•	Parent delete → Child delete.
+Cascade.REFRESH
+•	Reload from database.
+Cascade.DETACH
+•	Detach child entity.
+Cascade.ALL
+•	Apply all operations.
+One-Liner
+•	Cascade propagates parent operations to child entities.
+________________________________________
+JPQL
+What is JPQL?
+•	Query language that works on Entity Objects instead of Database Tables.
+Example
+SELECT e FROM Employee e
+Key Features
+✅ Entity Based
+✅ Database Independent
+✅ Object-Oriented
+One-Liner
+•	JPQL queries entities and fields rather than tables and columns.
+________________________________________
+Spring Profiles
+What are Profiles?
+•	Profiles allow different configurations for different environments.
+Examples
+•	dev
+•	test
+•	stage
+•	prod
+________________________________________
+Enable Profile
+spring.profiles.active=dev
+________________________________________
+Profile-Based Configuration
+@Configuration
+@Profile("dev")
+public class DevConfig {
+}
+Benefits
+✅ Environment Specific Configuration
+✅ No Code Changes
+✅ Better Deployment Management
+Interview One-Liner
+•	Profiles help manage environment-specific configurations like dev, test, and prod.
+________________________________________
+🔥 REST + Hibernate Interview Gold One-Liners
+✅ GET=Read, POST=Create, PUT=Replace, PATCH=Update, DELETE=Remove
+✅ GET, PUT, DELETE are Idempotent APIs.
+✅ REST is lightweight; SOAP is protocol-based and XML-heavy.
+✅ @RequestBody → Request Payload, @RequestParam → URL Parameter.
+✅ @ExceptionHandler handles controller-level exceptions.
+✅ @ControllerAdvice handles global exceptions.
+✅ Hibernate is an ORM framework.
+✅ Lazy Loading loads data on demand.
+✅ Eager Loading loads data immediately.
+✅ persist() inserts new entity.
+✅ merge() updates detached entity.
+✅ JPQL works with entities, not tables.
+✅ Cascade propagates operations from parent to child.
+✅ Profiles manage environment-specific settings.
+✅ dev, test, stage, prod are common Spring Boot profiles.
+✅ Microservices & Advanced Quick Revision Notes
+Microservices Architecture
+What is Microservices Architecture?
+•	Microservices is an architectural style where an application is built as a collection of small, independent, loosely coupled services communicating through APIs.
+Benefits
+✅ Independent Deployment
+✅ Independent Scaling
+✅ Technology Flexibility
+✅ Fault Isolation
+✅ Faster Development
+One-Liner
+•	Microservices break a large application into small business-focused services.
+________________________________________
+Microservices vs Monolithic
+Feature	Microservices	Monolithic
+Structure	Multiple Small Services	Single Large Application
+Deployment	Independent	Whole Application
+Scalability	Individual Service	Entire Application
+Technology	Different Tech Stack	Single Tech Stack
+Maintenance	Easier	Difficult
+One-Liner
+•	Monolith = One Big Application, Microservices = Many Small Services.
+________________________________________
+Spring Boot Actuator
+What is Actuator?
+•	Provides production-ready monitoring and management endpoints.
+Uses
+✅ Health Monitoring
+✅ Runtime Information
+✅ Metrics
+✅ Environment Info
+✅ Application Monitoring
+Common Endpoints
+/actuator/health
+/actuator/info
+/actuator/metrics
+/actuator/beans
+/actuator/env
+One-Liner
+•	Actuator helps monitor and manage Spring Boot applications in production.
+________________________________________
+Spring Cloud
+What is Spring Cloud?
+•	A collection of tools for building distributed and cloud-based microservices.
+Provides
+✅ Service Discovery
+✅ Config Management
+✅ Load Balancing
+✅ API Gateway
+✅ Circuit Breaker
+✅ Distributed Tracing
+One-Liner
+•	Spring Cloud solves common microservice challenges.
+________________________________________
+Feign Client
+What is Feign Client?
+•	Declarative REST Client used for communication between microservices.
+Enable Feign
+@EnableFeignClients
+@SpringBootApplication
+Sample Feign Client
+@FeignClient(name = "USER-SERVICE")
+public interface UserClient {
+
+    @GetMapping("/users/{id}")
+    User getUser(@PathVariable Long id);
+
+}
+Benefits
+✅ Less Boilerplate Code
+✅ Easy Service Communication
+✅ Integration with Eureka
+✅ Load Balancing Support
+✅ Fault Tolerance Support
+One-Liner
+•	Feign Client allows REST calls using Java interfaces.
+________________________________________
+Eureka + Feign
+Service Discovery
+@FeignClient(name = "USER-SERVICE")
+•	Eureka automatically finds service instances.
+One-Liner
+•	Feign + Eureka eliminate hardcoded service URLs.
+________________________________________
+Feign Fallback
+Purpose
+•	Used when target service is unavailable.
+@FeignClient(
+name="USER-SERVICE",
+fallback=UserFallback.class
+)
+One-Liner
+•	Fallback provides a default response when service fails.
+________________________________________
+API Gateway
+What is API Gateway?
+•	Single entry point for all client requests in a microservices architecture.
+Responsibilities
+✅ Request Routing
+✅ Load Balancing
+✅ Authentication
+✅ Authorization
+✅ Logging
+✅ Monitoring
+✅ Rate Limiting
+✅ Response Aggregation
+________________________________________
+Example
+Client
+   ↓
+API Gateway
+   ↓
+Order Service
+User Service
+Payment Service
+One-Liner
+•	API Gateway centralizes routing, security, and traffic management.
+________________________________________
+Spring Cloud Gateway
+What is Spring Cloud Gateway?
+•	Modern API Gateway solution from Spring Cloud.
+Dependency
+spring-cloud-starter-gateway
+Route Example
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: user-service
+        uri: lb://USER-SERVICE
+        predicates:
+          - Path=/users/**
+One-Liner
+•	Spring Cloud Gateway routes requests to appropriate microservices.
+________________________________________
+Circuit Breaker
+What is Circuit Breaker?
+•	Fault tolerance pattern that prevents repeated calls to failing services.
+Why Needed?
+Without Circuit Breaker:
+Order Service
+      ↓
+Payment Service Down
+      ↓
+Timeouts
+      ↓
+Thread Block
+      ↓
+System Failure
+Benefits
+✅ Prevents Cascading Failure
+✅ Improves System Stability
+✅ Faster Failure Detection
+✅ Supports Graceful Degradation
+________________________________________
+Circuit Breaker States
+Closed State 🟢
+•	Requests flow normally.
+Open State 🔴
+•	Requests blocked.
+•	Fallback returned.
+Half Open State 🟡
+•	Few requests allowed for testing recovery.
+Flow
+Closed
+  ↓
+Failures
+  ↓
+Open
+  ↓
+Timeout
+  ↓
+Half-Open
+  ↓
+Success → Closed
+Fail    → Open
+One-Liner
+•	Circuit Breaker stops calling failing services and returns fallback responses.
+________________________________________
+Spring Security
+What is Spring Security?
+•	Framework providing authentication, authorization, and security protection.
+________________________________________
+Authentication
+Meaning
+•	Verifies identity.
+Examples
+✅ Username & Password
+✅ JWT
+✅ OAuth2
+✅ LDAP
+One-Liner
+•	Authentication answers "Who are you?"
+________________________________________
+Authorization
+Meaning
+•	Determines access permissions.
+Example
+ADMIN → Create User ✅
+USER  → Create User ❌
+One-Liner
+•	Authorization answers "What are you allowed to access?"
+________________________________________
+Security Protection
+Spring Security protects against:
+✅ CSRF
+✅ Session Fixation
+✅ Clickjacking
+✅ Password Attacks
+________________________________________
+Spring Security Flow
+Client Request
+      ↓
+Security Filter Chain
+      ↓
+Authentication
+      ↓
+Authorization
+      ↓
+Controller
+      ↓
+Response
+One-Liner
+•	Spring Security intercepts requests using a Filter Chain before reaching controllers.
+________________________________________
+JWT (JSON Web Token)
+What is JWT?
+•	JWT is a secure and self-contained token used for authentication and authorization.
+Why JWT?
+✅ Stateless Authentication
+✅ Scalable
+✅ No Session Storage
+✅ Fast Validation
+________________________________________
+JWT Flow
+User Login
+    ↓
+Authentication
+    ↓
+Generate JWT
+    ↓
+Send Token
+    ↓
+Client Stores Token
+    ↓
+Bearer Token Sent With Requests
+    ↓
+Server Validates JWT
+Header Example
+Authorization: Bearer eyJhbGciOi...
+One-Liner
+•	JWT enables stateless authentication without server-side sessions.
+________________________________________
+Spring Cache
+What is Caching?
+•	Stores frequently accessed data in memory for faster retrieval.
+Benefits
+✅ Faster Response
+✅ Reduced Database Calls
+✅ Better Performance
+________________________________________
+@EnableCaching
+@EnableCaching
+Enables caching support.
+________________________________________
+@Cacheable
+@Cacheable("users")
+public User getUser(Long id)
+•	Stores result in cache.
+One-Liner
+•	@Cacheable caches method results.
+________________________________________
+@CachePut
+@CachePut("users")
+•	Updates cache after execution.
+One-Liner
+•	@CachePut updates cache and executes method.
+________________________________________
+@CacheEvict
+@CacheEvict("users")
+•	Removes cache entries.
+One-Liner
+•	@CacheEvict clears cached data.
+________________________________________
+Scheduling
+What is Scheduling?
+•	Automatic execution of tasks at specified intervals or times.
+Uses
+✅ Daily Reports
+✅ Email Notifications
+✅ Order Processing
+✅ Data Synchronization
+________________________________________
+Enable Scheduling
+@EnableScheduling
+________________________________________
+Fixed Rate
+@Scheduled(fixedRate = 5000)
+•	Runs every 5 seconds.
+________________________________________
+Fixed Delay
+@Scheduled(fixedDelay = 5000)
+•	Waits 5 seconds after completion.
+________________________________________
+Initial Delay
+@Scheduled(initialDelay = 10000)
+•	Starts after initial delay.
+________________________________________
+Cron Expression
+@Scheduled(cron = "0 0 9 * * ?")
+•	Executes daily at 9 AM.
+One-Liner
+•	@Scheduled executes tasks automatically at predefined intervals.
+________________________________________
+Real-Time Microservice Flow
+Client
+   ↓
+API Gateway
+   ↓
+Order Service
+   ↓
+Feign/WebClient
+   ↓
+User Service
+Payment Service
+   ↓
+Database
+Service Discovery
+Services ↔ Eureka Server
+One-Liner
+•	Gateway routes requests, Eureka discovers services, and Feign enables inter-service communication.
+________________________________________
+Microservices Design Patterns
+API Gateway
+•	Single entry point for all requests.
+Circuit Breaker
+•	Prevents cascading failures.
+Service Discovery
+•	Dynamic service lookup.
+Saga Pattern
+•	Handles distributed transactions.
+CQRS
+•	Separate read and write models.
+Retry Pattern
+•	Retries temporary failures.
+Bulkhead
+•	Isolates failures.
+Strangler Fig
+•	Gradually replaces legacy systems.
+One-Liner
+•	Design patterns improve scalability, fault tolerance, and maintainability.
+________________________________________
+Eureka Server
+What is Eureka Server?
+•	Service Registry used for service registration and discovery.
+Problem Without Eureka
+❌ Hardcoded URLs
+❌ Difficult Scaling
+❌ Manual Configuration
+Solution
+✅ Dynamic Registration
+✅ Service Discovery
+✅ Load Balancing Support
+Enable Eureka Server
+@EnableEurekaServer
+@SpringBootApplication
+Configuration
+server.port=8761
+
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+Service Registration
+@EnableEurekaClient
+One-Liner
+•	Eureka allows microservices to find each other dynamically without hardcoded URLs.
+________________________________________
+🔥 Microservices Interview Gold One-Liners
+✅ Microservices = Small, independently deployable services.
+✅ Monolith = Single deployable application.
+✅ Actuator provides production monitoring endpoints.
+✅ Spring Cloud solves distributed system challenges.
+✅ Feign Client = Declarative REST Client.
+✅ Eureka = Service Registry & Discovery.
+✅ API Gateway = Single entry point.
+✅ Circuit Breaker prevents cascading failures.
+✅ Closed → Open → Half-Open are Circuit Breaker states.
+✅ Authentication = Who are you?
+✅ Authorization = What can you access?
+✅ JWT = Stateless authentication token.
+✅ @Cacheable stores method results in cache.
+✅ @CachePut updates cache.
+✅ @CacheEvict removes cache entries.
+✅ @Scheduled automates task execution.
+✅ Saga manages distributed transactions.
+✅ CQRS separates read and write operations.
+✅ Retry Pattern handles temporary failures automatically.
+✅ Spring Cloud Gateway is the modern API Gateway replacement for Zuul.
+✅ SQL + Jenkins + JUnit Quick Revision Notes (Interview One-Liners)
+🔶 SQL Indexes
+What is an Index?
+•	An index is a database object that improves data retrieval speed by reducing full table scans.
+One-Liner
+✅ Index = Book Index for Faster Data Search
+________________________________________
+Types of Indexes
+Primary Index
+•	Automatically created on Primary Key.
+Unique Index
+•	Ensures unique values.
+Non-Unique Index
+•	Improves search without uniqueness check.
+Composite Index
+•	Created on multiple columns.
+Clustered Index
+•	Physically sorts table data.
+Non-Clustered Index
+•	Separate structure pointing to actual data.
+Full-Text Index
+•	Used for text searching.
+________________________________________
+Clustered vs Non-Clustered Index
+Clustered Index
+•	Physical data sorting.
+•	Only one per table.
+•	Faster range queries.
+Non-Clustered Index
+•	Separate index structure.
+•	Multiple allowed.
+•	Faster lookups.
+Interview One-Liner
+✅ Clustered = Data Sorted Physically, Non-Clustered = Pointer to Data
+________________________________________
+Can a Table Have Multiple Clustered Indexes?
+❌ No
+✅ Only one clustered index because data can be physically sorted only once.
+________________________________________
+When NOT to Use Indexes?
+•	Small tables
+•	Frequently updated columns
+•	Columns with low selectivity (Gender, Status)
+•	Tables with heavy INSERT/UPDATE/DELETE
+•	Too many indexes
+One-Liner
+✅ Indexes improve reads but slow writes.
+________________________________________
+How Indexes Improve Performance?
+✅ Faster Search
+✅ Faster Joins
+✅ Faster Sorting
+✅ Better Query Plans
+✅ Reduced Full Table Scan
+One-Liner
+✅ Indexes reduce the amount of data the database must scan.
+________________________________________
+Composite Index
+What is Composite Index?
+•	Index created on multiple columns.
+CREATE INDEX idx_emp
+ON Employee(first_name,last_name);
+One-Liner
+✅ Composite Index optimizes queries using multiple columns together.
+________________________________________
+🔶 SQL Joins
+What is JOIN?
+•	Combines rows from multiple tables using related columns.
+________________________________________
+Types of Joins
+Join	Result
+INNER JOIN	Matching Records
+LEFT JOIN	All Left + Matches
+RIGHT JOIN	All Right + Matches
+FULL JOIN	All Records
+CROSS JOIN	Cartesian Product
+SELF JOIN	Table Joined With Itself
+________________________________________
+INNER JOIN
+•	Returns matching rows from both tables.
+SELECT *
+FROM Employee e
+INNER JOIN Department d
+ON e.dept_id=d.id;
+One-Liner
+✅ Returns only matching records.
+________________________________________
+LEFT JOIN
+•	All rows from left table.
+•	Matching rows from right table.
+One-Liner
+✅ Returns all left table records irrespective of match.
+________________________________________
+RIGHT JOIN
+•	All rows from right table.
+•	Matching rows from left table.
+One-Liner
+✅ Returns all right table records irrespective of match.
+________________________________________
+FULL OUTER JOIN
+•	Returns all records from both tables.
+One-Liner
+✅ Returns matched and unmatched records from both tables.
+________________________________________
+SELF JOIN
+•	Join a table with itself.
+Example
+Employee → Manager Relationship.
+One-Liner
+✅ Used to compare rows within the same table.
+________________________________________
+CROSS JOIN
+•	Produces all possible combinations.
+One-Liner
+✅ Returns Cartesian Product.
+________________________________________
+Which Join Returns Unmatched Records?
+✅ LEFT JOIN
+✅ RIGHT JOIN
+✅ FULL OUTER JOIN
+One-Liner
+✅ Outer Joins return unmatched records.
+________________________________________
+🔶 SQL Constraints
+What are Constraints?
+•	Rules that enforce data integrity.
+Types
+✅ PRIMARY KEY
+✅ FOREIGN KEY
+✅ UNIQUE
+✅ NOT NULL
+✅ CHECK
+✅ DEFAULT
+________________________________________
+PRIMARY KEY vs UNIQUE
+Feature	PRIMARY KEY	UNIQUE
+NULL	Not Allowed	Usually One Allowed
+Count	One Per Table	Multiple Allowed
+Uniqueness	Yes	Yes
+One-Liner
+✅ Primary Key = Unique + Not Null
+________________________________________
+FOREIGN KEY
+•	Maintains relationship between tables.
+FOREIGN KEY (PersonId)
+REFERENCES Person(PersonId)
+One-Liner
+✅ Foreign Key maintains referential integrity.
+________________________________________
+NOT NULL
+•	Prevents NULL values.
+name VARCHAR(50) NOT NULL
+One-Liner
+✅ Column must always contain a value.
+________________________________________
+CHECK Constraint
+•	Restricts allowed values.
+CHECK(age >= 18)
+One-Liner
+✅ CHECK validates data before insertion.
+________________________________________
+DEFAULT Constraint
+•	Assigns default value when none provided.
+status VARCHAR(20) DEFAULT 'ACTIVE'
+One-Liner
+✅ DEFAULT supplies automatic value during insert.
+________________________________________
+Can a Table Have Multiple UNIQUE Constraints?
+✅ Yes
+One-Liner
+✅ Multiple columns can independently enforce uniqueness.
+________________________________________
+🔶 Jenkins
+What is Jenkins?
+•	Open-source CI/CD automation server.
+Uses
+✅ Build Applications
+✅ Run Tests
+✅ Deploy Applications
+✅ Continuous Integration
+✅ Continuous Delivery
+One-Liner
+✅ Jenkins automates Build → Test → Deploy pipelines.
+________________________________________
+Jenkins Flow
+Developer Pushes Code
+          ↓
+Git Repository
+          ↓
+Jenkins Trigger
+          ↓
+Build
+          ↓
+Test
+          ↓
+Deploy
+          ↓
+Success / Failure Report
+One-Liner
+✅ Jenkins automates software delivery from commit to deployment.
+________________________________________
+🔶 JUnit
+What is JUnit?
+•	Java framework for writing and executing unit tests.
+One-Liner
+✅ JUnit is the most widely used Java unit testing framework.
+________________________________________
+What is Unit Testing?
+•	Tests a small piece of code independently.
+One-Liner
+✅ Unit Testing validates individual methods or classes.
+________________________________________
+JUnit 4 vs JUnit 5
+Feature	JUnit 4	JUnit 5
+Architecture	Single	Modular
+Java Requirement	Java 5+	Java 8+
+Annotations	@Before	@BeforeEach
+________________________________________
+Common JUnit Annotations
+@Test
+@BeforeEach
+@AfterEach
+@BeforeAll
+@AfterAll
+Quick Notes
+•	@Test → Marks test method
+•	@BeforeEach → Before every test
+•	@AfterEach → After every test
+•	@BeforeAll → Once before all tests
+•	@AfterAll → Once after all tests
+________________________________________
+Assertions
+What are Assertions?
+•	Used to compare expected and actual results.
+Common Assertions
+assertEquals()
+assertTrue()
+assertFalse()
+assertNull()
+assertNotNull()
+One-Liner
+✅ Assertions validate test results.
+________________________________________
+Exception Testing
+assertThrows(
+Exception.class,
+() -> method()
+);
+One-Liner
+✅ assertThrows verifies expected exceptions.
+________________________________________
+Parameterized Test
+@ParameterizedTest
+@ValueSource(ints={1,2,3})
+One-Liner
+✅ Runs the same test with multiple inputs.
+________________________________________
+Mockito
+What is Mockito?
+•	Framework used to mock dependencies during testing.
+One-Liner
+✅ Mockito creates fake objects for unit testing.
+________________________________________
+What is Mock?
+•	Complete fake implementation.
+@Mock
+UserService userService;
+One-Liner
+✅ Mock replaces real dependency.
+________________________________________
+Mock vs Spy
+Mock	Spy
+Fully Fake	Partial Real Object
+No Real Logic	Real Methods Executed
+One-Liner
+✅ Mock = Fake Object, Spy = Partial Real Object
+________________________________________
+Mockito Example
+when(userService.getUser())
+.thenReturn("John");
+One-Liner
+✅ Mockito controls dependency behavior during tests.
+________________________________________
+JUnit Test Lifecycle
+@BeforeAll
+      ↓
+@BeforeEach
+      ↓
+@Test
+      ↓
+@AfterEach
+      ↓
+@AfterAll
+One-Liner
+✅ JUnit follows Setup → Test → Cleanup lifecycle.
+________________________________________
+Test Suite
+•	Collection of test cases executed together.
+One-Liner
+✅ Test Suite groups multiple test classes.
+________________________________________
+@Disabled
+@Disabled
+One-Liner
+✅ Skips execution of a test case.
+________________________________________
+Timeout Testing
+assertTimeout(
+Duration.ofSeconds(2),
+() -> method()
+);
+One-Liner
+✅ Verifies execution completes within specified time.
+________________________________________
+🔥 SQL + Jenkins + JUnit Interview Gold
+✅ Index improves SELECT performance.
+✅ Clustered Index physically sorts data.
+✅ Non-Clustered Index stores pointers to data.
+✅ Only one Clustered Index per table.
+✅ Composite Index uses multiple columns.
+✅ INNER JOIN returns matching records only.
+✅ LEFT JOIN returns all left table records.
+✅ FULL JOIN returns all records from both tables.
+✅ Primary Key = Unique + Not Null.
+✅ Foreign Key maintains table relationships.
+✅ CHECK validates column data.
+✅ DEFAULT provides automatic values.
+✅ Jenkins automates CI/CD pipelines.
+✅ JUnit is used for unit testing.
+✅ Assertions compare expected vs actual results.
+✅ Mockito mocks dependencies.
+✅ Mock = Fully Fake Object.
+✅ Spy = Partial Real Object.
+✅ assertThrows tests exceptions.
+✅ Parameterized Tests run same test using multiple inputs.
+
+✅ Kafka Quick Revision Notes (6+ Years Interview)
+Core Concepts
+•	Kafka → Distributed Event Streaming Platform.
+•	Topic → Logical channel to store messages.
+•	Partition → Splits topic for scalability.
+•	Broker → Kafka server.
+•	Producer → Publishes messages.
+•	Consumer → Reads messages.
+•	Offset → Unique message position inside partition.
+________________________________________
+Consumer Group
+•	Consumer Group → Multiple consumers working together.
+•	Same Group → One message consumed by one consumer.
+•	Different Groups → Same message can be consumed by all groups.
+✅ 1 Partition = 1 Consumer in a Group
+________________________________________
+Replication
+•	Replication → Copies data across brokers.
+•	Leader → Handles Read/Write.
+•	Follower → Replicates Leader data.
+•	ISR (In-Sync Replicas) → Replicas synced with leader.
+✅ Replication provides Fault Tolerance.
+________________________________________
+Delivery Guarantees
+At Most Once
+•	No duplicates
+•	Possible data loss
+At Least Once
+•	No data loss
+•	Possible duplicates
+Exactly Once (EOS)
+•	No duplicates
+•	No data loss
+✅ EOS = Idempotent Producer + Transactions
+________________________________________
+Producer Acknowledgement
+•	acks=0 → No confirmation.
+•	acks=1 → Leader confirmation.
+•	acks=all → All replicas confirmation (most reliable).
+________________________________________
+Idempotent Producer
+enable.idempotence=true
+✅ Prevents duplicate messages.
+________________________________________
+Consumer Lag
+Lag = Latest Offset - Consumer Offset
+Example:
+Latest Offset = 100
+Consumer Offset = 80
+
+Lag = 20
+✅ Higher lag = Slow Consumer.
+________________________________________
+Rebalancing
+Occurs when:
+•	Consumer joins
+•	Consumer leaves
+•	Consumer crashes
+✅ Kafka redistributes partitions automatically.
+________________________________________
+Retention
+•	Messages remain in Kafka after consumption.
+•	Enables replay and recovery.
+log.retention.hours=168
+________________________________________
+DLQ (Dead Letter Queue)
+•	Failed messages moved to separate topic.
+orders-topic
+      ↓
+orders-dlq
+✅ Stores unprocessed messages.
+________________________________________
+Kafka vs REST
+REST
+•	Synchronous
+•	Tight Coupling
+Kafka
+•	Asynchronous
+•	Loose Coupling
+✅ Kafka is preferred for Event-Driven Microservices.
+________________________________________
+Kafka vs RabbitMQ
+Kafka
+•	High Throughput
+•	Message Replay
+•	Event Streaming
+RabbitMQ
+•	Traditional Messaging
+•	Complex Routing
+✅ Kafka = Streaming ✅ RabbitMQ = Messaging
+________________________________________
+Microservice Flow
+Order Service
+      ↓
+   Kafka
+      ↓
+Inventory Service
+Notification Service
+Payment Service
+✅ Loose Coupling ✅ Scalability ✅ Async Communication
+________________________________________
+Circuit Scenario Questions
+Broker Down?
+✅ No Data Loss (if replication exists)
+10 Partitions, 5 Consumers?
+✅ Each consumer gets 2 partitions.
+10 Partitions, 15 Consumers?
+✅ 10 active, 5 idle.
+Multiple Consumers Same Group Read Same Partition?
+❌ No
+Multiple Consumer Groups Read Same Topic?
+✅ Yes
+________________________________________
+🔥 Kafka Interview Gold (1-Liners)
+✅ Topic = Category of Messages
+✅ Partition = Scalability Unit
+✅ Broker = Kafka Server
+✅ Offset = Message Position
+✅ Producer = Publish Data
+✅ Consumer = Read Data
+✅ Consumer Group = Parallel Processing
+✅ Replication = Fault Tolerance
+✅ Leader = Read/Write Operations
+✅ Follower = Replicate Data
+✅ ISR = Healthy Replicas
+✅ Lag = Consumer Behind Producer
+✅ Rebalancing = Redistribute Partitions
+✅ DLQ = Failed Message Topic
+✅ EOS = Exactly Once Processing
+✅ Kafka = Asynchronous Event Streaming Platform
+✅ KRaft = Kafka without ZooKeeper
+🎯 30-Second Interview Summary
+Kafka is a distributed event-streaming platform where Producers send messages to Topics, Topics are divided into Partitions for scalability, Consumers read messages using Offsets, Consumer Groups provide parallel processing, and Replication with ISR ensures fault tolerance and high availability.
+
+Rabit MQ
+✅ RabbitMQ Quick Revision Notes (Interview 5–10+ Years)
+What is RabbitMQ?
+•	RabbitMQ is an open-source Message Broker used for asynchronous communication between applications.
+•	Implements AMQP (Advanced Message Queuing Protocol).
+One-Liner
+✅ RabbitMQ receives, stores, and forwards messages between producers and consumers.
+________________________________________
+RabbitMQ Architecture
+Producer
+   ↓
+Exchange
+   ↓
+Queue
+   ↓
+Consumer
+Components
+Producer
+•	Sends messages.
+Exchange
+•	Receives messages from producer and routes them.
+Queue
+•	Stores messages.
+Consumer
+•	Processes messages.
+________________________________________
+Why RabbitMQ?
+✅ Asynchronous Processing
+✅ Decoupled Services
+✅ Reliable Messaging
+✅ Load Balancing
+✅ Fault Tolerance
+✅ Message Delivery Guarantee
+________________________________________
+Exchange Types
+Direct Exchange
+•	Routes based on exact routing key.
+Routing Key = order.created
+✅ One-to-One routing.
+________________________________________
+Topic Exchange
+•	Uses pattern matching.
+order.*
+order.created
+order.updated
+✅ Flexible routing.
+________________________________________
+Fanout Exchange
+•	Sends message to all queues.
+Producer
+    ↓
+Fanout
+↓   ↓   ↓
+Q1  Q2  Q3
+✅ Broadcast messaging.
+________________________________________
+Headers Exchange
+•	Routing based on message headers.
+✅ Less commonly used.
+________________________________________
+Queue
+•	Temporary storage for messages.
+•	Consumer reads from queue.
+One-Liner
+✅ Queue stores messages until consumers process them.
+________________________________________
+Message Acknowledgement
+Auto Ack
+•	Message removed immediately.
+Manual Ack
+•	Consumer confirms processing.
+channel.basicAck()
+One-Liner
+✅ Ack prevents message loss.
+________________________________________
+What Happens if Consumer Crashes?
+Without Ack: ❌ Message lost
+With Manual Ack: ✅ Message re-queued
+One-Liner
+✅ Unacknowledged messages are redelivered.
+________________________________________
+Durable Queue
+queueDeclare(
+"orders",
+true,
+false,
+false,
+null
+);
+•	Queue survives broker restart.
+One-Liner
+✅ Durable queue survives RabbitMQ restart.
+________________________________________
+Persistent Message
+MessageProperties.PERSISTENT_TEXT_PLAIN
+•	Messages stored on disk.
+One-Liner
+✅ Persistent messages reduce risk of data loss.
+________________________________________
+Dead Letter Queue (DLQ)
+Failed messages moved to another queue.
+Order Queue
+      ↓
+Failure
+      ↓
+DLQ
+Use Cases
+•	Retry processing
+•	Error Analysis
+One-Liner
+✅ DLQ stores unprocessed messages.
+________________________________________
+Retry Mechanism
+When processing fails:
+Queue
+  ↓
+Retry Queue
+  ↓
+Original Queue
+``
+One-Liner
+✅ Retry avoids losing messages due to temporary failures.
+________________________________________
+Publisher Confirm
+Ensures broker received the message.
+channel.confirmSelect();
+One-Liner
+✅ Publisher Confirm guarantees producer-side reliability.
+________________________________________
+RabbitMQ vs Kafka
+Feature	RabbitMQ	Kafka
+Type	Message Broker	Event Streaming Platform
+Throughput	Moderate	Very High
+Message Replay	No	Yes
+Retention	After Consumption Removed	Retained
+Protocol	AMQP	Custom Protocol
+Use Case	Messaging	Event Streaming
+One-Liner
+✅ RabbitMQ = Messaging, Kafka = Event Streaming.
+________________________________________
+RabbitMQ in Microservices
+Order Service
+      ↓
+RabbitMQ
+      ↓
+Email Service
+
+Payment Service
+
+Inventory Service
+Benefits
+✅ Loose Coupling
+✅ Async Communication
+✅ Reliability
+________________________________________
+Load Balancing
+Multiple consumers on same queue.
+Queue
+↓   ↓
+C1  C2
+Messages distributed among consumers.
+One-Liner
+✅ RabbitMQ distributes workload across consumers.
+________________________________________
+RabbitMQ Scenario Questions
+What if RabbitMQ server crashes?
+✅ Durable Queue + Persistent Messages prevent loss.
+________________________________________
+Difference Between Queue and Exchange?
+•	Exchange → Routes message.
+•	Queue → Stores message.
+________________________________________
+Difference Between Direct and Fanout Exchange?
+•	Direct → Exact routing key.
+•	Fanout → Broadcast to all queues.
+________________________________________
+How to avoid message loss?
+✅ Durable Queue
+✅ Persistent Messages
+✅ Manual Ack
+✅ Publisher Confirm
+________________________________________
+🔥 RabbitMQ Interview Gold (1-Liners)
+✅ RabbitMQ is a Message Broker.
+✅ Producer sends messages to Exchange.
+✅ Exchange routes messages to Queue.
+✅ Consumer reads messages from Queue.
+✅ Direct Exchange = Exact Match Routing.
+✅ Topic Exchange = Pattern-Based Routing.
+✅ Fanout Exchange = Broadcast Messaging.
+✅ Queue stores messages.
+✅ Ack confirms successful processing.
+✅ Manual Ack prevents message loss.
+✅ Durable Queue survives restart.
+✅ Persistent Message stored on disk.
+✅ DLQ stores failed messages.
+✅ Publisher Confirm ensures broker received messages.
+✅ RabbitMQ provides asynchronous communication.
+✅ RabbitMQ distributes messages among multiple consumers.
+🎯 30-Second Interview Summary
+RabbitMQ is an AMQP-based message broker where Producers send messages to Exchanges, Exchanges route messages to Queues, and Consumers process them. Reliability is achieved using Durable Queues, Persistent Messages, Manual Acknowledgements, Publisher Confirms, and Dead Letter Queues. It is commonly used in microservices for asynchronous and decoupled communication.
+
