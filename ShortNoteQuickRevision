@@ -333,12 +333,12 @@ ________________________________________
 CompletableFuture
 •	Java 8 API for asynchronous and non-blocking programming.
 •	Supports chaining, combining results, and exception handling.
-________________________________________
+
 ForkJoinPool
 •	Thread pool using Work-Stealing Algorithm.
 •	Splits large tasks (Fork) and combines results (Join).
 •	Used internally by Parallel Streams and CompletableFuture.
-
+________________________________________
 ✅ Spring Framework Quick Revision Notes (One-Liners)
 IoC Container
 What is IoC?
@@ -534,25 +534,6 @@ public class AppConfig {
 Interview One-Liner
 •	Loads custom properties files into Spring.
 ________________________________________
-🔥 Spring Interview Gold One-Liners
-✅ IoC = Container controls object creation.
-✅ DI = Dependencies injected from outside.
-✅ ApplicationContext = Advanced BeanFactory.
-✅ Constructor Injection is preferred over Setter Injection.
-✅ Spring Bean = Object managed by Spring Container.
-✅ Singleton = One object per container.
-✅ Prototype = New object every request.
-✅ @Autowired injects beans automatically.
-✅ @Qualifier resolves multiple bean ambiguity.
-✅ @Primary defines default bean.
-✅ @Component = Generic Bean.
-✅ @Service = Business Layer.
-✅ @Repository = Data Access Layer.
-✅ @Controller = MVC Request Handler.
-✅ @RestController = REST API Controller.
-✅ @Configuration + @Bean = Java-based Spring Configuration.
-✅ @Value = Inject property value.
-✅ @PropertySource = Load external properties file.
 ✅ Spring Boot Quick Revision Notes (Interview One-Liners)
 Spring vs Spring Boot
 Feature	Spring	Spring Boot
@@ -562,7 +543,7 @@ Server	External Tomcat	Embedded Tomcat
 Development Speed	Slower	Faster
 One-Liner
 •	Spring Boot is an extension of Spring that simplifies configuration and development using auto-configuration and embedded servers.
-________________________________________
+
 Auto Configuration
 What is Auto Configuration?
 •	Automatically configures beans based on dependencies available in the classpath.
@@ -571,14 +552,9 @@ Example
 •	Spring Web Dependency → DispatcherServlet auto-configured.
 One-Liner
 •	Auto-Configuration reduces manual configuration work.
-________________________________________
-Spring Boot Starter
+
 What is Spring Boot Starter?
 •	Predefined dependency bundles for specific functionality.
-Examples
-•	spring-boot-starter-web → REST APIs/Web Applications
-•	spring-boot-starter-data-jpa → JPA + Hibernate
-•	spring-boot-starter-security → Security Features
 One-Liner
 •	Starters eliminate the need to add multiple related dependencies manually.
 ________________________________________
@@ -592,7 +568,7 @@ Examples
 One-Liner
 •	Spring Boot applications run directly using embedded servers without external deployment.
 java -jar app.jar
-________________________________________
+
 @SpringBootApplication
 What is @SpringBootApplication?
 •	Main annotation of Spring Boot.
@@ -606,7 +582,7 @@ Responsibilities
 •	Configuration Class
 One-Liner
 •	@SpringBootApplication combines configuration, component scanning, and auto-configuration.
-________________________________________
+
 Spring Boot Internal Flow
 Internal Working
 SpringApplication.run()
@@ -842,7 +818,7 @@ What is Spring ORM?
 •	Spring module that integrates Hibernate, JPA, and other ORM frameworks.
 One-Liner
 •	Spring ORM simplifies ORM framework integration.
-________________________________________
+
 Spring + Hibernate Integration
 How Spring Integrates Hibernate?
 •	Spring ORM
@@ -852,24 +828,6 @@ How Spring Integrates Hibernate?
 •	Exception Translation
 One-Liner
 •	Spring manages Hibernate sessions, transactions, and exceptions automatically.
-________________________________________
-🔥 Spring Boot Interview Gold One-Liners
-✅ Spring Boot = Spring + Auto Configuration + Embedded Server.
-✅ Auto Configuration configures beans based on classpath dependencies.
-✅ Starter = Predefined dependency bundle.
-✅ Embedded Tomcat eliminates separate deployment.
-✅ @SpringBootApplication = @Configuration + @ComponentScan + @EnableAutoConfiguration.
-✅ Actuator provides health, metrics, and monitoring endpoints.
-✅ JpaRepository = CRUD + Pagination + Sorting + JPA Features.
-✅ Query Methods generate SQL automatically from method names.
-✅ @Query is used for custom JPQL/SQL queries.
-✅ Transaction = Commit all or Rollback all.
-✅ @Transactional manages transactions automatically.
-✅ REQUIRED is the default propagation type.
-✅ AOP separates cross-cutting concerns from business logic.
-✅ ORM maps Java objects to database tables.
-✅ Spring Data JPA reduces DAO boilerplate code.
-✅ Spring Boot Security should be implemented layer-wise (Controller → Service → DB).
 
 ✅ REST API + Hibernate + Profiles Quick Revision Notes
 REST API
@@ -1094,7 +1052,7 @@ Cascade.ALL
 •	Apply all operations.
 One-Liner
 •	Cascade propagates parent operations to child entities.
-________________________________________
+________________________________________ 
 JPQL
 What is JPQL?
 •	Query language that works on Entity Objects instead of Database Tables.
@@ -1131,22 +1089,6 @@ Benefits
 Interview One-Liner
 •	Profiles help manage environment-specific configurations like dev, test, and prod.
 ________________________________________
-🔥 REST + Hibernate Interview Gold One-Liners
-✅ GET=Read, POST=Create, PUT=Replace, PATCH=Update, DELETE=Remove
-✅ GET, PUT, DELETE are Idempotent APIs.
-✅ REST is lightweight; SOAP is protocol-based and XML-heavy.
-✅ @RequestBody → Request Payload, @RequestParam → URL Parameter.
-✅ @ExceptionHandler handles controller-level exceptions.
-✅ @ControllerAdvice handles global exceptions.
-✅ Hibernate is an ORM framework.
-✅ Lazy Loading loads data on demand.
-✅ Eager Loading loads data immediately.
-✅ persist() inserts new entity.
-✅ merge() updates detached entity.
-✅ JPQL works with entities, not tables.
-✅ Cascade propagates operations from parent to child.
-✅ Profiles manage environment-specific settings.
-✅ dev, test, stage, prod are common Spring Boot profiles.
 ✅ Microservices & Advanced Quick Revision Notes
 Microservices Architecture
 What is Microservices Architecture?
@@ -1159,7 +1101,6 @@ Benefits
 ✅ Faster Development
 One-Liner
 •	Microservices break a large application into small business-focused services.
-________________________________________
 Microservices vs Monolithic
 Feature	Microservices	Monolithic
 Structure	Multiple Small Services	Single Large Application
@@ -1169,7 +1110,7 @@ Technology	Different Tech Stack	Single Tech Stack
 Maintenance	Easier	Difficult
 One-Liner
 •	Monolith = One Big Application, Microservices = Many Small Services.
-________________________________________
+
 Spring Boot Actuator
 What is Actuator?
 •	Provides production-ready monitoring and management endpoints.
@@ -1187,7 +1128,7 @@ Common Endpoints
 /actuator/env
 One-Liner
 •	Actuator helps monitor and manage Spring Boot applications in production.
-________________________________________
+
 Spring Cloud
 What is Spring Cloud?
 •	A collection of tools for building distributed and cloud-based microservices.
