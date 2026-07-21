@@ -312,8 +312,8 @@ Internal Structure
 ------------------------
 
 A HashMap consists of an array of buckets, where each bucket is a linked list . Each bucket corresponds to a hash code calculated from the key.
-Hash Calculation: The hash code for the key is calculated and further processed to find the index of the array (bucket).
-Index Calculation: The index in the array is determined by the formula (n - 1) & hash, where n is the length of the array.
+HashMap internally uses an array of buckets. When a key-value pair is inserted, HashMap calculates the key's hash, 
+determines the bucket index using (n-1) & hash, and stores the entry in that bucket.
 Handling Collisions: If the bucket at the calculated index is already occupied, the HashMap traverses the linked list (or tree) to
 find the correct spot for the new entry.If the key already exists, the value is updated.
 Resize: If the load factor exceeds a certain threshold, the HashMap will resize itself by doubling the array size and rehashing all entries.
@@ -330,6 +330,14 @@ Performance
 Average Time Complexity: O(1) for put and get operations, assuming a good hash function and uniform distribution.
 Worst Case Time Complexity: O(n) for put and get operations, if all keys hash to the same bucket and form a single linked list.
 However, with treeification, the worst-case time complexity is improved to O(log n).
+
+How does HashMap identify duplicate keys?
+It uses:
+hashCode()
+
+to find the bucket and
+equals()
+to identify the exact key.
 
 Core java QuestionList
 ==============================
