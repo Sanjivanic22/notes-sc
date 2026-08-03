@@ -524,3 +524,209 @@ Q. How Does SonarQube Handle Legacy Code Analysis and Refactoring Recommendation
 Answer: In my experience, SonarQube plays a crucial role in managing legacy code. It starts by scanning the codebase to identify “code smells” and areas of technical debt. This is essential because it helps us understand where the most critical issues lie and which parts of the code require immediate attention. I’ve found that by setting up Quality Gates specifically tailored for our legacy project, we can ensure that new changes don’t increase debt or introduce more issues. Additionally, SonarQube offers suggestions for refactoring which are invaluable. By incrementally addressing these recommendations, we’ve been able to improve our code’s maintainability and reduce its complexity over time, making it easier to add new features or fix bugs.
 Q. Can You Discuss The Role Of Quality Profiles In Configuring Rule Sets For Code Analysis In SonarQube?
 Answer: In my experience, Quality Profiles in SonarQube play a crucial role in tailoring the code analysis to meet our project’s specific requirements. By selecting and configuring the set of rules in a Quality Profile, I ensure that our code is analyzed against standards that are relevant to our project’s technology stack and coding conventions. For instance, for a Java project, I customize the Quality Profile to enforce rules that are specific to Java best practices and performance optimizations. This customization helps in identifying issues that are most pertinent to our code, making the analysis more effective and actionable. It’s about making SonarQube work for us, ensuring we focus on improving code quality in areas that matter most to our project.
+
+1. What are Jenkins Pipelines, and how do they work?
+A Jenkins Pipeline is a suite of plugins that enables implementing and integrating Continuous Integration (CI) and Continuous Delivery/Deployment (CD) workflows as code.
+A pipeline automates software delivery processes such as:
+•
+Building applications
+•
+Running tests
+•
+Packaging artifacts
+•
+Deploying to environments
+•
+Monitoring deployments
+2. How do you create and configure Parameterized Jobs in Jenkins?
+Parameterized jobs allow users to provide input values during job execution.
+Create a Parameterized Job
+1.
+Create a new Jenkins Job.
+2.
+Select This project is parameterized.
+3.
+Add parameters such as:
+o
+String Parameter
+o
+Choice Parameter
+o
+Boolean Parameter
+o
+Password Parameter
+3. How do you use Jenkinsfiles to define CI/CD Pipelines as Code?
+A Jenkinsfile is a text file stored in source control containing pipeline definitions.
+Benefits
+•
+Version controlled
+•
+Reproducible
+•
+Auditable
+•
+Easy collaboration
+4.
+What is Jenkins?
+Answer: Jenkins is a free, open-source Continuous Integration tool and automation server used to monitor continuous integration and delivery. It is written in Java.
+It is known as an automated Continuous Delivery tool that helps to build and test the software system with easy integration of changes to the system. Jenkins follows Groovy Scripting.
+Also, it enables developers to continuously check their code and analyze the post-build actions. The automation testers can use it to run their tests as soon as the new code is added or the code is modified.
+5.
+What are the features of Jenkins?
+Answer: Jenkins comes with the following features:
+1.
+Free open source
+2.
+Easy installation on various operating systems
+3.
+Build Pipeline Support
+4.
+Workflow Plugin
+5.
+Test harness built around JUnit
+6.
+Easy upgrades
+7.
+Rapid release cycle
+8.
+Easy configuration setup
+9.
+Extensible through the use of third-party plugins
+6.
+What are the advantages of Jenkins? Why do we use Jenkins?
+Answer: Jenkins is used to continuously monitor the large code base in real time. It enables developers to find bugs in their code and fix them. Email notifications are made to the developers regarding their check-ins as a post-build action.
+The advantages of Jenkins are:
+•
+Build failures are cached during the integration stage.
+•
+Notifies the developers about the build report status using an LDAP (Lightweight Directory Access Protocol) mail server.
+•
+The simple steps automate the Maven release project.
+•
+Easy bug tracking.
+•
+Automatic changes get updated in the build report with a notification.
+•
+Supports Continuous Integration in agile development and test-driven development.
+7.
+Mention some of the important plugins in Jenkins.
+Answer: Plugins in Jenkins include:
+•
+Gits
+•
+Maven 2 Project
+•
+HTML Publisher
+•
+Copy Artcraft
+•
+Join
+•
+Green Balls
+•
+Amazon EC2
+8.
+What is Continuous Integration in Jenkins?
+Answer: Continuous integration is the process of continuously checking the developer’s code into a version control system and triggering the build to check and identify bugs in the written code.
+This is a very quick process and also gives them a chance to fix the bugs. Jenkins is one such continuous integration tool.
+In software development, multiple developers work on different software modules. While performing integration testing, all the modules are being integrated. It is considered the development practice to integrate the code into the source repository.
+Whenever the programmer/developer changes the current code, it automatically gets integrated with the system running on the tester’s machine, making the testing task easier and faster for system testers.
+Continuous Integration comprises:
+•
+Development and Compilation
+•
+Database Integration
+•
+Unit Testing
+•
+Production Deployment
+•
+Code Labeling
+•
+Functional Testing
+•
+Generating and Analyzing Reports
+9.
+What is the difference between Hudson and Jenkins?
+Answer: There is no difference between Hudson and Jenkins. Hudson was the former name of Jenkins. After going through several issues, the name was changed to Jenkins.
+10.
+What is Groovy in Jenkins?
+Answer: Groovy is the default scripting language that is being used in the development of JMeter Version 3.1.
+Currently, Apache Groovy is a dynamic object-oriented programming language that is used as a scripting language for the Java platform. Apache Groovy offers several useful features, including Java Compatibility and Development Support.
+11.
+Which command is used to start Jenkins?
+Answer: You can follow the below-mentioned steps to start Jenkins:
+1.
+Open Command Prompt
+2.
+From the Command Prompt, browse the directory where Jenkins. war resides
+3.
+Run the command given below:
+1
+Java –jar Jenkins.war
+12.
+What is Jenkinsfile?
+Answer: The text file where all the definitions of pipelines are defined is called Jenkinsfile. It is being checked in the source control repository.
+13.
+What is the difference between Continuous Integration, Continuous Delivery, and Continuous Deployment?
+Answer: The diagrammatic representation given below can elaborate on the differences between Continuous Integration, Continuous Delivery, and Continuous Deployment more precisely.
+Continuous Integration:
+(It involves keeping the latest copy of the source code at a commonly shared hub where all the developers can check to fetch the latest change to avoid conflict.)
+Continuous Delivery:
+(Manual Deployment to Production. It does not involve every change to be deployed.)
+Continuous Deployment:
+(Automated Deployment to Production. Involves every change to be deployed automatically.)
+14.
+What is Jenkins Pipeline? What is a CI CD pipeline?
+Answer: The pipeline can be defined as the suite of plugins supporting the implementation and integration of continuous delivery pipelines in Jenkins.
+Continuous integration or continuous delivery pipeline consists of a build, deploy, test, and release pipeline. The pipeline feature saves a lot of time and errors in maintaining the builds. A pipeline is a group of build jobs that are chained and integrated in sequence.
+15.
+What are Declarative Pipelines in Jenkins?
+Answer: Declarative Pipelines are the newest additions to Jenkins that simplify the Groovy syntax of Jenkins pipelines (top-level pipeline) with some exceptions, such as:
+No semicolon is to be used as a statement separator. The top-level pipeline should be enclosed within the block, viz.
+The common syntax is:
+pipeline {
+/* Declarative Pipeline */
+}
+Blocks must contain Sections, Directives, steps, or assignments.
+pipeline {
+agent any
+stages {
+stage(‘Build’) {
+steps {
+// Statements…
+}
+}
+stage (‘Test’) {
+steps {
+// Statements…
+}
+}
+}
+}
+The above code has 3 major elements:
+•
+Pipeline: The block of script contents.
+•
+Agent: Defines where the pipeline will start running from.
+•
+Stage: The pipelines contain several steps enclosed in the block called Stage.
+16.
+Which CI tools are used in Jenkins?
+Answer: Jenkins supported the following CI tools:
+1.
+Jenkins
+2.
+GitLab CI
+3.
+Travis CI
+4.
+CircleCI
+5.
+Codeship
+6.
+Go CD
+7.
+TeamCity
+8.
+Bamboo
