@@ -1,0 +1,415 @@
+-🔹 Core Java & Spring Boot
+• 01) How would you optimize a slow Java service under production load?
+"For a slow Java service in production, I first identify whether the bottleneck is CPU, memory, database, thread contention, or an external dependency using monitoring tools and JVM diagnostics. After performing root cause analysis through logs, thread dumps, profiling, and APM metrics, I implement targeted optimizations such as query tuning, caching, asynchronous processing, or JVM tuning. I then validate the fix through load testing and deploy it gradually while monitoring key production metrics. My focus is always on data-driven optimization rather than guesswork."
+• 02) How do you handle exception management in Spring Boot?
+"In Spring Boot, I prefer a centralized and structured exception-handling approach rather than handling exceptions in every controller. This improves maintainability, consistency, and API usability.
+"I use global exception handling with @RestControllerAdvice, create custom exceptions for business scenarios, and return standardized error responses with proper HTTP status codes. I ensure exceptions are logged appropriately, sensitive information is not exposed, and production monitoring tools capture critical failures. This keeps the code clean, improves API consistency, and simplifies troubleshooting in production environments."
+For example, if a customer record is not found, instead of returning a generic 500 error, I throw a custom ResourceNotFoundException and map it to a 404 response. Similarly, validation failures are mapped to 400 Bad Request responses with meaningful error messages.
+I also follow a standard API error response structure containing fields such as timestamp, status code, error message, and request path. This makes troubleshooting easier for both clients and support teams.
+In production, I ensure exceptions are properly logged using SLF4J/Logback with appropriate log levels. Sensitive information such as passwords, tokens, or internal stack traces are never exposed to API consumers.
+For distributed systems, I integrate exception handling with monitoring tools like Application Insights, Splunk, or ELK Stack so that critical failures can be tracked and alerted proactively.
+The goal is to provide meaningful responses to consumers, maintain clean code, and ensure production issues can be diagnosed quickly."
+"In one project, multiple microservices were returning different error formats, which made troubleshooting difficult for frontend and integration teams. I implemented a centralized exception-handling framework using @RestControllerAdvice and standardized error responses across all APIs. This improved API consistency, reduced debugging time, and provided better visibility into production issues."
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
+            ResourceNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.NOT_FOUND.value(),
+                ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGenericException(
+            Exception ex) {
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Something went wrong");
+        return new ResponseEntity<>(error,
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+• 03) How would you diagnose high CPU or memory usage in a Java application?
+"To diagnose high CPU or memory usage, I first analyze JVM and application metrics through monitoring tools. For CPU issues, I inspect thread dumps, JFR profiles, and hot methods to identify inefficient code or thread contention. For memory issues, I analyze heap usage, GC logs, and heap dumps to detect memory leaks or excessive object retention. After identifying the root cause, I implement targeted optimizations such as code improvements, cache tuning, JVM tuning, or leak fixes, and validate the results through performance testing and production monitoring."
+rexperiencing slow responses. I captured a heap dump and analyzed it using Eclipse MAT. The analysis showed that a static cache was continuously storing customer data without any eviction policy. We replaced it with a bounded cache using Caffeine and configured proper expiration. Memory consumption stabilized, Full GCs were reduced significantly, and response times improved."
+• 04) How would you design a maintainable Spring Boot application?
+"To design a maintainable Spring Boot application, I follow clean architecture principles with clear separation between Controller, Service, and Repository layers. I use DTOs, dependency injection, global exception handling, externalized configuration, proper logging, and comprehensive testing. I also follow SOLID principles, maintain coding standards, and automate quality checks through CI/CD pipelines. This ensures the application remains scalable, testable, and easy to maintain as business requirements grow." 
+"In one project, we initially had a monolithic Spring Boot application where business logic was spread across controllers and services. As the application grew, maintenance became difficult. We refactored it using layered architecture, DTOs, centralized exception handling, common utility modules, and standardized API responses. This significantly improved code readability, testability, and onboarding speed for new team members."
+🔹 Microservices
+• 05) How would you design resilient communication between microservices?
+"To design resilient microservice communication, I use a combination of synchronous and asynchronous communication based on business needs. I implement resilience patterns such as Circuit Breaker, Retry, Timeout, and Fallback using Resilience4j. For scalability and fault tolerance, I prefer Kafka-based event-driven communication where appropriate. I also use distributed tracing, centralized logging, monitoring, and correlation IDs to troubleshoot failures quickly. The objective is to prevent cascading failures and ensure graceful degradation when dependent services become unavailable."
+"In one project, Order Service depended on Payment Service and Inventory Service. During peak traffic, Payment Service experienced intermittent failures. Instead of allowing the failures to propagate, we implemented Resilience4j Circuit Breaker, retries with exponential backoff, and Kafka-based event processing. If Payment Service became unavailable, orders were placed in a pending state and processed automatically once the service recovered. This prevented system-wide failures and significantly improved platform availability."
+• 06) How do you handle service failure, retries, and timeouts?
+"In a microservices architecture, service failures are inevitable, so I design systems assuming that dependencies can fail at any time. To handle failures effectively, I implement timeouts, retries, circuit breakers, and fallback mechanisms.
+"I handle service failures using a combination of timeouts, retries, circuit breakers, and fallback mechanisms. Timeouts prevent threads from waiting indefinitely, retries handle transient failures, circuit breakers prevent cascading failures, and fallbacks provide graceful degradation. For asynchronous workflows, I use Kafka with dead-letter queues to prevent data loss. I also monitor failure rates, latency, and circuit breaker health to ensure system reliability and quick recovery from incidents."
+"In one project, Order Service depended on Payment Service. During intermittent outages, API calls started timing out and affecting order placement. We implemented Resilience4j retries with exponential backoff, a circuit breaker, and fallback responses. Additionally, payment processing was moved to Kafka for asynchronous handling. As a result, orders continued to be accepted even when Payment Service experienced temporary failures, significantly improving system availability."
+• 07) How would you troubleshoot intermittent failures across microservices?
+"When troubleshooting intermittent failures across microservices, I take a systematic approach because these issues are often difficult to reproduce and can occur due to network latency, service dependencies, thread contention, resource exhaustion, or transient infrastructure problems.
+"To troubleshoot intermittent failures across microservices, I first use correlation IDs and distributed tracing to identify where the request is failing. Then I analyze logs, metrics, thread pools, database connections, and dependency health to determine the root cause. I also check timeout, retry, and circuit-breaker metrics, along with recent deployments or configuration changes. Once the issue is identified, I implement fixes such as timeout tuning, query optimization, scaling, or resilience improvements and validate the results through monitoring."
+"In one project, users intermittently experienced order placement failures. The issue could not be consistently reproduced. Using correlation IDs and distributed tracing, we discovered that Payment Service occasionally exceeded its response time during traffic spikes. Order Service was timing out after 2 seconds while Payment Service sometimes took 3 to 4 seconds. We introduced circuit breakers, optimized payment database queries, increased connection pool capacity, and adjusted timeout configurations. After deployment, failure rates dropped significantly and the issue was resolved."
+• 08) How would you make a microservice scalable and reliable?
+"To make a microservice scalable and reliable, I design it as a stateless service that can scale horizontally behind a load balancer. I use caching, database optimization, and asynchronous messaging with Kafka to improve scalability. For reliability, I implement retries, timeouts, circuit breakers, health checks, and centralized monitoring. I also leverage Kubernetes auto-scaling, CI/CD, and safe deployment strategies like canary deployments to ensure high availability and fault tolerance."
+"In one project, our Order Service experienced performance degradation during peak sale events. We improved scalability by introducing Redis caching, Kafka-based asynchronous processing, and Kubernetes auto-scaling. To improve reliability, we implemented Resilience4j circuit breakers, retries, and health checks. As a result, the service handled significantly higher traffic while maintaining stable response times and availability."
+🔹 GCP
+• 09) How would you deploy and scale a Java microservice on GCP?
+"In GCP, I would deploy stateless microservices on GKE or Cloud Run with auto-scaling enabled. I'd use Pub/Sub for asynchronous processing, Memorystore for caching, and Cloud SQL read replicas for database scalability. For reliability, I'd implement retries, timeouts, circuit breakers, health checks, and multi-zone deployments. Monitoring would be handled through Cloud Monitoring, Cloud Logging, and Cloud Trace. This ensures high availability, fault tolerance, and the ability to handle increasing traffic efficiently."
+• 10) How would you troubleshoot a production service running on GCP?
+"When troubleshooting a production service on GCP, I follow a structured approach: identify the impact, gather metrics and logs, isolate the root cause, implement a fix, and monitor the results.
+"To troubleshoot a production service on GCP, I start with Cloud Monitoring to check latency, error rates, CPU, memory, and availability. Then I analyze Cloud Logging for application errors and inspect GKE pods for restarts, crashes, or resource issues. I verify dependent services such as Cloud SQL, Pub/Sub, Redis, and external APIs, and use Cloud Trace for end-to-end request analysis. I also correlate incidents with recent deployments or traffic spikes. Once the root cause is identified, I apply the fix, validate it through monitoring, and perform an RCA to prevent future occurrences."
+"In one production incident on GKE, users reported intermittent API failures. Cloud Monitoring showed increased latency and pod restarts. Cloud Logging revealed OutOfMemoryError exceptions. After reviewing heap utilization and pod memory limits, we found a memory-intensive batch process causing pods to be OOMKilled. We optimized the process, increased memory limits temporarily, and added monitoring alerts. Service stability was restored, and we documented the RCA."
+• 11) How would you design reliable cloud infrastructure for a banking application?
+"For a banking application, reliability, security, high availability, disaster recovery, and compliance are the top priorities. My design would follow a multi-layered architecture with no single point of failure.
+"For a banking application, I would design a highly available, secure, and fault-tolerant infrastructure. Services would run on GKE across multiple zones behind a load balancer with auto-scaling enabled. Databases would use replication, automated backups, and disaster recovery processes. I would implement retries, circuit breakers, and timeouts for resilience, use Pub/Sub for asynchronous processing, and secure data with encryption, IAM, and secrets management. Centralized monitoring, logging, and alerting would provide observability, while defined RPO and RTO targets would ensure business continuity."
+"Suppose the Payment Service in a banking application becomes unavailable. The load balancer redirects traffic to healthy instances. If all instances fail, the circuit breaker prevents cascading failures. Payment requests are temporarily stored in Pub/Sub/Kafka and processed once the service recovers. Database replicas ensure no data is lost, while centralized monitoring alerts the support team immediately. This design maintains availability, consistency, and reliability even during partial outages."
+🔹 SQL & NoSQL
+• 12) How would you optimize a complex SQL query causing latency?
+"To optimize a slow SQL query, I first analyze its execution plan using EXPLAIN ANALYZE to identify bottlenecks such as full table scans, inefficient joins, or costly aggregations. Then I optimize indexes, reduce unnecessary data retrieval, improve joins, implement pagination, and consider caching for frequently accessed data. For large datasets, I may use partitioning or materialized views. Finally, I compare performance metrics before and after optimization to validate the improvement."
+"In one project, an order-history API was taking almost 8 seconds during peak traffic. Using EXPLAIN ANALYZE, I found full table scans on a transactions table containing millions of records. I added composite indexes on customer_id and transaction_date, removed unnecessary columns from the SELECT clause, and implemented pagination. Query execution time dropped from around 8 seconds to less than 300 milliseconds, significantly improving API performance."`
+• 13) How do indexes affect query performance, and when can they hurt?
+"Indexes improve query performance by reducing the need for full table scans and enabling faster lookups, joins, sorting, and aggregations. They are especially useful for columns used in WHERE, JOIN, ORDER BY, and GROUP BY clauses. However, indexes can hurt performance when there are too many of them because they increase storage requirements and add overhead to INSERT, UPDATE, and DELETE operations. Therefore, indexes should be created based on query patterns and validated using execution plans like EXPLAIN ANALYZE."
+"In one project, a customer search API was taking around 5 seconds. After analyzing the execution plan, we found a full table scan on a table containing millions of records. We added a composite index on (customer_id, status) and reduced query execution time to less than 100 milliseconds. However, we also reviewed existing indexes and removed several unused ones because they were increasing insert latency."
+• 14) How would you investigate database bottlenecks in production?
+"To investigate a database bottleneck in production, I start by analyzing symptoms such as high response times, query timeouts, or connection pool exhaustion. Then I review database metrics including CPU, memory, disk I/O, connections, and locks. Next, I identify slow queries, analyze their execution plans using EXPLAIN ANALYZE, and verify index usage. I also check for locking issues, deadlocks, and application-side problems like N+1 queries. After implementing optimizations such as indexing, query tuning, caching, or connection pool adjustments, I validate improvements using monitoring and performance metrics."
+"In one production environment, an Order API started experiencing response times of 6-8 seconds during peak hours. I analyzed the slow query logs and found a frequently executed query performing a full table scan on a table containing millions of records. Using EXPLAIN ANALYZE, I confirmed that an index on customer_id was missing. After adding a composite index and optimizing the query, execution time reduced from several seconds to under 100 milliseconds. We also discovered connection pool saturation due to long-running queries, which was resolved after the optimization."
+• 15) When would you choose NoSQL over SQL for a microservice?
+"I choose NoSQL when a microservice requires flexible schemas, horizontal scalability, high throughput, or stores semi-structured data such as user profiles, product catalogs, logs, or events. I choose SQL when the service requires strong ACID transactions, complex relationships, joins, and strict data consistency, such as banking, payments, or order management systems. In a microservices architecture, it's common to use polyglot persistence, where each service uses the database technology best suited to its requirements."
+"In an e-commerce project, we used PostgreSQL for Order and Payment services because transactional consistency was critical. However, Product Catalog was stored in MongoDB because product attributes varied significantly across categories and changed frequently. This allowed us to scale independently and avoid complex schema modifications."
+
+🔹 GitLab CI/CD
+• 16) How would you design a GitLab pipeline for build, test, and deployment?
+"I would design a GitLab pipeline with stages for build, unit testing, code quality checks, packaging, Docker image creation, and deployment. The pipeline would automatically run Maven builds, JUnit tests, and SonarQube scans before creating a Docker image and pushing it to a registry. Deployments would occur first to Dev and UAT environments, followed by Production through an approval process. For production releases, I would use blue-green or canary deployments along with monitoring and rollback mechanisms to ensure reliability and minimal downtime."
+"In my previous project, we used GitLab CI/CD for Spring Boot microservices deployed on GKE. The pipeline automatically triggered on every merge request. It executed Maven builds, JUnit tests, SonarQube analysis, Docker image creation, and deployment to Dev. After successful integration testing, deployments to UAT and Production required approvals. We also implemented rollback and canary deployment strategies to minimize production risks."
+• 17) How would you troubleshoot a failing GitLab CI/CD pipeline?
+"To troubleshoot a failing GitLab CI/CD pipeline, I first identify the stage where the failure occurred and carefully analyze the job logs. I verify recent code changes, pipeline configuration, environment variables, dependencies, and external services. If the issue is deployment-related, I inspect Kubernetes resources, container logs, and infrastructure health. I also check runner availability and permissions. Once I identify the root cause, I implement the fix, rerun the pipeline, and document the issue to prevent future failures."
+"In one project, the GitLab pipeline started failing during the deployment stage. Build and test stages were passing successfully. After reviewing deployment logs, I found that the Kubernetes cluster was unable to pull the newly built image due to an expired registry authentication token. We updated the credentials in GitLab CI variables, reran the pipeline, and the deployment succeeded. To prevent recurrence, we implemented automated credential rotation and monitoring."
+• 18) How would you implement safe deployments through CI/CD?
+"To implement safe deployments through CI/CD, I automate build, testing, quality checks, security scans, and deployments. I enforce quality gates using unit tests and SonarQube before promoting artifacts across environments. For production, I use blue-green or canary deployments combined with feature flags, health checks, monitoring, and automated rollback mechanisms. This minimizes deployment risk, enables quick recovery from failures, and ensures reliable releases."
+
+"In one project, we deployed Spring Boot microservices to GKE using GitLab CI/CD. Every commit triggered build, unit tests, SonarQube scanning, and Docker image creation. Production deployments used a canary strategy where only 10% of traffic was routed to the new version initially. We monitored latency, error rates, and pod health. If any metric breached the defined threshold, the deployment automatically rolled back. This significantly reduced production incidents and ensured stable releases."
+🔹 Testing with Playwright
+• 19) How would you structure integration tests using Playwright?
+"To implement safe deployments through CI/CD, I automate build, testing, quality checks, security scans, and deployments. I enforce quality gates using unit tests and SonarQube before promoting artifacts across environments. For production, I use blue-green or canary deployments combined with feature flags, health checks, monitoring, and automated rollback mechanisms. This minimizes deployment risk, enables quick recovery from failures, and ensures reliable releases."
+"In one project, we deployed Spring Boot microservices to GKE using GitLab CI/CD. Every commit triggered build, unit tests, SonarQube scanning, and Docker image creation. Production deployments used a canary strategy where only 10% of traffic was routed to the new version initially. We monitored latency, error rates, and pod health. If any metric breached the defined threshold, the deployment automatically rolled back. This significantly reduced production incidents and ensured stable releases."
+• 20) How would you handle flaky Playwright tests in CI/CD?
+"To handle flaky Playwright tests, I first use Playwright reports, traces, screenshots, and videos to identify the root cause. Common causes include timing issues, unstable locators, shared test data, slow APIs, and environment constraints. I replace fixed waits with Playwright's auto-waiting mechanisms, use reliable locators, isolate test data, and ensure tests can run independently. I also configure retries for diagnosis, not as a permanent solution, and continuously monitor flaky tests within the CI/CD pipeline to maintain reliable automated deployments."
+"In one project, several Playwright tests failed randomly in GitLab CI while they always passed locally. After analyzing Playwright traces and videos, we discovered that the tests were using fixed waits (waitForTimeout(3000)) and were failing when the CI runners were under heavy load. We replaced static waits with Playwright's built-in auto-waiting and explicit assertions such as toBeVisible(). We also isolated test data and reduced dependencies between tests. As a result, flaky failures dropped significantly and pipeline reliability improved."
+• 21) How would you test a critical banking workflow end to end?
+"To test a critical banking workflow end-to-end, I validate the entire transaction lifecycle including authentication, account validation, fund transfer, transaction recording, notifications, and audit logging. I test happy paths, negative scenarios, service failures, and rollback behavior to ensure data consistency. Additionally, I verify idempotency, security, compliance requirements, API integrations, database updates, and event processing. Finally, I automate the workflow and execute performance tests to ensure reliability under production-scale loads."
+"In a banking project, we automated the fund transfer workflow using Playwright for UI validation and Rest Assured for API verification. The test validated account balances before and after transfer, checked transaction records in the database, verified Kafka-generated events, and ensured audit logs were created. We also tested failure scenarios such as insufficient funds and service outages to ensure rollback mechanisms worked correctly."
+🔹 Design & Production Scenarios
+• 22) How would you design a scalable, robust, and highly available Java system?
+"To design a scalable, robust, and highly available Java system, I would build stateless Spring Boot microservices that can scale horizontally behind a load balancer. I would use Redis for caching, Kafka for asynchronous communication, and a highly available database with replication and backups. To improve resilience, I'd implement retries, circuit breakers, timeouts, and fallback mechanisms using Resilience4j. Observability would be achieved through centralized logging, monitoring, and distributed tracing. Finally, I would deploy the system on Kubernetes with auto-scaling, health checks, and CI/CD pipelines using blue-green or canary deployments."
+"For a digital banking platform, I would design Spring Boot microservices deployed on Kubernetes, fronted by a load balancer and API Gateway. Services would communicate synchronously through REST for critical operations and asynchronously through Kafka for notifications and audit processing. Redis would be used for caching, PostgreSQL with replicas for persistence, and Resilience4j for retries, circuit breakers, and timeouts. Monitoring, distributed tracing, and automated CI/CD pipelines would ensure reliability and operational visibility. The system would be deployed across multiple availability zones to achieve high availability and fault tolerance."
+• 23) A production API suddenly becomes slow. How would you isolate the root cause?
+"If a production API suddenly becomes slow, I first confirm the impact using monitoring dashboards and identify whether the latency is occurring in the application, database, infrastructure, or downstream services. I review recent deployments, analyze logs, examine distributed traces, and check JVM metrics such as CPU, memory, GC, and thread pools. I then investigate database performance, connection pools, and external dependencies. By narrowing down each layer systematically, I can isolate the root cause and implement a targeted fix rather than relying on assumptions."
+"In one production incident, an Order API response time increased from 300 ms to nearly 8 seconds. I started by reviewing monitoring dashboards and found no application errors but noticed a spike in database CPU usage. Using distributed tracing, I confirmed that most of the latency was occurring during database calls. I analyzed slow query logs and execution plans and found a query performing a full table scan after a recent release. We added an appropriate index and optimized the query, reducing the response time back to under 500 ms."
+• 24) How would you design a system that remains stable during traffic spikes?
+"To keep a system stable during traffic spikes, I design stateless services that can scale horizontally behind a load balancer. I use caching to reduce database load, asynchronous messaging through Kafka to absorb bursts, and database optimizations such as indexing and read replicas. To improve resilience, I implement rate limiting, circuit breakers, retries with exponential backoff, and graceful degradation. Finally, I rely on monitoring, auto-scaling, and load testing to ensure the system can handle peak traffic while maintaining performance and availability."
+"In an e-commerce project, traffic increased nearly 10x during seasonal sales. To handle the spike, we introduced Redis caching for product data, Kafka for asynchronous order processing, Kubernetes auto-scaling, and rate limiting at the API Gateway. The database was scaled using read replicas, and non-critical services such as recommendations were designed to degrade gracefully. As a result, the platform remained stable during peak traffic without major outages."
+• 25) How would you handle a critical production incident while coordinating with stakeholders?
+"In a critical production incident, I first assess the business impact and establish an incident bridge with the relevant teams. I assign clear roles, communicate early with stakeholders, and focus on mitigation actions such as rollback, scaling, or failover to restore service quickly. Throughout the incident, I provide regular status updates and ensure decisions are driven by monitoring, logs, and system metrics. Once the service is stable, I conduct a detailed RCA, identify preventive actions, and track them to completion."
+"In a previous project, a production deployment caused a spike in API failures affecting customer transactions. As soon as the issue was detected, we initiated a P1 bridge call and informed business stakeholders. While one team analyzed logs and monitoring data, another team prepared a rollback strategy. We identified a connection pool misconfiguration introduced in the deployment and rolled back the release within minutes. Service was restored quickly, and we continued providing updates every 15 minutes until stability was confirmed. Later, we conducted an RCA and added automated validation checks to prevent similar issues."
+🔹 Core Java / Advanced
+1.	Explain the difference between Comparable and Comparator. Which one is more flexible in real projects?
+Comparable	Comparator
+Used for natural/default sorting	Used for custom sorting
+Implemented inside the class	Implemented outside the class
+Uses compareTo()	Uses compare()
+One sorting logic	Multiple sorting logics
+Modifies the domain class	No need to modify the class
+
+Which One is More Flexible?
+✅ Comparator is more flexible.
+Because:
+•	Supports multiple sorting strategies.
+•	Doesn't require modifying the existing class.
+•	Useful when sorting third-party classes.
+•	Works well with Java 8 Lambda expressions.
+Easily reusable across projects.
+2.	How does Garbage Collector decide which objects to clean? What is the difference between Minor GC & Major GC?
+3.	Java Garbage Collector uses reachability analysis to determine whether an object can be reclaimed. It starts from GC Roots such as stack references, static variables, and active threads. Any object that cannot be reached from these roots is considered eligible for garbage collection.
+4.	Minor GC operates on the Young Generation, mainly Eden and Survivor spaces. It occurs frequently and is usually fast because most newly created objects are short-lived.
+5.	Major GC (or Full GC) cleans the Old Generation and sometimes the entire heap. It is much more expensive, causes longer stop-the-world pauses, and typically occurs when the old generation becomes full.
+6.	In production systems, frequent Minor GCs are normal, but frequent Full GCs are a warning sign indicating possible memory leaks, insufficient heap sizing, high object churn, or improper GC tuning. I usually analyze GC logs, heap usage patterns, and JVM metrics using tools like JVisualVM, JConsole, Java Flight Recorder, or GCP monitoring dashboards to identify the root cause.
+3. Why String is immutable in Java? What benefits does it give in multi-threaded environments?
+String is immutable in Java because once a String object is created, its state cannot be modified. Any operation that appears to modify a String actually creates a new object.
+Immutability provides several advantages. It enables String Pooling, improves security for sensitive data such as URLs and credentials, allows hashcode caching for efficient use in collections, and most importantly makes Strings inherently thread-safe.
+In multi-threaded environments, multiple threads can safely share the same String instance without synchronization because there is no risk of one thread modifying the value while another is reading it. This eliminates race conditions, reduces locking overhead, and improves application performance and reliability.
+Follow-Up Interview Question
+Q: If String is immutable, how do we efficiently build large strings?
+Answer: Use StringBuilder (single-threaded) or StringBuffer (thread-safe)
+4. How does ClassLoader work in Java? Can we have multiple classloaders in one JVM?
+ClassLoader is responsible for dynamically loading classes into JVM memory. The loading process consists of Loading, Linking, and Initialization phases. Java uses a Parent Delegation Model where the Application ClassLoader delegates to the Platform ClassLoader, which further delegates to the Bootstrap ClassLoader. This ensures core Java classes are loaded only once and improves security.
+Yes, a JVM can have multiple ClassLoaders. In enterprise applications, application servers such as Tomcat use separate ClassLoaders for different applications to isolate dependencies. A key concept is that the JVM identifies a class using both its fully qualified name and the ClassLoader that loaded it. Therefore, the same class loaded by two different ClassLoaders is treated as two distinct classes.
+Q: What is the difference between Class.forName() and ClassLoader.loadClass()?
+Answer:
+•	Class.forName() loads and initializes the class (executes static blocks).
+•	loadClass() only loads the class; initialization happens when the class is first actively used.
+5. Difference between StringBuffer, StringBuilder, and normal String. Which one to use where?
+String is immutable, meaning any modification creates a new object. It is ideal for constants, configuration values, and situations where data should not change.
+StringBuffer is mutable and thread-safe because its methods are synchronized. It should be used when multiple threads need to modify the same string object.
+StringBuilder is mutable but not thread-safe, making it faster than StringBuffer. In modern applications, StringBuilder is generally preferred for string manipulation because most operations occur within a single thread.
+In real-world Spring Boot and microservice applications, I mostly use StringBuilder for constructing dynamic strings such as SQL queries, JSON payloads, log messages, and report generation. I use String for immutable values like request IDs, constants, and configuration properties. StringBuffer is rarely used today unless a shared mutable string must be accessed safely by multiple threads.
+🔹 Collections & Performance
+7.	How does CopyOnWriteArrayList work internally? When would you prefer it?
+8.	CopyOnWriteArrayList is a thread-safe collection where every write operation such as add, remove, or update creates a new copy of the underlying array. Readers access an immutable snapshot, so read operations do not require synchronization and can run concurrently without blocking.
+9.	Its iterators are snapshot-based, which means they never throw ConcurrentModificationException. The tradeoff is that write operations are expensive because the entire array is copied on each modification.
+10.	I prefer CopyOnWriteArrayList in read-heavy and write-light scenarios such as listener registries, configuration caches, and observer lists. I avoid it when the application performs frequent updates because array copying can cause significant CPU and memory overhead.
+11.	Follow-up Interview Question
+12.	Q: Why doesn't CopyOnWriteArrayList throw   ConcurrentModificationException?
+Answer: Because the iterator works on a snapshot of the array taken at iterator creation time. Any later modifications create a new array, leaving the iterator's snapshot unchanged.
+7. What is the difference between fail-fast and fail-safe iterators?
+A fail-fast iterator traverses the original collection and throws a ConcurrentModificationException if it detects a structural modification after the iterator is created. Collections like ArrayList, HashMap, and HashSet use fail-fast iterators by tracking modifications through an internal modCount.
+A fail-safe iterator operates on a snapshot or a concurrent view of the collection, so modifications during iteration do not cause exceptions. Examples include CopyOnWriteArrayList and ConcurrentHashMap iterators. The trade-off is additional memory overhead or relaxed consistency.
+In real-world concurrent applications, I prefer fail-safe or concurrent collections when reads and writes happen simultaneously, whereas fail-fast collections are suitable when modifications during iteration indicate a programming error that should be detected early.
+Q: Can a fail-fast iterator guarantee that it will always throw ConcurrentModificationException?
+Answer: No. Fail-fast behavior is best-effort, not guaranteed. In multi-threaded environments, concurrent modifications may not always be detected immediately, so ConcurrentModificationException should be used as a bug-detection mechanism, not as a synchronization mechanism.
+8. If you have millions of records to process, would you use Stream API or traditional loops? Why?
+For processing millions of records, I would choose based on the use case. In performance-critical paths, I generally prefer traditional loops because they have lower overhead and are easier to optimize. However, for complex data transformations and better readability, I use Stream API. For CPU-intensive independent operations, I may use Parallel Streams after proper benchmarking.
+9. How does TreeMap maintain ordering? Can we provide custom sorting logic?
+TreeMap maintains ordering using a self-balancing Red-Black Tree. By default, it sorts keys according to their natural ordering through the Comparable interface. All operations such as insert, search, and delete take O(log n) time because the tree remains balanced through rotations and recoloring.
+Yes, we can provide custom sorting logic by supplying a Comparator during TreeMap creation. In that case, TreeMap uses the comparator for all key comparisons instead of natural ordering.
+One important distinction is that TreeMap determines key uniqueness using compareTo() or Comparator.compare(), whereas HashMap relies on equals() and hashCode(). I typically use TreeMap when I need sorted data, range queries, or navigational methods like higherKey(), lowerKey(), ceilingKey(), and floorKey().
+Follow-up Interview Question
+Q: How would you sort Employee objects by salary in a TreeMap?
+
+TreeMap<Employee, String> map =
+new TreeMap<>((e1, e2) ->
+Double.compare(e1.getSalary(), e2.getSalary()));
+This comparator ensures employees are ordered based on salary instead of their natural ordering.
+10. How do you find duplicates in a list using Java 8 features?
+Set<Integer> seen = new HashSet<>();
+List<Integer> duplicates = numbers.stream()
+        .filter(n -> !seen.add(n))
+        .distinct()
+        .collect(Collectors.toList());
+System.out.println(duplicates);
+🔹 Spring & Spring Boot
+11. What is the difference between @Transactional at class level vs method level?
+@Transactional at the class level applies the same transactional behavior to all public methods in the class, which helps reduce repetition and maintain consistency. @Transactional at the method level provides fine-grained control and can override class-level settings.
+In real projects, I typically place @Transactional at the service class level for common transactional behavior and override specific methods with settings such as readOnly = true, different propagation levels, or isolation levels when required. Method-level annotations always take precedence over class-level annotations. Also, since Spring uses proxy-based AOP, internal method calls within the same class do not trigger transactional interception. This is an important consideration when designing service layers.
+Why use @Transactional(readOnly = true) for read operations?
+Answer:
+•	Avoids unnecessary dirty checking.
+•	Can optimize database interaction.
+•	Improves performance for query-only methods.
+•	Clearly communicates intent that data should not be modified.
+13.	Can you explain how Spring Boot auto-configuration works internally?
+It automatically configures beans based on the libraries present in the classpath, existing beans, and application properties, reducing manual configuration.
+
+14.	How do you configure multiple datasources in Spring Boot?
+15.	In Spring Boot, multiple datasources are configured by defining separate DataSource, EntityManagerFactory, and PlatformTransactionManager beans for each database. I usually mark one datasource as @Primary and use @EnableJpaRepositories to bind specific repository packages to the corresponding datasource. For transactional operations, I specify the appropriate transaction manager using @Transactional(transactionManager = "...").
+16.	In enterprise applications, I've used this approach for scenarios such as separating transactional and reporting databases, audit databases, and connecting to heterogeneous databases like MySQL and PostgreSQL. When a business transaction spans multiple databases, I consider distributed transaction solutions such as XA/JTA or prefer event-driven patterns like Saga to maintain consistency.
+Q: Can a single @Transactional method update two different databases?
+Answer:
+Not reliably with separate datasources. A standard Spring transaction manager handles only one datasource. For atomic transactions across multiple databases, use JTA/XA distributed transactions or design for eventual consistency using the Saga pattern.
+14. What’s the difference between @RequestParam, @PathVariable, and @RequestBody?
+15. How do you monitor and optimize Spring Boot applications in production?
+In production, I monitor Spring Boot applications using Actuator, Micrometer, Prometheus, and Grafana. I track JVM metrics such as heap usage, GC activity, CPU utilization, thread counts, API response times, error rates, and database connection pool metrics. For microservices, I use distributed tracing with OpenTelemetry and centralized logging through ELK or similar platforms.
+For optimization, I first identify the bottleneck using metrics and traces rather than making assumptions. Common optimizations include database query tuning, adding indexes, resolving N+1 issues, implementing caching with Redis, tuning HikariCP connection pools, optimizing thread pools, reducing payload sizes, and tuning JVM/GC settings. I also implement resilience patterns such as circuit breakers, retries, and timeouts to maintain system stability under load.
+My approach is always metric-driven: measure, identify the bottleneck, optimize, and validate the improvement through monitoring dashboards and load testing.
+🔹 Microservices & System Design
+17.	How do you implement distributed logging in microservices?
+18.	In microservices, I implement distributed logging using a centralized logging platform such as ELK or Grafana Loki. Every incoming request is assigned a unique Correlation ID at the API Gateway and propagated across all downstream services through HTTP headers. I store the ID in MDC so that every log entry automatically contains it.
+19.	Logs are generated in structured JSON format and shipped using Filebeat or Fluentd to Elasticsearch, where they can be searched through Kibana dashboards. I also integrate distributed tracing using OpenTelemetry and include Trace ID and Span ID in logs. This allows me to trace a request end-to-end across multiple services and quickly identify failures in production. In enterprise banking systems, this approach significantly reduces MTTR during incident troubleshooting and root-cause analysis.
+17. What’s the difference between synchronous vs asynchronous communication in microservices?
+In synchronous communication, one microservice directly calls another service using protocols such as REST, Feign, or gRPC and waits for a response. It is simple and suitable for request-response workflows where an immediate result is required, but it increases latency and creates tighter coupling between services.
+In asynchronous communication, services communicate through events or messages using systems like Kafka or RabbitMQ. The producer publishes a message and continues processing without waiting for consumers. This approach improves scalability, resilience, and fault tolerance, but introduces challenges such as eventual consistency, message ordering, and duplicate handling.
+In real-world systems, I typically use synchronous communication for critical validation flows such as authentication or payment authorization, and asynchronous communication for event-driven workflows like notifications, auditing, analytics, and order processing. A well-designed microservices architecture usually combines both patterns based on business requirements.
+18. How would you design a service to handle 1000+ requests per second?
+To design a service capable of handling 1000+ requests per second, I would build a stateless Spring Boot microservice behind a load balancer and scale it horizontally using Kubernetes. I would reduce database pressure through proper indexing, connection pooling, and Redis caching. Long-running operations such as notifications or report generation would be handled asynchronously using Kafka or RabbitMQ.
+For resilience, I would implement timeouts, retries, and circuit breakers using Resilience4j. To maintain performance under load, I would tune thread pools, use efficient APIs with pagination, and compress responses. Finally, I would monitor RPS, latency, CPU, memory, GC behavior, and distributed traces using tools such as Prometheus, Grafana, and OpenTelemetry.
+The key principle is to identify the bottleneck first, whether it's CPU, database, network, threads, or external dependencies, and design the system so that it scales horizontally while remaining resilient and observable.
+20.	How do you handle transactions that span across multiple microservices?
+21.	In microservices, I avoid spanning a single database transaction across services because each service owns its own datastore. Instead, I use the Saga Pattern to maintain eventual consistency. Each service performs a local transaction and publishes an event that triggers the next step in the workflow.
+22.	If a later step fails, compensating transactions are executed to undo previously completed actions. Depending on complexity, I use either event-driven choreography or an orchestration approach with tools such as Temporal or Camunda.
+23.	To ensure reliability, I implement idempotency, retries, dead-letter queues, and the Outbox Pattern. In production systems, this approach scales far better than distributed two-phase commits and aligns with cloud-native microservice design principles.
+Q: What is the difference between Saga and 2PC?
+Answer:
+Saga: Eventual consistency, uses compensating transactions, highly scalable.
+       2PC: Strong consistency, distributed commit protocol, but slower and difficult to scale in    microservices
+20. Can you explain the circuit breaker pattern? When have you used it?
+The Circuit Breaker Pattern is a resilience mechanism that prevents repeated calls to a failing service. It operates in three states: Closed, Open, and Half-Open. When failures exceed a configured threshold, the circuit opens and fails requests immediately instead of waiting for timeouts. After a cooling-off period, a few test requests are allowed to determine whether the service has recovered. I have used Resilience4j in Spring Boot microservices to protect downstream REST APIs and external payment systems from cascading failures, typically combined with retries, timeouts, and fallback responses.
+In one of my microservices projects, our Order Service called an external Payment Gateway. During peak traffic, the gateway occasionally experienced high latency and timeouts. Without protection, request-processing threads in the Order Service started getting blocked, increasing overall response times.
+We implemented Resilience4j Circuit Breaker along with configurable retries and timeouts. Once the failure threshold was reached, the circuit opened and requests failed fast with a fallback response. This prevented thread-pool exhaustion and protected the rest of the platform from cascading failures.
+We also exposed Circuit Breaker metrics through Spring Boot Actuator and monitored them using dashboards and alerts. As a result, downstream outages had minimal impact on customer-facing services.
+🔹 Database & Real-time Scenarios
+21. How do you implement pagination in SQL + Java?
+I usually implement pagination using SQL's LIMIT/OFFSET and expose page and size parameters through Spring Boot APIs. In Spring Data JPA, I use PageRequest.of(page, size) which returns a Page<T> containing records along with total count and pagination metadata.
+For large datasets, I avoid deep OFFSET pagination because the database must scan and skip many rows, leading to performance issues. In such cases, I prefer keyset (cursor) pagination, where records are fetched using the last processed ID or timestamp. This approach leverages indexes efficiently and scales better for high-volume applications such as transaction history, audit logs, and event processing systems.
+In production, I also ensure proper indexing on sorting and filtering columns, because pagination performance depends heavily on index design.
+
+22. If a query is taking 5 seconds, how would you debug & optimize it?
+If a query is taking 5 seconds in production, I follow a systematic approach rather than immediately adding indexes. First, I identify whether the bottleneck is in the query execution plan, indexing strategy, data volume, locking, or infrastructure resources. I typically start with EXPLAIN/EXPLAIN ANALYZE, review index usage, examine table statistics, check for full table scans and expensive joins, and then make targeted optimizations. After changes, I validate performance improvements and monitor execution under realistic load.
+24.	What’s the difference between optimistic and pessimistic locking? Which one is better in microservices?
+25.	Optimistic locking uses a version field to detect concurrent updates without locking database rows. During update, the application verifies that the version has not changed; otherwise, an OptimisticLockException is thrown and the operation can be retried. It provides high concurrency and scalability.
+26.	Pessimistic locking acquires a database lock, typically using SELECT ... FOR UPDATE, preventing other transactions from modifying the record until the lock is released. This ensures strong consistency but can reduce throughput and increase the risk of lock contention and deadlocks.
+27.	In microservices, I generally prefer optimistic locking because it scales much better and avoids long-lived database locks across distributed services. I reserve pessimistic locking for special cases involving critical financial operations, inventory reservation, or situations where concurrent updates are highly likely and data correctness is more important than throughput.
+28.	Optimistic locking detects conflicts after they occur using versions, while pessimistic locking prevents conflicts by locking data upfront.
+29.	 In microservices, optimistic locking is usually preferred because it offers better scalability and avoids distributed locking issues.
+24. How do you implement caching in Spring Boot + DB to reduce load?
+In Spring Boot, I implement caching using the Spring Cache abstraction with annotations like @Cacheable, @CachePut, and @CacheEvict
+. For distributed microservices, I typically use Redis as the cache layer. The application first checks the cache, and only on a cache miss does it query the database and store the result in the cache. I configure TTLs to prevent stale data and use cache eviction after updates. In production, caching frequently accessed read-heavy data can significantly reduce database load, improve response times, and increase application scalability.
+In a microservices-based banking application, customer profile and reference data were being read thousands of times per minute while updates were relatively infrequent. We implemented Redis caching using Spring Cache with @Cacheable. Frequently accessed customer and configuration data were cached with a TTL of 10–15 minutes. For updates, we used @CacheEvict to invalidate stale entries. This reduced database traffic significantly, improved API response times from hundreds of milliseconds to a few milliseconds for cached requests, and helped the application handle peak loads more efficiently.
+
+25. Real-world scenario: If one service keeps failing in production, how will you identify whether it’s a code issue, infra issue, or DB issue?
+If a service keeps failing in production, I use a data-driven approach rather than guessing. I first review logs, metrics, traces, and recent deployments to understand the failure pattern. If I see application exceptions, high CPU usage, memory leaks, or thread contention, I investigate the code using logs and JVM diagnostics. If pods are restarting, showing OOMKilled events, network errors, or infrastructure alerts, I focus on Kubernetes and platform health. If response times increase along with connection pool exhaustion, lock waits, slow queries, or SQL timeouts, I investigate the database using query analysis and DB metrics. I also use distributed tracing to identify latency across microservices. By correlating logs, infrastructure metrics, and database behavior, I can accurately determine whether the root cause is code, infrastructure, or database related and implement the correct fix.
+
+Features of Java 8
+Upper bound and lower bound wildcards 
+lazy streams? terminal operations and intermediate operations d
+Design patterns in Java x
+Relationship between equals and hash code method
+How does hashmap works internally
+Memory leaks
+int[] arr1 = {1, 3, 5, 7};
+int[] arr2 = {2, 4, 6, 8};
+
+Spring boot 
+@Transactional annotation
+Significance of @SpringbootApplication annotation
+Dependency injection and Inversion of control
+
+
+Microservices
+Microservices components
+Resilience4j patterns
+Choreography vs orchestration
+
+
+Angular 
+Typescript
+Data binding? explain two way binding 
+
+Explain current project
+What steps you'll do to resolve Out of Memory Exception in production environment
+Write a query to find third highest salary
+Design patterns you've used in your project
+Which Spring boot version you've used in your current project
+What is role of JIT compiler
+What is stack memory and heap memory 
+How will you write a code to process a large file data uploading
+How to ensure thread ordering.
+which Garbage collectors you've used 
+
+
+What project you have worked on ?
+
+What are the slringboot and microsevices that you have implemented?
+
+How DAO fits in your application?
+
+For performance optimization, what you have did ?
+
+How do you come to conclusion that you need to add an index for performance optimization?
+
+What is batch processing exactly?
+
+if application needs to do a sum of all the records in a table. Will you do sum for that? 
+
+So when you're trying to show thousands of records of data in the front end, how do we ensure that the screen is not overloaded and at the same time, user can access the records in a faster way?
+
+How does the data come to your system?
+
+What if a single API request itself contains thousands of records? How will you handle batch processing?
+
+So how do you process 1000s of records putting into the database?
+
+So what kind of collections you have used for data processing?
+
+what's the difference between an ArrayList versus streams?
+
+Insert a unique records into a collection. Which one we will use?
+
+what is the need of creating interfaces there?
+
+Method overloading and onverriding. 
+
+Desgin pattter you used.
+
+I have two tables. First table I have 10 records, second table I have 20 records. Okay. And between both of them, I have five matching records. Okay, so if I apply full outer join A on B, how many records I'll get on output?
+
+
+features of Java 8, Java 11, Java 17, 
+Write a small program using stream like remove duplicate, count the occurences etc.
+Design patterns in Java, microservices
+Spring boot annotations, like SpringBootApplication, Transactional, other stereotype annotations
+Microservice gateway, circuit breaker pattern,
+1) What is Dependency Injection (DI), and why is it important in complex applications?
+2) How does Dependency Injection help in managing and maintaining software complexity?
+3) Explain Inversion of Control (IoC) and its relationship with Dependency Injection.
+4) What are the different ways to achieve Dependency Injection, and which approach is preferred?
+5) What are SOLID principles?
+6) What design tactics can make a class more testable?
+7) What are the key considerations for unit testing using JUnit or Mockito?
+8) What is the relationship between equals() and hashCode()? What issues can arise if this contract is violated?
+9) Should keys in a Map be mutable? Why or why not?
+10) Explain the concept of effectively final variables in Java, why is it needed in lambdas & inner classes?
+11) What are the advantages of checked exceptions?
+12) Explain upper bound and lower bound wildcards in Java generics and their use cases.
+13) When and why is a Java object promoted to a different heap generation (e.g., from Young to Old generation)?
+14) How can distributed transactions be implemented?
+15) When should you use choreography vs orchestration in distributed systems?
+16) What is the Singleton Design Pattern?
+17) What is the difference between the Factory Pattern and the Abstract Factory Pattern?
+
+
+What is Singleton and Prototype design. Give example where we use each
+ArrayList-Integer type api to find duplicate integers and count and same result is returned in API . At particular point of time the load increase and some users says response not getting then how will you identify issue and solve it
+.Related to Kafka. What is relation between partition and consumer.If we have 4 partitions and 2 consumers then how it will read data?
+
+What is Dependency Injection? 
+How you inject the dependencies.
+When to use field injection and constructor injection.
+Frequency of characters in a string and array of string.
+In Table A(1,2,1,2,1,2,1) and Table B(1,2,3,4) , what is the output for left join and inner join.
+How you create REST API for Frequency of characters in a string and array of string.
+
+Q1) Library has 26 shelves (A–Z).
+Each shelf stores books whose title starts with that alphabet.
+Books inside each shelf are maintained in lexicographical order.
+what will be the design of this system
+what will the classes used
+
+
+Q2) 2 container 5 lit and 3 lit jar,no instrument to measure, how to get 4 lit of water
+
+Q3) We have a citizen survey application deployed in Nepal.
+
+10 survey questions
+Citizens submit responses
+Data is stored in the database
+Reports are generated and shared with the government
+
+Now the same application is deployed in India.
+
+After a few days, users report crashes and high latency.
+
+How will you find the root cause?
+
+Q4) D in SOLID
+Q5) Design patterns
+Q6)2 sorted arrays, code to merge and result should be sorted
+Q7)Problems or issues fixed in project
+Q8) why microservices? is it not overhead?
+
+
+1)what is N+1 problem and how did you resolved it ?
+2) what is functional interface and write an codefor it .
+3) what is the use of Lambda experession ?
+4) you haver to add two numbers. how can you do that via lamda ?
+5) String s = "Shivam", write code for 1st non repeating character. 
+6) future and computable future difference.
+7) there were some issue occurred in production environment than how would you find it out and resolve it.
+8) you have to desing one system which is libray management, how would you design it.
+9) what is partitions in sql.
+ 
