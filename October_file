@@ -1,6 +1,11 @@
 -🔹 Core Java & Spring Boot
 • 01) How would you optimize a slow Java service under production load?
-"For a slow Java service in production, I first identify whether the bottleneck is CPU, memory, database, thread contention, or an external dependency using monitoring tools and JVM diagnostics. After performing root cause analysis through logs, thread dumps, profiling, and APM metrics, I implement targeted optimizations such as query tuning, caching, asynchronous processing, or JVM tuning. I then validate the fix through load testing and deploy it gradually while monitoring key production metrics. My focus is always on data-driven optimization rather than guesswork."
+"For a slow Java service in production, I first identify whether the bottleneck is CPU, memory, database, thread contention, or an
+external dependency using monitoring tools and JVM diagnostics. After performing root cause analysis through logs, thread dumps,
+profiling, and APM metrics, I implement targeted optimizations such as query tuning, caching, asynchronous processing, or JVM tuning.
+I then validate the fix through load testing and deploy it gradually while monitoring key production metrics. My focus is always on
+data-driven optimization rather than guesswork."
+
 • 02) How do you handle exception management in Spring Boot?
 "In Spring Boot, I prefer a centralized and structured exception-handling approach rather than handling exceptions in every controller. This improves maintainability, consistency, and API usability.
 "I use global exception handling with @RestControllerAdvice, create custom exceptions for business scenarios, and return standardized error responses with proper HTTP status codes. I ensure exceptions are logged appropriately, sensitive information is not exposed, and production monitoring tools capture critical failures. This keeps the code clean, improves API consistency, and simplifies troubleshooting in production environments."
